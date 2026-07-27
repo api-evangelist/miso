@@ -1,0 +1,705 @@
+generated: '2026-07-27'
+method: generated
+source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json, openapi/miso-data-exchange-pricing-api-openapi.json,
+  openapi/miso-public-api-markets-displays-openapi.json, openapi/miso-public-api-operations-displays-openapi.json
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 69
+  by_action_class:
+    connected: 69
+  by_consequence:
+    read: 69
+  human_in_the_loop_required: 0
+operations:
+- path: /v1/day-ahead/{date}/demand
+  method: get
+  operationId: get-v1-day-ahead-date-demand
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/day-ahead/{date}/generation/cleared/physical
+  method: get
+  operationId: get-v1-day-ahead-date-generation-cleared-physical
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/day-ahead/{date}/generation/cleared/virtual
+  method: get
+  operationId: get-v1-day-ahead-date-generation-cleared-virtual
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/day-ahead/{date}/generation/fuel-type
+  method: get
+  operationId: get-v1-day-ahead-date-generation-fuel-type
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/day-ahead/{date}/generation/offered/ecomax
+  method: get
+  operationId: get-v1-day-ahead-date-generation-offered-ecomax
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/day-ahead/{date}/generation/offered/ecomin
+  method: get
+  operationId: get-v1-day-ahead-date-generation-offered-ecomin
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/day-ahead/{date}/interchange/net-scheduled
+  method: get
+  operationId: get-v1-day-ahead-date-interchange-net-scheduled
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/forecast/{date}/load
+  method: get
+  operationId: get-v1-forecast-date-load
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/forecast/{date}/outage
+  method: get
+  operationId: get-v1-forecast-date-outage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/historical/{date}/interchange/net-scheduled
+  method: get
+  operationId: get-v1-historical-date-interchange-net-scheduled
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/real-time/{date}/binding-constraint
+  method: get
+  operationId: get-v1-real-time-date-binding-constraint
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/real-time/{date}/demand/actual
+  method: get
+  operationId: get-v1-real-time-date-demand-actual
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/real-time/{date}/demand/forecast
+  method: get
+  operationId: get-v1-real-time-date-demand-forecast
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/real-time/{date}/demand/load-state-estimator
+  method: get
+  operationId: get-v1-real-time-date-demand-load-state-estimator
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/real-time/{date}/generation/cleared/supply
+  method: get
+  operationId: get-v1-real-time-date-generation-cleared-supply
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/real-time/{date}/generation/committed/ecomax
+  method: get
+  operationId: get-v1-real-time-date-generation-committed-ecomax
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/real-time/{date}/generation/fuel-on-the-margin
+  method: get
+  operationId: get-v1-real-time-date-generation-fuel-on-the-margin
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/real-time/{date}/generation/fuel-type
+  method: get
+  operationId: get-v1-real-time-date-generation-fuel-type
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/real-time/{date}/generation/offered/ecomax
+  method: get
+  operationId: get-v1-real-time-date-generation-offered-ecomax
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/real-time/{date}/interchange/net-actual
+  method: get
+  operationId: get-v1-real-time-date-interchange-net-actual
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/real-time/{date}/interchange/net-scheduled
+  method: get
+  operationId: get-v1-real-time-date-interchange-net-scheduled
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/real-time/{date}/outage
+  method: get
+  operationId: get-v1-real-time-date-outage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/aggregated-pnode
+  method: get
+  operationId: get-v1-aggregated-pnode
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/day-ahead/{date}/asm-exante
+  method: get
+  operationId: get-v1-day-ahead-date-asm-exante
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/day-ahead/{date}/asm-expost
+  method: get
+  operationId: get-v1-day-ahead-date-asm-expost
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/day-ahead/{date}/lmp-exante
+  method: get
+  operationId: get-v1-day-ahead-date-lmp-exante
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/day-ahead/{date}/lmp-expost
+  method: get
+  operationId: get-v1-day-ahead-date-lmp-expost
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/real-time/{date}/asm-exante
+  method: get
+  operationId: get-v1-real-time-date-asm-exante
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/real-time/{date}/asm-expost
+  method: get
+  operationId: get-v1-real-time-date-asm-expost
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/real-time/{date}/asm-summary
+  method: get
+  operationId: get-v1-real-time-date-asm-summary
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/real-time/{date}/lmp-exante
+  method: get
+  operationId: get-v1-real-time-date-lmp-exante
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/real-time/{date}/lmp-expost
+  method: get
+  operationId: get-v1-real-time-date-lmp-expost
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/BindingConstraints/RealTime
+  method: get
+  operationId: getBindingConstraintsRealTime
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/BindingConstraints/Reserve
+  method: get
+  operationId: getBindingConstraintsReserve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/BindingConstraints/SubRegional
+  method: get
+  operationId: getBindingConstraintsSubRegional
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/CoordinatedTransactionScheduling
+  method: get
+  operationId: getCoordinatedTransactionScheduling
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/MarketPricing/GetAncillaryServicesMcp
+  method: get
+  operationId: getMarketPricingGetAncillaryServicesMcp
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/MarketPricing/GetExAnteLmp
+  method: get
+  operationId: getMarketPricingGetExAnteLmp
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/MarketPricing/GetLmpConsolidatedTable
+  method: get
+  operationId: getMarketPricingGetLmpConsolidatedTable
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/MarketPricing/GetRealTimeFiveMinExPost/Current
+  method: get
+  operationId: getMarketPricingGetRealTimeFiveMinExPostCurrent
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/MarketPricing/GetRealTimeFiveMinExPost/Previous
+  method: get
+  operationId: getMarketPricingGetRealTimeFiveMinExPostPrevious
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/MarketPricing/GetRealTimeFiveMinExPost/Rolling
+  method: get
+  operationId: getMarketPricingGetRealTimeFiveMinExPostRolling
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/RealTimeRSGCommitments
+  method: get
+  operationId: getRealTimeRSGCommitments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/Ace
+  method: get
+  operationId: getAce
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/CsatNextDayShortTermReserveRequirement
+  method: get
+  operationId: getCsatNextDayShortTermReserveRequirement
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/CsatSupplyDemand
+  method: get
+  operationId: getCsatSupplyDemand
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/FuelMix
+  method: get
+  operationId: getFuelMix
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/FuelMix/Today
+  method: get
+  operationId: getFuelMixToday
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/FuelMix/Yesterday
+  method: get
+  operationId: getFuelMixYesterday
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/GenerationOutages/GetGenerationOutagesPlusMinusFiveDays
+  method: get
+  operationId: getGenerationOutagesGetGenerationOutagesPlusMinusFiveDays
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/Interchange/GetNai
+  method: get
+  operationId: getInterchangeGetNai
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/Interchange/GetNai/FiveMinute
+  method: get
+  operationId: getInterchangeGetNaiFiveMinute
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/Interchange/GetNai/Imports
+  method: get
+  operationId: getInterchangeGetNaiImports
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/Interchange/GetNsi
+  method: get
+  operationId: getInterchangeGetNsi
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/Interchange/GetNsi/FiveMinute
+  method: get
+  operationId: getInterchangeGetNsiFiveMinute
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/Interchange/GetNsi/MISO
+  method: get
+  operationId: getInterchangeGetNsiMISO
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/Interchange/GetNsi/MISOFiveMinute
+  method: get
+  operationId: getInterchangeGetNsiMISOFiveMinute
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/Interchange/GetNsi/MISOOneMinute
+  method: get
+  operationId: getInterchangeGetNsiMISOOneMinute
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/Interchange/GetNsi/OneMinute
+  method: get
+  operationId: getInterchangeGetNsiOneMinute
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/RealTimeTotalLoad
+  method: get
+  operationId: getRealTimeTotalLoad
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/RegionalDirectionalTransfer
+  method: get
+  operationId: getRegionalDirectionalTransfer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/Snapshot
+  method: get
+  operationId: getSnapshot
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/WindSolar/GetCombined
+  method: get
+  operationId: getWindSolarGetCombined
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/WindSolar/getsolar
+  method: get
+  operationId: getWindSolarGetsolar
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/WindSolar/getsolaractual
+  method: get
+  operationId: getWindSolarGetsolaractual
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/WindSolar/getsolarforecast
+  method: get
+  operationId: getWindSolarGetsolarforecast
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/WindSolar/getwind
+  method: get
+  operationId: getWindSolarGetwind
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/WindSolar/getwindactual
+  method: get
+  operationId: getWindSolarGetwindactual
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/WindSolar/getwindforecast
+  method: get
+  operationId: getWindSolarGetwindforecast
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none

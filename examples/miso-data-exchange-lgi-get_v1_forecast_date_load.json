@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "timeInterval": {
+        "resolution": "daily",
+        "start": "2023-06-28 00:00:00.000",
+        "end": "2023-06-29 00:00:00.000",
+        "value": "2023-06-29"
+      },
+      "region": "NORTH",
+      "localResourceZone": "Z1",
+      "loadForecast": 1349,
+      "init": "2026-02-02"
+    }
+  ],
+  "page": {
+    "pageNumber": 0,
+    "pageSize": 0,
+    "totalElements": 0,
+    "totalPages": 0,
+    "lastPage": true
+  }
+}

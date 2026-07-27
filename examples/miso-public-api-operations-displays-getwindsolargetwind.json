@@ -1,0 +1,22 @@
+{
+  "instance": [
+    {
+      "ForecastDateTimeEST": "2026-07-27 12:00:00 AM",
+      "ForecastHourEndingEST": "1",
+      "ForecastValue": "13582.00",
+      "ActualDateTimeEST": "2026-07-27 12:00:00 AM",
+      "ActualHourEndingEST": "1",
+      "ActualValue": "11320.30"
+    },
+    {
+      "ForecastDateTimeEST": "2026-07-27 1:00:00 AM",
+      "ForecastHourEndingEST": "2",
+      "ForecastValue": "13652.00",
+      "ActualDateTimeEST": "2026-07-27 1:00:00 AM",
+      "ActualHourEndingEST": "2",
+      "ActualValue": "11166.52"
+    }
+  ],
+  "RefId": "27-Jul-2026 - Interval 08:00 EST",
+  "MktDay": "07-27-2026"
+}

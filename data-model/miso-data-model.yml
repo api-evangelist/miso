@@ -1,0 +1,929 @@
+generated: '2026-07-27'
+method: derived
+source: openapi/miso-data-exchange-pricing-api-openapi.json, openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+description: 'The entity graph of MISO''s keyed Data Exchange APIs, derived from the components.schemas
+  MISO serves from its own developer portal. It is a flat, denormalised, time-series model rather than
+  a relational object graph: there are no ids, no cross-entity foreign keys and no nesting beyond a shared
+  TimeInterval value object and the paging envelope. Every record is keyed implicitly by (market date,
+  interval, location) where location is a Commercial Pricing Node, a Reserve Zone, a Region or an adjacent
+  Balancing Authority. The Public API half of MISO''s surface is deliberately excluded — its payloads
+  are display shapes with no declared component schemas at all.'
+style: time-series / denormalised; no entity identifiers, no foreign keys
+keys:
+  temporal:
+  - date (path segment, yyyy-mm-dd, market day)
+  - interval (query filter, EST)
+  - timeInterval.resolution (5-minute | hourly | daily)
+  spatial:
+  - node — Commercial Pricing Node (e.g. ALTW.WELLS1)
+  - zone — Reserve Zone (8 zones)
+  - region — MISO region
+  - adjacentBa — adjacent Balancing Authority
+envelope:
+  shape: '{data: [<record>], page: PageInfo}'
+  note: Every list response wraps its records in this envelope; PageInfo carries pageNumber, pageSize,
+    totalElements, totalPages and lastPage.
+entity_count: 35
+relationship_count: 83
+entities:
+- name: AggregatedPnode
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+  kind: record
+  fields:
+  - name: node
+    type: string
+    description: Pricing Node
+    example: ALTW.WELLS1
+  - name: nodeType
+    type: string
+    description: Pricing Node Type
+    example: Hubs
+- name: Geo-Res-Region-Zone
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+  kind: enumeration
+  values:
+  - region
+  - localResourceZone
+- name: LocationalMarginalPrice
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+  kind: record
+  fields:
+  - name: interval
+    type: string
+    example: '1'
+  - name: timeInterval
+    type: TimeInterval
+  - name: node
+    type: string
+    description: Commercial Pricing Node
+    example: ALTW.WELLS1
+  - name: lmp
+    type: number
+    description: Locational Marginal Price
+    example: 21.6
+  - name: mcc
+    type: number
+    description: Marginal Congestion Component
+    example: 0.02
+  - name: mec
+    type: number
+    description: Marginal Energy Component
+    example: 20.94
+  - name: mlc
+    type: number
+    description: Marginal Losses Component
+    example: 0.64
+- name: MarketClearingPrice
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+  kind: record
+  fields:
+  - name: interval
+    type: string
+    example: '1'
+  - name: timeInterval
+    type: TimeInterval
+  - name: product
+    type: string
+    description: Ancillary Market product
+  - name: zone
+    type: string
+    description: Ancillary Services Reserve Zone
+    example: Zone 1
+  - name: mcp
+    type: number
+    description: Market Clearing Price
+    example: 6.48
+- name: PreliminaryFinalEnum
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+  kind: enumeration
+  values:
+  - Preliminary
+  - Final
+- name: RealTimeExPostLocationalMarginalPrice
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: preliminaryFinal
+    type: string
+    description: Whether the price is preliminary or final
+  - name: node
+    type: string
+    description: Commercial Pricing Node
+    example: ALTW.WELLS1
+  - name: lmp
+    type: number
+    description: Locational Marginal Price
+    example: 21.6
+  - name: mcc
+    type: number
+    description: Marginal Congestion Component
+    example: 0.02
+  - name: mec
+    type: number
+    description: Marginal Energy Component
+    example: 20.94
+  - name: mlc
+    type: number
+    description: Marginal Losses Component
+    example: 0.64
+- name: RealTimeExPostMarketClearingPrice
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+  kind: record
+  fields:
+  - name: preliminaryFinal
+    type: string
+    description: Whether the price is preliminary or final.
+  - name: product
+    type: string
+    description: Ancillary Market product
+  - name: zone
+    type: string
+    description: Ancillary Services Reserve Zone
+    example: Zone 1
+  - name: mcp
+    type: number
+    description: Market Clearing Price
+    example: 6.48
+  - name: timeInterval
+    type: TimeInterval
+- name: RealTimeSummaryMarketClearingPrice
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+  kind: record
+  fields:
+  - name: interval
+    type: string
+    example: '1'
+  - name: timeInterval
+    type: TimeInterval
+  - name: product
+    type: string
+    description: Ancillary Market product
+  - name: mcp
+    type: number
+    description: Market Clearing Price
+    example: 6.48
+- name: Time-Res-5Min-Hourly
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+  kind: enumeration
+  values:
+  - 5min
+  - hourly
+- name: Time-Res-Hourly
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+  kind: enumeration
+  values:
+  - hourly
+- name: Time-Res-Hourly-Daily
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+  kind: enumeration
+  values:
+  - hourly
+  - daily
+- name: TimeInterval
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+  kind: record
+  fields:
+  - name: resolution
+    type: string
+    example: daily
+  - name: start
+    type: string
+    description: In Eastern Standard Time (UTC−05:00).
+    example: '2023-06-28 00:00:00.000'
+  - name: end
+    type: string
+    description: In Eastern Standard Time (UTC−05:00).
+    example: '2023-06-29 00:00:00.000'
+  - name: value
+    type: string
+    description: 'Short hand value for time interval. Can be timestamp for 5min resolution (ex: 2023-06-28
+      00:00:00.000), hour ending value for hourly resolution, 1-24 (ex: 21), or date string for daily
+      (ex: 2023-06-28). In Eastern Standard Time (UTC−05:00).'
+    example: '2023-06-29'
+- name: ClearedGeneration
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: region
+    type: Region
+  - name: supply
+    type: number
+    description: Total supply cleared (in megawatts) based on physical or virtual offers.
+- name: CommittedGeneration
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: committedForwardEcoMax
+    type: number
+    description: The economic maximum (in megawatts) for all units committed in the Forward Reliability
+      Assessment & Commitment (FRAC) process.
+  - name: committedRealTimeEcoMax
+    type: number
+    description: The economic maximum (in megawatts) for all units committed in the real-time market,
+      based on the peak case within the hour.
+  - name: committedEcoMaxDelta
+    type: number
+    description: The difference between the forward and real-time values.
+- name: DayAheadDemand
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: region
+    type: Region
+  - name: fixed
+    type: number
+    description: Total demand cleared (in megawatts) based on physical fixed bids.
+  - name: priceSens
+    type: number
+    description: Total demand cleared (in megawatts) based on physical price sensitive bids.
+  - name: virtual
+    type: number
+    description: Total demand cleared (in megawatts) based on virtual bids.
+- name: DayAheadNetScheduledInterchange
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: region
+    type: Region
+  - name: nsi
+    type: number
+- name: Demand
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: interval
+    type: string
+  - name: region
+    type: Region
+  - name: demand
+    type: number
+- name: DemandEst
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: zone
+    type: string
+  - name: demand
+    type: number
+- name: DemandForecastMw
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: interval
+    type: TimeInterval
+  - name: demand
+    type: number
+- name: FuelType
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: coal
+    type: number
+  - name: gas
+    type: number
+  - name: nuclear
+    type: number
+  - name: water
+    type: number
+  - name: wind
+    type: number
+  - name: solar
+    type: number
+  - name: other
+    type: number
+  - name: storage
+    type: number
+- name: GenerationCleared
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: generation
+    type: number
+  - name: timeInterval
+    type: TimeInterval
+- name: GenerationFuelType
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: region
+    type: Region
+  - name: fuelTypes
+    type: FuelType
+  - name: totalMw
+    type: number
+  - name: interval
+    type: string
+- name: HistoricalNetScheduledInterchange
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: adjacentBa
+    type: string
+  - name: nsi
+    type: number
+- name: Load
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: region
+    type: string
+    description: The applicable region. When geoResolution=region.
+    example: North
+  - name: localResourceZone
+    type: string
+    description: The applicable localResourceZone. When geoResolution=localResourceZone.
+    example: LRZ3_5
+  - name: load
+    type: number
+    example: 1349.2
+- name: LoadForecast
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: region
+    type: string
+    example: NORTH
+  - name: localResourceZone
+    type: string
+    example: Z1
+  - name: loadForecast
+    type: number
+    example: 1349
+  - name: init
+    type: string
+    example: '2026-02-02'
+- name: NetActualInterchange
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: adjacentBa
+    type: string
+  - name: nai
+    type: number
+- name: OfferGeneration
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: offerForwardEcoMax
+    type: number
+    description: The economic maximum (in megawatts) from unit offers available to the Forward Reliability
+      Assessment & Commitment (FRAC) process.
+  - name: offerRealTimeEcoMax
+    type: number
+    description: The economic maximum (in megawatts) from unit offers available to the real-time market.
+  - name: offerEcoMaxDelta
+    type: number
+    description: The difference between the forward and real-time values.
+- name: OfferedGeneration
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: region
+    type: Region
+  - name: mustRun
+    type: number
+    description: The economic minimum/maximum (in megawatts) offered by generators with the must run commit
+      status in the day-ahead market.
+  - name: economic
+    type: number
+    description: The economic minimum/maximum (in megawatts) offered by generators as economic in the
+      day-ahead market.
+  - name: emergency
+    type: number
+    description: The economic minimum/maximum (in megawatts) offered by generators as emergency in the
+      day-ahead market.
+- name: OutageForecast
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: region
+    type: Region
+  - name: onOutage
+    type: number
+  - name: interval
+    type: string
+- name: RealTimeBindingConstraints
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: constraintCount
+    type: number
+  - name: interval
+    type: string
+- name: RealTimeDemand
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: interval
+    type: string
+  - name: demand
+    type: number
+- name: RealTimeGenerationFuelMargin
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: peak
+    type: boolean
+  - name: region
+    type: Region
+  - name: fuelType
+    type: string
+  - name: unitCount
+    type: integer
+- name: RealTimeNetScheduledInterchange
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: nsiForward
+    type: number
+    description: The net scheduled interchange (in megawatts) as used in the Forward Reliability Assessment
+      Commitment (FRAC) process.
+  - name: nsiRealTime
+    type: number
+    description: The net scheduled interchange (in megawatts) as used in the real-time market.
+  - name: nsiDelta
+    type: number
+    description: The difference between the forward and real-time values.
+- name: RealTimeOutage
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: record
+  fields:
+  - name: timeInterval
+    type: TimeInterval
+  - name: realTime
+    type: number
+    description: The approved (planned) outages (in megawatts) used in the real-time market.
+  - name: forward
+    type: number
+    description: The approved (planned) outages (in megawatts) used in the Forward Reliability Assessment
+      & Commitment (FRAC) process.
+  - name: delta
+    type: number
+    description: The difference between the forward and real-time values.
+  - name: interval
+    type: string
+- name: Region
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  kind: enumeration
+  values:
+  - NORTH
+  - CENTRAL
+  - SOUTH
+  - MISO
+  - NO_REGION
+relationships:
+- from: LocationalMarginalPrice
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+- from: MarketClearingPrice
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+- from: RealTimeExPostLocationalMarginalPrice
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+- from: RealTimeExPostMarketClearingPrice
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+- from: RealTimeSummaryMarketClearingPrice
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+- from: PageAggregatedPnode
+  to: AggregatedPnode
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+- from: PageAggregatedPnode
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+- from: PageLocationalMarginalPrice
+  to: LocationalMarginalPrice
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+- from: PageLocationalMarginalPrice
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+- from: PageMarketClearingPrice
+  to: MarketClearingPrice
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+- from: PageMarketClearingPrice
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+- from: PageRealTimeExPostLocationalMarginalPrice
+  to: RealTimeExPostLocationalMarginalPrice
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+- from: PageRealTimeExPostLocationalMarginalPrice
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+- from: PageRealTimeExPostMarketClearingPrice
+  to: RealTimeExPostMarketClearingPrice
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+- from: PageRealTimeExPostMarketClearingPrice
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+- from: PageRealTimeSummaryMarketClearingPrice
+  to: RealTimeSummaryMarketClearingPrice
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+- from: PageRealTimeSummaryMarketClearingPrice
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-pricing-api-openapi.json
+- from: ClearedGeneration
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: ClearedGeneration
+  to: Region
+  kind: has_one
+  via: region
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: CommittedGeneration
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: DayAheadDemand
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: DayAheadDemand
+  to: Region
+  kind: has_one
+  via: region
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: DayAheadNetScheduledInterchange
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: DayAheadNetScheduledInterchange
+  to: Region
+  kind: has_one
+  via: region
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: Demand
+  to: Region
+  kind: has_one
+  via: region
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: DemandEst
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: DemandForecastMw
+  to: TimeInterval
+  kind: has_one
+  via: interval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: GenerationCleared
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: GenerationFuelType
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: GenerationFuelType
+  to: Region
+  kind: has_one
+  via: region
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: GenerationFuelType
+  to: FuelType
+  kind: has_one
+  via: fuelTypes
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: HistoricalNetScheduledInterchange
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: Load
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: LoadForecast
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: NetActualInterchange
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: OfferGeneration
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: OfferedGeneration
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: OfferedGeneration
+  to: Region
+  kind: has_one
+  via: region
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: OutageForecast
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: OutageForecast
+  to: Region
+  kind: has_one
+  via: region
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: RealTimeBindingConstraints
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: RealTimeGenerationFuelMargin
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: RealTimeGenerationFuelMargin
+  to: Region
+  kind: has_one
+  via: region
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: RealTimeNetScheduledInterchange
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: RealTimeOutage
+  to: TimeInterval
+  kind: has_one
+  via: timeInterval
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageClearedGeneration
+  to: ClearedGeneration
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageClearedGeneration
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageCommittedGeneration
+  to: CommittedGeneration
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageCommittedGeneration
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageDayAheadDemand
+  to: DayAheadDemand
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageDayAheadDemand
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageDayAheadNetScheduledInterchange
+  to: DayAheadNetScheduledInterchange
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageDayAheadNetScheduledInterchange
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageDemandEst
+  to: DemandEst
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageDemandEst
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageDemandForecastMw
+  to: DemandForecastMw
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageDemandForecastMw
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageGenerationCleared
+  to: GenerationCleared
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageGenerationCleared
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageGenerationFuelType
+  to: GenerationFuelType
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageGenerationFuelType
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageHistoricalNetScheduledInterchange
+  to: HistoricalNetScheduledInterchange
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageHistoricalNetScheduledInterchange
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageLoad
+  to: Load
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageLoad
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageLoadForecast
+  to: LoadForecast
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageLoadForecast
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageNetActualInterchange
+  to: NetActualInterchange
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageNetActualInterchange
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageOfferGeneration
+  to: OfferGeneration
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageOfferGeneration
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageOfferedGeneration
+  to: OfferedGeneration
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageOfferedGeneration
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageOutageForecast
+  to: OutageForecast
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageOutageForecast
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageRealTimeBindingConstraints
+  to: RealTimeBindingConstraints
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageRealTimeBindingConstraints
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageRealTimeGenerationFuelMargin
+  to: RealTimeGenerationFuelMargin
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageRealTimeGenerationFuelMargin
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageRealTimeNetScheduledInterchange
+  to: RealTimeNetScheduledInterchange
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageRealTimeNetScheduledInterchange
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageRealTimeOutage
+  to: RealTimeOutage
+  kind: has_many
+  via: data
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+- from: PageRealTimeOutage
+  to: PageInfo
+  kind: has_one
+  via: page
+  source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+notes:
+- The LMP record decomposes price into lmp, mcc (marginal congestion), mec (marginal energy) and mlc (marginal
+  losses) — mec + mcc + mlc reconstructs lmp.
+- Interchange records are provisional for up to 105 days after the market day due to reconciliation.
+- There is no id-prefix scheme because there are no ids; joins across entities are done on (date, interval,
+  location).

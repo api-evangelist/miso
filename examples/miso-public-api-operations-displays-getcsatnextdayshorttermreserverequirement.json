@@ -1,0 +1,16 @@
+[
+  {
+    "forecastPeakHourEst": "2026-07-28T16:00:00",
+    "region": "North/Central",
+    "forecastCreatedTime": "2026-07-27T07:05:06",
+    "strReq": 0,
+    "strOverwrite": 0
+  },
+  {
+    "forecastPeakHourEst": "2026-07-28T16:00:00",
+    "region": "Systemwide",
+    "forecastCreatedTime": "2026-07-27T07:05:06",
+    "strReq": 0,
+    "strOverwrite": 0
+  }
+]

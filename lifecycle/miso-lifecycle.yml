@@ -1,0 +1,110 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://www.misoenergy.org/markets-and-operations/RTDataAPIs/ (the 2025-12-12 restructure
+  notice), https://api.misoenergy.org/MISORTWDDataBroker/data-links.html (the legacy surface,
+  still reachable), https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us,
+  https://www.misoenergy.org/markets-and-operations/notifications/it-and-system-notifications/,
+  https://www.misoenergy.org/markets-and-operations/MSE/, plus derivation from openapi/.
+description: >-
+  MISO versions its two public surfaces in two different ways and publishes neither policy
+  formally. The Data Exchange gateway is versioned in the URI path at v1 and has not
+  changed version. The Public API is versioned by announcement: on 2025-12-12 MISO moved it
+  to a new host, changed every URL and dropped CSV and XML in favour of JSON only. There is
+  no written deprecation policy, no RFC 8594 Sunset or Deprecation header support, no
+  numeric SLA and no Statuspage-style uptime dashboard anywhere on any MISO host.
+
+versioning:
+  data-exchange:
+    scheme: uri-path
+    current: v1
+    mechanism: /v1/ segment on every operation
+    docs: https://data-exchange.misoenergy.org/apis
+  public-api:
+    scheme: none
+    current: null
+    effective_release: '2025-12-12'
+    docs: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
+    note: >-
+      No version token in the URL and no version header. The harvested specification uses
+      2025-12-12 as its info.version because that is the date of the restructure MISO
+      announced, not a version MISO publishes.
+
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    MISO publishes no deprecation policy document, gives no advance-notice commitment, and
+    emits neither the RFC 8594 Sunset header nor the Deprecation header. Deliberately
+    recorded as absent — no Deprecation pointer is claimed in apis.yml.
+  events:
+    - date: '2025-12-12'
+      kind: breaking-change
+      surface: Public API
+      announcement: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
+      quote: >-
+        "As of December 12, 2025, these data feeds are available in JSON format only.
+        Please be aware that the underlying URLs have also changed for all links. This
+        implementation is designed to improve consistency, performance, and future
+        compatibility for accessing real-time data."
+      impact:
+        - Host moved from api.misoenergy.org/MISORTWDDataBroker to public-api.misoenergy.org
+        - CSV and XML response formats withdrawn; JSON only
+        - Every endpoint URL changed
+      migration_guide: null
+      grace_period: none published
+
+retired_surfaces:
+  - name: MISORTWDDataBroker
+    url: https://api.misoenergy.org/MISORTWDDataBroker/data-links.html
+    status: legacy — data-links page still returns HTTP 200 (verified 2026-07-27) but the
+      data endpoints return {"error":"no data"}
+    superseded_by: https://public-api.misoenergy.org/
+    retired: '2025-12-12'
+
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No uptime commitment of any kind. MISO's published product terms are the opposite of an
+    SLA — "MISO DOES NOT WARRANT THAT ITS SITES WILL BE UNINTERRUPTED OR ERROR-FREE ...
+    distributed on an AS IS, AS AVAILABLE basis."
+
+status_page: https://www.misoenergy.org/markets-and-operations/notifications/it-and-system-notifications/
+status_page_kind: notifications-feed
+status_page_note: >-
+  MISO runs no Statuspage/Statusgator-style component dashboard — status.misoenergy.org does
+  not resolve, and misoenergy.statuspage.io is an unclaimed Atlassian marketing redirect,
+  not a MISO page. What MISO does publish is an IT and System Notifications feed where
+  system outages, maintenance windows and incident notices are posted, times in Eastern.
+  Retention is short and explicit: "all Notifications except Market Settlements
+  Notifications will be deleted after 30 days of the issue date." That feed is recorded here
+  as MISO's operational-status surface; the limitation is stated rather than papered over.
+
+roadmap: https://www.misoenergy.org/markets-and-operations/MSE/
+roadmap_note: >-
+  The Market System Enhancements (MSE) programme is MISO's published forward-looking
+  roadmap for the market systems that sit behind these APIs — Model Manager, the Day-Ahead
+  and Real-Time Market Clearing Engines, the Operator Interface, an upgraded Energy
+  Management System and the New Market User Interface (the MUI 2.0 surface in this
+  profile). MISO publishes an MSE timeline graphic and gives quarterly stakeholder updates;
+  RT-MCE is stated as expected to complete in 2026.
+
+data_revision_policy:
+  interchange_window_days: 105
+  quote: >-
+    "Data available within the interchange endpoints are subject to change up to 105 days
+    after the market day due to reconciliation."
+  source: MISO Data Exchange portal operation metadata
+
+deprecated_operations: []
+deprecated_operations_note: >-
+  No operation in any of the four harvested OpenAPI documents carries deprecated: true.
+
+change_log: null
+change_log_note: >-
+  MISO publishes no dated API changelog or release-notes feed for either the Public API or
+  Data Exchange. The 2025-12-12 restructure was announced as page copy on the RT Data APIs
+  page, not as a changelog entry. No ChangeLog pointer is claimed.

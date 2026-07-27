@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "interval": "1",
+      "timeInterval": {
+        "resolution": "daily",
+        "start": "2023-06-28 00:00:00.000",
+        "end": "2023-06-29 00:00:00.000",
+        "value": "2023-06-29"
+      },
+      "node": "ALTW.WELLS1",
+      "lmp": 21.6,
+      "mcc": 0.02,
+      "mec": 20.94,
+      "mlc": 0.64
+    }
+  ],
+  "page": {
+    "pageNumber": 0,
+    "pageSize": 0,
+    "totalElements": 0,
+    "totalPages": 0,
+    "lastPage": true
+  }
+}

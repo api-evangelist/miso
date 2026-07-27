@@ -1,0 +1,128 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  Derived from openapi/miso-data-exchange-load-generation-interchange-api-openapi.json and
+  openapi/miso-data-exchange-pricing-api-openapi.json, then upgraded from MISO's own
+  documentation: https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us (keys and
+  expiry), https://data-exchange.misoenergy.org/developer/apis?api-version=2022-04-01-preview
+  (subscriptionKeyParameterNames and empty OAuth/OIDC settings), and live anonymous probes of
+  every host on 2026-07-27.
+docs: https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us
+description: >-
+  MISO runs three different authentication postures across one profile, and the spread is the
+  point. Most of its surface has no authentication at all — 37 Public API endpoints and the
+  entire bulk market-report archive answer an anonymous GET. The keyed half uses a single
+  Azure API Management subscription key, free and self-serve, with no OAuth, no OpenID Connect,
+  no bearer tokens and no scopes anywhere. The market-participant interface at the far end is
+  mutual-TLS with a client digital certificate. There is no OAuth surface to describe, so no
+  scopes/ artifact exists for this provider — the correct outcome for a key-auth API, not a gap.
+summary:
+  types: [none, apiKey, mutualTLS]
+  api_key_in: [header, query]
+  oauth2_flows: []
+  scopes: 0
+  openid_connect: false
+postures:
+  - id: anonymous
+    apis:
+      - miso:miso-public-api-operations-displays
+      - miso:miso-public-api-markets-displays
+      - miso:miso-market-reports
+    type: none
+    hosts: [https://public-api.misoenergy.org, https://docs.misoenergy.org]
+    verified: '2026-07-27'
+    evidence: >-
+      Every one of the 37 documented Public API paths returned HTTP 200 with content-type
+      application/json to a plain GET carrying no key, no cookie and no account. Market reports
+      (20260726_da_expost_lmp.csv, 20260726_sr_gfm.xlsx, Dead_Node_Reports_Readers_Guide.pdf)
+      downloaded anonymously with HTTP 200.
+  - id: subscription-key
+    apis:
+      - miso:miso-data-exchange-pricing-api
+      - miso:miso-data-exchange-load-generation-interchange-api
+    type: apiKey
+    hosts: [https://apim.misoenergy.org]
+    gateway: Azure API Management
+    self_serve: true
+    approval_required: false
+    verified: '2026-07-27'
+    evidence: >-
+      Anonymous GET to https://apim.misoenergy.org/pricing/v1/day-ahead/2026-07-26/lmp-expost
+      returned HTTP 401 {"statusCode": 401, "message": "Access denied due to missing
+      subscription key"}, while an unknown route on the same gateway returned HTTP 404
+      "Resource not found" — the 404/401 split confirms the route exists and is key-gated.
+  - id: client-certificate
+    apis:
+      - miso:miso-mui-2-0-api
+    type: mutualTLS
+    hosts: [https://markets.midwestiso.org, https://cce.midwestiso.org]
+    self_serve: false
+    verified: '2026-07-27'
+    evidence: >-
+      An anonymous TLS connection to markets.midwestiso.org failed at the handshake with an SSL
+      alert rather than returning any HTTP status — direct evidence of client-certificate
+      enforcement. MISO's MUI 2.0 API User Guide states "All market participants using the JSON
+      programmatic interface must be registered with MISO." The certificate is issued through
+      the MISO Market Portal.
+schemes:
+  - name: apiKeyHeader
+    type: apiKey
+    in: header
+    parameter: Ocp-Apim-Subscription-Key
+    preferred: true
+    sources:
+      - openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+      - openapi/miso-data-exchange-pricing-api-openapi.json
+      - https://data-exchange.misoenergy.org/developer/apis?api-version=2022-04-01-preview
+  - name: apiKeyQuery
+    type: apiKey
+    in: query
+    parameter: subscription-key
+    preferred: false
+    note: >-
+      Functional but discouraged — a key in the query string lands in access logs, browser
+      history and referrer headers. Use the header form.
+    sources:
+      - openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+      - openapi/miso-data-exchange-pricing-api-openapi.json
+key_lifecycle:
+  issuance: >-
+    A MISO public-website profile is required first; a MISO Data Exchange account is then
+    created at https://data-exchange.misoenergy.org/ and a subscription taken out on each
+    product. Product metadata returns approvalRequired false, so keys are issued immediately.
+  expiry: >-
+    "The API keys do not expire or require revalidation, but the accounts they are tied to have
+    account password that expire and require reset after 1 year."
+  rotation: Not documented. Azure API Management issues a primary and a secondary key per subscription.
+  scope_of_key: >-
+    Per product. Pricing API and Load/Generation/Interchange API are separate subscriptions with
+    separate keys and separate rate-limit budgets.
+  revocation: Not documented.
+anomalies:
+  - id: bearer-token-mismatch
+    severity: medium
+    detail: >-
+      All 32 Data Exchange operations declare their 401 as "Invalid or missing Bearer Token in
+      the Authorization header". No bearer token, OAuth flow or Authorization header exists
+      anywhere in this API — the portal's own API metadata returns empty
+      oAuth2AuthenticationSettings and empty openidAuthenticationSettings for both APIs. The
+      description is leftover template text and will mislead any client generated from the
+      specification. The real credential is the subscription key.
+  - id: optional-security-requirement
+    severity: low
+    detail: >-
+      Both Data Exchange OpenAPIs declare a root security array of [{}, {apiKeyHeader: []},
+      {apiKeyQuery: []}]. The empty object makes authentication formally optional in the
+      specification, which is not what the gateway enforces — anonymous calls are rejected
+      with 401.
+not_present:
+  oauth2: false
+  openid_connect: false
+  jwt: false
+  basic_auth: false
+  hmac_signing: false
+  scopes: false
+  mtls_on_public_apis: false
+  well_known_discovery: >-
+    No /.well-known/openid-configuration and no /.well-known/oauth-authorization-server on any
+    host (all HTTP 404, probed 2026-07-27). See well-known/miso-well-known.yml.

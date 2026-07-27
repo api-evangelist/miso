@@ -1,0 +1,20 @@
+{
+  "RefId": "27-Jul-2026 - Interval 08:10 EST",
+  "TotalMW": "0",
+  "Fuel": {
+    "Type": [
+      {
+        "INTERVALEST": "2026-07-27 12:00:00 AM",
+        "CATEGORY": "Battery Storage",
+        "ACT": "39",
+        "FUEL_CATEGORY": "Battery Storage  (39 MW)"
+      },
+      {
+        "INTERVALEST": "2026-07-27 12:00:00 AM",
+        "CATEGORY": "Coal",
+        "ACT": "33729",
+        "FUEL_CATEGORY": "Coal  (33,729 MW)"
+      }
+    ]
+  }
+}

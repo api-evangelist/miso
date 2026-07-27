@@ -1,0 +1,19 @@
+{
+  "RefId": "27-Jul-2026 - Interval 08:15 EST",
+  "Interval": [
+    {
+      "instantEST": "2026-07-26 08:15:00 AM",
+      "NORTH_SOUTH_LIMIT": "-3000",
+      "SOUTH_NORTH_LIMIT": "2500",
+      "RAW_MW": "2594",
+      "UDSFLOW_MW": "2200"
+    },
+    {
+      "instantEST": "2026-07-26 08:20:00 AM",
+      "NORTH_SOUTH_LIMIT": "-3000",
+      "SOUTH_NORTH_LIMIT": "2500",
+      "RAW_MW": "2527",
+      "UDSFLOW_MW": "2200"
+    }
+  ]
+}

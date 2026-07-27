@@ -1,0 +1,17 @@
+{
+  "RefId": "27-Jul-2026 - Interval 08:10 EST",
+  "Constraint": [
+    {
+      "Name": "RDT_SO_MW (South_North) - STR+Lost_Gen Zone_1",
+      "Period": "2026-07-27T08:10:00",
+      "Price": "-0.16",
+      "Description": "STR+Lost_Gen Zone_1"
+    },
+    {
+      "Name": "RDT_SO_MW (South_North) - STR+Lost_Gen Zone_3",
+      "Period": "2026-07-27T08:10:00",
+      "Price": "-8.32",
+      "Description": "STR+Lost_Gen Zone_3"
+    }
+  ]
+}

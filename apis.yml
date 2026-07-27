@@ -30,7 +30,7 @@ description: >-
   self-serve tier over historical market report data, and its MUI 2.0 market
   interface is a genuinely closed, client-certificate-gated API for registered
   market participants only.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/groq.png
+image: https://www.misoenergy.org/siteassets/favicons/miso-icon-only---blue-green---whitebg_rgb_192.png
 tags:
 - Energy
 - United States
@@ -87,6 +87,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/miso-public-api-operations-displays-openapi.json
+  - type: Overlay
+    url: overlays/miso-public-api-operations-displays-overlay.yaml
   - type: Documentation
     url: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
   - type: APIReference
@@ -126,6 +128,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/miso-public-api-markets-displays-openapi.json
+  - type: Overlay
+    url: overlays/miso-public-api-markets-displays-overlay.yaml
   - type: Documentation
     url: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
   - type: APIReference
@@ -164,6 +168,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/miso-data-exchange-pricing-api-openapi.json
+  - type: Overlay
+    url: overlays/miso-data-exchange-pricing-overlay.yaml
   - type: DeveloperPortal
     url: https://data-exchange.misoenergy.org/
   - type: APIReference
@@ -205,6 +211,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+  - type: Overlay
+    url: overlays/miso-data-exchange-lgi-overlay.yaml
   - type: DeveloperPortal
     url: https://data-exchange.misoenergy.org/
   - type: APIReference
@@ -276,6 +284,42 @@ apis:
   - type: Onboarding
     url: https://www.misoenergy.org/markets-and-operations/mp-registration/market-participation/
 common:
+- type: AgenticAccess
+  url: agentic-access/miso-agentic-access.yml
+- type: DomainSecurity
+  url: security/miso-domain-security.yml
+- type: Authentication
+  url: authentication/miso-authentication.yml
+- type: Conventions
+  url: conventions/miso-conventions.yml
+- type: RateLimits
+  url: rate-limits/miso-rate-limits.yml
+- type: Plans
+  url: plans/miso-plans.yml
+- type: ErrorCatalog
+  url: errors/miso-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/miso-lifecycle.yml
+- type: StatusPage
+  url: https://www.misoenergy.org/markets-and-operations/notifications/it-and-system-notifications/
+- type: Roadmap
+  url: https://www.misoenergy.org/markets-and-operations/MSE/
+- type: Conformance
+  url: conformance/miso-conformance.yml
+- type: DataModel
+  url: data-model/miso-data-model.yml
+- type: Examples
+  url: examples/_index.yml
+- type: Packages
+  url: packages/miso-packages.yml
+- type: Sandbox
+  url: sandbox/miso-sandbox.yml
+- type: MCPServer
+  url: mcp/miso-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/miso-llms.txt
 - type: Website
   url: https://www.misoenergy.org/
 - type: DeveloperPortal
@@ -294,6 +338,10 @@ common:
   url: https://data-exchange.misoenergy.org/products
 - type: TermsOfService
   url: https://www.misoenergy.org/meet-miso/legal-and-privacy/
+- type: PrivacyPolicy
+  url: https://www.misoenergy.org/meet-miso/legal-and-privacy/
+- type: GettingStarted
+  url: https://cdn.misoenergy.org/MISO%20Data%20Exchange%20User%20Guide674561.pdf
 - type: Support
   url: https://help.misoenergy.org/
 - type: Blog

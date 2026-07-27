@@ -1,0 +1,142 @@
+generated: '2026-07-27'
+method: derived
+source: >-
+  Derived from the four OpenAPI documents in openapi/ and the artifacts already in this
+  repo (authentication/, conventions/, errors/, well-known/, security/), cross-checked
+  against MISO's own published documentation. No conformance claim below is asserted
+  without evidence, and MISO makes no conformance claim of its own anywhere on its
+  developer surfaces.
+description: >-
+  What MISO's public API surface does and does not conform to. The short version is that
+  MISO conforms to almost no cross-cutting web-API standard by name — it publishes no
+  OpenAPI, no OAuth, no RFC 9457 errors, no RFC 8594 deprecation headers and no RFC 9116
+  security.txt — while being one of the most genuinely open data programmes in the North
+  American energy sector. The standards it does sit under are sectoral and regulatory
+  (FERC-jurisdictional wholesale market operation), not API standards. Recorded here so the
+  distinction is legible: openness and standards-conformance are not the same axis.
+standards:
+  - id: openapi
+    conforms: false
+    evidence: >-
+      MISO publishes no OpenAPI for the Public API. For Data Exchange, MISO's Azure API
+      Management portal exposes an OpenAPI export endpoint that returns a valid document
+      whose paths object is EMPTY; the specifications in openapi/ were assembled by API
+      Evangelist from MISO's portal operation and schema metadata plus live payloads. No
+      provider-published machine-readable contract exists.
+  - id: swagger-2.0
+    conforms: false
+    evidence: No Swagger 2.0 document published.
+  - id: asyncapi
+    conforms: false
+    evidence: No event, streaming or webhook surface exists. Polling only.
+  - id: graphql
+    conforms: false
+    evidence: No /graphql endpoint on any host (probed 2026-07-27, HTTP 404).
+  - id: grpc
+    conforms: false
+    evidence: No .proto definitions published; no gRPC endpoint documented.
+  - id: mcp
+    conforms: false
+    evidence: No hosted or remote Model Context Protocol server published by MISO.
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      Both Data Exchange OpenAPIs declare only apiKey security schemes
+      (Ocp-Apim-Subscription-Key header, subscription-key query). The portal's own API
+      metadata returns empty oAuth2AuthenticationSettings and empty
+      openidAuthenticationSettings for both APIs.
+  - id: oidc
+    conforms: false
+    evidence: /.well-known/openid-configuration returned 404 on every host probed.
+  - id: rfc8414-oauth-metadata
+    conforms: false
+    evidence: /.well-known/oauth-authorization-server returned 404 on every host probed.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      No application/problem+json media type appears in any spec. Gateway errors use the
+      Azure API Management envelope {"statusCode": n, "message": "..."}; operation-level
+      400/401/404 responses are declared with a description and no schema.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: /.well-known/security.txt returned 404 (400 on docs host) across all five hosts.
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: >-
+      No Sunset or Deprecation header support. The 2025-12-12 breaking change to the Public
+      API was announced as page copy, not as header-signalled deprecation.
+  - id: rfc9727-api-catalog
+    conforms: false
+    evidence: /.well-known/api-catalog returned 404 on every host probed.
+  - id: json-api
+    conforms: false
+    evidence: >-
+      Responses are plain JSON. Data Exchange uses a {data: [...], page: {...}} envelope of
+      its own; the Public API returns display-shaped objects with upper-case field names
+      (RefId, TotalMW, INTERVALEST) inherited from the web charts they back.
+  - id: odata
+    conforms: false
+    evidence: No $filter/$select/$top query surface; filtering is by named query parameters.
+  - id: http-caching
+    conforms: partial
+    evidence: >-
+      MISO asks callers to respect caching and poll no more than once per minute, but
+      publishes no ETag or Cache-Control contract and none is documented in any spec.
+  - id: pagination
+    conforms: true
+    evidence: >-
+      Data Exchange implements consistent page-number pagination — pageNumber request
+      parameter, and a page object carrying pageNumber, pageSize, totalElements, totalPages
+      and lastPage on every list response. Page size is fixed and not client-configurable.
+      The Public API is unpaged.
+  - id: idempotency
+    conforms: not-applicable
+    evidence: >-
+      Every operation on every public MISO API is a GET, safe and idempotent by HTTP
+      semantics. No idempotency-key contract exists because no write operation exists.
+  - id: api-versioning
+    conforms: partial
+    evidence: >-
+      Data Exchange versions in the URI path (/v1/). The Public API carries no version
+      token and was restructured in place on 2025-12-12.
+  - id: rate-limit-headers
+    conforms: false
+    evidence: >-
+      Real numeric limits are published (100/minute, 24,000/day per subscription) and
+      enforced with 429 and 403, but no RateLimit-* or Retry-After header is documented.
+  - id: tls-1.2-plus
+    conforms: true
+    evidence: >-
+      All probed hosts negotiate TLSv1.3 — see security/miso-domain-security.yml.
+  - id: hsts
+    conforms: partial
+    evidence: >-
+      www.misoenergy.org (max-age 2592000) and data-exchange.misoenergy.org (max-age
+      31536000) send HSTS; public-api.misoenergy.org does not.
+  - id: dnssec
+    conforms: false
+    evidence: misoenergy.org is not DNSSEC-signed (probed 2026-07-27).
+  - id: spf-dmarc
+    conforms: true
+    evidence: misoenergy.org publishes SPF and DMARC with policy p=reject.
+  - id: caa
+    conforms: false
+    evidence: No CAA records published for misoenergy.org.
+  - id: green-button-espi
+    conforms: not-applicable
+    evidence: >-
+      Green Button / NAESB ESPI is a distribution-utility consumer-data standard. MISO is a
+      Regional Transmission Organization with no retail customers, no meters and no billing
+      relationships, so it holds no consumer usage data to expose. See review.yml — recorded
+      as structurally not-applicable, not as a gap.
+  - id: ferc-jurisdiction
+    conforms: true
+    evidence: >-
+      MISO is a FERC-regulated Regional Transmission Organization operating under a FERC
+      accepted Open Access Transmission, Energy and Operating Reserve Markets Tariff. This
+      is a regulatory status, not an API conformance claim.
+certifications_published: []
+certifications_note: >-
+  MISO publishes no trust centre and names no security certification (SOC 2, ISO 27001, PCI
+  DSS, HIPAA, FedRAMP) on any developer-facing surface — probed 2026-07-27, no hit. No
+  Compliance pointer is claimed in apis.yml.

@@ -1,0 +1,119 @@
+generated: '2026-07-27'
+method: derived
+source: >-
+  Derived from the 4xx responses declared on all 32 operations in
+  openapi/miso-data-exchange-pricing-api-openapi.json and
+  openapi/miso-data-exchange-load-generation-interchange-api-openapi.json, plus live probes
+  of apim.misoenergy.org and public-api.misoenergy.org on 2026-07-27, plus the throttling
+  and quota codes MISO states in
+  https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us.
+format: none
+format_note: >-
+  Not RFC 9457. No application/problem+json media type appears anywhere in MISO's surface,
+  and MISO publishes no error reference page. The 400/401/404 responses declared on every
+  Data Exchange operation carry a description and no schema and no example, so the
+  operation-level error body shape is genuinely undocumented — MISO's published error
+  contract is the status code and its description, nothing more. What is documented is the
+  Azure API Management gateway envelope, observed live.
+envelopes:
+  gateway:
+    shape: '{"statusCode": <integer>, "message": "<string>"}'
+    media_type: application/json
+    observed:
+      - request: GET https://apim.misoenergy.org/pricing/v1/day-ahead/2026-07-26/lmp-expost (no key)
+        status: 401
+        body: '{"statusCode": 401, "message": "Access denied due to missing subscription key"}'
+      - request: GET https://apim.misoenergy.org/pricing/openapi.json
+        status: 404
+        body: '{"statusCode": 404, "message": "Resource not found"}'
+    note: >-
+      Returned by the gateway before the request reaches MISO's backend. The 401/404 split
+      is what makes the 401 meaningful — an unknown route on the same gateway returns 404,
+      so a 401 confirms the route exists and is key-gated.
+  operation:
+    shape: undocumented
+    media_type: application/json
+  public_api:
+    shape: '{"error": "<string>"}'
+    observed:
+      - request: GET https://api.misoenergy.org/MISORTWDDataBroker/... (retired legacy endpoint)
+        status: 200
+        body: '{"error": "no data"}'
+    note: >-
+      A 200-with-error-body anti-pattern on the retired legacy surface. The current Public
+      API endpoints all returned HTTP 200 with real data on 2026-07-27 and publish no error
+      contract at all.
+problems:
+  - status: 400
+    title: Invalid date format
+    detail: >-
+      The {date} path segment is not a valid yyyy-mm-dd market date.
+    remediation: Format the date as yyyy-mm-dd, e.g. 2026-07-26.
+    applies_to: all 32 Data Exchange operations
+    source_operations:
+      - openapi/miso-data-exchange-pricing-api-openapi.json (10 operations)
+      - openapi/miso-data-exchange-load-generation-interchange-api-openapi.json (22 operations)
+  - status: 401
+    title: Invalid or missing Bearer Token in the Authorization header
+    detail: >-
+      Declared verbatim by MISO on every Data Exchange operation. Note the mismatch: the
+      description says Bearer token, but the security schemes MISO actually declares — and
+      the gateway actually enforces — are apiKey (Ocp-Apim-Subscription-Key header or
+      subscription-key query). The live gateway message is "Access denied due to missing
+      subscription key". The description appears to be leftover template text; the
+      subscription key is the real credential.
+    remediation: >-
+      Send a valid subscription key in the Ocp-Apim-Subscription-Key header (or the
+      subscription-key query parameter). Keys are free and self-serve at
+      https://data-exchange.misoenergy.org/.
+    applies_to: all 32 Data Exchange operations
+    source_operations:
+      - openapi/miso-data-exchange-pricing-api-openapi.json (10 operations)
+      - openapi/miso-data-exchange-load-generation-interchange-api-openapi.json (22 operations)
+  - status: 403
+    title: Quota exceeded
+    detail: >-
+      The subscription has exceeded its 24,000 call/day quota. Not declared in either
+      OpenAPI; documented by MISO in the Data Exchange FAQ.
+    remediation: Wait for the daily quota to reset. Reduce page-walking by filtering with node, region or interval.
+    method: searched
+    source: https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us
+  - status: 404
+    title: Date not found
+    detail: >-
+      No data exists for the requested market date on this operation — either the date is
+      before the data series begins, or it is a future/unsettled market day, or the report
+      has not published yet for that day. Day-ahead data refreshes at approximately
+      6:45 PM GMT; real-time at approximately 8:45 AM GMT.
+    remediation: Request a settled market date, or retry after the publication window.
+    applies_to: all 32 Data Exchange operations
+  - status: 404
+    title: Resource not found
+    detail: The path does not match any route published on the gateway.
+    envelope: gateway
+    remediation: Check the operation path against https://data-exchange.misoenergy.org/apis.
+  - status: 429
+    title: Too Many Requests
+    detail: >-
+      The subscription has exceeded its 100 call/minute rate limit. Not declared in either
+      OpenAPI; documented by MISO in the Data Exchange FAQ.
+    remediation: >-
+      Back off and retry. No Retry-After or RateLimit-* header is documented, so use a
+      fixed backoff of at least 60 seconds. See rate-limits/miso-rate-limits.yml.
+    method: searched
+    source: https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us
+undeclared_but_real:
+  statuses:
+    - status: 403
+      reason: daily quota
+    - status: 429
+      reason: per-minute rate limit
+  note: >-
+    Neither 403 nor 429 is declared on any operation in either Data Exchange OpenAPI, even
+    though MISO documents both as real enforced behaviours. Any generated client built from
+    the spec alone will not handle throttling. This is the single most actionable contract
+    gap in MISO's developer surface.
+error_reference_docs: null
+error_reference_note: >-
+  MISO publishes no error-code reference page. Searched 2026-07-27 across
+  data-exchange.misoenergy.org, help.misoenergy.org and www.misoenergy.org — no hit.

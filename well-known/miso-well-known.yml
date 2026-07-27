@@ -1,0 +1,61 @@
+generated: '2026-07-27'
+method: probed
+source: live HTTPS probes of every apis.yml baseURL host, every OpenAPI servers[] host and the docs/portal hosts
+description: >-
+  MISO publishes no /.well-known/ discovery surface at all. Every one of the five hosts in
+  this profile was probed for the full RFC 9116 / RFC 8414 / OIDC / RFC 9727 / ai-plugin set
+  on 2026-07-27 and every path missed. This is recorded as evidence rather than omitted:
+  there is no security.txt, no OAuth or OpenID Connect discovery document (consistent with
+  MISO's subscription-key-only auth model), no api-catalog and no ai-plugin manifest. No
+  WellKnown or SecurityTxt pointer is claimed in apis.yml because nothing was found.
+hosts:
+  - host: https://public-api.misoenergy.org
+    role: Public API gateway (anonymous)
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /llms.txt, status: 404}
+  - host: https://apim.misoenergy.org
+    role: MISO Data Exchange gateway (Azure API Management)
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /llms.txt, status: 404}
+  - host: https://data-exchange.misoenergy.org
+    role: MISO Data Exchange developer portal
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /llms.txt, status: 404}
+  - host: https://www.misoenergy.org
+    role: Corporate website
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+      - {path: /.well-known/ai-plugin.json, status: 404}
+      - {path: /llms.txt, status: 404}
+  - host: https://docs.misoenergy.org
+    role: Market report archive
+    documents:
+      - {path: /.well-known/security.txt, status: 400}
+      - {path: /.well-known/openid-configuration, status: 400}
+      - {path: /.well-known/oauth-authorization-server, status: 400}
+      - {path: /.well-known/api-catalog, status: 400}
+      - {path: /.well-known/ai-plugin.json, status: 400}
+      - {path: /llms.txt, status: 400}
+    note: >-
+      docs.misoenergy.org answers unknown paths with HTTP 400 rather than 404; it serves
+      only exact market-report file names and has no directory listing (the
+      /marketreports/ index itself returns 404).
+found: 0

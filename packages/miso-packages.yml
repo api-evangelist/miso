@@ -1,0 +1,63 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  npm, PyPI, Maven Central, NuGet, pkg.go.dev, RubyGems, Packagist and crates.io searched
+  2026-07-27 for a first-party MISO client library, plus MISO's own developer surfaces
+  (data-exchange.misoenergy.org, help.misoenergy.org, www.misoenergy.org) for any SDK or
+  code-sample downloads.
+description: >-
+  MISO ships no client libraries. There is no MISO GitHub organisation, no SDK section on
+  the Data Exchange portal, no code samples beyond the Azure API Management portal's
+  built-in snippet generator, and nothing published by MISO under any name on any of the
+  eight public package registries probed. Every library that speaks to MISO's APIs is
+  third-party and community-maintained. Those are catalogued below as candidates so the
+  gap is visible, all with official false — none of them is a MISO artifact and none is
+  endorsed by MISO. No SDKs pointer is claimed in apis.yml, because MISO ships no SDK.
+official_packages: []
+official_count: 0
+registries_probed:
+  - {registry: npm, result: no first-party package}
+  - {registry: pypi, result: no first-party package; third-party clients only}
+  - {registry: maven-central, result: no first-party package}
+  - {registry: nuget, result: no first-party package}
+  - {registry: pkg.go.dev, result: no first-party package}
+  - {registry: rubygems, result: no first-party package}
+  - {registry: packagist, result: no first-party package}
+  - {registry: crates.io, result: no first-party package}
+third_party_packages:
+  - language: python
+    registry: pypi
+    name: gridstatus
+    version_seen: 0.36.0
+    url: https://pypi.org/project/gridstatus/
+    source: https://github.com/gridstatus/gridstatus
+    install: pip install gridstatus
+    official: false
+    maintainer: Grid Status (gridstatus.io)
+    covers:
+      - MISO Public API / real-time display feeds
+      - MISO Data Exchange (gridstatus.miso_api module)
+    note: >-
+      A uniform Python client across US ISOs — CAISO, SPP, ISONE, MISO, ERCOT, NYISO and
+      PJM. The most actively maintained way to consume MISO data from Python, but it is a
+      third-party project, not a MISO release.
+  - language: python
+    registry: pypi
+    name: pyiso
+    version_seen: 0.4.0
+    url: https://pypi.org/project/pyiso/
+    source: https://github.com/WattTime/pyiso
+    install: pip install pyiso
+    official: false
+    maintainer: WattTime
+    covers:
+      - MISO legacy real-time data broker feeds (MISOClient)
+    note: >-
+      Older WattTime client library with a MISOClient built against the legacy
+      MISORTWDDataBroker surface that MISO retired on 2025-12-12; treat as historical.
+cli: null
+cli_note: MISO publishes no command-line interface.
+gaps:
+  - No first-party SDK in any language.
+  - No MISO GitHub organisation could be located; no GitHubOrganization pointer is claimed.
+  - No published code samples outside the Azure API Management portal's generated snippets.

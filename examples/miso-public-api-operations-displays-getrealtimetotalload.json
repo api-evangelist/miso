@@ -1,0 +1,47 @@
+{
+  "LoadInfo": {
+    "RefId": "27-Jul-2026 - Interval 08:10 EST",
+    "ClearedMW": [
+      {
+        "ClearedMWHourly": {
+          "Hour": "1",
+          "Value": "90916"
+        }
+      },
+      {
+        "ClearedMWHourly": {
+          "Hour": "2",
+          "Value": "86496"
+        }
+      }
+    ],
+    "MediumTermLoadForecast": [
+      {
+        "Forecast": {
+          "HourEnding": "1",
+          "LoadForecast": "89367"
+        }
+      },
+      {
+        "Forecast": {
+          "HourEnding": "2",
+          "LoadForecast": "86225"
+        }
+      }
+    ],
+    "FiveMinTotalLoad": [
+      {
+        "Load": {
+          "Time": "00:00",
+          "Value": "93419"
+        }
+      },
+      {
+        "Load": {
+          "Time": "00:05",
+          "Value": "93087"
+        }
+      }
+    ]
+  }
+}

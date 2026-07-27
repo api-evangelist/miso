@@ -1,0 +1,64 @@
+{
+  "MCPData": {
+    "RefId": "27-Jul-2026 - Interval 08:15 EST",
+    "MktDay": "07-27-2026",
+    "RealTimeMCP": {
+      "HourAndMin": "08:15",
+      "Zone": [
+        {
+          "number": "1",
+          "GenRegMCP": "9.34",
+          "GenSpinMCP": "0.16",
+          "GenSuppMCP": "0.16",
+          "StrMcp": "0.10",
+          "DemandRegMcp": "9.34",
+          "DemandSpinMcp": "0.16",
+          "DemandSuppMcp": "0.16",
+          "RcpUpMcp": "0.00",
+          "RcpDownMcp": "0.00"
+        },
+        {
+          "number": "2",
+          "GenRegMCP": "9.34",
+          "GenSpinMCP": "0.16",
+          "GenSuppMCP": "0.16",
+          "StrMcp": "0.10",
+          "DemandRegMcp": "9.34",
+          "DemandSpinMcp": "0.16",
+          "DemandSuppMcp": "0.16",
+          "RcpUpMcp": "0.00",
+          "RcpDownMcp": "0.00"
+        }
+      ]
+    },
+    "DayAheadMCP": {
+      "HourEnding": "9",
+      "Zone": [
+        {
+          "number": "1",
+          "GenRegMCP": "11.91",
+          "GenSpinMCP": "0.84",
+          "GenSuppMCP": "0.40",
+          "StrMcp": "0.85",
+          "DemandRegMcp": "11.91",
+          "DemandSpinMcp": "0.84",
+          "DemandSuppMcp": "0.40",
+          "RcpUpMcp": "0.00",
+          "RcpDownMcp": "0.00"
+        },
+        {
+          "number": "2",
+          "GenRegMCP": "11.91",
+          "GenSpinMCP": "0.84",
+          "GenSuppMCP": "0.40",
+          "StrMcp": "0.85",
+          "DemandRegMcp": "11.91",
+          "DemandSpinMcp": "0.84",
+          "DemandSuppMcp": "0.40",
+          "RcpUpMcp": "0.00",
+          "RcpDownMcp": "0.00"
+        }
+      ]
+    }
+  }
+}

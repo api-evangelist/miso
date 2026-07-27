@@ -1,0 +1,694 @@
+generated: '2026-07-27'
+method: derived
+status: candidate
+source: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json, openapi/miso-data-exchange-pricing-api-openapi.json,
+  openapi/miso-public-api-markets-displays-openapi.json, openapi/miso-public-api-operations-displays-openapi.json
+summary: 'No official hosted or remote Model Context Protocol server exists for MISO. Searched 2026-07-27
+  across MISO''s own developer surfaces, npm, the MCP registries and the public web — no hit, and MISO
+  makes no agent or MCP claim anywhere. The tool set below is a CANDIDATE surface DERIVED one-per-operation
+  from the four OpenAPI documents in openapi/, published here as a proposal, not as a MISO artifact. It
+  is unusually easy to stand up because 37 of the 69 operations need no credential at all: the MISO Public
+  API answers an anonymous GET, so an MCP server over the operations-displays and markets-displays halves
+  requires no auth story whatsoever. The 32 Data Exchange operations need a free self-serve subscription
+  key.'
+server:
+  name: miso
+  transport: http
+  url: null
+auth:
+  public-api:
+    type: none
+    note: Anonymous. No key, no account.
+  data-exchange:
+    type: apiKey
+    header: Ocp-Apim-Subscription-Key
+    note: Free, self-serve, no approval step.
+coverage:
+  operations_total: 69
+  anonymous_operations: 37
+  keyed_operations: 32
+tools:
+- name: miso_day_ahead_demand
+  title: Day-Ahead Cleared Demand
+  description: Demand cleared in the day-ahead market, by region in hourly or daily intervals. Available
+    at 2pm EST the day before.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-day-ahead-date-demand
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-day-ahead-date-demand
+    parameters
+- name: miso_day_ahead_generation_cleared_physical
+  title: Day-Ahead Cleared Generation, Physical
+  description: Physical generation cleared in the day-ahead market, in hourly intervals. Available at
+    2pm EST the day before.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-day-ahead-date-generation-cleared-physical
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-day-ahead-date-generation-cleared-physical
+    parameters
+- name: miso_day_ahead_generation_cleared_virtual
+  title: Day-Ahead Cleared Generation, Virtual
+  description: Virtual generation cleared in the day-ahead market, in hourly intervals. Available at 2pm
+    EST the day before.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-day-ahead-date-generation-cleared-virtual
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-day-ahead-date-generation-cleared-virtual
+    parameters
+- name: miso_day_ahead_generation_fuel_type
+  title: Day-Ahead Generation Fuel Type
+  description: Generation fuel mix (in megawatts) of units cleared in the day-ahead market for the various
+    fuel types in the MISO footprint, by region in hourly intervals. Available at 2pm EST the day before.
+    'Coal' includes combination coal/gas units; 'Gas' includes combination oil/gas units; 'Storage' includes
+    pumped storage, ESR, and battery units. 'Solar' data is only available from 2022-01-01 onwards.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-day-ahead-date-generation-fuel-type
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-day-ahead-date-generation-fuel-type
+    parameters
+- name: miso_day_ahead_generation_offered_ecomax
+  title: Day-Ahead Offered Generation ECOMAX
+  description: The Economic Maximum offered by generators in the day-ahead market, by region in hourly
+    intervals. Available at 2pm EST the day before.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-day-ahead-date-generation-offered-ecomax
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-day-ahead-date-generation-offered-ecomax
+    parameters
+- name: miso_day_ahead_generation_offered_ecomin
+  title: Day-Ahead Offered Generation ECOMIN
+  description: The Economic Minimum offered by generators in the day-ahead market, by region in hourly
+    intervals. Available at 2pm EST the day before.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-day-ahead-date-generation-offered-ecomin
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-day-ahead-date-generation-offered-ecomin
+    parameters
+- name: miso_day_ahead_interchange_net_scheduled
+  title: Day-Ahead Net Scheduled Interchange
+  description: Net scheduled interchange (NSI) that cleared the day-ahead market, by region in hourly
+    intervals. Positive values indicate imports. Available at 2pm EST the day before.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-day-ahead-date-interchange-net-scheduled
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-day-ahead-date-interchange-net-scheduled
+    parameters
+- name: miso_forecast_load
+  title: Medium Term Load Forecast
+  description: Medium term load forecast (in megawatts), by region and zone in hourly or daily intervals.
+    Use the 'init' parameter to access a specific past run. Available at 7am EST the day after the init
+    date.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-forecast-date-load
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-forecast-date-load
+    parameters
+- name: miso_forecast_outage
+  title: Outage Forecast
+  description: The total capacity (in megawatts at economic maximum) for all units that are expected to
+    be on outage, by region in hourly intervals. This endpoint has no lookback, dates must always be current
+    or future. Available at 6am EST up to 6 days before.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-forecast-date-outage
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-forecast-date-outage
+    parameters
+- name: miso_historical_interchange_net_scheduled
+  title: Historical Net Scheduled Interchange
+  description: Net scheduled interchange (NSI) final volumes, by adjacent balancing authority (BA) in
+    hourly intervals. Includes updates from Dynamic Schedules, Emergency Power Purchases, and ARS/CRSG
+    events. Positive values indicate imports. Available at 7am EST the day after. May be updated up to
+    105 days after-the-fact.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-historical-date-interchange-net-scheduled
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-historical-date-interchange-net-scheduled
+    parameters
+- name: miso_real_time_binding_constraint
+  title: Real-Time Binding Constraints
+  description: The total number of binding constraints in the real-time market, in hourly intervals. Available
+    at 7am EST the day after.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-binding-constraint
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-binding-constraint
+    parameters
+- name: miso_real_time_demand_actual
+  title: Actual Load
+  description: Actual load (in megawatt-hours) as used in the real-time market, by region or grouped local
+    resource zones (LRZ) in hourly or daily intervals. Available at 2am EST the day after.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-demand-actual
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-demand-actual
+    parameters
+- name: miso_real_time_demand_forecast
+  title: Real-Time Cleared Demand
+  description: Demand cleared (in megawatts) in the real-time market, in hourly or daily intervals. Available
+    at 7am EST the day after.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-demand-forecast
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-demand-forecast
+    parameters
+- name: miso_real_time_demand_load_state_estimator
+  title: Real-Time State Estimator Load
+  description: Preliminary actual load (in megawatt-hours) as determined by the state estimator and reported
+    in EIA-930 filings, in hourly or daily intervals. Available at 7am EST the day after. Aggregated by
+    zone groups to preserve market participant confidentiality.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-demand-load-state-estimator
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-demand-load-state-estimator
+    parameters
+- name: miso_real_time_generation_cleared_supply
+  title: Real-Time Cleared Generation
+  description: Generation cleared (in megawatts) in the real-time market, in hourly or 5-minute intervals.
+    Available at 7am EST the day after.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-generation-cleared-supply
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-generation-cleared-supply
+    parameters
+- name: miso_real_time_generation_committed_ecomax
+  title: Real-Time Committed Generation, ECOMAX
+  description: The Economic Maximum for all units committed in the real-time market and Forward Reliability
+    Assessment & Commitment (FRAC) process, in hourly intervals. Available at 7am EST the day after.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-generation-committed-ecomax
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-generation-committed-ecomax
+    parameters
+- name: miso_real_time_generation_fuel_on_the_margin
+  title: Real-Time Generation Fuel-on-the-Margin
+  description: Retrieve real-time generation fuel on the margin, by region in 5-minute intervals. Available
+    at 7am EST the day after.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-generation-fuel-on-the-margin
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-generation-fuel-on-the-margin
+    parameters
+- name: miso_real_time_generation_fuel_type
+  title: Real-Time Generation Fuel Type
+  description: Generation fuel mix (in megawatts) as determined by the state estimator for the various
+    fuel types in the MISO footprint, by region in hourly intervals. Available at 7am EST the day after.
+    'Coal' includes combination coal/gas units; 'Gas' includes combination oil/gas units; 'Storage' includes
+    pumped storage, ESR, and battery units. 'Solar' data is only available from 2022-01-01 onwards.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-generation-fuel-type
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-generation-fuel-type
+    parameters
+- name: miso_real_time_generation_offered_ecomax
+  title: Real-Time Offered Generation, ECOMAX
+  description: The Economic Maximum from unit offers available to the real-time market and Forward Reliability
+    Assessment & Commitment (FRAC) process, in hourly intervals. Available at 7am EST the day after.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-generation-offered-ecomax
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-generation-offered-ecomax
+    parameters
+- name: miso_real_time_interchange_net_actual
+  title: Real-Time Net Actual Interchange
+  description: Net actual interchange (NAI), by adjacent balancing authority (BA) in hourly intervals.
+    Available at 7am EST the day after.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-interchange-net-actual
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-interchange-net-actual
+    parameters
+- name: miso_real_time_interchange_net_scheduled
+  title: Real-Time Net Scheduled Interchange
+  description: Net scheduled interchange (NSI) used in the Forward Reliability Assessment & Commitment
+    (FRAC) process and Unit Dispatch System (UDS) cases, in hourly intervals. Positive values indicate
+    imports. Available at 7am EST the day after.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-interchange-net-scheduled
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-interchange-net-scheduled
+    parameters
+- name: miso_real_time_outage
+  title: Real-Time Outages
+  description: The approved (planned) outages (in megawatt-hours) used in the real-time market and Forward
+    Reliability Assessment & Commitment (FRAC) process, in hourly intervals. Available at 7am EST the
+    day after.
+  surface: data-exchange-lgi
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-outage
+  input_schema_from: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json#get-v1-real-time-date-outage
+    parameters
+- name: miso_aggregated_pnode
+  title: Aggregated Pnode
+  description: List of Aggregated Pnode with their types.
+  surface: data-exchange-pricing
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-aggregated-pnode
+  input_schema_from: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-aggregated-pnode parameters
+- name: miso_day_ahead_asm_exante
+  title: Day-Ahead Ex-Ante MCP
+  description: Historical ex-ante market clearing prices (MCP) for the day-ahead (DA) ancillary services
+    market (ASM), by reserve zone in hourly intervals. Available at 2pm EST the day before.
+  surface: data-exchange-pricing
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-day-ahead-date-asm-exante
+  input_schema_from: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-day-ahead-date-asm-exante
+    parameters
+- name: miso_day_ahead_asm_expost
+  title: Day-Ahead Ex-Post MCP
+  description: Historical ex-post market clearing prices (MCP) for the day-ahead (DA) ancillary services
+    market (ASM), by reserve zone in hourly intervals. Available at 2pm EST the day before.
+  surface: data-exchange-pricing
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-day-ahead-date-asm-expost
+  input_schema_from: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-day-ahead-date-asm-expost
+    parameters
+- name: miso_day_ahead_lmp_exante
+  title: Day-Ahead Ex-Ante LMP
+  description: Historical ex-ante locational marginal prices (LMP) for the day-ahead (DA) energy market,
+    by commercial pricing node (CPNode) in hourly intervals. Available at 2pm EST the day before.
+  surface: data-exchange-pricing
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-day-ahead-date-lmp-exante
+  input_schema_from: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-day-ahead-date-lmp-exante
+    parameters
+- name: miso_day_ahead_lmp_expost
+  title: Day-Ahead Ex-Post LMP
+  description: Historical ex-post locational marginal prices (LMP) for the day-ahead (DA) energy market,
+    by commercial pricing node (CPNode) in hourly intervals. Available at 2pm EST the day before.
+  surface: data-exchange-pricing
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-day-ahead-date-lmp-expost
+  input_schema_from: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-day-ahead-date-lmp-expost
+    parameters
+- name: miso_real_time_asm_exante
+  title: Real-Time Ex-Ante MCP
+  description: 'Historical ex-ante market clearing prices (MCP) for the real-time (RT) ancillary services
+    market (ASM), by reserve zone in 5-minute intervals. Available at 7am EST the day after. [On May 6,
+    2026 Changes Applied including historical dates] 5-minute interval labels corrected. The database
+    stores end-of-interval timestamps. Previously, the API returned interval values misaligned with database
+    storage. Now corrected: ''value'', ''start'', and ''end'' fields correctly represent period START
+    time (and end time in ''end'' field). To update stored data: subtract 5 minutes from all three fields.
+    Before (old stored data): {"value": "2025-12-31T23:55:00", "start": "2025-12-31T23:55:00", "end":
+    "2026-01-01T00:00:00"}. After (corrected): {"value": "2025-12-31T23:50:00", "start": "2025-12-31T23:50:00",
+    "end": "2025-12-31T23:55:00"}. Apply this offset to all stored 5-minute interval records. No re-fetch
+    required.'
+  surface: data-exchange-pricing
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-real-time-date-asm-exante
+  input_schema_from: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-real-time-date-asm-exante
+    parameters
+- name: miso_real_time_asm_expost
+  title: Real-Time Ex-Post MCP
+  description: 'Historical ex-post market clearing prices (MCP) for the real-time (RT) ancillary services
+    market (ASM), by reserve zone in hourly or 5-minute intervals. Available at 7am EST the day after.
+    It takes on average 3-5 days to finalize preliminary LMPs. [On May 6, 2026 Changes Applied including
+    historical dates] Interval labels corrected. Database stores end-of-interval timestamps. Previously,
+    API returned 5-minute values misaligned with storage. Now corrected: ''value'', ''start'', ''end''
+    fields represent period START time. Hourly unchanged. To update stored 5-minute data: subtract 5 minutes
+    from all three fields. Before (old): {"value": "2025-12-31T23:55:00", "start": "2025-12-31T23:55:00",
+    "end": "2026-01-01T00:00:00"}. After (corrected): {"value": "2025-12-31T23:50:00", "start": "2025-12-31T23:50:00",
+    "end": "2025-12-31T23:55:00"}. Apply offset to all stored 5-minute records. No re-fetch required.'
+  surface: data-exchange-pricing
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-real-time-date-asm-expost
+  input_schema_from: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-real-time-date-asm-expost
+    parameters
+- name: miso_real_time_asm_summary
+  title: Real-Time MCP Summary
+  description: Historical ex-post market clearing prices (MCP) for the real-time (RT) ancillary services
+    market (ASM), at the MISO level in hourly intervals. Available at 7am EST the day after.
+  surface: data-exchange-pricing
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-real-time-date-asm-summary
+  input_schema_from: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-real-time-date-asm-summary
+    parameters
+- name: miso_real_time_lmp_exante
+  title: Real-Time Ex-Ante LMP
+  description: 'Historical ex-ante locational marginal prices (LMP) for the real-time (RT) energy market,
+    by commercial pricing node (CPNode) in 5-minute intervals. Available at 7am EST the day after. [On
+    May 6, 2026 Changes Applied including historical dates] 5-minute interval labels corrected. The database
+    stores end-of-interval timestamps. Previously, the API returned interval values misaligned with database
+    storage. Now corrected: ''value'', ''start'', and ''end'' fields correctly represent period START
+    time (and end time in ''end'' field). To update stored data: subtract 5 minutes from all three fields.
+    Before (old stored data): {"value": "2025-12-31T23:55:00", "start": "2025-12-31T23:55:00", "end":
+    "2026-01-01T00:00:00"}. After (corrected): {"value": "2025-12-31T23:50:00", "start": "2025-12-31T23:50:00",
+    "end": "2025-12-31T23:55:00"}. Apply this offset to all stored 5-minute interval records. No re-fetch
+    required.'
+  surface: data-exchange-pricing
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-real-time-date-lmp-exante
+  input_schema_from: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-real-time-date-lmp-exante
+    parameters
+- name: miso_real_time_lmp_expost
+  title: Real-Time Ex-Post LMP
+  description: 'Historical ex-post locational marginal prices (LMP) for the real-time (RT) energy market,
+    by commercial pricing node (CPNode) in hourly or 5-minute intervals. Available at 7am EST the day
+    after. It takes on average 3-5 days to finalize preliminary LMPs. [On May 6, 2026 Changes Applied
+    including historical dates - 5-MINUTE INTERVALS ONLY] Interval labels corrected. Database stores end-of-interval
+    timestamps. Previously, API returned 5-minute values misaligned with storage. Now corrected: ''value'',
+    ''start'', ''end'' fields represent period START time. Hourly unchanged. To update stored 5-minute
+    data: subtract 5 minutes from all three fields. Before (old): {"value": "2025-12-31T23:55:00", "start":
+    "2025-12-31T23:55:00", "end": "2026-01-01T00:00:00"}. After (corrected): {"value": "2025-12-31T23:50:00",
+    "start": "2025-12-31T23:50:00", "end": "2025-12-31T23:55:00"}. Apply offset to all stored 5-minute
+    records. No re-fetch required.'
+  surface: data-exchange-pricing
+  auth: subscription key
+  source_operation: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-real-time-date-lmp-expost
+  input_schema_from: openapi/miso-data-exchange-pricing-api-openapi.json#get-v1-real-time-date-lmp-expost
+    parameters
+- name: miso_bindingconstraintsrealtime
+  title: Real-Time Transmission Binding Constraints
+  description: Source data behind the MISO public "Real-Time Transmission Binding Constraints" display.
+    Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no
+    key or account.
+  surface: public-api-markets-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-markets-displays-openapi.json#getBindingConstraintsRealTime
+  input_schema_from: openapi/miso-public-api-markets-displays-openapi.json#getBindingConstraintsRealTime
+    parameters
+- name: miso_bindingconstraintsreserve
+  title: Reserve Products Binding Constraints
+  description: Source data behind the MISO public "Reserve Products Binding Constraints" display. Endpoint
+    published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or
+    account.
+  surface: public-api-markets-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-markets-displays-openapi.json#getBindingConstraintsReserve
+  input_schema_from: openapi/miso-public-api-markets-displays-openapi.json#getBindingConstraintsReserve
+    parameters
+- name: miso_bindingconstraintssubregional
+  title: Real-Time Binding Sub-Regional Power Balance Constraints
+  description: Source data behind the MISO public "Real-Time Binding Sub-Regional Power Balance Constraints"
+    display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously
+    with no key or account.
+  surface: public-api-markets-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-markets-displays-openapi.json#getBindingConstraintsSubRegional
+  input_schema_from: openapi/miso-public-api-markets-displays-openapi.json#getBindingConstraintsSubRegional
+    parameters
+- name: miso_coordinatedtransactionscheduling
+  title: Coordinated Transaction Scheduling
+  description: Source data behind the MISO public "Coordinated Transaction Scheduling" display. Endpoint
+    published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or
+    account.
+  surface: public-api-markets-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-markets-displays-openapi.json#getCoordinatedTransactionScheduling
+  input_schema_from: openapi/miso-public-api-markets-displays-openapi.json#getCoordinatedTransactionScheduling
+    parameters
+- name: miso_marketpricinggetancillaryservicesmcp
+  title: Ancillary Services MCP
+  description: Source data behind the MISO public "Ancillary Services MCP" display. Endpoint published
+    by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-markets-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-markets-displays-openapi.json#getMarketPricingGetAncillaryServicesMcp
+  input_schema_from: openapi/miso-public-api-markets-displays-openapi.json#getMarketPricingGetAncillaryServicesMcp
+    parameters
+- name: miso_marketpricinggetexantelmp
+  title: ExAnte LMP
+  description: Source data behind the MISO public "ExAnte LMP" display. Endpoint published by MISO at
+    https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-markets-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-markets-displays-openapi.json#getMarketPricingGetExAnteLmp
+  input_schema_from: openapi/miso-public-api-markets-displays-openapi.json#getMarketPricingGetExAnteLmp
+    parameters
+- name: miso_marketpricinggetlmpconsolidatedtable
+  title: LMP Consolidated Table
+  description: Source data behind the MISO public "LMP Consolidated Table" display. Endpoint published
+    by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-markets-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-markets-displays-openapi.json#getMarketPricingGetLmpConsolidatedTable
+  input_schema_from: openapi/miso-public-api-markets-displays-openapi.json#getMarketPricingGetLmpConsolidatedTable
+    parameters
+- name: miso_marketpricinggetrealtimefiveminexpostcurrent
+  title: Real-Time Five Minute ExPost Intervals - Current
+  description: Source data behind the MISO public "Real-Time Five Minute ExPost Intervals" display. Endpoint
+    published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or
+    account.
+  surface: public-api-markets-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-markets-displays-openapi.json#getMarketPricingGetRealTimeFiveMinExPostCurrent
+  input_schema_from: openapi/miso-public-api-markets-displays-openapi.json#getMarketPricingGetRealTimeFiveMinExPostCurrent
+    parameters
+- name: miso_marketpricinggetrealtimefiveminexpostprevious
+  title: Real-Time Five Minute ExPost Intervals - Previous
+  description: Source data behind the MISO public "Real-Time Five Minute ExPost Intervals" display. Endpoint
+    published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or
+    account.
+  surface: public-api-markets-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-markets-displays-openapi.json#getMarketPricingGetRealTimeFiveMinExPostPrevious
+  input_schema_from: openapi/miso-public-api-markets-displays-openapi.json#getMarketPricingGetRealTimeFiveMinExPostPrevious
+    parameters
+- name: miso_marketpricinggetrealtimefiveminexpostrolling
+  title: Real-Time Five Minute ExPost Intervals - Rolling
+  description: Source data behind the MISO public "Real-Time Five Minute ExPost Intervals" display. Endpoint
+    published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or
+    account.
+  surface: public-api-markets-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-markets-displays-openapi.json#getMarketPricingGetRealTimeFiveMinExPostRolling
+  input_schema_from: openapi/miso-public-api-markets-displays-openapi.json#getMarketPricingGetRealTimeFiveMinExPostRolling
+    parameters
+- name: miso_realtimersgcommitments
+  title: Real Time RSG Commitments
+  description: Source data behind the MISO public "Real Time RSG Commitments" display. Endpoint published
+    by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-markets-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-markets-displays-openapi.json#getRealTimeRSGCommitments
+  input_schema_from: openapi/miso-public-api-markets-displays-openapi.json#getRealTimeRSGCommitments parameters
+- name: miso_ace
+  title: Area Control Error (ACE)
+  description: Source data behind the MISO public "Area Control Error (ACE)" display. Endpoint published
+    by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getAce
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getAce parameters
+- name: miso_csatnextdayshorttermreserverequirement
+  title: CSAT Next Day Short Term Reserve Requirement
+  description: Source data behind the MISO public "CSAT Next Day Short Term Reserve Requirement" display.
+    Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no
+    key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getCsatNextDayShortTermReserveRequirement
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getCsatNextDayShortTermReserveRequirement
+    parameters
+- name: miso_csatsupplydemand
+  title: CSAT Supply and Demand
+  description: Source data behind the MISO public "CSAT Supply and Demand" display. Endpoint published
+    by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getCsatSupplyDemand
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getCsatSupplyDemand parameters
+- name: miso_fuelmix
+  title: Fuel Mix - FuelMix
+  description: Source data behind the MISO public "Fuel Mix" display. Endpoint published by MISO at https://public-api.misoenergy.org/
+    ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getFuelMix
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getFuelMix parameters
+- name: miso_fuelmixtoday
+  title: Fuel Mix - Today
+  description: Source data behind the MISO public "Fuel Mix" display. Endpoint published by MISO at https://public-api.misoenergy.org/
+    ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getFuelMixToday
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getFuelMixToday parameters
+- name: miso_fuelmixyesterday
+  title: Fuel Mix - Yesterday
+  description: Source data behind the MISO public "Fuel Mix" display. Endpoint published by MISO at https://public-api.misoenergy.org/
+    ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getFuelMixYesterday
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getFuelMixYesterday parameters
+- name: miso_generationoutagesgetgenerationoutagesplusminusfivedays
+  title: Generation outages Plus or Minus Five Days
+  description: Source data behind the MISO public "Generation outages Plus or Minus Five Days" display.
+    Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no
+    key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getGenerationOutagesGetGenerationOutagesPlusMinusFiveDays
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getGenerationOutagesGetGenerationOutagesPlusMinusFiveDays
+    parameters
+- name: miso_interchangegetnai
+  title: Tie Flow / Net Actual Interchange (NAI) - GetNai
+  description: Source data behind the MISO public "Tie Flow / Net Actual Interchange (NAI)" display. Endpoint
+    published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or
+    account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNai
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNai parameters
+- name: miso_interchangegetnaifiveminute
+  title: Tie Flow / Net Actual Interchange (NAI) - FiveMinute
+  description: Source data behind the MISO public "Tie Flow / Net Actual Interchange (NAI)" display. Endpoint
+    published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or
+    account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNaiFiveMinute
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNaiFiveMinute
+    parameters
+- name: miso_interchangegetnaiimports
+  title: Net Actual Interchange (Imports)
+  description: Source data behind the MISO public "Net Actual Interchange (Imports)" display. Endpoint
+    published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or
+    account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNaiImports
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNaiImports
+    parameters
+- name: miso_interchangegetnsi
+  title: Net Scheduled Interchange - GetNsi
+  description: Source data behind the MISO public "Net Scheduled Interchange" display. Endpoint published
+    by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNsi
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNsi parameters
+- name: miso_interchangegetnsifiveminute
+  title: Net Scheduled Interchange - FiveMinute
+  description: Source data behind the MISO public "Net Scheduled Interchange" display. Endpoint published
+    by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNsiFiveMinute
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNsiFiveMinute
+    parameters
+- name: miso_interchangegetnsimiso
+  title: Net Scheduled Interchange (MISO) - MISO
+  description: Source data behind the MISO public "Net Scheduled Interchange (MISO)" display. Endpoint
+    published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or
+    account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNsiMISO
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNsiMISO
+    parameters
+- name: miso_interchangegetnsimisofiveminute
+  title: Net Scheduled Interchange (MISO) - MISOFiveMinute
+  description: Source data behind the MISO public "Net Scheduled Interchange (MISO)" display. Endpoint
+    published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or
+    account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNsiMISOFiveMinute
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNsiMISOFiveMinute
+    parameters
+- name: miso_interchangegetnsimisooneminute
+  title: Net Scheduled Interchange (MISO) - MISOOneMinute
+  description: Source data behind the MISO public "Net Scheduled Interchange (MISO)" display. Endpoint
+    published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or
+    account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNsiMISOOneMinute
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNsiMISOOneMinute
+    parameters
+- name: miso_interchangegetnsioneminute
+  title: Net Scheduled Interchange - OneMinute
+  description: Source data behind the MISO public "Net Scheduled Interchange" display. Endpoint published
+    by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNsiOneMinute
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getInterchangeGetNsiOneMinute
+    parameters
+- name: miso_realtimetotalload
+  title: Real Time Total Load
+  description: Source data behind the MISO public "Real Time Total Load" display. Endpoint published by
+    MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getRealTimeTotalLoad
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getRealTimeTotalLoad parameters
+- name: miso_regionaldirectionaltransfer
+  title: Regional Directional Transfer
+  description: Source data behind the MISO public "Regional Directional Transfer" display. Endpoint published
+    by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getRegionalDirectionalTransfer
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getRegionalDirectionalTransfer
+    parameters
+- name: miso_snapshot
+  title: Snapshot
+  description: Source data behind the MISO public "Snapshot" display. Endpoint published by MISO at https://public-api.misoenergy.org/
+    ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getSnapshot
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getSnapshot parameters
+- name: miso_windsolargetcombined
+  title: Wind and Solar Generation - GetCombined
+  description: Source data behind the MISO public "Wind and Solar Generation" display. Endpoint published
+    by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getWindSolarGetCombined
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getWindSolarGetCombined
+    parameters
+- name: miso_windsolargetsolar
+  title: Wind and Solar Generation - getsolar
+  description: Source data behind the MISO public "Wind and Solar Generation" display. Endpoint published
+    by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getWindSolarGetsolar
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getWindSolarGetsolar parameters
+- name: miso_windsolargetsolaractual
+  title: Wind and Solar Generation - getsolaractual
+  description: Source data behind the MISO public "Wind and Solar Generation" display. Endpoint published
+    by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getWindSolarGetsolaractual
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getWindSolarGetsolaractual
+    parameters
+- name: miso_windsolargetsolarforecast
+  title: Wind and Solar Generation - getsolarforecast
+  description: Source data behind the MISO public "Wind and Solar Generation" display. Endpoint published
+    by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getWindSolarGetsolarforecast
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getWindSolarGetsolarforecast
+    parameters
+- name: miso_windsolargetwind
+  title: Wind and Solar Generation - getwind
+  description: Source data behind the MISO public "Wind and Solar Generation" display. Endpoint published
+    by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getWindSolarGetwind
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getWindSolarGetwind parameters
+- name: miso_windsolargetwindactual
+  title: Wind and Solar Generation - getwindactual
+  description: Source data behind the MISO public "Wind and Solar Generation" display. Endpoint published
+    by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getWindSolarGetwindactual
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getWindSolarGetwindactual
+    parameters
+- name: miso_windsolargetwindforecast
+  title: Wind and Solar Generation - getwindforecast
+  description: Source data behind the MISO public "Wind and Solar Generation" display. Endpoint published
+    by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+  surface: public-api-operations-displays
+  auth: none (anonymous)
+  source_operation: openapi/miso-public-api-operations-displays-openapi.json#getWindSolarGetwindforecast
+  input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getWindSolarGetwindforecast
+    parameters

@@ -1,0 +1,16 @@
+{
+  "headers": [
+    "INTERVAL",
+    "CPNODE"
+  ],
+  "data": [
+    [
+      "2026-07-27T08:15:00",
+      "EES.KRBYVLE.AZ"
+    ],
+    [
+      "2026-07-27T08:15:00",
+      "EES.L_CREEK1"
+    ]
+  ]
+}

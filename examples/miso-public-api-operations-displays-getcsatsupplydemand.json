@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "timeEst": "2026-07-27T00:00:00",
+    "demand": 94262,
+    "committedCapacity": 102993,
+    "demandForecast": null,
+    "committedCapacityForecast": null,
+    "availableCapacity": null
+  },
+  {
+    "id": 2,
+    "timeEst": "2026-07-27T00:15:00",
+    "demand": 92916,
+    "committedCapacity": 102106,
+    "demandForecast": null,
+    "committedCapacityForecast": null,
+    "availableCapacity": null
+  }
+]

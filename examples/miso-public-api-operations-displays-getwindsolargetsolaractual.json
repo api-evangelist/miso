@@ -1,0 +1,16 @@
+{
+  "instance": [
+    {
+      "DateTimeEST": "2026-07-27 12:00:00 AM",
+      "HourEndingEST": "1",
+      "Value": "-48.77"
+    },
+    {
+      "DateTimeEST": "2026-07-27 1:00:00 AM",
+      "HourEndingEST": "2",
+      "Value": "-48.95"
+    }
+  ],
+  "RefId": "27-Jul-2026 - Interval 08:00 EST",
+  "MktDay": "07-27-2026"
+}

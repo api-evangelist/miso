@@ -1,0 +1,21 @@
+{
+  "RefId": "27-Jul-2026 - Total Outage Megawatts: 34,719",
+  "Days": [
+    {
+      "OutageDate": "2026-07-22 12:00:00 AM",
+      "OutageMonthDay": "Jul-22",
+      "Unplanned": 8106,
+      "Planned": 5555,
+      "Forced": 13603,
+      "Derated": 11227
+    },
+    {
+      "OutageDate": "2026-07-23 12:00:00 AM",
+      "OutageMonthDay": "Jul-23",
+      "Unplanned": 9858,
+      "Planned": 6353,
+      "Forced": 13092,
+      "Derated": 11834
+    }
+  ]
+}

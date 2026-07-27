@@ -1,0 +1,10 @@
+{
+  "Date": "27-Jul-2026 - Interval 08:10 EST",
+  "Actual": {
+    "HourandMin": "08:10",
+    "TieFlow": {
+      "Name": "MISO",
+      "Value": "-5495.34"
+    }
+  }
+}

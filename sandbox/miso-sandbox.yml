@@ -1,0 +1,78 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://data-exchange.misoenergy.org/ (portal, Azure API Management interactive console),
+  https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us,
+  https://public-api.misoenergy.org/ (anonymous endpoint table), probed 2026-07-27.
+description: >-
+  MISO operates no sandbox in the payments sense — there is no test environment, no test
+  key prefix, no fixture data and no simulated market. Recording that plainly matters,
+  because MISO's answer to the same developer problem is unusually good and is easy to miss:
+  the entire Public API is anonymous, so the try-before-you-integrate surface is production
+  itself, served with no key and no account. The Data Exchange half adds a real interactive
+  request console in MISO's Azure API Management developer portal, and its data is
+  historical market-report data, so a call made in exploration is indistinguishable in
+  effect from a call made in production. Nothing here is a fabricated test value; MISO
+  publishes none, and none is invented.
+test_environment:
+  exists: false
+  note: >-
+    No test/staging host for the Public API or Data Exchange. The one MISO API that does
+    have a separate non-production environment is the closed MUI 2.0 market-participant
+    interface — MISO documents https://cce.midwestiso.org/dart2 as the customer-facing
+    test environment against https://markets.midwestiso.org/dart2 for production — but both
+    are gated on a client digital certificate issued to a registered market participant, so
+    it is not a self-serve sandbox.
+key_modes:
+  test_key_prefix: null
+  live_key_prefix: null
+  note: >-
+    Subscription keys have no test/live distinction. One key per product subscription; keys
+    do not expire.
+anonymous_trial:
+  available: true
+  hosts:
+    - https://public-api.misoenergy.org
+    - https://docs.misoenergy.org/marketreports
+  note: >-
+    Thirty-seven live JSON endpoints and the full bulk market-report archive answer an
+    anonymous GET. This is the practical evaluation surface — no signup step at all.
+  examples:
+    - curl https://public-api.misoenergy.org/api/FuelMix
+    - curl https://public-api.misoenergy.org/api/MarketPricing/GetExAnteLmp
+    - curl -O https://docs.misoenergy.org/marketreports/20260726_da_expost_lmp.csv
+interactive_console:
+  available: true
+  url: https://data-exchange.misoenergy.org/apis
+  platform: Azure API Management developer portal
+  capabilities:
+    - Browse every operation with its parameters, response codes and response examples
+    - Send a live request from the browser ("Try it")
+    - Generate request snippets in the portal's supported languages
+  requires_key: true
+  quote: >-
+    "Discover APIs, learn how to use them, try them out interactively, and sign up to
+    acquire keys." — MISO Data Exchange portal
+  note: >-
+    The console executes against the production gateway. An anonymous call without a
+    subscription key returns HTTP 401 "Access denied due to missing subscription key"
+    (verified 2026-07-27), so a free self-serve key is required before the console does
+    anything useful. Signup is self-serve with no approval step.
+test_data:
+  cards: []
+  accounts: []
+  magic_values: []
+  note: >-
+    Not applicable. MISO's APIs are read-only wholesale market data; there is no entity to
+    create, no transaction to simulate and no decline path to trigger. The nearest thing to
+    a "known-good" fixture is a market date with settled data — for example the Pricing API
+    operation examples MISO itself publishes use node ALTW.WELLS1 for 2023-06-29.
+time_simulation:
+  supported: false
+  note: >-
+    No test clocks. Time travel is done with real history instead: every Data Exchange
+    operation is date-pathed (/v1/{market}/{yyyy-mm-dd}/...) so any past market day can be
+    replayed, subject to the 105-day interchange reconciliation window.
+triggers:
+  supported: false
+  note: No event or webhook simulation — MISO publishes no event surface.

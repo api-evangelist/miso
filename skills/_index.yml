@@ -1,0 +1,70 @@
+generated: '2026-07-27'
+method: generated
+source: >-
+  Generated from the four OpenAPI documents in openapi/ plus conventions/miso-conventions.yml,
+  errors/miso-problem-types.yml and rate-limits/miso-rate-limits.yml. Every operationId
+  referenced in every skill was verified verbatim against the specifications; none was invented.
+  MISO publishes no AGENTS.md, no skill files and no agent guidance of any kind — searched
+  2026-07-27, no hit — so these are API Evangelist packaged skills, not MISO artifacts.
+description: >-
+  Four packaged agent skills covering MISO's two usable API surfaces. The split is deliberate
+  and mirrors how the APIs actually differ: two skills for the anonymous Public API (no
+  credential, no paging, no parameters, display-shaped payloads) and two for the keyed Data
+  Exchange gateway (self-serve key, date-pathed, paged, quota-limited). The closed MUI 2.0
+  market-participant API is deliberately excluded — it is client-certificate gated with no
+  machine-readable contract, so no skill can be grounded in real operations.
+skills:
+  - file: miso-read-realtime-grid-conditions.md
+    name: Read real-time MISO grid conditions
+    api: openapi/miso-public-api-operations-displays-openapi.json
+    auth: none
+    operations:
+      - getSnapshot
+      - getFuelMix
+      - getRealTimeTotalLoad
+      - getAce
+      - getWindSolarGetCombined
+      - getInterchangeGetNsi
+      - getGenerationOutagesGetGenerationOutagesPlusMinusFiveDays
+  - file: miso-track-realtime-prices-and-constraints.md
+    name: Track real-time MISO prices and binding constraints
+    api: openapi/miso-public-api-markets-displays-openapi.json
+    auth: none
+    operations:
+      - getMarketPricingGetExAnteLmp
+      - getMarketPricingGetRealTimeFiveMinExPostCurrent
+      - getMarketPricingGetAncillaryServicesMcp
+      - getBindingConstraintsRealTime
+      - getBindingConstraintsSubRegional
+      - getBindingConstraintsReserve
+  - file: miso-pull-historical-market-prices.md
+    name: Pull historical MISO market prices
+    api: openapi/miso-data-exchange-pricing-api-openapi.json
+    auth: apiKey (Ocp-Apim-Subscription-Key)
+    operations:
+      - get-v1-aggregated-pnode
+      - get-v1-day-ahead-date-lmp-expost
+      - get-v1-day-ahead-date-lmp-exante
+      - get-v1-real-time-date-lmp-expost
+      - get-v1-day-ahead-date-asm-expost
+      - get-v1-real-time-date-asm-summary
+  - file: miso-analyze-load-and-generation.md
+    name: Analyze MISO load, generation and interchange
+    api: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+    auth: apiKey (Ocp-Apim-Subscription-Key)
+    operations:
+      - get-v1-real-time-date-demand-actual
+      - get-v1-real-time-date-generation-fuel-type
+      - get-v1-real-time-date-generation-fuel-on-the-margin
+      - get-v1-forecast-date-load
+      - get-v1-real-time-date-interchange-net-actual
+      - get-v1-day-ahead-date-demand
+      - get-v1-real-time-date-outage
+shared_rules:
+  - All MISO market intervals are Eastern Standard Time (UTC−05:00) year-round.
+  - Every public MISO operation is a GET. There is no write surface and no idempotency contract.
+  - Data Exchange limits are per subscription - 100 calls/minute (429) and 24,000 calls/day (403),
+    neither of which is declared in the OpenAPI.
+  - Interchange values are provisional for up to 105 days after the market day due to reconciliation.
+  - The 401 description on every Data Exchange operation says "Bearer Token"; the real credential
+    is the Ocp-Apim-Subscription-Key subscription key.

@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "timeInterval": {
+        "resolution": "daily",
+        "start": "2023-06-28 00:00:00.000",
+        "end": "2023-06-29 00:00:00.000",
+        "value": "2023-06-29"
+      },
+      "region": "NORTH",
+      "fuelTypes": {
+        "coal": 0,
+        "gas": 0,
+        "nuclear": 0,
+        "water": 0,
+        "wind": 0,
+        "solar": 0,
+        "other": 0,
+        "storage": 0
+      },
+      "totalMw": 0,
+      "interval": "string"
+    }
+  ],
+  "page": {
+    "pageNumber": 0,
+    "pageSize": 0,
+    "totalElements": 0,
+    "totalPages": 0,
+    "lastPage": true
+  }
+}

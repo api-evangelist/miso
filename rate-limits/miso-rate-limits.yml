@@ -1,0 +1,77 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+provider: MISO
+providerId: miso
+generated: '2026-07-27'
+method: searched
+created: '2026-07-27'
+modified: '2026-07-27'
+tags:
+  - Rate Limiting
+  - Energy
+  - Open Data
+description: >-
+  MISO publishes rate limits on exactly one of its two public data surfaces. The keyed
+  MISO Data Exchange gateway (apim.misoenergy.org) enforces a hard, numeric,
+  per-subscription rate limit and daily quota that MISO states in its own Data Exchange
+  FAQ. The anonymous Public API (public-api.misoenergy.org) carries no enforced,
+  documented limit at all — MISO instead publishes a politeness request on the RT Data
+  APIs page asking callers not to poll faster than once per minute. Both are recorded
+  here verbatim; the second is guidance, not an enforced limit, and is marked as such.
+sources:
+  - url: https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us
+    note: MISO Data Exchange FAQs — states the 100 call/minute limit and 24,000 call/day quota.
+  - url: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
+    note: RT Data APIs page — the once-per-minute caching-politeness request for the anonymous Public API.
+  - url: https://data-exchange.misoenergy.org/developer/products?api-version=2022-04-01-preview
+    note: Portal product metadata — subscriptionRequired true, approvalRequired false, subscriptionsLimit null.
+responseCodes:
+  throttled: 429
+  quotaExceeded: 403
+headers:
+  requestId: null
+  rateLimitRemaining: null
+  retryAfter: null
+  note: >-
+    MISO does not document any RateLimit-* / X-RateLimit-* response headers, and none are
+    declared in either Data Exchange OpenAPI. Callers learn they are throttled from the
+    status code alone.
+limits:
+  - name: MISO Data Exchange gateway requests
+    api: miso:miso-data-exchange-pricing-api, miso:miso-data-exchange-load-generation-interchange-api
+    scope: subscription
+    metric: requests_per_minute
+    limit: 100
+    timeFrame: minute
+    enforced: true
+    on_exceed: HTTP 429 Too Many Requests
+    quote: >-
+      "There is currently a 100 call/minute rate limit and a 24,000 call/day quota."
+  - name: MISO Data Exchange gateway daily quota
+    api: miso:miso-data-exchange-pricing-api, miso:miso-data-exchange-load-generation-interchange-api
+    scope: subscription
+    metric: requests_per_day
+    limit: 24000
+    timeFrame: day
+    enforced: true
+    on_exceed: HTTP 403 Forbidden
+  - name: Public API polling guidance (not enforced)
+    api: miso:miso-public-api-operations-displays, miso:miso-public-api-markets-displays
+    scope: caller
+    metric: requests_per_minute
+    limit: 1
+    timeFrame: minute
+    enforced: false
+    on_exceed: null
+    quote: >-
+      "Please be respectful of caching limits and avoid accessing these links more than
+      once per minute to ensure system stability and fair usage for all users."
+    note: >-
+      Guidance, not enforcement. Verified 2026-07-27: repeated anonymous GETs to
+      public-api.misoenergy.org returned HTTP 200 with no throttling and no rate-limit
+      headers.
+notes: >-
+  Limits apply on a per-subscription basis, so a caller with two Data Exchange product
+  subscriptions (Pricing and LGI) holds two independent budgets. Page size is fixed and
+  cannot be changed, so a large market day is fetched by walking pageNumber, and each page
+  costs one call against both the minute limit and the daily quota.

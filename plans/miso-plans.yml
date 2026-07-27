@@ -1,0 +1,108 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+provider: MISO
+providerId: miso
+generated: '2026-07-27'
+method: searched
+created: '2026-07-27'
+modified: '2026-07-27'
+tags:
+  - Plans
+  - Open Data
+  - Energy
+description: >-
+  MISO charges nothing for API access. There is no paid tier, no metered billing and no
+  commercial agreement anywhere in its public data programme. What MISO has instead is
+  three access postures: fully anonymous (the Public API and the market report archive),
+  free but keyed and self-serve (the two MISO Data Exchange products), and closed
+  registration (MUI 2.0, gated on a client digital certificate issued to a registered
+  market participant). The two Data Exchange products below are real Azure API Management
+  products read from MISO's own anonymously served portal product metadata on 2026-07-27;
+  both return approvalRequired false, which is what makes them genuinely self-serve.
+sources:
+  - https://data-exchange.misoenergy.org/products
+  - https://data-exchange.misoenergy.org/developer/products?api-version=2022-04-01-preview
+  - https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us
+currency: USD
+plans:
+  - name: Public API
+    id: public-api
+    type: free
+    price: 0
+    access: anonymous
+    subscription_required: false
+    approval_required: false
+    apis:
+      - miso:miso-public-api-operations-displays
+      - miso:miso-public-api-markets-displays
+    limits:
+      - Politeness guidance only — no more than one call per minute (not enforced)
+    notes: >-
+      Thirty-seven JSON endpoints served to an anonymous GET with no key, no account and
+      no click-through. Verified anonymous 2026-07-27.
+  - name: Market Reports archive
+    id: market-reports
+    type: free
+    price: 0
+    access: anonymous
+    subscription_required: false
+    approval_required: false
+    apis:
+      - miso:miso-market-reports
+    notes: >-
+      Bulk CSV / XLSX / XML / ZIP / PDF market reports over plain HTTP GET at
+      docs.misoenergy.org/marketreports/ with no key and no login.
+  - name: Pricing API
+    id: pricing-api
+    type: free
+    price: 0
+    access: keyed
+    subscription_required: true
+    approval_required: false
+    subscriptions_limit: null
+    apis:
+      - miso:miso-data-exchange-pricing-api
+    limits:
+      - 100 calls per minute per subscription
+      - 24,000 calls per day per subscription
+    signup: https://data-exchange.misoenergy.org/
+    description: >-
+      "This service provides access to the Energy and Ancillary Service prices in the
+      Day-Ahead and Real-Time markets. Prices are published for both Ex-Ante and Ex-Post."
+  - name: Load, Generation, and Interchange API
+    id: load-generation-and-interchange-api
+    type: free
+    price: 0
+    access: keyed
+    subscription_required: true
+    approval_required: false
+    subscriptions_limit: null
+    apis:
+      - miso:miso-data-exchange-load-generation-interchange-api
+    limits:
+      - 100 calls per minute per subscription
+      - 24,000 calls per day per subscription
+    signup: https://data-exchange.misoenergy.org/
+    description: >-
+      "Load, Generation, and Interchange API" — demand, load and load forecast; generation
+      cleared and offered; and energy transfers crossing Balancing Authority boundaries.
+  - name: MUI 2.0 (market participants)
+    id: mui-2-0
+    type: restricted
+    price: 0
+    access: client-certificate
+    subscription_required: true
+    approval_required: true
+    apis:
+      - miso:miso-mui-2-0-api
+    notes: >-
+      Not a commercial plan. Access requires MISO market-participant registration and a
+      client digital certificate issued through the MISO Market Portal.
+onboarding:
+  account: A MISO public-website profile is required before a Data Exchange account can be created.
+  key_lifecycle: >-
+    "The API keys do not expire or require revalidation, but the accounts they are tied to
+    have account password that expire and require reset after 1 year."
+  terms: >-
+    Each Data Exchange product carries MISO's AS IS / AS AVAILABLE warranty disclaimer as
+    its product terms; accepted at subscription time.

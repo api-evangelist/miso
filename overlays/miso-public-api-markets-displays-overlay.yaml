@@ -1,0 +1,30 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for MISO Public API - Markets Displays
+  version: 1.0.0
+extends: openapi/miso-public-api-markets-displays-openapi.json
+x-generated: '2026-07-27'
+x-method: generated
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: miso
+    x-apievangelist-aid: miso:miso-public-api-markets-displays
+    x-apievangelist-artifacts:
+      authentication: authentication/miso-authentication.yml
+      conventions: conventions/miso-conventions.yml
+      errors: errors/miso-problem-types.yml
+      lifecycle: lifecycle/miso-lifecycle.yml
+      rate-limits: rate-limits/miso-rate-limits.yml
+      plans: plans/miso-plans.yml
+      data-model: data-model/miso-data-model.yml
+      agentic-access: agentic-access/miso-agentic-access.yml
+      skills: skills/_index.yml
+    x-apievangelist-access: anonymous
+- target: $.info
+  description: MISO publishes no OpenAPI for the Public API. This document was assembled by API Evangelist
+    from MISO's own published endpoint table and the live payloads it served; the provenance block records
+    every source.
+  update:
+    x-apievangelist-spec-origin: harvested-by-api-evangelist
+    x-apievangelist-anonymous-verified: '2026-07-27'

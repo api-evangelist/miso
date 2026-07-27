@@ -1,0 +1,27 @@
+{
+  "RefId": "27-Jul-2026 - Interval 08:10 EST",
+  "Constraint": [
+    {
+      "Name": "ALEWEC02_ROCKDAL1_66320_66",
+      "Period": "2026-07-27T08:10:00",
+      "Price": "-329.63",
+      "OVERRIDE": "0",
+      "CURVETYPE": "PERCENT",
+      "BP1": "100",
+      "PC1": "700",
+      "BP2": "102",
+      "PC2": "1000"
+    },
+    {
+      "Name": "ALW16041_ABBOTT_ABBOTTRAER16_1_1",
+      "Period": "2026-07-27T08:10:00",
+      "Price": "-27.61",
+      "OVERRIDE": "0",
+      "CURVETYPE": "PERCENT",
+      "BP1": "100",
+      "PC1": "1000",
+      "BP2": "102",
+      "PC2": "2000"
+    }
+  ]
+}

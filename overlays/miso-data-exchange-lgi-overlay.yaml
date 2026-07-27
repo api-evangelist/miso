@@ -1,0 +1,40 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Load, Generation, and Interchange API
+  version: 1.0.0
+extends: openapi/miso-data-exchange-load-generation-interchange-api-openapi.json
+x-generated: '2026-07-27'
+x-method: generated
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: miso
+    x-apievangelist-aid: miso:miso-data-exchange-load-generation-interchange-api
+    x-apievangelist-artifacts:
+      authentication: authentication/miso-authentication.yml
+      conventions: conventions/miso-conventions.yml
+      errors: errors/miso-problem-types.yml
+      lifecycle: lifecycle/miso-lifecycle.yml
+      rate-limits: rate-limits/miso-rate-limits.yml
+      plans: plans/miso-plans.yml
+      data-model: data-model/miso-data-model.yml
+      agentic-access: agentic-access/miso-agentic-access.yml
+      skills: skills/_index.yml
+    x-apievangelist-access: self-serve-api-key
+- target: $.paths.*.get.responses
+  description: MISO enforces a 100 call/minute rate limit and a 24,000 call/day quota per subscription
+    but declares neither status code on any operation. Added so generated clients handle throttling.
+  update:
+    '429':
+      description: Too Many Requests — the subscription exceeded its 100 call/minute rate limit. No Retry-After
+        header is published; back off at least 60 seconds.
+    '403':
+      description: Forbidden — the subscription exceeded its 24,000 call/day quota.
+- target: $.components.securitySchemes.apiKeyHeader
+  description: MISO declares the 401 on every operation as "Invalid or missing Bearer Token in the Authorization
+    header", but the credential the gateway actually enforces is this subscription key. Recorded so the
+    mismatch is not propagated to clients.
+  update:
+    description: MISO Data Exchange subscription key. Free and self-serve at https://data-exchange.misoenergy.org/
+      with no approval step. Keys do not expire, but the MISO account they belong to requires a password
+      reset every 12 months.

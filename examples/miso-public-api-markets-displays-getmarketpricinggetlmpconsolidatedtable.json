@@ -1,0 +1,95 @@
+{
+  "LMPData": {
+    "RefId": "27-Jul-2026 - Interval 08:15 EST",
+    "FiveMinLMP": {
+      "HourAndMin": "08:15",
+      "PricingNode": [
+        {
+          "name": "KCPL",
+          "region": "Midwest",
+          "LMP": "24.58",
+          "MLC": "-1.94",
+          "MCC": "-3.44",
+          "REGMCP": "0.00",
+          "REGMILEAGEMCP": "0.00",
+          "SPINMCP": "0.00",
+          "SUPPMCP": "0.00",
+          "STRMCP": "0.00",
+          "RCUPMCP": "0.00",
+          "RCDOWNMCP": "0.00"
+        },
+        {
+          "name": "LAFA.HARGIS1",
+          "region": "South",
+          "LMP": "23.52",
+          "MLC": "-0.75",
+          "MCC": "-5.69",
+          "REGMCP": "9.34",
+          "REGMILEAGEMCP": "0.75",
+          "SPINMCP": "0.16",
+          "SUPPMCP": "0.16",
+          "STRMCP": "0.00",
+          "RCUPMCP": "0.00",
+          "RCDOWNMCP": "0.00"
+        }
+      ]
+    },
+    "HourlyIntegratedLMP": {
+      "HourAndMin": "HE 8",
+      "PricingNode": [
+        {
+          "name": "KCPL",
+          "region": "Midwest",
+          "LMP": "31.12",
+          "MCC": "-6.04",
+          "MLC": "-2.92"
+        },
+        {
+          "name": "LAFA.HARGIS1",
+          "region": "South",
+          "LMP": "24.01",
+          "MCC": "-14.91",
+          "MLC": "-1.15"
+        }
+      ]
+    },
+    "DayAheadExAnteLMP": {
+      "HourAndMin": "HE 9",
+      "PricingNode": [
+        {
+          "name": "KCPL",
+          "region": "Midwest",
+          "LMP": "33.83",
+          "MCC": "-1.75",
+          "MLC": "-2.18"
+        },
+        {
+          "name": "LAFA.HARGIS1",
+          "region": "South",
+          "LMP": "23.65",
+          "MCC": "-12.42",
+          "MLC": "-1.69"
+        }
+      ]
+    },
+    "DayAheadExPostLMP": {
+      "HourAndMin": "HE 9",
+      "PricingNode": [
+        {
+          "name": "KCPL",
+          "region": "Midwest",
+          "LMP": "34.35",
+          "MCC": "-2.06",
+          "MLC": "-2.23"
+        },
+        {
+          "name": "LAFA.HARGIS1",
+          "region": "South",
+          "LMP": "23.73",
+          "MCC": "-13.18",
+          "MLC": "-1.73"
+        }
+      ]
+    }
+  }
+}

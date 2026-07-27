@@ -1,0 +1,21 @@
+{
+  "RefId": "27-Jul-2026 - Interval 08:10 EST",
+  "Constraint": [
+    {
+      "REASON": "None",
+      "BP3": "0",
+      "PC3": "0",
+      "BP4": "0",
+      "PC4": "0",
+      "Name": "None",
+      "Period": "2026-07-27T08:10:00",
+      "Price": "None",
+      "OVERRIDE": "None",
+      "CURVETYPE": "None",
+      "BP1": "0",
+      "PC1": "0",
+      "BP2": "0",
+      "PC2": "0"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+# MISO — Midcontinent Independent System Operator
+
+> MISO is the not-for-profit Regional Transmission Organization that operates the electric grid and the wholesale electricity markets across fifteen US states and the Canadian province of Manitoba. It publishes one of the most genuinely open market-data programmes in North American energy: 37 JSON endpoints answer an anonymous GET with no key, no account and no click-through, and the full market report archive downloads anonymously as CSV and XLSX. A second, keyed but free and self-serve tier (MISO Data Exchange) adds 32 paged, date-pathed operations over historical market report data. A third surface (MUI 2.0) is genuinely closed — client-certificate-gated for registered market participants only.
+
+Generated 2026-07-27 by API Evangelist from the MISO profile at https://github.com/api-evangelist/miso. MISO publishes no llms.txt of its own; probed 2026-07-27 across public-api.misoenergy.org, apim.misoenergy.org, data-exchange.misoenergy.org and www.misoenergy.org — all HTTP 404.
+
+## Start here
+
+- [MISO Public API endpoint table](https://public-api.misoenergy.org/): the anonymous surface. Every endpoint listed here returns JSON to a plain GET with no credential.
+- [RT Data APIs](https://www.misoenergy.org/markets-and-operations/RTDataAPIs/): MISO's own page for the real-time data feeds, including the 2025-12-12 restructure notice.
+- [MISO Data Exchange](https://data-exchange.misoenergy.org/): the keyed developer portal. Free, self-serve, no approval step; browse operations and try them interactively.
+- [MISO Data Exchange FAQs](https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us): signup, keys, the 100 call/minute limit and the 24,000 call/day quota.
+- [Market Reports](https://www.misoenergy.org/markets-and-operations/real-time--market-data/market-reports/): the anonymous bulk archive at docs.misoenergy.org/marketreports/.
+
+## APIs
+
+- [MISO Public API — Operations Displays](https://www.misoenergy.org/markets-and-operations/RTDataAPIs/): 26 anonymous JSON endpoints at https://public-api.misoenergy.org — area control error, CSAT supply and demand, real-time fuel mix (current, today, yesterday), real-time total load, system snapshot, wind and solar actuals and forecasts, net actual and net scheduled interchange at one- and five-minute resolution, regional directional transfer, generation outages ±5 days.
+- [MISO Public API — Markets Displays](https://www.misoenergy.org/markets-and-operations/RTDataAPIs/): 11 anonymous JSON endpoints at https://public-api.misoenergy.org — ancillary services market clearing prices for all 8 reserve zones, ex-ante LMP for the 9 MISO hubs with loss and congestion components, the LMP consolidated table, real-time five-minute ex-post intervals (current, rolling, previous), transmission / sub-regional / reserve binding constraints, coordinated transaction scheduling, real-time RSG commitments.
+- [MISO Data Exchange Pricing API](https://data-exchange.misoenergy.org/api-details#api=pricing-api): 10 keyed GET operations at https://apim.misoenergy.org/pricing — day-ahead and real-time, ex-ante and ex-post LMP by Commercial Pricing Node; day-ahead and real-time, ex-ante and ex-post ancillary services market clearing prices by reserve zone; a real-time MCP summary; and the aggregated pricing-node reference list.
+- [MISO Data Exchange Load, Generation, and Interchange API](https://data-exchange.misoenergy.org/api-details#api=load-generation-and-interchange-api): 22 keyed GET operations at https://apim.misoenergy.org/lgi — actual load, cleared demand, cleared and offered generation (physical, virtual, ECOMAX, ECOMIN), generation by fuel type, fuel-on-the-margin, net scheduled and net actual interchange, binding constraints, outages, medium-term load forecast, state estimator load.
+- [MISO Market Reports](https://www.misoenergy.org/markets-and-operations/real-time--market-data/market-reports/): bulk CSV / XLSX / XML / ZIP / PDF at https://docs.misoenergy.org/marketreports/ named by market date. No query API and no directory listing.
+- [MISO Market User Interface (MUI) 2.0 API](https://cdn.misoenergy.org/MUI%202.0%20API%20User%20Guide629008.pdf): closed. JSON programmatic interface for registered market participants to submit offers and bids and query market results. Base URLs https://markets.midwestiso.org/dart2 (production) and https://cce.midwestiso.org/dart2 (test). Client digital certificate required.
+
+## Specs
+
+MISO publishes no OpenAPI, no AsyncAPI, no GraphQL schema and no gRPC definitions. The specifications below were assembled by API Evangelist from MISO's own published artifacts; each carries an x-provenance block naming every source.
+
+- [Operations Displays OpenAPI 3.0.3](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/openapi/miso-public-api-operations-displays-openapi.json)
+- [Markets Displays OpenAPI 3.0.3](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/openapi/miso-public-api-markets-displays-openapi.json)
+- [Pricing API OpenAPI 3.0.1](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/openapi/miso-data-exchange-pricing-api-openapi.json)
+- [Load, Generation and Interchange API OpenAPI 3.0.1](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/openapi/miso-data-exchange-load-generation-interchange-api-openapi.json)
+
+## How to call it
+
+- Anonymous, no credential: `curl https://public-api.misoenergy.org/api/FuelMix`
+- Anonymous bulk: `curl -O https://docs.misoenergy.org/marketreports/20260726_da_expost_lmp.csv`
+- Keyed: `curl -H "Ocp-Apim-Subscription-Key: <key>" "https://apim.misoenergy.org/pricing/v1/day-ahead/2026-07-26/lmp-expost"` — or pass `?subscription-key=<key>`.
+- Data Exchange operations are date-pathed `/v1/{market}/{yyyy-mm-dd}/...` with optional `interval`, `node`, `region` and `pageNumber` filters. Walk `pageNumber` until `page.lastPage` is true; page size is fixed and cannot be changed.
+- All market intervals are Eastern Standard Time (UTC−05:00), year-round.
+- Interchange values are provisional for up to 105 days after the market day due to reconciliation.
+- Rate limits: 100 calls/minute (429) and 24,000 calls/day (403) per Data Exchange subscription. No rate-limit headers are published. The anonymous Public API asks callers not to poll faster than once per minute.
+
+## Profile artifacts
+
+- [apis.yml (APIs.json)](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/apis.yml)
+- [Authentication profile](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/authentication/miso-authentication.yml)
+- [API conventions](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/conventions/miso-conventions.yml)
+- [Rate limits](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/rate-limits/miso-rate-limits.yml)
+- [Plans and access](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/plans/miso-plans.yml)
+- [Error catalog](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/errors/miso-problem-types.yml)
+- [Lifecycle and versioning](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/lifecycle/miso-lifecycle.yml)
+- [Data model](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/data-model/miso-data-model.yml)
+- [Conformance](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/conformance/miso-conformance.yml)
+- [Domain security](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/security/miso-domain-security.yml)
+- [Sandbox and evaluation surface](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/sandbox/miso-sandbox.yml)
+- [Candidate MCP tool surface](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/mcp/miso-mcp.yml)
+- [Agentic access contracts](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/agentic-access/miso-agentic-access.yml)
+- [Agent skills](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/skills/_index.yml)
+- [Response examples](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/examples/_index.yml)
+
+## What MISO does not publish
+
+Recorded so an agent does not go looking: no OpenAPI of its own, no llms.txt, no /.well-known/ documents of any kind (no security.txt, no OpenID or OAuth discovery, no api-catalog), no OAuth or OpenID Connect, no webhooks, no events, no AsyncAPI, no GraphQL, no gRPC, no MCP server, no SDK in any language, no CLI, no embeddable components, no Postman collection, no GitHub organisation, no dated changelog, no deprecation policy, no Sunset headers, no numeric SLA, no Statuspage-style uptime dashboard, no bug bounty or vulnerability-disclosure programme, and no trust centre or named security certification. MISO is also not a consumer-data holder — it operates no meters, no billing and no retail relationships, so Green Button / ESPI does not apply to it.

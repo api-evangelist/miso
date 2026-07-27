@@ -1,0 +1,22 @@
+{
+  "LMPData": {
+    "RefId": "27-Jul-2026 - Interval 08:15 EST",
+    "ExAnteLMP": {
+      "HourAndMin": "08:15",
+      "Hub": [
+        {
+          "name": "ARKANSAS.HUB",
+          "LMP": "22.12",
+          "loss": "-1.67",
+          "congestion": "-1.91"
+        },
+        {
+          "name": "ILLINOIS.HUB",
+          "LMP": "24.84",
+          "loss": "-0.86",
+          "congestion": "0.00"
+        }
+      ]
+    }
+  }
+}

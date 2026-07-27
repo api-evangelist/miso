@@ -1,0 +1,171 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us and
+  https://www.misoenergy.org/markets-and-operations/RTDataAPIs/ for the documented
+  behaviour, plus derivation from the four OpenAPI documents in openapi/ for parameters,
+  paging fields, status codes and security schemes.
+description: >-
+  Cross-cutting request and response semantics for MISO's public API surfaces. MISO runs
+  two structurally different APIs and the conventions are not shared between them, so this
+  profile is split by surface. The Data Exchange gateway is a conventional, paged, keyed,
+  date-pathed REST API on Azure API Management. The Public API is a set of anonymous
+  display feeds whose shapes are inherited from the web charts they back — no paging, no
+  parameters, no versioning and JSON field names in the casing of the underlying display.
+
+surfaces:
+  - id: data-exchange
+    base_url: https://apim.misoenergy.org
+    apis: [miso:miso-data-exchange-pricing-api, miso:miso-data-exchange-load-generation-interchange-api]
+    gateway: Azure API Management
+  - id: public-api
+    base_url: https://public-api.misoenergy.org
+    apis: [miso:miso-public-api-operations-displays, miso:miso-public-api-markets-displays]
+    gateway: none documented
+
+api_style: REST over HTTPS, GET only, JSON responses. No write operations exist on any public MISO API.
+
+authentication:
+  data-exchange:
+    scheme: apiKey — subscription key
+    header: Ocp-Apim-Subscription-Key
+    query_alternative: subscription-key
+    key_expiry: >-
+      "The API keys do not expire or require revalidation, but the accounts they are tied
+      to have account password that expire and require reset after 1 year."
+    on_missing_key: HTTP 401 "Access denied due to missing subscription key"
+    docs: https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us
+  public-api:
+    scheme: none
+    detail: Fully anonymous. No key, no cookie, no account, no click-through. Verified 2026-07-27.
+  detail: authentication/miso-authentication.yml
+
+idempotency:
+  supported: false
+  mechanism: null
+  note: >-
+    MISO publishes no idempotency-key contract because there is nothing to make idempotent
+    — every operation on every public MISO API is a GET, which is safe and idempotent by
+    HTTP semantics. Retrying a failed read is always safe. Recorded as false deliberately:
+    there is no Idempotency-Key header, no replay window and no conflict behaviour to
+    document, and no Idempotency pointer is claimed in apis.yml.
+
+pagination:
+  data-exchange:
+    style: page-number
+    request_params:
+      pageNumber: integer, default 1
+    response_fields:
+      data: array of results
+      page.pageNumber: current page
+      page.pageSize: fixed by MISO
+      page.totalElements: total rows matching the query
+      page.totalPages: total pages
+      page.lastPage: boolean — true on the final page
+    page_size_configurable: false
+    quote: '"The page size cannot be changed at this time."'
+    note: >-
+      Walk pageNumber until page.lastPage is true. Each page costs one call against both
+      the 100/minute limit and the 24,000/day quota — see rate-limits/miso-rate-limits.yml.
+  public-api:
+    style: none
+    note: >-
+      Unpaged. Whole-series feeds are returned in a single response; the previous-day and
+      rolling real-time five-minute ex-post interval feeds are 47 MB and 16 MB respectively
+      and are served anonymously with no pagination and no compression negotiation
+      documented.
+
+filtering:
+  data-exchange:
+    date: >-
+      Required path segment on almost every operation, form /v1/{market}/{yyyy-mm-dd}/...
+      A malformed date returns 400; a date with no data returns 404.
+    interval: >-
+      Optional query filter to a specific time interval, e.g. "13:05" or "13", in Eastern
+      Standard Time (UTC-05:00).
+    node: Optional query filter to a specific Commercial Pricing Node (Pricing API).
+    region: Optional query filter on selected Load/Generation/Interchange operations.
+    date_ranges_supported: false
+    quote: '"this feature is not available at this time" (custom date ranges)'
+  public-api:
+    note: >-
+      No query parameters are documented by MISO for any Public API endpoint, and none are
+      asserted in the harvested specifications. The feed itself selects the window
+      (Current / Today / Yesterday / Rolling / Previous / PlusMinusFiveDays).
+
+time_semantics:
+  timezone: Eastern Standard Time (UTC-05:00), fixed — MISO expresses market intervals in EST year-round.
+  interval_object: >-
+    Data Exchange responses carry a timeInterval object with resolution, start, end and
+    value; resolutions observed in the schemas are 5-minute, hourly and daily.
+  publication_times:
+    day_ahead: Data refreshes at approximately 6:45 PM GMT for day-ahead.
+    real_time: Data refreshes at approximately 8:45 AM GMT for real-time.
+  revision_window: >-
+    "Data available within the interchange endpoints are subject to change up to 105 days
+    after the market day due to reconciliation." — MISO's own operation metadata. Treat
+    interchange values as provisional inside that window.
+
+metadata:
+  supported: false
+  note: No user-supplied metadata fields; MISO's APIs are read-only market data.
+
+request_tracing:
+  request_id_header: null
+  note: >-
+    MISO documents no request-id or correlation header. Azure API Management generates an
+    internal request id that appears in gateway error bodies but MISO does not document it
+    as a contract. Public API responses carry a RefId field on some display feeds (for
+    example the fuel mix) that identifies the publication interval, not the request.
+
+versioning:
+  data-exchange:
+    scheme: uri-path
+    current: v1
+    mechanism: /v1/ path segment on every operation
+    header: null
+  public-api:
+    scheme: none
+    current: null
+    note: >-
+      No version segment. The surface is versioned by announcement instead: MISO
+      restructured it on 2025-12-12, changed every URL and dropped CSV and XML in favour of
+      JSON only. See lifecycle/miso-lifecycle.yml.
+
+error_envelope:
+  data-exchange_gateway:
+    shape: '{"statusCode": <int>, "message": "<text>"}'
+    examples:
+      - '{"statusCode": 401, "message": "Access denied due to missing subscription key"}'
+      - '{"statusCode": 404, "message": "Resource not found"}'
+    note: Azure API Management gateway envelope, returned before the request reaches MISO's backend.
+  data-exchange_operation:
+    shape: undocumented
+    note: >-
+      MISO declares 400, 401 and 404 on every Data Exchange operation with a description but
+      no response schema and no example, so the operation-level error body shape is not
+      published. Not RFC 9457 — no application/problem+json media type appears anywhere.
+  public-api:
+    shape: '{"error": "no data"}'
+    note: >-
+      Observed on the retired MISORTWDDataBroker endpoints. Live Public API endpoints
+      returned 200 for every documented path on 2026-07-27; no error contract is published.
+  detail: errors/miso-problem-types.yml
+
+rate_limit_signaling:
+  throttled: 429 Too Many Requests (100 calls/minute exceeded)
+  quota_exceeded: 403 Forbidden (24,000 calls/day exceeded)
+  headers: none documented
+  detail: rate-limits/miso-rate-limits.yml
+
+content_negotiation:
+  formats: JSON only on both surfaces since 2025-12-12. CSV, XLSX, XML, ZIP and PDF remain
+    available on the separate bulk Market Reports archive at docs.misoenergy.org/marketreports/.
+  media_type: application/json
+
+cross_references:
+  authentication: authentication/miso-authentication.yml
+  errors: errors/miso-problem-types.yml
+  lifecycle: lifecycle/miso-lifecycle.yml
+  rate_limits: rate-limits/miso-rate-limits.yml
+  data_model: data-model/miso-data-model.yml
