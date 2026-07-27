@@ -1,0 +1,586 @@
+aid: miso
+name: MISO
+review:
+  question: >-
+    Does MISO expose a real, documented, publicly reachable API surface — and does any
+    energy-data mandate (Green Button, Consumer Data Right, smart-meter infrastructure)
+    apply to it, and if so, is it actually implemented?
+  answer: >-
+    Yes to the API surface, and it is one of the more open in the sector. No to any
+    mandate. MISO publishes thirty-seven JSON endpoints at public-api.misoenergy.org
+    that return real-time grid and market data to a completely anonymous GET — no key,
+    no account, no click-through — plus an anonymous bulk market report archive at
+    docs.misoenergy.org. It separately runs a real self-serve Azure API Management
+    developer portal at data-exchange.misoenergy.org offering two keyed APIs over
+    historical market report data, and a client-certificate-gated market participant
+    API (MUI 2.0) that is genuinely closed. No energy-data mandate applies to MISO:
+    Green Button is voluntary in the United States and is a distribution-utility
+    standard, and MISO is an RTO with no retail customers, no meters, no billing
+    relationships and therefore no consumer data to be obliged over.
+  date: '2026-07-27'
+  reviewer: API Evangelist
+  homeMarket: United States
+  tier: system-operator
+
+mandate:
+  regime: none
+  status: not-applicable
+  regimeNotes: >-
+    MISO is a not-for-profit Regional Transmission Organization regulated by the Federal
+    Energy Regulatory Commission under the Federal Power Act. FERC's jurisdiction over
+    MISO is wholesale-market and transmission jurisdiction; it carries no consumer
+    energy-data right. The United States has no federal analogue to the Australian
+    Consumer Data Right for energy — no designation process, no accredited-recipient
+    regime, no data-holder register, no energy Consumer Data Standards body. Green
+    Button (the NAESB/NIST-derived ESPI standard, in its Download My Data and Connect
+    My Data forms) is real and widely referenced, but in the United States it is adopted
+    voluntarily with nothing compelling anyone to implement it. Where Green Button has
+    been mandated in North America it has been mandated on distribution utilities by a
+    sub-national regulator — Ontario by regulation through the Ontario Energy Board, and
+    Nova Scotia Power — not on system or market operators. MISO operates in fifteen US
+    states and Manitoba; state-level Green Button or smart-meter-data obligations in
+    those states, where they exist, attach to the investor-owned utilities and
+    cooperatives inside the footprint, not to the RTO above them. There is no UK-DCC
+    style smart-meter infrastructure mandate in the United States either.
+  statusNotes: >-
+    Recorded as not-applicable rather than none because the distinction carries the
+    finding. MISO is not an unmandated retailer that could hold consumer data and simply
+    chooses not to publish it — it is structurally not a consumer data holder at all. It
+    owns no generation, no distribution wires, no meters and no retail customers. The
+    obligation surface that Green Button, CDR-energy and the UK DCC all target — an
+    individual customer's own interval usage and billing data, released to a third party
+    on that customer's consent — has no counterpart anywhere inside MISO. Its finest
+    granularity in the public data is the commercial pricing node (e.g. ALTW.WELLS1) and
+    the balancing-authority tie, which are market and network objects, not premises.
+  mandateIsNotImplementation: >-
+    Nothing here required separating a claim from an implementation, because MISO makes
+    no claim. No compliance page, press release, register entry, conformance statement or
+    standards reference about consumer energy data was found on any MISO host probed, and
+    none was expected. MISO is a clean control case for the sector's central question: a
+    genuinely open market-data programme that exists entirely without a mandate, sitting
+    one layer above the fifteen states' utilities where any US consumer-data obligation
+    would actually land.
+  greenButtonSearched: true
+  greenButtonFinding: >-
+    Searched specifically for any MISO Green Button, ESPI, Download My Data, Connect My
+    Data, or consumer energy-data sharing surface. None exists. No Green Button or ESPI
+    string appears on the RT Data API page, the public API endpoint table, the Market
+    Reports page, the MISO Data Exchange portal, or the Data Exchange help article, and
+    a web search for MISO plus Green Button returns only material about MISO's RTO role.
+    No OAuth authorization endpoint, consent flow, or customer-authorized data-sharing
+    endpoint exists on any MISO host probed.
+
+dataStandard:
+  standard: no standard reference found
+  notes: >-
+    MISO implements no named energy data standard. There is no Green Button/ESPI surface,
+    no CDR Consumer Data Standards conformance, no IEC CIM 61968/61970 payload, no IEEE
+    2030.5, no OpenADR, and no OCPP or OCPI. Both API surfaces are proprietary JSON
+    shapes defined by MISO. The Public API returns display-shaped documents — for example
+    {"RefId": "27-Jul-2026 - Interval 08:10 EST", "TotalMW": "96122", "Fuel": {"Type":
+    [{"INTERVALEST", "CATEGORY", "ACT", "FUEL_CATEGORY"}]}} for fuel mix, and
+    {"LMPData": {"ExAnteLMP": {"Hub": [{"name", "LMP", "loss", "congestion"}]}}} for
+    ex-ante prices — with every numeric value serialized as a string. The Data Exchange
+    APIs are a cleaner, modern, paged JSON shape with proper numeric types
+    ({"data": [{"interval", "timeInterval", "node", "lmp", "mcc", "mec", "mlc"}],
+    "page": {...}}), but still proprietary. The only standards actually in play are
+    OpenAPI 3.0.1, which is how Azure API Management models the Data Exchange contracts
+    internally, and the industry vocabulary itself (LMP, MCC, MEC, MLC, ECOMAX, ECOMIN,
+    CPNode, ACE, NAI, NSI).
+
+consumerVersusMarketData:
+  consumer_data_api: false
+  consumerDataNotes: >-
+    None exists and none can. MISO holds no retail customer usage or billing data. There
+    is no consent flow, no accreditation regime, no customer-authorized data sharing, and
+    no individual-customer portal. The only login-gated identity on misoenergy.org is a
+    generic website profile (used to reach the Data Exchange and the stakeholder tools)
+    and the Extranet for market participants — neither is a consumer data right. In the
+    MISO footprint, any household usage data lives with the local distribution utilities
+    and their retail suppliers, which is exactly where a US Green Button obligation would
+    attach if one existed.
+  market_data_open: true
+  marketDataNotes: >-
+    Open in the strong sense, on two independent layers, plus a third self-serve keyed
+    layer. Layer one is the MISO Public API at https://public-api.misoenergy.org —
+    thirty-seven JSON endpoints, every single one of which was fetched anonymously on
+    2026-07-27 and returned HTTP 200 with content-type application/json. No key, no
+    account, no cookie, no licence click-through, no rate-limit rejection. Real values
+    came back: fuel mix 96,122 MW split across Coal 29,517, Natural Gas 30,223, Nuclear
+    11,912, Wind 9,031, Solar 9,333, Battery Storage -166 and Other 612; ex-ante LMPs for
+    all nine hubs; ancillary services MCPs for all eight reserve zones; net scheduled
+    interchange broken out to AECI, LGEE, MHEB, ONT, PJM, SOCO, SPA, SWPP and TVA; and
+    the current-day and previous-day five-minute ex-post interval feeds at 16 MB and
+    47 MB, served unauthenticated and unpaginated. Layer two is the bulk market report
+    archive at https://docs.misoenergy.org/marketreports/ — 20260726_da_expost_lmp.csv
+    returned HTTP 200 with 1,165,710 bytes and 20260726_sr_gfm.xlsx returned HTTP 200,
+    both anonymously. Layer three is MISO Data Exchange, where the key is required but
+    free and self-serve. The split that defines this sector elsewhere resolves here as
+    market data wide open and consumer data non-existent.
+  surfaceRestructureNote: >-
+    MISO restructured the open surface on 2025-12-12. Its notice reads verbatim: "As of
+    December 12, 2025, these data feeds are available in JSON format only. Please be
+    aware that the underlying URLs have also changed for all links." The former
+    MISORTWDDataBroker endpoints on api.misoenergy.org, which served CSV, XML and JSON,
+    are now marked on MISO's own data-links page as "This API has been deprecated" (most)
+    or "This API has been retired. It will not be replaced in Public API" (the ACE
+    chart), and a live call to the legacy fuel-mix endpoint returned
+    {"error": "no data", "See": "https://www.misoenergy.org/markets-and-operations/rtdataapis"}.
+    Net effect on openness: CSV and XML were withdrawn from the real-time surface, JSON
+    was kept, and the surface stayed anonymous.
+
+accessGate:
+  gate: self-serve
+  gated: false
+  whatADeveloperMustDo: >-
+    For the thirty-seven Public API endpoints and for the entire market report archive —
+    nothing at all. Issue an HTTP GET. There is no signup, no key, no terms acceptance and
+    no identity of any kind. MISO's only stated condition is operational courtesy, quoted
+    verbatim from its RT Data API page: "Please be respectful of caching limits and avoid
+    accessing these links more than once per minute to ensure system stability and fair
+    usage for all users." For MISO Data Exchange: create a profile on the MISO public
+    website at https://www.misoenergy.org/account/create-profile/ (email, password, first
+    and last name, company, phone and postal address; the Entity Code field is optional,
+    so a non-market-participant can complete it), then create an account on
+    data-exchange.misoenergy.org and subscribe to a product to be issued an API key. No
+    approval step exists — MISO's own portal product metadata returns
+    "approvalRequired": false, "subscriptionRequired": true, "subscriptionsLimit": null
+    for both products. For MUI 2.0 the gate is real and different in kind: you must be a
+    registered MISO market participant and hold a MISO Market Portal client digital
+    certificate.
+  productTerms: >-
+    Both Data Exchange products ("Pricing API" and "Load, Generation, and Interchange
+    API") carry the same terms text, which is MISO's all-caps AS IS / AS AVAILABLE
+    warranty disclaimer rather than a data licence. There is no non-commercial
+    restriction, no attribution requirement and no redistribution clause in the product
+    terms.
+  legalCaveat: >-
+    There is a genuine tension worth recording. MISO's site-wide Terms of Use, at
+    https://www.misoenergy.org/meet-miso/legal-and-privacy/, state: "You agree not use
+    any automated means, including, without limitation, agents, robots, scripts, or
+    spiders, to access, monitor, or copy any part of this Website or the App." The same
+    Terms then provide that "Some of the services offered on this Website or the App
+    ('Services') may be subject to additional posted conditions... In the event of a
+    conflict or ambiguity between the Terms and any additional posted conditions, the
+    provisions of the additional conditions shall prevail." The RT Data API page and the
+    public-api.misoenergy.org endpoint table are exactly such additional posted
+    conditions, and they explicitly invite programmatic access subject to a once-per-
+    minute courtesy limit. Read together, automated access to the published data feeds is
+    invited; automated scraping of the corporate website is not. MISO's robots.txt also
+    sets Content-Signal "search=yes,ai-train=no,use=reference" and disallows a list of AI
+    crawlers. Governing law is Indiana.
+  rateLimits: >-
+    Public API: no enforced limit observed; MISO asks for no more than one call per link
+    per minute. Data Exchange: MISO's help article states "There is currently a 100
+    call/minute rate limit and a 24,000 call/day quota", with HTTP 429 on minute-limit
+    breach and HTTP 403 on daily-quota breach.
+
+authModel:
+  publicApi:
+    scheme: none
+    notes: >-
+      Fully anonymous. No API key, no bearer token, no cookie, no signed request. Every
+      one of the thirty-seven endpoints returned HTTP 200 to a bare GET. No security
+      scheme is declared in the harvested specifications because MISO enforces none.
+  dataExchange:
+    scheme: API key
+    header: Ocp-Apim-Subscription-Key
+    queryParameter: subscription-key
+    notes: >-
+      Taken verbatim from MISO's own portal API metadata, which returns
+      subscriptionKeyParameterNames {"header": "Ocp-Apim-Subscription-Key", "query":
+      "subscription-key", "bearer": null} for both APIs, and from the OpenAPI export,
+      which declares apiKeyHeader and apiKeyQuery. No OAuth2 and no OpenID Connect are
+      configured — authenticationSettings returns empty oAuth2AuthenticationSettings and
+      empty openidAuthenticationSettings on both APIs. No mTLS. MISO's help article
+      describes the credential plainly: "API KEY is a long number that MISO gives to the
+      user to allow them access to the data", keys do not expire, and account passwords
+      reset annually. One inconsistency is recorded rather than smoothed over: several
+      operation definitions describe their 401 response as "Invalid or missing Bearer
+      Token in the Authorization header", which is upstream service wording that survived
+      into the portal; the gateway itself actually rejects with "Access denied due to
+      missing subscription key", so the enforced scheme is the APIM subscription key.
+  mui:
+    scheme: mTLS client certificate
+    notes: >-
+      The MUI 2.0 API User Guide states "All market participants using the JSON
+      programmatic interface must be registered with MISO" and points at MISO Market
+      Portal certificates. An anonymous TLS connection to https://markets.midwestiso.org/
+      on 2026-07-27 did not return an HTTP status at all — it failed at the TLS handshake
+      with an SSL alert, which is direct evidence of client-certificate enforcement rather
+      than an application-layer 401 or 403.
+  wellKnownProbes:
+  - url: https://www.misoenergy.org/.well-known/openid-configuration
+    status: 404
+  - url: https://data-exchange.misoenergy.org/.well-known/openid-configuration
+    status: 404
+  - url: https://apim.misoenergy.org/.well-known/openid-configuration
+    status: 404
+  - url: https://public-api.misoenergy.org/.well-known/openid-configuration
+    status: 404
+  - url: https://www.misoenergy.org/.well-known/security.txt
+    status: 404
+  - url: https://sso.misoenergy.org/.well-known/openid-configuration
+    status: 000
+    note: Host does not resolve.
+
+findings:
+  summary: |
+    MISO, the Midcontinent Independent System Operator, is the not-for-profit Regional
+    Transmission Organization that operates the grid and the wholesale electricity markets
+    across fifteen US states and the Canadian province of Manitoba. It has run the region
+    since December 2001, describes itself as "the electric grid operator for the central
+    United States", says "45 million people depend upon the work we do", is regulated by
+    FERC, and is headquartered at 720 City Center Drive, Carmel, Indiana.
+
+    Its public API surface is real, current and unusually generous. Three distinct layers
+    were confirmed live:
+
+    (1) The MISO Public API at https://public-api.misoenergy.org — thirty-seven JSON
+    endpoints across two MISO-defined groupings, Operations Displays (twenty-six paths)
+    and Markets Displays (eleven paths). Every path was fetched anonymously and every one
+    returned HTTP 200 application/json. This surface was rebuilt on 2025-12-12; it is
+    JSON-only now, and the legacy CSV/XML MISORTWDDataBroker endpoints are deprecated or
+    retired.
+
+    (2) The bulk market report archive at https://docs.misoenergy.org/marketreports/ —
+    anonymous CSV/XLSX/ZIP/PDF downloads named by market date. Confirmed with a 1.1 MB
+    day-ahead ex-post LMP CSV and a settlement report XLSX.
+
+    (3) MISO Data Exchange at https://data-exchange.misoenergy.org — a live Azure API
+    Management developer portal (Home / APIs / Products / Resources / Sign in / Sign up)
+    cataloguing two APIs: the Pricing API (ten operations) and the Load, Generation, and
+    Interchange API (twenty-two operations). The full reference, every operation
+    definition with parameters, response codes and real examples, and the component
+    schemas were all readable anonymously from the portal's data API. Calls require a key,
+    but the key is self-serve with approvalRequired false.
+
+    The gateway is real. An anonymous GET to
+    https://apim.misoenergy.org/pricing/v1/day-ahead/2026-07-26/lmp-expost returned
+    HTTP 401 "Access denied due to missing subscription key", and the same for
+    https://apim.misoenergy.org/lgi/v1/real-time/2026-07-26/demand/actual, while
+    https://apim.misoenergy.org/pricing/v1/nope-not-real and
+    https://apim.misoenergy.org/nosuchapi-xyz/v1/foo both returned HTTP 404 "Resource not
+    found" — so the documented routes resolve and the only barrier is the free key.
+
+    Alongside these sits MUI 2.0, MISO's market participant JSON API at
+    https://markets.midwestiso.org/dart2, documented in a public PDF but gated by a client
+    digital certificate and MISO market-participant registration. That is the one genuinely
+    closed API in the profile, and it is closed for market-integrity reasons, not data
+    reasons — it is where bids and offers are submitted.
+
+    On the sector's central question, MISO is a control case. No mandate applies to it, it
+    makes no compliance claim, and it publishes an open market-data programme anyway. The
+    consumer/market split resolves as: market data wide open on two anonymous layers plus
+    a free-key third layer; consumer data non-existent, because an RTO holds none.
+  openApiHarvestMethod: >-
+    Four OpenAPI documents were produced and all four validate. Two provenance stories,
+    both recorded in an x-provenance block inside each document.
+
+    (a) The two Data Exchange documents. IMPORTANT: MISO's own OpenAPI export endpoint
+    (?export=true&format=openapi+json) returns a syntactically valid OpenAPI 3.0.1
+    document whose paths object is EMPTY — it carries only info, servers and
+    securitySchemes. This is the same empty-shell behaviour previously observed at AESO
+    and AEMO. Rather than save two useless shells, each document was assembled verbatim
+    from MISO's own anonymously served APIM developer-portal data API: info, servers and
+    securitySchemes from MISO's OpenAPI export; paths, HTTP methods, operationIds,
+    summaries, descriptions, path/query parameters, response status codes and response
+    examples from /developer/apis/{id}/operations and
+    /developer/apis/{id}/operations/{opId}; and components.schemas from
+    /developer/apis/{id}/schemas/{schemaId}. Nothing was invented, inferred or paraphrased.
+    All $refs resolve.
+
+    (b) The two Public API documents. MISO publishes no OpenAPI for this surface at all.
+    Each document was assembled from MISO's own published artifacts only: every path and
+    every operation summary is taken verbatim from the endpoint table MISO serves at
+    https://public-api.misoenergy.org/ (preserving MISO's own two groupings, "Operations
+    Displays" and "Markets Displays", as the two documents), and every response schema and
+    example is derived from the live JSON MISO returned to an anonymous GET on 2026-07-27.
+    No host, path, parameter, field name or value was invented. Examples are the real
+    payloads with long arrays truncated to two elements. MISO documents no query parameters
+    for these endpoints, so none are asserted. No security scheme is declared because MISO
+    enforces none.
+  apisHarvested: 4
+  specsSaved: 4
+  operationsCovered: 69
+  gatewayHosts:
+  - https://public-api.misoenergy.org
+  - https://apim.misoenergy.org
+  - https://docs.misoenergy.org
+  - https://markets.midwestiso.org
+  apiInventory:
+  - name: MISO Public API - Operations Displays
+    host: public-api.misoenergy.org
+    operations: 26
+    auth: none
+  - name: MISO Public API - Markets Displays
+    host: public-api.misoenergy.org
+    operations: 11
+    auth: none
+  - name: MISO Data Exchange Pricing API
+    host: apim.misoenergy.org/pricing
+    operations: 10
+    auth: API key
+  - name: MISO Data Exchange Load, Generation, and Interchange API
+    host: apim.misoenergy.org/lgi
+    operations: 22
+    auth: API key
+  - name: MISO Market Reports
+    host: docs.misoenergy.org/marketreports
+    operations: null
+    auth: none
+    note: Bulk file surface, no specification and no directory listing.
+  - name: MISO Market User Interface (MUI) 2.0 API
+    host: markets.midwestiso.org/dart2
+    operations: null
+    auth: mTLS client certificate + market participant registration
+    note: Documented only in a PDF user guide; no machine-readable contract published.
+
+probes:
+- url: https://www.misoenergy.org/
+  status: 200
+  note: Corporate site, live.
+- url: https://misoenergy.org/
+  status: 200
+  note: Apex redirects to www.
+- url: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
+  status: 200
+  note: >-
+    MISO's RT Data API landing page. Carries the 2025-12-12 restructure notice and the
+    single outbound link to https://public-api.misoenergy.org/. This is the documentation
+    home for the open surface.
+- url: https://public-api.misoenergy.org/
+  status: 200
+  note: >-
+    The real portal. A static HTML page with two tables — "Operations Displays" and
+    "Markets Displays" — listing all thirty-seven endpoint links by name. No login, no
+    signup, no key request. Not a customer login.
+- url: https://public-api.misoenergy.org/api/FuelMix
+  status: 200
+  note: Anonymous JSON. TotalMW 96,122 with the full generation mix by fuel category.
+- url: https://public-api.misoenergy.org/api/Ace
+  status: 200
+  note: Anonymous JSON. Area Control Error at thirty-second resolution.
+- url: https://public-api.misoenergy.org/api/Snapshot
+  status: 200
+  note: Anonymous JSON. Forecast peak demand, current demand, marginal energy cost, scheduled imports/exports.
+- url: https://public-api.misoenergy.org/api/MarketPricing/GetExAnteLmp
+  status: 200
+  note: Anonymous JSON. Ex-ante LMP with loss and congestion components for all nine hubs.
+- url: https://public-api.misoenergy.org/api/MarketPricing/GetAncillaryServicesMcp
+  status: 200
+  note: Anonymous JSON. Real-time MCP by reserve zone across all ancillary products.
+- url: https://public-api.misoenergy.org/api/MarketPricing/GetRealTimeFiveMinExPost/Previous
+  status: 200
+  note: Anonymous JSON, 47,011,360 bytes. No pagination, no authentication.
+- url: https://public-api.misoenergy.org/api/Interchange/GetNsi
+  status: 200
+  note: Anonymous JSON. Net scheduled interchange per neighbouring balancing authority.
+- url: https://public-api.misoenergy.org/api/... (all 37 published paths)
+  status: 200
+  note: >-
+    Every one of the thirty-seven paths MISO publishes was fetched individually on
+    2026-07-27. All thirty-seven returned HTTP 200 with content-type application/json to
+    an anonymous GET. Zero failures, zero auth challenges.
+- url: https://data-exchange.misoenergy.org/
+  status: 200
+  note: >-
+    Live Azure API Management developer portal, "MISO Data Exchange", meta description
+    "Discover APIs, learn how to use them, try them out interactively, and sign up to
+    acquire keys." Navigation is Home / APIs / Products / Resources / Sign in / Sign up.
+    A real self-serve developer portal, not a customer login.
+- url: https://data-exchange.misoenergy.org/apis
+  status: 200
+  note: APIs list page.
+- url: https://data-exchange.misoenergy.org/products
+  status: 200
+  note: Products page.
+- url: https://data-exchange.misoenergy.org/resources
+  status: 200
+  note: Resources page; links to the MISO Data Exchange FAQs help article and MISO's Privacy Notice.
+- url: https://data-exchange.misoenergy.org/signup
+  status: 200
+  note: Resolves to the Data Exchange sign-in/sign-up form (apim-delegation login).
+- url: https://data-exchange.misoenergy.org/developer/apis?api-version=2022-04-01-preview
+  status: 200
+  note: >-
+    Anonymous. Returned both APIs with ids, paths (lgi, pricing), subscriptionRequired
+    true, empty oAuth2/openid authentication settings, and subscription key parameter
+    names Ocp-Apim-Subscription-Key / subscription-key.
+- url: https://data-exchange.misoenergy.org/developer/products?api-version=2022-04-01-preview
+  status: 200
+  note: >-
+    Anonymous. Two products, both with "approvalRequired": false and
+    "subscriptionRequired": true. This is the evidence that the gate is self-serve rather
+    than application-approval. The terms field is MISO's AS IS warranty disclaimer.
+- url: https://data-exchange.misoenergy.org/developer/apis/{id}/operations?api-version=2022-04-01-preview
+  status: 200
+  note: Anonymous, both APIs. Thirty-two operations total with methods and urlTemplates.
+- url: https://data-exchange.misoenergy.org/developer/apis/{id}/operations/{opId}?api-version=2022-04-01-preview
+  status: 200
+  note: Anonymous, all thirty-two operations. Full parameter, response and real example detail.
+- url: https://data-exchange.misoenergy.org/developer/apis/{id}/schemas/{schemaId}?api-version=2022-04-01-preview
+  status: 200
+  note: Anonymous, both APIs. Full OpenAPI components.schemas documents (59 and 119 schemas).
+- url: https://data-exchange.misoenergy.org/developer/apis/{id}?export=true&format=openapi%2Bjson&api-version=2022-04-01-preview
+  status: 200
+  note: MISO's own OpenAPI export, both APIs. Valid documents but paths is EMPTY in each.
+- url: https://apim.misoenergy.org/pricing/v1/day-ahead/2026-07-26/lmp-expost
+  status: 401
+  note: '{"statusCode": 401, "message": "Access denied due to missing subscription key..."} — route confirmed real, key required.'
+- url: https://apim.misoenergy.org/lgi/v1/real-time/2026-07-26/demand/actual
+  status: 401
+  note: Same. Second API, same behaviour.
+- url: https://apim.misoenergy.org/pricing/v1/aggregated-pnode
+  status: 401
+  note: Same. Non-date-pathed operation, same behaviour.
+- url: https://apim.misoenergy.org/pricing/v1/nope-not-real
+  status: 404
+  note: Control probe. A fake operation on a real API returns 404 "Resource not found", which is what makes the 401s above meaningful.
+- url: https://apim.misoenergy.org/nosuchapi-xyz/v1/foo
+  status: 404
+  note: Second control probe. A fake API on the same gateway also returns 404.
+- url: https://apim.misoenergy.org/
+  status: 404
+  note: Gateway root; host resolves and serves the APIM 404 shape.
+- url: https://docs.misoenergy.org/marketreports/20260726_da_expost_lmp.csv
+  status: 200
+  note: Anonymous, 1,165,710 bytes of day-ahead ex-post LMP. No key, no account, no click-through.
+- url: https://docs.misoenergy.org/marketreports/20260726_sr_gfm.xlsx
+  status: 200
+  note: Anonymous, 21,922 bytes.
+- url: https://docs.misoenergy.org/marketreports/Dead_Node_Reports_Readers_Guide.pdf
+  status: 200
+  note: Anonymous, 192,418 bytes.
+- url: https://docs.misoenergy.org/marketreports/
+  status: 404
+  note: No directory listing is served; files are addressed by name from the Market Reports page.
+- url: https://www.misoenergy.org/markets-and-operations/real-time--market-data/market-reports/
+  status: 200
+  note: >-
+    Report catalogue. Rendered by a React MarketReportSearchNavigator component backed by
+    an internal Episerver Find service at /api/find/Optics_Models_Find_MarketReportItem.
+    That find endpoint is site-search infrastructure, not a documented API, and is
+    deliberately not listed in apis.yml.
+- url: https://www.misoenergy.org/api/find/Optics_Models_Find_MarketReportItem
+  status: 200
+  note: 'Anonymous but returns {"found": false} for a bare GET. Undocumented internal search adapter; not treated as a public API.'
+- url: https://api.misoenergy.org/MISORTWDDataBroker/data-links.html
+  status: 200
+  note: >-
+    The legacy data-links page. Every entry is now annotated "This API has been
+    deprecated" except the ACE chart, annotated "This API has been retired. It will not be
+    replaced in Public API". Historical evidence of the pre-2025-12-12 CSV/XML surface.
+- url: https://api.misoenergy.org/MISORTWDDataBroker/DataBrokerServices.asmx?messageType=getfuelmix&returnType=json
+  status: 200
+  note: 'Legacy endpoint still answers but returns {"error": "no data", "See": "https://www.misoenergy.org/markets-and-operations/rtdataapis"}.'
+- url: https://markets.midwestiso.org/dart2/X
+  status: 000
+  note: >-
+    TLS handshake failure (SSL alert), not an HTTP status. Direct evidence of client
+    digital certificate enforcement on the MUI 2.0 market participant gateway.
+- url: https://cce.midwestiso.org/dart2/X
+  status: 000
+  note: Same TLS handshake failure on the customer-facing test environment.
+- url: https://cdn.misoenergy.org/MUI%202.0%20API%20User%20Guide629008.pdf
+  status: 200
+  note: >-
+    847,263 bytes. Public MUI 2.0 API User Guide. Gives the production base URL
+    https://markets.midwestiso.org/dart2 and the CCE test base URL
+    https://cce.midwestiso.org/dart2, and states "All market participants using the JSON
+    programmatic interface must be registered with MISO."
+- url: https://www.misoenergy.org/account/create-profile/
+  status: 200
+  note: >-
+    Self-serve profile creation. Required fields are email, password, first name, last
+    name, company, phone and postal address; Entity Code is optional, so a
+    non-market-participant can complete it. No approval step.
+- url: https://www.misoenergy.org/meet-miso/legal-and-privacy/
+  status: 200
+  note: Combined Privacy Notice and Terms of Use. Governing law Indiana. Contains the anti-automation clause and the additional-posted-conditions override.
+- url: https://www.misoenergy.org/meet-miso/about-miso/
+  status: 200
+  note: 'Corporate facts: fifteen states plus Manitoba, 45 million people, region operated since December 2001.'
+- url: https://www.misoenergy.org/robots.txt
+  status: 200
+  note: 'Cloudflare-managed. Content-Signal: search=yes,ai-train=no,use=reference. Disallows a named list of AI crawlers. Disallows /episerver/, /utils/, /Optics/.'
+- url: https://developer.misoenergy.org/
+  status: 000
+  note: Does not resolve.
+- url: https://developers.misoenergy.org/
+  status: 000
+  note: Does not resolve.
+- url: https://data.misoenergy.org/
+  status: 000
+  note: Does not resolve.
+- url: https://dataexchange.misoenergy.org/
+  status: 000
+  note: Does not resolve. The portal is data-exchange.misoenergy.org, with the hyphen.
+- url: https://www.misoenergy.org/openapi.json
+  status: 404
+- url: https://www.misoenergy.org/swagger.json
+  status: 404
+- url: https://www.misoenergy.org/api-docs
+  status: 404
+- url: https://public-api.misoenergy.org/swagger/v1/swagger.json
+  status: 404
+- url: https://public-api.misoenergy.org/openapi.json
+  status: 404
+- url: https://api.github.com/orgs/misoenergy
+  status: 404
+  note: No MISO GitHub organization exists under this name. No GitHub property is claimed in apis.yml.
+- url: https://api.github.com/users/misoenergy
+  status: 404
+  note: Also absent.
+
+sources:
+- url: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
+  type: Documentation
+  note: The documentation home for the open Public API. Carries MISO's 2025-12-12 JSON-only restructure notice and the once-per-minute courtesy limit.
+- url: https://public-api.misoenergy.org/
+  type: APIReference
+  note: The endpoint table itself — thirty-seven links across MISO's own Operations Displays and Markets Displays groupings.
+- url: https://data-exchange.misoenergy.org/
+  type: DeveloperPortal
+  note: MISO Data Exchange, an Azure API Management developer portal with self-serve signup and two published APIs.
+- url: https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us
+  type: Documentation
+  note: >-
+    MISO Data Exchange FAQs. "The MISO Data Exchange comprises APIs (Application
+    Programming Interfaces) that enable users to access MISO Market Report data for use in
+    their own applications." Access is by MISO website profile plus a Data Exchange
+    account; credential is an API KEY that does not expire; rate limits are "100
+    call/minute" and "24,000 call/day", returning 429 and 403 respectively.
+- url: https://help.misoenergy.org/knowledgebase/article/KA-01000/en-us
+  type: Documentation
+  note: >-
+    Access MISO Market and Operations Data. Confirms programmatic access exists for MUI
+    2.0, the Emergency Demand Response Tool, the FTR Tool, the MISO Market Portal, the MISO
+    Communications System, Module E Capacity Tracking and the Physical Security System —
+    all market participant tools behind the Extranet.
+- url: https://cdn.misoenergy.org/MUI%202.0%20API%20User%20Guide629008.pdf
+  type: Documentation
+  note: The only published contract for MUI 2.0. Base URLs, registration requirement, and Market Portal certificate references.
+- url: https://www.misoenergy.org/meet-miso/about-miso/
+  type: Documentation
+  note: Corporate identity, footprint and scale, in MISO's own words.
+- url: https://www.misoenergy.org/meet-miso/legal-and-privacy/
+  type: TermsOfService
+  note: Privacy Notice and Terms of Use, including the automation clause and the clause under which additional posted conditions prevail.
+
+actions:
+  apisYmlCreated: true
+  apisListed: 6
+  openapiDirCreated: true
+  specsSaved: 4
+  reason: >-
+    Four OpenAPI documents were saved and all four validate against the OpenAPI
+    specification. Two were assembled verbatim from MISO Data Exchange's anonymously
+    served APIM portal metadata (its own export ships empty paths); two were assembled for
+    the Public API from MISO's published endpoint table plus the live anonymous payloads,
+    because MISO publishes no specification for that surface. Every document carries an
+    x-provenance block naming every source URL and fetch date. Two further apis[] entries —
+    the Market Reports bulk file surface and the MUI 2.0 market participant API — are
+    listed as verified surfaces with documentation links only, because neither has a
+    machine-readable contract to harvest and none was invented. No consumer-data, Green
+    Button, ESPI, CDR or OpenID Connect artifact was found or created, because none exists.

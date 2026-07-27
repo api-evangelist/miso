@@ -1,0 +1,1793 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "MISO Public API - Operations Displays",
+    "version": "2025-12-12",
+    "description": "Real-time MISO system operations data behind the public Operations Displays on misoenergy.org: area control error, CSAT supply and demand, fuel mix, real-time total load, system snapshot, wind and solar generation, net actual and net scheduled interchange, regional directional transfer, and generation outages.\n\nMISO notice, verbatim from https://www.misoenergy.org/markets-and-operations/RTDataAPIs/ : \"For your convenience, MISO provides direct access to the source data behind the charts and tables displayed in real-time on this website. As of December 12, 2025, these data feeds are available in JSON format only. Please be aware that the underlying URLs have also changed for all links. This implementation is designed to improve consistency, performance, and future compatibility for accessing real-time data. Please be respectful of caching limits and avoid accessing these links more than once per minute to ensure system stability and fair usage for all users.\"",
+    "x-provenance": {
+      "harvestedBy": "API Evangelist",
+      "fetchDate": "2026-07-27",
+      "note": "MISO publishes no OpenAPI for its Public API. This document was assembled from MISO's own published artifacts only: every path and every operation summary is taken verbatim from the endpoint table MISO publishes at https://public-api.misoenergy.org/ (section \"Operations Displays\"), and every response schema and example is derived from the live JSON MISO returned to an anonymous GET on 2026-07-27. No host, path, parameter, field name or value was invented. Examples are the real payloads with long arrays truncated to two elements. No query parameters are documented by MISO for these endpoints and none are asserted here.",
+      "sources": [
+        "https://www.misoenergy.org/markets-and-operations/RTDataAPIs/ (HTTP 200)",
+        "https://public-api.misoenergy.org/ (HTTP 200, endpoint table)",
+        "Every path in this document individually fetched anonymously; all returned HTTP 200 application/json on 2026-07-27."
+      ]
+    }
+  },
+  "servers": [
+    {
+      "url": "https://public-api.misoenergy.org",
+      "description": "MISO Public API \u2014 anonymous, no key, no account."
+    }
+  ],
+  "paths": {
+    "/api/Ace": {
+      "get": {
+        "operationId": "getAce",
+        "summary": "Area Control Error (ACE)",
+        "description": "Source data behind the MISO public \"Area Control Error (ACE)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "MktDay": {
+                      "type": "string"
+                    },
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "ACE": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "instantEST": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "MktDay": "07-27-2026",
+                  "RefId": "27-Jul-2026 - Interval 08:15:00 EST",
+                  "ACE": [
+                    {
+                      "instantEST": "2026-07-27 6:15:30 AM",
+                      "value": "-35.62"
+                    },
+                    {
+                      "instantEST": "2026-07-27 6:16:00 AM",
+                      "value": "307.35"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/CsatNextDayShortTermReserveRequirement": {
+      "get": {
+        "operationId": "getCsatNextDayShortTermReserveRequirement",
+        "summary": "CSAT Next Day Short Term Reserve Requirement",
+        "description": "Source data behind the MISO public \"CSAT Next Day Short Term Reserve Requirement\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "forecastPeakHourEst": {
+                        "type": "string"
+                      },
+                      "region": {
+                        "type": "string"
+                      },
+                      "forecastCreatedTime": {
+                        "type": "string"
+                      },
+                      "strReq": {
+                        "type": "integer"
+                      },
+                      "strOverwrite": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "forecastPeakHourEst": "2026-07-28T16:00:00",
+                    "region": "North/Central",
+                    "forecastCreatedTime": "2026-07-27T07:05:06",
+                    "strReq": 0,
+                    "strOverwrite": 0
+                  },
+                  {
+                    "forecastPeakHourEst": "2026-07-28T16:00:00",
+                    "region": "Systemwide",
+                    "forecastCreatedTime": "2026-07-27T07:05:06",
+                    "strReq": 0,
+                    "strOverwrite": 0
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/CsatSupplyDemand": {
+      "get": {
+        "operationId": "getCsatSupplyDemand",
+        "summary": "CSAT Supply and Demand",
+        "description": "Source data behind the MISO public \"CSAT Supply and Demand\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "timeEst": {
+                        "type": "string"
+                      },
+                      "demand": {
+                        "type": "integer"
+                      },
+                      "committedCapacity": {
+                        "type": "integer"
+                      },
+                      "demandForecast": {
+                        "nullable": true
+                      },
+                      "committedCapacityForecast": {
+                        "nullable": true
+                      },
+                      "availableCapacity": {
+                        "nullable": true
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "id": 1,
+                    "timeEst": "2026-07-27T00:00:00",
+                    "demand": 94262,
+                    "committedCapacity": 102993,
+                    "demandForecast": null,
+                    "committedCapacityForecast": null,
+                    "availableCapacity": null
+                  },
+                  {
+                    "id": 2,
+                    "timeEst": "2026-07-27T00:15:00",
+                    "demand": 92916,
+                    "committedCapacity": 102106,
+                    "demandForecast": null,
+                    "committedCapacityForecast": null,
+                    "availableCapacity": null
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FuelMix": {
+      "get": {
+        "operationId": "getFuelMix",
+        "summary": "Fuel Mix \u2014 FuelMix",
+        "description": "Source data behind the MISO public \"Fuel Mix\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "TotalMW": {
+                      "type": "string"
+                    },
+                    "Fuel": {
+                      "type": "object",
+                      "properties": {
+                        "Type": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "INTERVALEST": {
+                                "type": "string"
+                              },
+                              "CATEGORY": {
+                                "type": "string"
+                              },
+                              "ACT": {
+                                "type": "string"
+                              },
+                              "FUEL_CATEGORY": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "RefId": "27-Jul-2026 - Interval 08:10 EST",
+                  "TotalMW": "96122",
+                  "Fuel": {
+                    "Type": [
+                      {
+                        "INTERVALEST": "2026-07-27 8:10:00 AM",
+                        "CATEGORY": "Coal",
+                        "ACT": "29517",
+                        "FUEL_CATEGORY": "Coal  (29,517 MW)"
+                      },
+                      {
+                        "INTERVALEST": "2026-07-27 8:10:00 AM",
+                        "CATEGORY": "Natural Gas",
+                        "ACT": "30223",
+                        "FUEL_CATEGORY": "Natural Gas  (30,223 MW)"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FuelMix/Today": {
+      "get": {
+        "operationId": "getFuelMixToday",
+        "summary": "Fuel Mix \u2014 Today",
+        "description": "Source data behind the MISO public \"Fuel Mix\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "TotalMW": {
+                      "type": "string"
+                    },
+                    "Fuel": {
+                      "type": "object",
+                      "properties": {
+                        "Type": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "INTERVALEST": {
+                                "type": "string"
+                              },
+                              "CATEGORY": {
+                                "type": "string"
+                              },
+                              "ACT": {
+                                "type": "string"
+                              },
+                              "FUEL_CATEGORY": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "RefId": "27-Jul-2026 - Interval 08:10 EST",
+                  "TotalMW": "0",
+                  "Fuel": {
+                    "Type": [
+                      {
+                        "INTERVALEST": "2026-07-27 12:00:00 AM",
+                        "CATEGORY": "Battery Storage",
+                        "ACT": "39",
+                        "FUEL_CATEGORY": "Battery Storage  (39 MW)"
+                      },
+                      {
+                        "INTERVALEST": "2026-07-27 12:00:00 AM",
+                        "CATEGORY": "Coal",
+                        "ACT": "33729",
+                        "FUEL_CATEGORY": "Coal  (33,729 MW)"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/FuelMix/Yesterday": {
+      "get": {
+        "operationId": "getFuelMixYesterday",
+        "summary": "Fuel Mix \u2014 Yesterday",
+        "description": "Source data behind the MISO public \"Fuel Mix\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "TotalMW": {
+                      "type": "string"
+                    },
+                    "Fuel": {
+                      "type": "object",
+                      "properties": {
+                        "Type": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "INTERVALEST": {
+                                "type": "string"
+                              },
+                              "CATEGORY": {
+                                "type": "string"
+                              },
+                              "ACT": {
+                                "type": "string"
+                              },
+                              "FUEL_CATEGORY": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "RefId": "27-Jul-2026 - Interval 08:10 EST",
+                  "TotalMW": "0",
+                  "Fuel": {
+                    "Type": [
+                      {
+                        "INTERVALEST": "2026-07-26 12:00:00 AM",
+                        "CATEGORY": "Battery Storage",
+                        "ACT": "-234",
+                        "FUEL_CATEGORY": "Battery Storage  (-234 MW)"
+                      },
+                      {
+                        "INTERVALEST": "2026-07-26 12:00:00 AM",
+                        "CATEGORY": "Coal",
+                        "ACT": "29335",
+                        "FUEL_CATEGORY": "Coal  (29,335 MW)"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/GenerationOutages/GetGenerationOutagesPlusMinusFiveDays": {
+      "get": {
+        "operationId": "getGenerationOutagesGetGenerationOutagesPlusMinusFiveDays",
+        "summary": "Generation outages Plus or Minus Five Days",
+        "description": "Source data behind the MISO public \"Generation outages Plus or Minus Five Days\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "Days": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "OutageDate": {
+                            "type": "string"
+                          },
+                          "OutageMonthDay": {
+                            "type": "string"
+                          },
+                          "Unplanned": {
+                            "type": "integer"
+                          },
+                          "Planned": {
+                            "type": "integer"
+                          },
+                          "Forced": {
+                            "type": "integer"
+                          },
+                          "Derated": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "RefId": "27-Jul-2026 - Total Outage Megawatts: 34,719",
+                  "Days": [
+                    {
+                      "OutageDate": "2026-07-22 12:00:00 AM",
+                      "OutageMonthDay": "Jul-22",
+                      "Unplanned": 8106,
+                      "Planned": 5555,
+                      "Forced": 13603,
+                      "Derated": 11227
+                    },
+                    {
+                      "OutageDate": "2026-07-23 12:00:00 AM",
+                      "OutageMonthDay": "Jul-23",
+                      "Unplanned": 9858,
+                      "Planned": 6353,
+                      "Forced": 13092,
+                      "Derated": 11834
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Interchange/GetNai": {
+      "get": {
+        "operationId": "getInterchangeGetNai",
+        "summary": "Tie Flow / Net Actual Interchange (NAI) \u2014 GetNai",
+        "description": "Source data behind the MISO public \"Tie Flow / Net Actual Interchange (NAI)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Date": {
+                      "type": "string"
+                    },
+                    "Actual": {
+                      "type": "object",
+                      "properties": {
+                        "HourandMin": {
+                          "type": "string"
+                        },
+                        "TieFlow": {
+                          "type": "object",
+                          "properties": {
+                            "Name": {
+                              "type": "string"
+                            },
+                            "Value": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "Date": "27-Jul-2026 - Interval 08:10 EST",
+                  "Actual": {
+                    "HourandMin": "08:10",
+                    "TieFlow": {
+                      "Name": "MISO",
+                      "Value": "-5495.34"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Interchange/GetNai/FiveMinute": {
+      "get": {
+        "operationId": "getInterchangeGetNaiFiveMinute",
+        "summary": "Tie Flow / Net Actual Interchange (NAI) \u2014 FiveMinute",
+        "description": "Source data behind the MISO public \"Tie Flow / Net Actual Interchange (NAI)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Time": {
+                        "type": "string"
+                      },
+                      "Value": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "Time": "2026-07-26 8:15:00 AM",
+                    "Value": "-5573.87"
+                  },
+                  {
+                    "Time": "2026-07-26 8:20:00 AM",
+                    "Value": "-5321.07"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Interchange/GetNai/Imports": {
+      "get": {
+        "operationId": "getInterchangeGetNaiImports",
+        "summary": "Net Actual Interchange (Imports)",
+        "description": "Source data behind the MISO public \"Net Actual Interchange (Imports)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Time": {
+                        "type": "string"
+                      },
+                      "Value": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "Time": "2026-07-26 1:15:00 PM",
+                    "Value": "-5572.00"
+                  },
+                  {
+                    "Time": "2026-07-26 1:20:00 PM",
+                    "Value": "-5319.00"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Interchange/GetNsi": {
+      "get": {
+        "operationId": "getInterchangeGetNsi",
+        "summary": "Net Scheduled Interchange \u2014 GetNsi",
+        "description": "Source data behind the MISO public \"Net Scheduled Interchange\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instance": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string"
+                          },
+                          "AECI": {
+                            "type": "string"
+                          },
+                          "LGEE": {
+                            "type": "string"
+                          },
+                          "MHEB": {
+                            "type": "string"
+                          },
+                          "MISO": {
+                            "type": "string"
+                          },
+                          "ONT": {
+                            "type": "string"
+                          },
+                          "PJM": {
+                            "type": "string"
+                          },
+                          "SOCO": {
+                            "type": "string"
+                          },
+                          "SPA": {
+                            "type": "string"
+                          },
+                          "SWPP": {
+                            "type": "string"
+                          },
+                          "TVA": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "MktDay": {
+                      "nullable": true
+                    }
+                  }
+                },
+                "example": {
+                  "instance": [
+                    {
+                      "timestamp": "2026-07-27 08:08:00",
+                      "AECI": "-164",
+                      "LGEE": "179",
+                      "MHEB": "-2061",
+                      "MISO": "-5425",
+                      "ONT": "-207",
+                      "PJM": "-3151",
+                      "SOCO": "138",
+                      "SPA": "-6",
+                      "SWPP": "-78",
+                      "TVA": "16"
+                    }
+                  ],
+                  "RefId": "27-Jul-2026 - Interval 08:08 EST",
+                  "MktDay": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Interchange/GetNsi/FiveMinute": {
+      "get": {
+        "operationId": "getInterchangeGetNsiFiveMinute",
+        "summary": "Net Scheduled Interchange \u2014 FiveMinute",
+        "description": "Source data behind the MISO public \"Net Scheduled Interchange\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instance": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string"
+                          },
+                          "AECI": {
+                            "type": "string"
+                          },
+                          "LGEE": {
+                            "type": "string"
+                          },
+                          "MHEB": {
+                            "type": "string"
+                          },
+                          "MISO": {
+                            "type": "string"
+                          },
+                          "ONT": {
+                            "type": "string"
+                          },
+                          "PJM": {
+                            "type": "string"
+                          },
+                          "SOCO": {
+                            "type": "string"
+                          },
+                          "SPA": {
+                            "type": "string"
+                          },
+                          "SWPP": {
+                            "type": "string"
+                          },
+                          "TVA": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "MktDay": {
+                      "nullable": true
+                    }
+                  }
+                },
+                "example": {
+                  "instance": [
+                    {
+                      "timestamp": "2026-07-25 19:05:00",
+                      "AECI": "220",
+                      "LGEE": "-75",
+                      "MHEB": "-1737",
+                      "MISO": "-6906",
+                      "ONT": "-1540",
+                      "PJM": "-3540",
+                      "SOCO": "172",
+                      "SPA": "-93",
+                      "SWPP": "-196",
+                      "TVA": "-370"
+                    },
+                    {
+                      "timestamp": "2026-07-25 19:10:00",
+                      "AECI": "220",
+                      "LGEE": "-75",
+                      "MHEB": "-1737",
+                      "MISO": "-6906",
+                      "ONT": "-1540",
+                      "PJM": "-3540",
+                      "SOCO": "172",
+                      "SPA": "-93",
+                      "SWPP": "-196",
+                      "TVA": "-370"
+                    }
+                  ],
+                  "RefId": "27-Jul-2026 - Interval 08:08 EST",
+                  "MktDay": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Interchange/GetNsi/MISO": {
+      "get": {
+        "operationId": "getInterchangeGetNsiMISO",
+        "summary": "Net Scheduled Interchange (MISO) \u2014 MISO",
+        "description": "Source data behind the MISO public \"Net Scheduled Interchange (MISO)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instance": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string"
+                          },
+                          "NSI": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "MktDay": {
+                      "nullable": true
+                    }
+                  }
+                },
+                "example": {
+                  "instance": [
+                    {
+                      "timestamp": "2026-07-27 08:13:00",
+                      "NSI": "-5405"
+                    }
+                  ],
+                  "RefId": "27-Jul-2026 - Interval 08:13 EST",
+                  "MktDay": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Interchange/GetNsi/MISOFiveMinute": {
+      "get": {
+        "operationId": "getInterchangeGetNsiMISOFiveMinute",
+        "summary": "Net Scheduled Interchange (MISO) \u2014 MISOFiveMinute",
+        "description": "Source data behind the MISO public \"Net Scheduled Interchange (MISO)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instance": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string"
+                          },
+                          "NSI": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "MktDay": {
+                      "nullable": true
+                    }
+                  }
+                },
+                "example": {
+                  "instance": [
+                    {
+                      "timestamp": "2026-07-26 08:20:00",
+                      "NSI": "-5325"
+                    },
+                    {
+                      "timestamp": "2026-07-26 08:25:00",
+                      "NSI": "-5325"
+                    }
+                  ],
+                  "RefId": "27-Jul-2026 - Interval 08:13 EST",
+                  "MktDay": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Interchange/GetNsi/MISOOneMinute": {
+      "get": {
+        "operationId": "getInterchangeGetNsiMISOOneMinute",
+        "summary": "Net Scheduled Interchange (MISO) \u2014 MISOOneMinute",
+        "description": "Source data behind the MISO public \"Net Scheduled Interchange (MISO)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instance": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string"
+                          },
+                          "NSI": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "MktDay": {
+                      "nullable": true
+                    }
+                  }
+                },
+                "example": {
+                  "instance": [
+                    {
+                      "timestamp": "2026-07-25 19:01:00",
+                      "NSI": "-6639"
+                    },
+                    {
+                      "timestamp": "2026-07-25 19:02:00",
+                      "NSI": "-6706"
+                    }
+                  ],
+                  "RefId": "27-Jul-2026 - Interval 08:08 EST",
+                  "MktDay": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Interchange/GetNsi/OneMinute": {
+      "get": {
+        "operationId": "getInterchangeGetNsiOneMinute",
+        "summary": "Net Scheduled Interchange \u2014 OneMinute",
+        "description": "Source data behind the MISO public \"Net Scheduled Interchange\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instance": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "timestamp": {
+                            "type": "string"
+                          },
+                          "AECI": {
+                            "type": "string"
+                          },
+                          "LGEE": {
+                            "type": "string"
+                          },
+                          "MHEB": {
+                            "type": "string"
+                          },
+                          "MISO": {
+                            "type": "string"
+                          },
+                          "ONT": {
+                            "type": "string"
+                          },
+                          "PJM": {
+                            "type": "string"
+                          },
+                          "SOCO": {
+                            "type": "string"
+                          },
+                          "SPA": {
+                            "type": "string"
+                          },
+                          "SWPP": {
+                            "type": "string"
+                          },
+                          "TVA": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "MktDay": {
+                      "nullable": true
+                    }
+                  }
+                },
+                "example": {
+                  "instance": [
+                    {
+                      "timestamp": "2026-07-25 19:01:00",
+                      "AECI": "182",
+                      "LGEE": "-73",
+                      "MHEB": "-1733",
+                      "MISO": "-6639",
+                      "ONT": "-1543",
+                      "PJM": "-3264",
+                      "SOCO": "172",
+                      "SPA": "-114",
+                      "SWPP": "-148",
+                      "TVA": "-370"
+                    },
+                    {
+                      "timestamp": "2026-07-25 19:02:00",
+                      "AECI": "191",
+                      "LGEE": "-74",
+                      "MHEB": "-1734",
+                      "MISO": "-6706",
+                      "ONT": "-1542",
+                      "PJM": "-3333",
+                      "SOCO": "172",
+                      "SPA": "-109",
+                      "SWPP": "-160",
+                      "TVA": "-370"
+                    }
+                  ],
+                  "RefId": "27-Jul-2026 - Interval 08:08 EST",
+                  "MktDay": null
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/RealTimeTotalLoad": {
+      "get": {
+        "operationId": "getRealTimeTotalLoad",
+        "summary": "Real Time Total Load",
+        "description": "Source data behind the MISO public \"Real Time Total Load\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "LoadInfo": {
+                      "type": "object",
+                      "properties": {
+                        "RefId": {
+                          "type": "string"
+                        },
+                        "ClearedMW": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "ClearedMWHourly": {
+                                "type": "object",
+                                "properties": {
+                                  "Hour": {
+                                    "type": "string"
+                                  },
+                                  "Value": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "MediumTermLoadForecast": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "Forecast": {
+                                "type": "object",
+                                "properties": {
+                                  "HourEnding": {
+                                    "type": "string"
+                                  },
+                                  "LoadForecast": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "FiveMinTotalLoad": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "Load": {
+                                "type": "object",
+                                "properties": {
+                                  "Time": {
+                                    "type": "string"
+                                  },
+                                  "Value": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "LoadInfo": {
+                    "RefId": "27-Jul-2026 - Interval 08:10 EST",
+                    "ClearedMW": [
+                      {
+                        "ClearedMWHourly": {
+                          "Hour": "1",
+                          "Value": "90916"
+                        }
+                      },
+                      {
+                        "ClearedMWHourly": {
+                          "Hour": "2",
+                          "Value": "86496"
+                        }
+                      }
+                    ],
+                    "MediumTermLoadForecast": [
+                      {
+                        "Forecast": {
+                          "HourEnding": "1",
+                          "LoadForecast": "89367"
+                        }
+                      },
+                      {
+                        "Forecast": {
+                          "HourEnding": "2",
+                          "LoadForecast": "86225"
+                        }
+                      }
+                    ],
+                    "FiveMinTotalLoad": [
+                      {
+                        "Load": {
+                          "Time": "00:00",
+                          "Value": "93419"
+                        }
+                      },
+                      {
+                        "Load": {
+                          "Time": "00:05",
+                          "Value": "93087"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/RegionalDirectionalTransfer": {
+      "get": {
+        "operationId": "getRegionalDirectionalTransfer",
+        "summary": "Regional Directional Transfer",
+        "description": "Source data behind the MISO public \"Regional Directional Transfer\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "Interval": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "instantEST": {
+                            "type": "string"
+                          },
+                          "NORTH_SOUTH_LIMIT": {
+                            "type": "string"
+                          },
+                          "SOUTH_NORTH_LIMIT": {
+                            "type": "string"
+                          },
+                          "RAW_MW": {
+                            "type": "string"
+                          },
+                          "UDSFLOW_MW": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "RefId": "27-Jul-2026 - Interval 08:15 EST",
+                  "Interval": [
+                    {
+                      "instantEST": "2026-07-26 08:15:00 AM",
+                      "NORTH_SOUTH_LIMIT": "-3000",
+                      "SOUTH_NORTH_LIMIT": "2500",
+                      "RAW_MW": "2594",
+                      "UDSFLOW_MW": "2200"
+                    },
+                    {
+                      "instantEST": "2026-07-26 08:20:00 AM",
+                      "NORTH_SOUTH_LIMIT": "-3000",
+                      "SOUTH_NORTH_LIMIT": "2500",
+                      "RAW_MW": "2527",
+                      "UDSFLOW_MW": "2200"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Snapshot": {
+      "get": {
+        "operationId": "getSnapshot",
+        "summary": "Snapshot",
+        "description": "Source data behind the MISO public \"Snapshot\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "t": {
+                        "type": "string"
+                      },
+                      "v": {
+                        "type": "string"
+                      },
+                      "d": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "t": "Forecasted Peak Demand (MW)",
+                    "v": "125,572",
+                    "d": "7/27/2026 12:00:00 AM EST",
+                    "id": "0"
+                  },
+                  {
+                    "t": "Current Demand (MW)",
+                    "v": "96,772",
+                    "d": "7/27/2026 8:10:00 AM EST",
+                    "id": "1"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WindSolar/GetCombined": {
+      "get": {
+        "operationId": "getWindSolarGetCombined",
+        "summary": "Wind and Solar Generation \u2014 GetCombined",
+        "description": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instance": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ForecastDateTimeEST": {
+                            "type": "string"
+                          },
+                          "ForecastHourEndingEST": {
+                            "type": "string"
+                          },
+                          "ForecastWindValue": {
+                            "type": "string"
+                          },
+                          "ForecastSolarValue": {
+                            "type": "string"
+                          },
+                          "ActualDateTimeEST": {
+                            "type": "string"
+                          },
+                          "ActualHourEndingEST": {
+                            "type": "string"
+                          },
+                          "ActualWindValue": {
+                            "type": "string"
+                          },
+                          "ActualSolarValue": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "MktDay": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "instance": [
+                    {
+                      "ForecastDateTimeEST": "2026-07-27 12:00:00 AM",
+                      "ForecastHourEndingEST": "1",
+                      "ForecastWindValue": "13582.00",
+                      "ForecastSolarValue": "0.00",
+                      "ActualDateTimeEST": "2026-07-27 12:00:00 AM",
+                      "ActualHourEndingEST": "1",
+                      "ActualWindValue": "11320.30",
+                      "ActualSolarValue": "-48.77"
+                    },
+                    {
+                      "ForecastDateTimeEST": "2026-07-27 1:00:00 AM",
+                      "ForecastHourEndingEST": "2",
+                      "ForecastWindValue": "13652.00",
+                      "ForecastSolarValue": "0.00",
+                      "ActualDateTimeEST": "2026-07-27 1:00:00 AM",
+                      "ActualHourEndingEST": "2",
+                      "ActualWindValue": "11166.52",
+                      "ActualSolarValue": "-48.95"
+                    }
+                  ],
+                  "RefId": "27-Jul-2026 - Interval 08:00 EST",
+                  "MktDay": "07-27-2026"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WindSolar/getsolar": {
+      "get": {
+        "operationId": "getWindSolarGetsolar",
+        "summary": "Wind and Solar Generation \u2014 getsolar",
+        "description": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instance": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ForecastDateTimeEST": {
+                            "type": "string"
+                          },
+                          "ForecastHourEndingEST": {
+                            "type": "string"
+                          },
+                          "ForecastValue": {
+                            "type": "string"
+                          },
+                          "ActualDateTimeEST": {
+                            "type": "string"
+                          },
+                          "ActualHourEndingEST": {
+                            "type": "string"
+                          },
+                          "ActualValue": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "MktDay": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "instance": [
+                    {
+                      "ForecastDateTimeEST": "2026-07-27 12:00:00 AM",
+                      "ForecastHourEndingEST": "1",
+                      "ForecastValue": "0.00",
+                      "ActualDateTimeEST": "2026-07-27 12:00:00 AM",
+                      "ActualHourEndingEST": "1",
+                      "ActualValue": "-48.77"
+                    },
+                    {
+                      "ForecastDateTimeEST": "2026-07-27 1:00:00 AM",
+                      "ForecastHourEndingEST": "2",
+                      "ForecastValue": "0.00",
+                      "ActualDateTimeEST": "2026-07-27 1:00:00 AM",
+                      "ActualHourEndingEST": "2",
+                      "ActualValue": "-48.95"
+                    }
+                  ],
+                  "RefId": "27-Jul-2026 - Interval 08:00 EST",
+                  "MktDay": "07-27-2026"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WindSolar/getsolaractual": {
+      "get": {
+        "operationId": "getWindSolarGetsolaractual",
+        "summary": "Wind and Solar Generation \u2014 getsolaractual",
+        "description": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instance": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "DateTimeEST": {
+                            "type": "string"
+                          },
+                          "HourEndingEST": {
+                            "type": "string"
+                          },
+                          "Value": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "MktDay": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "instance": [
+                    {
+                      "DateTimeEST": "2026-07-27 12:00:00 AM",
+                      "HourEndingEST": "1",
+                      "Value": "-48.77"
+                    },
+                    {
+                      "DateTimeEST": "2026-07-27 1:00:00 AM",
+                      "HourEndingEST": "2",
+                      "Value": "-48.95"
+                    }
+                  ],
+                  "RefId": "27-Jul-2026 - Interval 08:00 EST",
+                  "MktDay": "07-27-2026"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WindSolar/getsolarforecast": {
+      "get": {
+        "operationId": "getWindSolarGetsolarforecast",
+        "summary": "Wind and Solar Generation \u2014 getsolarforecast",
+        "description": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Forecast": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "DateTimeEST": {
+                            "type": "string"
+                          },
+                          "HourEndingEST": {
+                            "type": "string"
+                          },
+                          "Value": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "MktDay": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "Forecast": [
+                    {
+                      "DateTimeEST": "2026-07-27 12:00:00 AM",
+                      "HourEndingEST": "1",
+                      "Value": "0.00"
+                    },
+                    {
+                      "DateTimeEST": "2026-07-27 1:00:00 AM",
+                      "HourEndingEST": "2",
+                      "Value": "0.00"
+                    }
+                  ],
+                  "RefId": "27-Jul-2026 - Interval 08:00 EST",
+                  "MktDay": "07-27-2026"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WindSolar/getwind": {
+      "get": {
+        "operationId": "getWindSolarGetwind",
+        "summary": "Wind and Solar Generation \u2014 getwind",
+        "description": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instance": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ForecastDateTimeEST": {
+                            "type": "string"
+                          },
+                          "ForecastHourEndingEST": {
+                            "type": "string"
+                          },
+                          "ForecastValue": {
+                            "type": "string"
+                          },
+                          "ActualDateTimeEST": {
+                            "type": "string"
+                          },
+                          "ActualHourEndingEST": {
+                            "type": "string"
+                          },
+                          "ActualValue": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "MktDay": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "instance": [
+                    {
+                      "ForecastDateTimeEST": "2026-07-27 12:00:00 AM",
+                      "ForecastHourEndingEST": "1",
+                      "ForecastValue": "13582.00",
+                      "ActualDateTimeEST": "2026-07-27 12:00:00 AM",
+                      "ActualHourEndingEST": "1",
+                      "ActualValue": "11320.30"
+                    },
+                    {
+                      "ForecastDateTimeEST": "2026-07-27 1:00:00 AM",
+                      "ForecastHourEndingEST": "2",
+                      "ForecastValue": "13652.00",
+                      "ActualDateTimeEST": "2026-07-27 1:00:00 AM",
+                      "ActualHourEndingEST": "2",
+                      "ActualValue": "11166.52"
+                    }
+                  ],
+                  "RefId": "27-Jul-2026 - Interval 08:00 EST",
+                  "MktDay": "07-27-2026"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WindSolar/getwindactual": {
+      "get": {
+        "operationId": "getWindSolarGetwindactual",
+        "summary": "Wind and Solar Generation \u2014 getwindactual",
+        "description": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instance": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "DateTimeEST": {
+                            "type": "string"
+                          },
+                          "HourEndingEST": {
+                            "type": "string"
+                          },
+                          "Value": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "MktDay": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "instance": [
+                    {
+                      "DateTimeEST": "2026-07-27 12:00:00 AM",
+                      "HourEndingEST": "1",
+                      "Value": "11320.30"
+                    },
+                    {
+                      "DateTimeEST": "2026-07-27 1:00:00 AM",
+                      "HourEndingEST": "2",
+                      "Value": "11166.52"
+                    }
+                  ],
+                  "RefId": "27-Jul-2026 - Interval 08:00 EST",
+                  "MktDay": "07-27-2026"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/WindSolar/getwindforecast": {
+      "get": {
+        "operationId": "getWindSolarGetwindforecast",
+        "summary": "Wind and Solar Generation \u2014 getwindforecast",
+        "description": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+        "responses": {
+          "200": {
+            "description": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Forecast": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "DateTimeEST": {
+                            "type": "string"
+                          },
+                          "HourEndingEST": {
+                            "type": "string"
+                          },
+                          "Value": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "RefId": {
+                      "type": "string"
+                    },
+                    "MktDay": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "Forecast": [
+                    {
+                      "DateTimeEST": "2026-07-27 12:00:00 AM",
+                      "HourEndingEST": "1",
+                      "Value": "13582.00"
+                    },
+                    {
+                      "DateTimeEST": "2026-07-27 1:00:00 AM",
+                      "HourEndingEST": "2",
+                      "Value": "13652.00"
+                    }
+                  ],
+                  "RefId": "27-Jul-2026 - Interval 08:00 EST",
+                  "MktDay": "07-27-2026"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
