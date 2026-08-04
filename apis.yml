@@ -73,6 +73,7 @@ apis:
     entries:
     - MISO Public API - Operations Displays
     - MISO Public API - Markets Displays
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 - aid: miso:miso-data-exchange-pricing-api
   name: MISO Data Exchange Pricing API
   description: 'The pricing half of MISO Data Exchange, MISO''s Azure API Management developer programme
@@ -109,6 +110,7 @@ apis:
     url: https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us
   - type: Plans
     url: https://data-exchange.misoenergy.org/products
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 - aid: miso:miso-data-exchange-load-generation-interchange-api
   name: MISO Data Exchange Load, Generation, and Interchange API
   description: The system-data half of MISO Data Exchange. Twenty-two documented GET operations spanning
@@ -146,6 +148,7 @@ apis:
     url: https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us
   - type: Plans
     url: https://data-exchange.misoenergy.org/products
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 - aid: miso:miso-market-reports
   name: MISO Market Reports
   description: 'MISO''s long-running bulk market report surface — the second fully anonymous layer of
@@ -172,6 +175,7 @@ apis:
     url: https://www.misoenergy.org/markets-and-operations/real-time--market-data/market-reports/
   - type: Website
     url: https://www.misoenergy.org/markets-and-operations/real-time--market-data/market-report-archives/
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 - aid: miso:miso-mui-2-0-api
   name: MISO Market User Interface (MUI) 2.0 API
   description: 'The closed counterpart to everything else in this profile — MISO''s programmatic JSON
@@ -202,6 +206,7 @@ apis:
     url: https://cdn.misoenergy.org/MUI%202.0%20API%20User%20Guide629008.pdf
   - type: Onboarding
     url: https://www.misoenergy.org/markets-and-operations/mp-registration/market-participation/
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 common:
 - type: AgenticAccess
   url: agentic-access/miso-agentic-access.yml
