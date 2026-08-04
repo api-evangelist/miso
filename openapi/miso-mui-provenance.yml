@@ -1,0 +1,25 @@
+generated: '2026-08-04'
+method: harvested
+status: published
+provider_published: true
+source: https://cdn.misoenergy.org/MUI%202.0%20Specification%203.3.0623177.yaml
+description: MISO publishes the MUI 2.0 OpenAPI on their CDN rather than linking it
+  from the MUI documentation page, so it is effectively undiscoverable — the profile
+  recorded "no OpenAPI published" until a reader pointed at the exact URL. Harvested
+  verbatim to _original/.
+verified: '2026-08-04'
+spec:
+  openapi: 3.0.3
+  title: MUI - Public Specification
+  version: 3.3.0
+  paths: 63
+  operations: 75
+  schemas: 264
+  operations_with_operationid: 75
+  servers:
+  - https://cce.midwestiso.org/dart2/
+  - https://markets.midwestiso.org/dart2/
+evidence:
+- url: https://cdn.misoenergy.org/MUI%202.0%20Specification%203.3.0623177.yaml
+  status: 200
+  note: 514,725 bytes, parses as OpenAPI 3.0.3
