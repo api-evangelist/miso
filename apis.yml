@@ -207,6 +207,51 @@ apis:
   - type: Onboarding
     url: https://www.misoenergy.org/markets-and-operations/mp-registration/market-participation/
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: miso:miso-file-download-api
+  name: MISO File Download API
+  description: 'The bulk file-retrieval counterpart to MUI 2.0, on the same two client-certificate-gated
+    hosts and documented only in a PDF. MISO''s File Download Specification lays out a consistent pair
+    of operations per report family — GET /portalDownload/{type}/files to list what is available and GET
+    /portalDownload/{type}/file to retrieve one — across at least nine types: day-ahead schedule reports
+    (dasr), electric quarterly reports (eqr), exposure, invoices, market clearing and market results (mcmr),
+    market operations control reports (mocr), resource load and adjustment (rla) and settlement statement
+    information (ssi), each with its own query parameters for entity, date, asset owner, market type and
+    output format. Production is https://markets.midwestiso.org/portalDownload and the customer-facing
+    test environment is https://cce.midwestiso.org/portalDownload. Access is gated exactly as MUI 2.0 is:
+    an anonymous TLS connection to either host on 2026-08-06 failed at the handshake with an SSL alert
+    rather than returning any HTTP status, which is direct evidence of mutual-TLS client-certificate enforcement.
+    NO MACHINE-READABLE CONTRACT IS PUBLISHED FOR THIS API and none could be harvested. MISO does publish
+    one for MUI 2.0, at cdn.misoenergy.org, so the capability plainly exists — it was simply never done
+    for this surface. The 145KB specification PDF is the only description of it that exists.'
+  humanURL: https://cdn.misoenergy.org/MISO%20-%20File%20Download%20Specification424459.pdf
+  baseURL: https://markets.midwestiso.org/portalDownload
+  tags:
+  - Energy Markets
+  - Market Participants
+  - Bulk Download
+  - Settlements
+  - Invoices
+  - Client Certificate
+  properties:
+  - type: Documentation
+    url: https://cdn.misoenergy.org/MISO%20-%20File%20Download%20Specification424459.pdf
+  - type: Onboarding
+    url: https://www.misoenergy.org/markets-and-operations/mp-registration/market-participation/
+  x-coverage:
+    state: gated
+    reason: no-machine-readable-spec
+    detail: >-
+      Documented in a PDF and nowhere else. Searched for a published contract on 2026-08-06 and
+      found none: the Wayback CDX index for cdn.misoenergy.org holds no .yaml or .json capture
+      other than three .well-known probes that 404'd in 2023, and filtering every archived URL
+      for misoenergy.org, www.misoenergy.org, api.misoenergy.org, cce.midwestiso.org and
+      markets.midwestiso.org on swagger / openapi / .yaml / .yml / api-docs returns nothing on
+      any host, ever. The MUI 2.0 yaml on the same CDN was still live and 514KB on the same day,
+      so the CDN does serve specs. Recorded as a documented but uncontracted surface rather than
+      reconstructed from the PDF — a spec written from documentation by someone who has never
+      called the API would carry MISO's name over inferred error responses and schemas.
+    raised_by: A reader, 2026-08-05, who asked for an OpenAPI and was told why we will not author one.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 common:
 - type: AgenticAccess
   url: agentic-access/miso-agentic-access.yml
