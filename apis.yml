@@ -252,6 +252,165 @@ apis:
       called the API would carry MISO's name over inferred error responses and schemas.
     raised_by: A reader, 2026-08-05, who asked for an OpenAPI and was told why we will not author one.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: miso:miso-weather-information-interface
+  name: MISO Weather Information Interface
+  description: >-
+    MISO's weather data service for market participants, and the ONLY API in this profile
+    outside the Data Exchange portal for which MISO publishes a machine-readable contract of its
+    own. The OpenAPI 3.0.1 document is distributed as miso_wii_api_spec.json inside a zip on
+    MISO's CDN, alongside a rendered HTML view — which is why nothing that crawls for
+    /openapi.json or /swagger.json will ever find it. One operation, GET /v{version}/Weather,
+    "Obtain weather data for all stations", with 7 component schemas (ApiWeatherResponse,
+    WeatherFeature, WeatherHourData, WeatherProperty, ReadingData, GeometryConstraint, ApiError)
+    and documented 200/400/401/500 responses. The 401 tells you it is authenticated; the
+    document declares no securitySchemes and no servers, so the base URL is not stated in the
+    contract itself.
+  humanURL: https://cdn.misoenergy.org/miso_wii_api_spec636543.zip
+  tags:
+  - Weather
+  - Energy Markets
+  - Market Participants
+  properties:
+  - type: OpenAPI
+    url: openapi/miso-weather-information-interface-api-openapi.yml
+  - type: X-OpenAPI-Source
+    url: https://cdn.misoenergy.org/miso_wii_api_spec636543.zip
+  x-coverage:
+    state: covered
+    reason: null
+    detail: >-
+      Harvested 2026-08-07 from MISO's own zip (68,062 bytes, HTTP 200), which contains
+      miso_wii_api_spec.json at 605,903 bytes plus a rendered HTML companion. Provider-published
+      and unmodified. Discovery is the only hard part: a spec inside a zip on a CDN is
+      machine-readable but not machine-DISCOVERABLE, and no amount of well-known probing finds it.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: miso:miso-ftr-mpma-market-user-api
+  name: MISO FTR MPMA Market User API
+  description: >-
+    The Financial Transmission Rights / Multi-Period Multi-Auction market user API — four SOAP
+    services covering the FTR market itself, auctions, bulk download and the secondary market.
+    MISO publishes real WSDL contracts for all four, with XSD schemas, and ships two dated
+    generations in the same archive: 2023_10_05 and 2026_04_01. This is a CURRENT, maintained
+    SOAP estate, not a legacy remnant. Endpoints are published in the archive as plain text —
+    production on markets.midwestiso.org/mui-miso-ihedge and the CCE test environment on
+    cce.midwestiso.org/mui-miso-ihedge, four services each. Access is gated the same way as MUI
+    2.0 and File Download: anonymous TLS to either host fails at the handshake with an SSL alert.
+  humanURL: https://cdn.misoenergy.org/FTR%20MPMA%20Market%20User%20API%20Documents742934.zip
+  baseURL: https://markets.midwestiso.org/mui-miso-ihedge
+  tags:
+  - Energy Markets
+  - FTR
+  - Auctions
+  - Secondary Market
+  - Market Participants
+  - SOAP
+  - Client Certificate
+  properties:
+  - type: Documentation
+    url: https://cdn.misoenergy.org/FTR%20MPMA%20Market%20User%20API%20Documents742934.zip
+  x-coverage:
+    state: gated
+    reason: contract-format-unreadable
+    detail: >-
+      MISO DOES publish machine-readable contracts here — 12 WSDL files across the two
+      generations, plus 33 XSD schemas in the archive. They are not catalogued as contracts
+      because the Kin Score cannot currently read WSDL, not because they are absent. This is a
+      READER gap on our side, and recording it as "no spec" would be false. See the roadmap
+      issue on WSDL as an unreadable contract format.
+    services:
+    - MarketService
+    - FtrAuctionService
+    - FtrDownloadService
+    - SecondaryMarketService
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: miso:miso-edr-service
+  name: MISO EDR Service (Electronic Data Reporting)
+  description: >-
+    A SOAP service for uploading meter data and offer data to MISO, with a published WSDL and
+    six XSD schemas (MdUploadPayload, MdUploadResponse, MeterData, OfferData,
+    OfferDataUploadPayload, OfferUploadResponse). The archive dates to 2008, which makes this the
+    oldest surface in the profile — and notable for being one of the few MISO interfaces that is
+    explicitly a WRITE path: participants upload meter and offer data rather than retrieve it.
+  humanURL: https://cdn.misoenergy.org/EDR%20WSDL%20and%20Schemas632992.zip
+  tags:
+  - Energy Markets
+  - Meter Data
+  - Offers
+  - Market Participants
+  - SOAP
+  - Write Surface
+  properties:
+  - type: Documentation
+    url: https://cdn.misoenergy.org/EDR%20WSDL%20and%20Schemas632992.zip
+  x-coverage:
+    state: gated
+    reason: contract-format-unreadable
+    detail: >-
+      A published WSDL (EdrService.wsdl) and six XSDs exist and were fetched 2026-08-07. Not
+      catalogued as a contract because we cannot read WSDL, not because MISO failed to publish one.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: miso:miso-crow-api
+  name: MISO CROW API (Outage Scheduling)
+  description: >-
+    The outage-scheduling interface, built on the CROW product, documented in a PDF reference
+    plus a MISO-specific addendum and shipped with worked XML request and response examples —
+    submit, cancel and withdraw outage requests, including cancellation over specified periods or
+    an entire outage. Like EDR this is a write surface: it exists so participants can lodge and
+    change outage requests, not merely read them.
+  humanURL: https://cdn.misoenergy.org/CROW%20API%20Documents372592.zip
+  tags:
+  - Energy Markets
+  - Outages
+  - Scheduling
+  - Market Participants
+  - Write Surface
+  properties:
+  - type: Documentation
+    url: https://cdn.misoenergy.org/CROW%20API%20Documents372592.zip
+  x-coverage:
+    state: gated
+    reason: no-machine-readable-spec
+    detail: >-
+      PDF reference documents and XML examples only — no WSDL, no XSD, no OpenAPI in the archive
+      fetched 2026-08-07. The XML examples describe the wire format but are samples, not a contract.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: miso:miso-fuel-and-consumables-api
+  name: MISO Fuel and Consumables Data Request API
+  description: >-
+    Data request API for fuel and consumables information, documented in a 171KB PDF API guide on
+    MISO's CDN and nowhere else.
+  humanURL: https://cdn.misoenergy.org/MISO%20Fuel%20and%20Consumables%20Data%20Request%20API%20Guide626173.pdf
+  tags:
+  - Energy Markets
+  - Fuel
+  - Market Participants
+  properties:
+  - type: Documentation
+    url: https://cdn.misoenergy.org/MISO%20Fuel%20and%20Consumables%20Data%20Request%20API%20Guide626173.pdf
+  x-coverage:
+    state: gated
+    reason: no-machine-readable-spec
+    detail: PDF guide only, fetched 2026-08-07 (HTTP 200, 171,252 bytes). No spec published.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: miso:miso-meter-data-and-settlement-statements-api
+  name: MISO Market Portal Meter Data and Settlement Statements API
+  description: >-
+    Market Portal API for retrieving meter data and settlement statements, documented in a 1MB PDF
+    on MISO's CDN. Sits alongside the File Download API in the settlements area of the estate.
+  humanURL: https://cdn.misoenergy.org/Market%20Portal%20Meter%20Data%20and%20Settlement%20Statements%20API-MS285892.pdf
+  tags:
+  - Energy Markets
+  - Meter Data
+  - Settlements
+  - Market Participants
+  properties:
+  - type: Documentation
+    url: https://cdn.misoenergy.org/Market%20Portal%20Meter%20Data%20and%20Settlement%20Statements%20API-MS285892.pdf
+  x-coverage:
+    state: gated
+    reason: no-machine-readable-spec
+    detail: PDF only, fetched 2026-08-07 (HTTP 200, 1,010,987 bytes). No spec published.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 common:
 - type: AgenticAccess
   url: agentic-access/miso-agentic-access.yml
