@@ -1,0 +1,1822 @@
+openapi: 3.2.0
+info:
+  title: Miso Real Time API
+  version: '1.0'
+  description: 'Operations tagged Real Time across 2 of this provider''s published API definitions: miso-data-exchange-load-generation-interchange-api-openapi.json, miso-data-exchange-pricing-api-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://apim.misoenergy.org/lgi
+- url: https://apim.misoenergy.org/pricing
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Real Time
+paths:
+  /v1/real-time/{date}/binding-constraint:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-real-time-date-binding-constraint
+      summary: Real-Time Binding Constraints
+      description: The total number of binding constraints in the real-time market, in hourly intervals. Available at 7am EST the day after.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Real-Time-BindingConstraintsResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  constraintCount: 0
+                  interval: string
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Real Time
+  /v1/real-time/{date}/demand/actual:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-real-time-date-demand-actual
+      summary: Actual Load
+      description: Actual load (in megawatt-hours) as used in the real-time market, by region or grouped local resource zones (LRZ) in hourly or daily intervals. Available at 2am EST the day after.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: geoResolution
+        in: query
+        required: false
+        description: Geographic resolution of data
+        schema:
+          type: string
+          enum:
+          - region
+          - localResourceZone
+          default: region
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: localResourceZone
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: region
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - NORTH
+          - CENTRAL
+          - SOUTH
+          - MISO
+          - NO_REGION
+      - name: timeResolution
+        in: query
+        required: false
+        description: Time resolution of data
+        schema:
+          type: string
+          enum:
+          - hourly
+          - daily
+          default: hourly
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-LoadResponse-json'
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Real Time
+  /v1/real-time/{date}/demand/forecast:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-real-time-date-demand-forecast
+      summary: Real-Time Cleared Demand
+      description: Demand cleared (in megawatts) in the real-time market, in hourly or daily intervals. Available at 7am EST the day after.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: timeResolution
+        in: query
+        required: false
+        description: Time resolution of data
+        schema:
+          type: string
+          enum:
+          - hourly
+          - daily
+          default: hourly
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-RealTime-DemandResponse-json'
+              example:
+                data:
+                - interval: string
+                  demand: 0
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Real Time
+  /v1/real-time/{date}/demand/load-state-estimator:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-real-time-date-demand-load-state-estimator
+      summary: Real-Time State Estimator Load
+      description: Preliminary actual load (in megawatt-hours) as determined by the state estimator and reported in EIA-930 filings, in hourly or daily intervals. Available at 7am EST the day after. Aggregated by zone groups to preserve market participant confidentiality.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: timeResolution
+        in: query
+        required: false
+        description: Time resolution of data
+        schema:
+          type: string
+          enum:
+          - hourly
+          - daily
+          default: hourly
+      - name: zone
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Demand-EstResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  zone: string
+                  demand: 0
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Real Time
+  /v1/real-time/{date}/generation/cleared/supply:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-real-time-date-generation-cleared-supply
+      summary: Real-Time Cleared Generation
+      description: Generation cleared (in megawatts) in the real-time market, in hourly or 5-minute intervals. Available at 7am EST the day after.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: timeResolution
+        in: query
+        required: false
+        description: Time resolution of data
+        schema:
+          type: string
+          enum:
+          - 5min
+          - hourly
+          default: hourly
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Gen-ClearedResponse-json'
+              example:
+                data:
+                - generation: 0
+                  timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Real Time
+  /v1/real-time/{date}/generation/committed/ecomax:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-real-time-date-generation-committed-ecomax
+      summary: Real-Time Committed Generation, ECOMAX
+      description: The Economic Maximum for all units committed in the real-time market and Forward Reliability Assessment & Commitment (FRAC) process, in hourly intervals. Available at 7am EST the day after.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Committed-GenerationResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  committedForwardEcoMax: 0
+                  committedRealTimeEcoMax: 0
+                  committedEcoMaxDelta: 0
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Real Time
+  /v1/real-time/{date}/generation/fuel-on-the-margin:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-real-time-date-generation-fuel-on-the-margin
+      summary: Real-Time Generation Fuel-on-the-Margin
+      description: Retrieve real-time generation fuel on the margin, by region in 5-minute intervals. Available at 7am EST the day after.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: fuelType
+        in: query
+        required: false
+        description: Filter to specific fuel type (ex. Coal, Gas, Wind, Solar, Hydro, Nuclear, Storage).
+        schema:
+          type: string
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: region
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - NORTH
+          - CENTRAL
+          - SOUTH
+          - MISO
+          - NO_REGION
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-RtGenerationFuelOnTheMarginResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  peak: true
+                  region: NORTH
+                  fuelType: string
+                  unitCount: 0
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Real Time
+  /v1/real-time/{date}/generation/fuel-type:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-real-time-date-generation-fuel-type
+      summary: Real-Time Generation Fuel Type
+      description: Generation fuel mix (in megawatts) as determined by the state estimator for the various fuel types in the MISO footprint, by region in hourly intervals. Available at 7am EST the day after. 'Coal' includes combination coal/gas units; 'Gas' includes combination oil/gas units; 'Storage' includes pumped storage, ESR, and battery units. 'Solar' data is only available from 2022-01-01 onwards.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: region
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - NORTH
+          - CENTRAL
+          - SOUTH
+          - MISO
+          - NO_REGION
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Generation-Fuel-TypeResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  region: NORTH
+                  fuelTypes:
+                    coal: 0
+                    gas: 0
+                    nuclear: 0
+                    water: 0
+                    wind: 0
+                    solar: 0
+                    other: 0
+                    storage: 0
+                  totalMw: 0
+                  interval: string
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Real Time
+  /v1/real-time/{date}/generation/offered/ecomax:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-real-time-date-generation-offered-ecomax
+      summary: Real-Time Offered Generation, ECOMAX
+      description: The Economic Maximum from unit offers available to the real-time market and Forward Reliability Assessment & Commitment (FRAC) process, in hourly intervals. Available at 7am EST the day after.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Offer-GenerationResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  offerForwardEcoMax: 0
+                  offerRealTimeEcoMax: 0
+                  offerEcoMaxDelta: 0
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Real Time
+  /v1/real-time/{date}/interchange/net-actual:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-real-time-date-interchange-net-actual
+      summary: Real-Time Net Actual Interchange
+      description: Net actual interchange (NAI), by adjacent balancing authority (BA) in hourly intervals. Available at 7am EST the day after.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: adjacentBa
+        in: query
+        required: false
+        description: Filter to a specific adjacent Balancing Authority (ex. PJM, TVA, SWPP).
+        schema:
+          type: string
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Net-Actual-InterchangeResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  adjacentBa: string
+                  nai: 0
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Real Time
+  /v1/real-time/{date}/interchange/net-scheduled:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-real-time-date-interchange-net-scheduled
+      summary: Real-Time Net Scheduled Interchange
+      description: Net scheduled interchange (NSI) used in the Forward Reliability Assessment & Commitment (FRAC) process and Unit Dispatch System (UDS) cases, in hourly intervals. Positive values indicate imports. Available at 7am EST the day after.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Real-Time-Net-Scheduled-InterchangeResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  nsiForward: 0
+                  nsiRealTime: 0
+                  nsiDelta: 0
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Real Time
+  /v1/real-time/{date}/outage:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-real-time-date-outage
+      summary: Real-Time Outages
+      description: The approved (planned) outages (in megawatt-hours) used in the real-time market and Forward Reliability Assessment & Commitment (FRAC) process, in hourly intervals. Available at 7am EST the day after.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Real-Time-OutageResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  realTime: 0
+                  forward: 0
+                  delta: 0
+                  interval: string
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Real Time
+  /v1/real-time/{date}/asm-exante:
+    servers:
+    - url: https://apim.misoenergy.org/pricing
+    get:
+      operationId: get-v1-real-time-date-asm-exante
+      summary: Real-Time Ex-Ante MCP
+      description: 'Historical ex-ante market clearing prices (MCP) for the real-time (RT) ancillary services market (ASM), by reserve zone in 5-minute intervals. Available at 7am EST the day after. [On May 6, 2026 Changes Applied including historical dates] 5-minute interval labels corrected. The database stores end-of-interval timestamps. Previously, the API returned interval values misaligned with database storage. Now corrected: ''value'', ''start'', and ''end'' fields correctly represent period START time (and end time in ''end'' field). To update stored data: subtract 5 minutes from all three fields. Before (old stored data): {"value": "2025-12-31T23:55:00", "start": "2025-12-31T23:55:00", "end": "2026-01-01T00:00:00"}. After (corrected): {"value": "2025-12-31T23:50:00", "start": "2025-12-31T23:50:00", "end": "2025-12-31T23:55:00"}. Apply this offset to all stored 5-minute interval records. No re-fetch required.'
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: product
+        in: query
+        required: false
+        description: Filter to a specific product (e.g. "Regulation", "Spin", "Supplemental", "STR", "Ramp-up", "Ramp-down").
+        schema:
+          type: string
+          enum:
+          - Regulation
+          - Spin
+          - Supplemental
+          - STR
+          - Ramp-up
+          - Ramp-down
+      - name: zone
+        in: query
+        required: false
+        description: Filter to a specific Reserve Zone (e.g. "Zone 1", ..., "Zone 8").
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-MCPResponse-json'
+              example:
+                data:
+                - interval: '1'
+                  timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  product: Regulation
+                  zone: Zone 1
+                  mcp: 6.48
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Real Time
+  /v1/real-time/{date}/asm-expost:
+    servers:
+    - url: https://apim.misoenergy.org/pricing
+    get:
+      operationId: get-v1-real-time-date-asm-expost
+      summary: Real-Time Ex-Post MCP
+      description: 'Historical ex-post market clearing prices (MCP) for the real-time (RT) ancillary services market (ASM), by reserve zone in hourly or 5-minute intervals. Available at 7am EST the day after. It takes on average 3-5 days to finalize preliminary LMPs. [On May 6, 2026 Changes Applied including historical dates] Interval labels corrected. Database stores end-of-interval timestamps. Previously, API returned 5-minute values misaligned with storage. Now corrected: ''value'', ''start'', ''end'' fields represent period START time. Hourly unchanged. To update stored 5-minute data: subtract 5 minutes from all three fields. Before (old): {"value": "2025-12-31T23:55:00", "start": "2025-12-31T23:55:00", "end": "2026-01-01T00:00:00"}. After (corrected): {"value": "2025-12-31T23:50:00", "start": "2025-12-31T23:50:00", "end": "2025-12-31T23:55:00"}. Apply offset to all stored 5-minute records. No re-fetch required.'
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: preliminaryFinal
+        in: query
+        required: false
+        description: When set, only return data if it's flagged as the given state.
+        schema:
+          type: string
+          enum:
+          - Preliminary
+          - Final
+      - name: product
+        in: query
+        required: false
+        description: Filter to a specific product (ex. "Regulation", "Spin", etc).
+        schema:
+          type: string
+          enum:
+          - Regulation
+          - Spin
+          - Supplemental
+          - STR
+          - Ramp-up
+          - Ramp-down
+      - name: timeResolution
+        in: query
+        required: false
+        description: Time resolution of data
+        schema:
+          type: string
+          enum:
+          - 5min
+          - hourly
+          default: hourly
+      - name: zone
+        in: query
+        required: false
+        description: Filter to a specific Reserve Zone (ex. "Zone 1").
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-RTMCPResponse-json'
+              example:
+                data:
+                - preliminaryFinal: string
+                  product: Regulation
+                  zone: Zone 1
+                  mcp: 6.48
+                  timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Real Time
+  /v1/real-time/{date}/asm-summary:
+    servers:
+    - url: https://apim.misoenergy.org/pricing
+    get:
+      operationId: get-v1-real-time-date-asm-summary
+      summary: Real-Time MCP Summary
+      description: Historical ex-post market clearing prices (MCP) for the real-time (RT) ancillary services market (ASM), at the MISO level in hourly intervals. Available at 7am EST the day after.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: product
+        in: query
+        required: false
+        description: Filter to a specific product (ex. "Regulation", "Spin", etc).
+        schema:
+          type: string
+          enum:
+          - Regulation
+          - Spin
+          - Supplemental
+          - SER
+          - Mileage
+      - name: timeResolution
+        in: query
+        required: false
+        description: Time resolution of data
+        schema:
+          type: string
+          enum:
+          - hourly
+          default: hourly
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-RTMCPResponse-json'
+              example:
+                data:
+                - preliminaryFinal: string
+                  product: Regulation
+                  zone: Zone 1
+                  mcp: 6.48
+                  timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Real Time
+  /v1/real-time/{date}/lmp-exante:
+    servers:
+    - url: https://apim.misoenergy.org/pricing
+    get:
+      operationId: get-v1-real-time-date-lmp-exante
+      summary: Real-Time Ex-Ante LMP
+      description: 'Historical ex-ante locational marginal prices (LMP) for the real-time (RT) energy market, by commercial pricing node (CPNode) in 5-minute intervals. Available at 7am EST the day after. [On May 6, 2026 Changes Applied including historical dates] 5-minute interval labels corrected. The database stores end-of-interval timestamps. Previously, the API returned interval values misaligned with database storage. Now corrected: ''value'', ''start'', and ''end'' fields correctly represent period START time (and end time in ''end'' field). To update stored data: subtract 5 minutes from all three fields. Before (old stored data): {"value": "2025-12-31T23:55:00", "start": "2025-12-31T23:55:00", "end": "2026-01-01T00:00:00"}. After (corrected): {"value": "2025-12-31T23:50:00", "start": "2025-12-31T23:50:00", "end": "2025-12-31T23:55:00"}. Apply this offset to all stored 5-minute interval records. No re-fetch required.'
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: node
+        in: query
+        required: false
+        description: Filter to a specific Commercial Pricing Node.
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-LMPResponse-json'
+              example:
+                data:
+                - interval: '1'
+                  timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  node: ALTW.WELLS1
+                  lmp: 21.6
+                  mcc: 0.02
+                  mec: 20.94
+                  mlc: 0.64
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Real Time
+  /v1/real-time/{date}/lmp-expost:
+    servers:
+    - url: https://apim.misoenergy.org/pricing
+    get:
+      operationId: get-v1-real-time-date-lmp-expost
+      summary: Real-Time Ex-Post LMP
+      description: 'Historical ex-post locational marginal prices (LMP) for the real-time (RT) energy market, by commercial pricing node (CPNode) in hourly or 5-minute intervals. Available at 7am EST the day after. It takes on average 3-5 days to finalize preliminary LMPs. [On May 6, 2026 Changes Applied including historical dates - 5-MINUTE INTERVALS ONLY] Interval labels corrected. Database stores end-of-interval timestamps. Previously, API returned 5-minute values misaligned with storage. Now corrected: ''value'', ''start'', ''end'' fields represent period START time. Hourly unchanged. To update stored 5-minute data: subtract 5 minutes from all three fields. Before (old): {"value": "2025-12-31T23:55:00", "start": "2025-12-31T23:55:00", "end": "2026-01-01T00:00:00"}. After (corrected): {"value": "2025-12-31T23:50:00", "start": "2025-12-31T23:50:00", "end": "2025-12-31T23:55:00"}. Apply offset to all stored 5-minute records. No re-fetch required.'
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: node
+        in: query
+        required: false
+        description: Filter to a specific Commercial Pricing Node.
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: preliminaryFinal
+        in: query
+        required: false
+        description: When set, only return data if it's flagged as the given state.
+        schema:
+          type: string
+          enum:
+          - Preliminary
+          - Final
+      - name: timeResolution
+        in: query
+        required: false
+        description: Time resolution of data
+        schema:
+          type: string
+          enum:
+          - 5min
+          - hourly
+          default: hourly
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-RTLMPResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  preliminaryFinal: string
+                  node: ALTW.WELLS1
+                  lmp: 21.6
+                  mcc: 0.02
+                  mec: 20.94
+                  mlc: 0.64
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Real Time
+components:
+  schemas:
+    NetActualInterchange:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        adjacentBa:
+          type: string
+        nai:
+          type: number
+    RealTimeGenerationFuelMargin:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        peak:
+          type: boolean
+        region:
+          $ref: '#/components/schemas/Region'
+        fuelType:
+          type: string
+        unitCount:
+          type: integer
+          format: int32
+    TimeInterval:
+      type: object
+      properties:
+        resolution:
+          enum:
+          - 5min
+          - hourly
+          - daily
+          type: string
+          example: daily
+        start:
+          pattern: ([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2}).([0-9]{3})
+          type: string
+          description: In Eastern Standard Time (UTC−05:00).
+          example: '2023-06-28 00:00:00.000'
+        end:
+          pattern: ([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2}).([0-9]{3})
+          type: string
+          description: In Eastern Standard Time (UTC−05:00).
+          example: '2023-06-29 00:00:00.000'
+        value:
+          type: string
+          description: 'Short hand value for time interval. Can be timestamp for 5min resolution (ex: 2023-06-28 00:00:00.000), hour ending value for hourly resolution, 1-24 (ex: 21), or date string for daily (ex: 2023-06-28). In Eastern Standard Time (UTC−05:00).'
+          example: '2023-06-29'
+    PreliminaryFinalEnum:
+      enum:
+      - Preliminary
+      - Final
+      type: string
+    200-OK-Demand-EstResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DemandEst'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-RealTime-DemandResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeDemand'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    RealTimeOutage:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        realTime:
+          type: number
+          description: The approved (planned) outages (in megawatts) used in the real-time market.
+        forward:
+          type: number
+          description: The approved (planned) outages (in megawatts) used in the Forward Reliability Assessment & Commitment (FRAC) process.
+        delta:
+          type: number
+          description: The difference between the forward and real-time values.
+        interval:
+          type: string
+    GenerationFuelType:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          $ref: '#/components/schemas/Region'
+        fuelTypes:
+          $ref: '#/components/schemas/FuelType'
+        totalMw:
+          type: number
+        interval:
+          type: string
+    GenerationCleared:
+      type: object
+      properties:
+        generation:
+          type: number
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+    200-OK-Gen-ClearedResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerationCleared'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    CommittedGeneration:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        committedForwardEcoMax:
+          type: number
+          description: The economic maximum (in megawatts) for all units committed in the Forward Reliability Assessment & Commitment (FRAC) process.
+        committedRealTimeEcoMax:
+          type: number
+          description: The economic maximum (in megawatts) for all units committed in the real-time market, based on the peak case within the hour.
+        committedEcoMaxDelta:
+          type: number
+          description: The difference between the forward and real-time values.
+    200-OK-LMPResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationalMarginalPrice'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-RTMCPResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeExPostMarketClearingPrice'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    RealTimeNetScheduledInterchange:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        nsiForward:
+          type: number
+          description: The net scheduled interchange (in megawatts) as used in the Forward Reliability Assessment Commitment (FRAC) process.
+        nsiRealTime:
+          type: number
+          description: The net scheduled interchange (in megawatts) as used in the real-time market.
+        nsiDelta:
+          type: number
+          description: The difference between the forward and real-time values.
+    PageInfo:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+        lastPage:
+          type: boolean
+    LocationalMarginalPrice:
+      type: object
+      properties:
+        interval:
+          type: string
+          example: '1'
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        node:
+          type: string
+          description: Commercial Pricing Node
+          example: ALTW.WELLS1
+        lmp:
+          type: number
+          description: Locational Marginal Price
+          example: 21.6
+        mcc:
+          type: number
+          description: Marginal Congestion Component
+          example: 0.02
+        mec:
+          type: number
+          description: Marginal Energy Component
+          example: 20.94
+        mlc:
+          type: number
+          description: Marginal Losses Component
+          example: 0.64
+    DemandEst:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        zone:
+          type: string
+        demand:
+          type: number
+    FuelType:
+      type: object
+      properties:
+        coal:
+          type: number
+        gas:
+          type: number
+        nuclear:
+          type: number
+        water:
+          type: number
+        wind:
+          type: number
+        solar:
+          type: number
+        other:
+          type: number
+        storage:
+          type: number
+    200-OK-Real-Time-OutageResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeOutage'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    Load:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          type: string
+          description: The applicable region. When geoResolution=region.
+          example: North
+        localResourceZone:
+          type: string
+          description: The applicable localResourceZone. When geoResolution=localResourceZone.
+          example: LRZ3_5
+        load:
+          type: number
+          example: 1349.2
+    200-OK-Net-Actual-InterchangeResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetActualInterchange'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-RTLMPResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeExPostLocationalMarginalPrice'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    Region:
+      enum:
+      - NORTH
+      - CENTRAL
+      - SOUTH
+      - MISO
+      - NO_REGION
+      type: string
+    200-OK-LoadResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Load'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    MarketClearingPrice:
+      type: object
+      properties:
+        interval:
+          type: string
+          example: '1'
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        product:
+          enum:
+          - Regulation
+          - Spin
+          - Supplemental
+          - STR
+          - Ramp-up
+          - Ramp-down
+          type: string
+          description: Ancillary Market product
+        zone:
+          type: string
+          description: Ancillary Services Reserve Zone
+          example: Zone 1
+        mcp:
+          type: number
+          description: Market Clearing Price
+          example: 6.48
+    RealTimeExPostLocationalMarginalPrice:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        preliminaryFinal:
+          type: string
+          allOf:
+          - $ref: '#/components/schemas/PreliminaryFinalEnum'
+          description: Whether the price is preliminary or final
+        node:
+          type: string
+          description: Commercial Pricing Node
+          example: ALTW.WELLS1
+        lmp:
+          type: number
+          description: Locational Marginal Price
+          example: 21.6
+        mcc:
+          type: number
+          description: Marginal Congestion Component
+          example: 0.02
+        mec:
+          type: number
+          description: Marginal Energy Component
+          example: 20.94
+        mlc:
+          type: number
+          description: Marginal Losses Component
+          example: 0.64
+    RealTimeExPostMarketClearingPrice:
+      type: object
+      properties:
+        preliminaryFinal:
+          type: string
+          allOf:
+          - $ref: '#/components/schemas/PreliminaryFinalEnum'
+          description: Whether the price is preliminary or final.
+        product:
+          enum:
+          - Regulation
+          - Spin
+          - Supplemental
+          - STR
+          - Ramp-up
+          - Ramp-down
+          type: string
+          description: Ancillary Market product
+        zone:
+          type: string
+          description: Ancillary Services Reserve Zone
+          example: Zone 1
+        mcp:
+          type: number
+          description: Market Clearing Price
+          example: 6.48
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+    200-OK-Generation-Fuel-TypeResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerationFuelType'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    OfferGeneration:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        offerForwardEcoMax:
+          type: number
+          description: The economic maximum (in megawatts) from unit offers available to the Forward Reliability Assessment & Commitment (FRAC) process.
+        offerRealTimeEcoMax:
+          type: number
+          description: The economic maximum (in megawatts) from unit offers available to the real-time market.
+        offerEcoMaxDelta:
+          type: number
+          description: The difference between the forward and real-time values.
+    200-OK-MCPResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/MarketClearingPrice'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-Real-Time-BindingConstraintsResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeBindingConstraints'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    RealTimeBindingConstraints:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        constraintCount:
+          type: number
+        interval:
+          type: string
+    RealTimeDemand:
+      type: object
+      properties:
+        interval:
+          type: string
+        demand:
+          type: number
+    200-OK-Committed-GenerationResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommittedGeneration'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-Offer-GenerationResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferGeneration'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-Real-Time-Net-Scheduled-InterchangeResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeNetScheduledInterchange'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-RtGenerationFuelOnTheMarginResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeGenerationFuelMargin'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+x-refined-from:
+- miso-data-exchange-load-generation-interchange-api-openapi.json
+- miso-data-exchange-pricing-api-openapi.json

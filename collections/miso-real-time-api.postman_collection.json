@@ -1,0 +1,5412 @@
+{
+  "item": [
+    {
+      "id": "fc9abbe9-4726-493f-bcf8-d477d40db939",
+      "name": "Real Time",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3db51c4c-e094-4743-837d-638553534749",
+          "name": "Real-Time Binding Constraints",
+          "request": {
+            "name": "Real-Time Binding Constraints",
+            "description": {
+              "content": "The total number of binding constraints in the real-time market, in hourly intervals. Available at 7am EST the day after.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "real-time",
+                ":date",
+                "binding-constraint"
+              ],
+              "host": [
+                "{{v1-real-time-date-binding-constraint-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b677d3cc-60c7-4071-8471-177b499f722a",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "binding-constraint"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-binding-constraint-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      },\n      \"constraintCount\": 0,\n      \"interval\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f726c77-9a6c-4925-9e2a-2ed3d5d30012",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "binding-constraint"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-binding-constraint-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05369c36-622b-4236-9b56-a16afe2bec5d",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "binding-constraint"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-binding-constraint-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2aadfaf7-b110-4288-9c82-656676952c9b",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "binding-constraint"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-binding-constraint-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3a158b9-d9a5-4948-88b1-ceeee7ea2785",
+          "name": "Actual Load",
+          "request": {
+            "name": "Actual Load",
+            "description": {
+              "content": "Actual load (in megawatt-hours) as used in the real-time market, by region or grouped local resource zones (LRZ) in hourly or daily intervals. Available at 2am EST the day after.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "real-time",
+                ":date",
+                "demand",
+                "actual"
+              ],
+              "host": [
+                "{{v1-real-time-date-demand-actual-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "geoResolution",
+                  "value": "region",
+                  "description": "Geographic resolution of data"
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "localResourceZone",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "timeResolution",
+                  "value": "hourly",
+                  "description": "Time resolution of data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e3aac24b-66e5-4081-a12e-668bd1eee629",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "demand",
+                    "actual"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-demand-actual-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "geoResolution",
+                      "value": "region"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "localResourceZone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      },\n      \"region\": \"North\",\n      \"localResourceZone\": \"LRZ3_5\",\n      \"load\": 1349.2\n    },\n    {\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      },\n      \"region\": \"North\",\n      \"localResourceZone\": \"LRZ3_5\",\n      \"load\": 1349.2\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 3027,\n    \"pageSize\": 7815,\n    \"totalElements\": 5070,\n    \"totalPages\": 577,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e443a581-de7c-44fc-8125-2a574b9024fd",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "demand",
+                    "actual"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-demand-actual-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "geoResolution",
+                      "value": "region"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "localResourceZone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b174406b-924a-40f7-a2ac-a1a0c32b3223",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "demand",
+                    "actual"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-demand-actual-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "geoResolution",
+                      "value": "region"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "localResourceZone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ffeba354-2844-445d-b5e5-456b08e27883",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "demand",
+                    "actual"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-demand-actual-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "geoResolution",
+                      "value": "region"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "localResourceZone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97e1df8a-d743-4f1e-8bb2-9c5e51871b29",
+          "name": "Real-Time Cleared Demand",
+          "request": {
+            "name": "Real-Time Cleared Demand",
+            "description": {
+              "content": "Demand cleared (in megawatts) in the real-time market, in hourly or daily intervals. Available at 7am EST the day after.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "real-time",
+                ":date",
+                "demand",
+                "forecast"
+              ],
+              "host": [
+                "{{v1-real-time-date-demand-forecast-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "timeResolution",
+                  "value": "hourly",
+                  "description": "Time resolution of data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e8014878-5384-4750-b75f-7d58db010cb6",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "demand",
+                    "forecast"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-demand-forecast-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"interval\": \"string\",\n      \"demand\": 0\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb1de183-9835-4d01-965d-de1043250b08",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "demand",
+                    "forecast"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-demand-forecast-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61807fdc-b4f9-4057-acd3-ff6d32ff1421",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "demand",
+                    "forecast"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-demand-forecast-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38733ace-acc2-4fbc-9211-3b73ed689838",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "demand",
+                    "forecast"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-demand-forecast-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "810b3ccf-7c74-46ba-8154-b01da6a72f1b",
+          "name": "Real-Time State Estimator Load",
+          "request": {
+            "name": "Real-Time State Estimator Load",
+            "description": {
+              "content": "Preliminary actual load (in megawatt-hours) as determined by the state estimator and reported in EIA-930 filings, in hourly or daily intervals. Available at 7am EST the day after. Aggregated by zone groups to preserve market participant confidentiality.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "real-time",
+                ":date",
+                "demand",
+                "load-state-estimator"
+              ],
+              "host": [
+                "{{v1-real-time-date-demand-load-state-estimator-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "timeResolution",
+                  "value": "hourly",
+                  "description": "Time resolution of data"
+                },
+                {
+                  "disabled": false,
+                  "key": "zone",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e2931073-fdcf-44a6-b0d4-069180561f54",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "demand",
+                    "load-state-estimator"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-demand-load-state-estimator-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    },
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      },\n      \"zone\": \"string\",\n      \"demand\": 0\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f7596d6-31e5-4e45-bfe6-c881ba6cd7a7",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "demand",
+                    "load-state-estimator"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-demand-load-state-estimator-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    },
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1fb74f2-0110-45e4-92c4-e77cd8dd42d3",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "demand",
+                    "load-state-estimator"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-demand-load-state-estimator-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    },
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fe4ba6e-7b8c-4b3e-bbb4-b948b033b67d",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "demand",
+                    "load-state-estimator"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-demand-load-state-estimator-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    },
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a7ccae61-8cbf-4af3-a739-ee2fcb285cd8",
+          "name": "Real-Time Cleared Generation",
+          "request": {
+            "name": "Real-Time Cleared Generation",
+            "description": {
+              "content": "Generation cleared (in megawatts) in the real-time market, in hourly or 5-minute intervals. Available at 7am EST the day after.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "real-time",
+                ":date",
+                "generation",
+                "cleared",
+                "supply"
+              ],
+              "host": [
+                "{{v1-real-time-date-generation-cleared-supply-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "timeResolution",
+                  "value": "hourly",
+                  "description": "Time resolution of data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6e1f3f5d-e225-41de-b23b-85279b51e38a",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "cleared",
+                    "supply"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-cleared-supply-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"generation\": 0,\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d8ff6c5-0105-4c4e-ab7f-7d1a97110965",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "cleared",
+                    "supply"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-cleared-supply-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed64bfac-d9d3-430f-833f-d74cbd067003",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "cleared",
+                    "supply"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-cleared-supply-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "678d4ad0-c8c5-4cbc-ae0a-c73d299c98e8",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "cleared",
+                    "supply"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-cleared-supply-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ddece630-7e53-4bde-b17b-ff514a187f1a",
+          "name": "Real-Time Committed Generation, ECOMAX",
+          "request": {
+            "name": "Real-Time Committed Generation, ECOMAX",
+            "description": {
+              "content": "The Economic Maximum for all units committed in the real-time market and Forward Reliability Assessment & Commitment (FRAC) process, in hourly intervals. Available at 7am EST the day after.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "real-time",
+                ":date",
+                "generation",
+                "committed",
+                "ecomax"
+              ],
+              "host": [
+                "{{v1-real-time-date-generation-committed-ecomax-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d26db70b-6b3f-48d9-b722-a50a0785f4aa",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "committed",
+                    "ecomax"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-committed-ecomax-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      },\n      \"committedForwardEcoMax\": 0,\n      \"committedRealTimeEcoMax\": 0,\n      \"committedEcoMaxDelta\": 0\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00e61268-3151-4f1a-8fd2-e24015c03eb1",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "committed",
+                    "ecomax"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-committed-ecomax-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15af7e59-602c-4035-94de-6c7a34dfcf1b",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "committed",
+                    "ecomax"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-committed-ecomax-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df72c545-b9cf-41f4-83a6-672585c9d2fa",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "committed",
+                    "ecomax"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-committed-ecomax-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82ab905d-a497-47f1-a271-d27805107356",
+          "name": "Real-Time Generation Fuel-on-the-Margin",
+          "request": {
+            "name": "Real-Time Generation Fuel-on-the-Margin",
+            "description": {
+              "content": "Retrieve real-time generation fuel on the margin, by region in 5-minute intervals. Available at 7am EST the day after.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "real-time",
+                ":date",
+                "generation",
+                "fuel-on-the-margin"
+              ],
+              "host": [
+                "{{v1-real-time-date-generation-fuel-on-the-margin-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fuelType",
+                  "value": "<string>",
+                  "description": "Filter to specific fuel type (ex. Coal, Gas, Wind, Solar, Hydro, Nuclear, Storage)."
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "24170fb7-74a2-432f-8e33-3d6f8c14d779",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "fuel-on-the-margin"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-fuel-on-the-margin-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fuelType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      },\n      \"peak\": true,\n      \"region\": \"NORTH\",\n      \"fuelType\": \"string\",\n      \"unitCount\": 0\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ebd607d-e8f5-4ea6-8dbb-c977b3739752",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "fuel-on-the-margin"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-fuel-on-the-margin-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fuelType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5af57543-e1ef-4f5c-9e72-1cca6ba25833",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "fuel-on-the-margin"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-fuel-on-the-margin-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fuelType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a913b883-e979-4c5c-8cd1-0dea63a53e78",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "fuel-on-the-margin"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-fuel-on-the-margin-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fuelType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb27c5ea-c081-4631-a7af-1ef38b186c01",
+          "name": "Real-Time Generation Fuel Type",
+          "request": {
+            "name": "Real-Time Generation Fuel Type",
+            "description": {
+              "content": "Generation fuel mix (in megawatts) as determined by the state estimator for the various fuel types in the MISO footprint, by region in hourly intervals. Available at 7am EST the day after. 'Coal' includes combination coal/gas units; 'Gas' includes combination oil/gas units; 'Storage' includes pumped storage, ESR, and battery units. 'Solar' data is only available from 2022-01-01 onwards.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "real-time",
+                ":date",
+                "generation",
+                "fuel-type"
+              ],
+              "host": [
+                "{{v1-real-time-date-generation-fuel-type-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87b740e3-b804-4b14-8a2a-bdb4aadd4a47",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "fuel-type"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-fuel-type-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      },\n      \"region\": \"NORTH\",\n      \"fuelTypes\": {\n        \"coal\": 0,\n        \"gas\": 0,\n        \"nuclear\": 0,\n        \"water\": 0,\n        \"wind\": 0,\n        \"solar\": 0,\n        \"other\": 0,\n        \"storage\": 0\n      },\n      \"totalMw\": 0,\n      \"interval\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbaf6ced-9fa6-47b9-a91b-4037bb9a0801",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "fuel-type"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-fuel-type-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1aebbf2-7e54-407c-823e-8cf9b3e00ec7",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "fuel-type"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-fuel-type-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64bb7bf3-422a-4caf-8c53-f59b10d1c14c",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "fuel-type"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-fuel-type-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "729ec226-510f-4fc7-ab74-7fc1c47f3ee2",
+          "name": "Real-Time Offered Generation, ECOMAX",
+          "request": {
+            "name": "Real-Time Offered Generation, ECOMAX",
+            "description": {
+              "content": "The Economic Maximum from unit offers available to the real-time market and Forward Reliability Assessment & Commitment (FRAC) process, in hourly intervals. Available at 7am EST the day after.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "real-time",
+                ":date",
+                "generation",
+                "offered",
+                "ecomax"
+              ],
+              "host": [
+                "{{v1-real-time-date-generation-offered-ecomax-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "168a54b2-40ac-4a67-b7a5-29ee26f63a8f",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "offered",
+                    "ecomax"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-offered-ecomax-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      },\n      \"offerForwardEcoMax\": 0,\n      \"offerRealTimeEcoMax\": 0,\n      \"offerEcoMaxDelta\": 0\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16409a5d-f0e1-4c1c-9ecb-fe59c0ec2c61",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "offered",
+                    "ecomax"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-offered-ecomax-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f21579c-f800-4ab3-8adb-85a399a714a1",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "offered",
+                    "ecomax"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-offered-ecomax-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bf65c2c-f526-43c8-a194-3e2cbde48e6f",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "generation",
+                    "offered",
+                    "ecomax"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-generation-offered-ecomax-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5700a567-6997-4637-8057-a6a67207f719",
+          "name": "Real-Time Net Actual Interchange",
+          "request": {
+            "name": "Real-Time Net Actual Interchange",
+            "description": {
+              "content": "Net actual interchange (NAI), by adjacent balancing authority (BA) in hourly intervals. Available at 7am EST the day after.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "real-time",
+                ":date",
+                "interchange",
+                "net-actual"
+              ],
+              "host": [
+                "{{v1-real-time-date-interchange-net-actual-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "adjacentBa",
+                  "value": "<string>",
+                  "description": "Filter to a specific adjacent Balancing Authority (ex. PJM, TVA, SWPP)."
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "166ba666-91b4-4fe5-85d4-350c6a242540",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "interchange",
+                    "net-actual"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-interchange-net-actual-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "adjacentBa",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      },\n      \"adjacentBa\": \"string\",\n      \"nai\": 0\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13d389b0-39dd-447c-88b8-5176a0087ce1",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "interchange",
+                    "net-actual"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-interchange-net-actual-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "adjacentBa",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb372961-f5aa-4db4-9e89-ffa477841d10",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "interchange",
+                    "net-actual"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-interchange-net-actual-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "adjacentBa",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e84c2e6c-4377-4a22-bfb1-938cfbba34ec",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "interchange",
+                    "net-actual"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-interchange-net-actual-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "adjacentBa",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df68421e-69aa-4019-9adf-81893fe3bd13",
+          "name": "Real-Time Net Scheduled Interchange",
+          "request": {
+            "name": "Real-Time Net Scheduled Interchange",
+            "description": {
+              "content": "Net scheduled interchange (NSI) used in the Forward Reliability Assessment & Commitment (FRAC) process and Unit Dispatch System (UDS) cases, in hourly intervals. Positive values indicate imports. Available at 7am EST the day after.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "real-time",
+                ":date",
+                "interchange",
+                "net-scheduled"
+              ],
+              "host": [
+                "{{v1-real-time-date-interchange-net-scheduled-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8648d773-8df5-4c0e-adc5-3b9df06d8ee5",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "interchange",
+                    "net-scheduled"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-interchange-net-scheduled-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      },\n      \"nsiForward\": 0,\n      \"nsiRealTime\": 0,\n      \"nsiDelta\": 0\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf25b2e9-5f7b-4af9-be36-4d1df2feec2b",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "interchange",
+                    "net-scheduled"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-interchange-net-scheduled-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de1151f0-de62-45f3-81ae-e75927168913",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "interchange",
+                    "net-scheduled"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-interchange-net-scheduled-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "814067ba-131b-42f4-955a-c75c5591ab7a",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "interchange",
+                    "net-scheduled"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-interchange-net-scheduled-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a023407-8907-4956-90d0-46bf6dc63c47",
+          "name": "Real-Time Outages",
+          "request": {
+            "name": "Real-Time Outages",
+            "description": {
+              "content": "The approved (planned) outages (in megawatt-hours) used in the real-time market and Forward Reliability Assessment & Commitment (FRAC) process, in hourly intervals. Available at 7am EST the day after.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "real-time",
+                ":date",
+                "outage"
+              ],
+              "host": [
+                "{{v1-real-time-date-outage-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74e76378-3e47-4625-829d-96c95f29f77d",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "outage"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-outage-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      },\n      \"realTime\": 0,\n      \"forward\": 0,\n      \"delta\": 0,\n      \"interval\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e4a663f3-0d9b-42b1-a382-f66e47035e24",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "outage"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-outage-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fba1e730-5ac7-4485-87f2-c4f6c708200a",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "outage"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-outage-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8725d71a-a0a9-45b9-b81c-6a9c380f438b",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "outage"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-outage-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a11b1ab-a232-4f0d-b8fc-4447d35a063a",
+          "name": "Real-Time Ex-Ante MCP",
+          "request": {
+            "name": "Real-Time Ex-Ante MCP",
+            "description": {
+              "content": "Historical ex-ante market clearing prices (MCP) for the real-time (RT) ancillary services market (ASM), by reserve zone in 5-minute intervals. Available at 7am EST the day after. [On May 6, 2026 Changes Applied including historical dates] 5-minute interval labels corrected. The database stores end-of-interval timestamps. Previously, the API returned interval values misaligned with database storage. Now corrected: 'value', 'start', and 'end' fields correctly represent period START time (and end time in 'end' field). To update stored data: subtract 5 minutes from all three fields. Before (old stored data): {\"value\": \"2025-12-31T23:55:00\", \"start\": \"2025-12-31T23:55:00\", \"end\": \"2026-01-01T00:00:00\"}. After (corrected): {\"value\": \"2025-12-31T23:50:00\", \"start\": \"2025-12-31T23:50:00\", \"end\": \"2025-12-31T23:55:00\"}. Apply this offset to all stored 5-minute interval records. No re-fetch required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "real-time",
+                ":date",
+                "asm-exante"
+              ],
+              "host": [
+                "{{v1-real-time-date-asm-exante-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "product",
+                  "value": "<string>",
+                  "description": "Filter to a specific product (e.g. \"Regulation\", \"Spin\", \"Supplemental\", \"STR\", \"Ramp-up\", \"Ramp-down\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "zone",
+                  "value": "<string>",
+                  "description": "Filter to a specific Reserve Zone (e.g. \"Zone 1\", ..., \"Zone 8\")."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69f8fb3d-a6ae-4991-b280-98950aa31572",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "asm-exante"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-asm-exante-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"interval\": \"1\",\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      },\n      \"product\": \"Regulation\",\n      \"zone\": \"Zone 1\",\n      \"mcp\": 6.48\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d700d21-fec2-44bf-bae0-44239bc813e6",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "asm-exante"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-asm-exante-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d97dc4d5-6794-4d5a-a216-2d146659269c",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "asm-exante"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-asm-exante-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7946c25d-733c-403c-ac3c-81fdcdf35e41",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "asm-exante"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-asm-exante-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "33be4189-c6f4-4d33-85c9-4d8ff61cfce7",
+          "name": "Real-Time Ex-Post MCP",
+          "request": {
+            "name": "Real-Time Ex-Post MCP",
+            "description": {
+              "content": "Historical ex-post market clearing prices (MCP) for the real-time (RT) ancillary services market (ASM), by reserve zone in hourly or 5-minute intervals. Available at 7am EST the day after. It takes on average 3-5 days to finalize preliminary LMPs. [On May 6, 2026 Changes Applied including historical dates] Interval labels corrected. Database stores end-of-interval timestamps. Previously, API returned 5-minute values misaligned with storage. Now corrected: 'value', 'start', 'end' fields represent period START time. Hourly unchanged. To update stored 5-minute data: subtract 5 minutes from all three fields. Before (old): {\"value\": \"2025-12-31T23:55:00\", \"start\": \"2025-12-31T23:55:00\", \"end\": \"2026-01-01T00:00:00\"}. After (corrected): {\"value\": \"2025-12-31T23:50:00\", \"start\": \"2025-12-31T23:50:00\", \"end\": \"2025-12-31T23:55:00\"}. Apply offset to all stored 5-minute records. No re-fetch required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "real-time",
+                ":date",
+                "asm-expost"
+              ],
+              "host": [
+                "{{v1-real-time-date-asm-expost-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "preliminaryFinal",
+                  "value": "<string>",
+                  "description": "When set, only return data if it's flagged as the given state."
+                },
+                {
+                  "disabled": false,
+                  "key": "product",
+                  "value": "<string>",
+                  "description": "Filter to a specific product (ex. \"Regulation\", \"Spin\", etc)."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeResolution",
+                  "value": "hourly",
+                  "description": "Time resolution of data"
+                },
+                {
+                  "disabled": false,
+                  "key": "zone",
+                  "value": "<string>",
+                  "description": "Filter to a specific Reserve Zone (ex. \"Zone 1\")."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af2b08db-22b9-4d80-9d79-162136ea6dee",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "asm-expost"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-asm-expost-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "preliminaryFinal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    },
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"preliminaryFinal\": \"string\",\n      \"product\": \"Regulation\",\n      \"zone\": \"Zone 1\",\n      \"mcp\": 6.48,\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c246ba5-1730-413e-b46e-09f35c2140b9",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "asm-expost"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-asm-expost-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "preliminaryFinal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    },
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c325414-2fb6-4720-b4c6-d7e176a46a82",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "asm-expost"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-asm-expost-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "preliminaryFinal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    },
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "528165b3-fe8e-419e-8f3f-c7b6a630d6ce",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "asm-expost"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-asm-expost-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "preliminaryFinal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    },
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0655cd64-5165-49d7-810c-5247cf771d17",
+          "name": "Real-Time MCP Summary",
+          "request": {
+            "name": "Real-Time MCP Summary",
+            "description": {
+              "content": "Historical ex-post market clearing prices (MCP) for the real-time (RT) ancillary services market (ASM), at the MISO level in hourly intervals. Available at 7am EST the day after.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "real-time",
+                ":date",
+                "asm-summary"
+              ],
+              "host": [
+                "{{v1-real-time-date-asm-summary-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "product",
+                  "value": "<string>",
+                  "description": "Filter to a specific product (ex. \"Regulation\", \"Spin\", etc)."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeResolution",
+                  "value": "hourly",
+                  "description": "Time resolution of data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bac95102-ab40-4dad-88e0-70cf5b405ad9",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "asm-summary"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-asm-summary-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"preliminaryFinal\": \"string\",\n      \"product\": \"Regulation\",\n      \"zone\": \"Zone 1\",\n      \"mcp\": 6.48,\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      }\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08c5db38-e889-4899-a533-7cedf50b7832",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "asm-summary"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-asm-summary-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dcc45516-e628-42cd-972b-286d6eaac15d",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "asm-summary"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-asm-summary-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d916455-1928-4c52-8814-1d6b80ea12b6",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "asm-summary"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-asm-summary-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "product",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4bf6a89f-2380-4bf4-8b9b-87e836eeab87",
+          "name": "Real-Time Ex-Ante LMP",
+          "request": {
+            "name": "Real-Time Ex-Ante LMP",
+            "description": {
+              "content": "Historical ex-ante locational marginal prices (LMP) for the real-time (RT) energy market, by commercial pricing node (CPNode) in 5-minute intervals. Available at 7am EST the day after. [On May 6, 2026 Changes Applied including historical dates] 5-minute interval labels corrected. The database stores end-of-interval timestamps. Previously, the API returned interval values misaligned with database storage. Now corrected: 'value', 'start', and 'end' fields correctly represent period START time (and end time in 'end' field). To update stored data: subtract 5 minutes from all three fields. Before (old stored data): {\"value\": \"2025-12-31T23:55:00\", \"start\": \"2025-12-31T23:55:00\", \"end\": \"2026-01-01T00:00:00\"}. After (corrected): {\"value\": \"2025-12-31T23:50:00\", \"start\": \"2025-12-31T23:50:00\", \"end\": \"2025-12-31T23:55:00\"}. Apply this offset to all stored 5-minute interval records. No re-fetch required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "real-time",
+                ":date",
+                "lmp-exante"
+              ],
+              "host": [
+                "{{v1-real-time-date-lmp-exante-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "node",
+                  "value": "<string>",
+                  "description": "Filter to a specific Commercial Pricing Node."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2afc0ca6-3a62-40db-98c3-96fcb002ef62",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "lmp-exante"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-lmp-exante-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "node",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"interval\": \"1\",\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      },\n      \"node\": \"ALTW.WELLS1\",\n      \"lmp\": 21.6,\n      \"mcc\": 0.02,\n      \"mec\": 20.94,\n      \"mlc\": 0.64\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5563c0a-7d16-4950-93b7-d53e87a59303",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "lmp-exante"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-lmp-exante-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "node",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9df211e0-2f81-45c9-94c4-07e358900cc3",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "lmp-exante"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-lmp-exante-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "node",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "356d0cd8-8b39-41d9-a635-cd726dd240b5",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "lmp-exante"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-lmp-exante-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "node",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af72ad13-75e3-4a8e-971b-993f9c85251e",
+          "name": "Real-Time Ex-Post LMP",
+          "request": {
+            "name": "Real-Time Ex-Post LMP",
+            "description": {
+              "content": "Historical ex-post locational marginal prices (LMP) for the real-time (RT) energy market, by commercial pricing node (CPNode) in hourly or 5-minute intervals. Available at 7am EST the day after. It takes on average 3-5 days to finalize preliminary LMPs. [On May 6, 2026 Changes Applied including historical dates - 5-MINUTE INTERVALS ONLY] Interval labels corrected. Database stores end-of-interval timestamps. Previously, API returned 5-minute values misaligned with storage. Now corrected: 'value', 'start', 'end' fields represent period START time. Hourly unchanged. To update stored 5-minute data: subtract 5 minutes from all three fields. Before (old): {\"value\": \"2025-12-31T23:55:00\", \"start\": \"2025-12-31T23:55:00\", \"end\": \"2026-01-01T00:00:00\"}. After (corrected): {\"value\": \"2025-12-31T23:50:00\", \"start\": \"2025-12-31T23:50:00\", \"end\": \"2025-12-31T23:55:00\"}. Apply offset to all stored 5-minute records. No re-fetch required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "real-time",
+                ":date",
+                "lmp-expost"
+              ],
+              "host": [
+                "{{v1-real-time-date-lmp-expost-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "node",
+                  "value": "<string>",
+                  "description": "Filter to a specific Commercial Pricing Node."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "preliminaryFinal",
+                  "value": "<string>",
+                  "description": "When set, only return data if it's flagged as the given state."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeResolution",
+                  "value": "hourly",
+                  "description": "Time resolution of data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eeb81c20-d2d1-465c-b123-a1740208a9fd",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "lmp-expost"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-lmp-expost-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "node",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "preliminaryFinal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      },\n      \"preliminaryFinal\": \"string\",\n      \"node\": \"ALTW.WELLS1\",\n      \"lmp\": 21.6,\n      \"mcc\": 0.02,\n      \"mec\": 20.94,\n      \"mlc\": 0.64\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c59f121e-77a5-49c6-a67c-b5e5baf4b09b",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "lmp-expost"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-lmp-expost-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "node",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "preliminaryFinal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21748c0d-8685-476f-9e86-53410e47583c",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "lmp-expost"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-lmp-expost-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "node",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "preliminaryFinal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b91ed73-3ced-4976-9251-2d409b7c2aff",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "real-time",
+                    ":date",
+                    "lmp-expost"
+                  ],
+                  "host": [
+                    "{{v1-real-time-date-lmp-expost-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "node",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "preliminaryFinal",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/lgi",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/lgi",
+      "key": "v1-real-time-date-binding-constraint-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/lgi",
+      "key": "v1-real-time-date-demand-actual-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/lgi",
+      "key": "v1-real-time-date-demand-forecast-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/lgi",
+      "key": "v1-real-time-date-demand-load-state-estimator-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/lgi",
+      "key": "v1-real-time-date-generation-cleared-supply-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/lgi",
+      "key": "v1-real-time-date-generation-committed-ecomax-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/lgi",
+      "key": "v1-real-time-date-generation-fuel-on-the-margin-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/lgi",
+      "key": "v1-real-time-date-generation-fuel-type-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/lgi",
+      "key": "v1-real-time-date-generation-offered-ecomax-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/lgi",
+      "key": "v1-real-time-date-interchange-net-actual-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/lgi",
+      "key": "v1-real-time-date-interchange-net-scheduled-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/lgi",
+      "key": "v1-real-time-date-outage-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/pricing",
+      "key": "v1-real-time-date-asm-exante-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/pricing",
+      "key": "v1-real-time-date-asm-expost-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/pricing",
+      "key": "v1-real-time-date-asm-summary-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/pricing",
+      "key": "v1-real-time-date-lmp-exante-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/pricing",
+      "key": "v1-real-time-date-lmp-expost-Url"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "f9d3e59f-375f-4860-9f10-6b8e878eca5d",
+    "name": "Miso Real Time API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Real Time across 2 of this provider's published API definitions: miso-data-exchange-load-generation-interchange-api-openapi.json, miso-data-exchange-pricing-api-openapi.json. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

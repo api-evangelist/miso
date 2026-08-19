@@ -1,0 +1,1154 @@
+openapi: 3.2.0
+info:
+  title: Miso Day Ahead API
+  version: '1.0'
+  description: 'Operations tagged Day Ahead across 2 of this provider''s published API definitions: miso-data-exchange-load-generation-interchange-api-openapi.json, miso-data-exchange-pricing-api-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://apim.misoenergy.org/lgi
+- url: https://apim.misoenergy.org/pricing
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Day Ahead
+paths:
+  /v1/day-ahead/{date}/demand:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-day-ahead-date-demand
+      summary: Day-Ahead Cleared Demand
+      description: Demand cleared in the day-ahead market, by region in hourly or daily intervals. Available at 2pm EST the day before.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: region
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - NORTH
+          - CENTRAL
+          - SOUTH
+          - MISO
+          - NO_REGION
+      - name: timeResolution
+        in: query
+        required: false
+        description: Time resolution of data
+        schema:
+          type: string
+          enum:
+          - hourly
+          - daily
+          default: hourly
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-DayAhead-DemandResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  region: NORTH
+                  fixed: 0
+                  priceSens: 0
+                  virtual: 0
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Day Ahead
+  /v1/day-ahead/{date}/generation/cleared/physical:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-day-ahead-date-generation-cleared-physical
+      summary: Day-Ahead Cleared Generation, Physical
+      description: Physical generation cleared in the day-ahead market, in hourly intervals. Available at 2pm EST the day before.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: region
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - NORTH
+          - CENTRAL
+          - SOUTH
+          - MISO
+          - NO_REGION
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Cleared-GenerationResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  region: NORTH
+                  supply: 0
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Day Ahead
+  /v1/day-ahead/{date}/generation/cleared/virtual:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-day-ahead-date-generation-cleared-virtual
+      summary: Day-Ahead Cleared Generation, Virtual
+      description: Virtual generation cleared in the day-ahead market, in hourly intervals. Available at 2pm EST the day before.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: region
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - NORTH
+          - CENTRAL
+          - SOUTH
+          - MISO
+          - NO_REGION
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Cleared-GenerationResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  region: NORTH
+                  supply: 0
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Day Ahead
+  /v1/day-ahead/{date}/generation/fuel-type:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-day-ahead-date-generation-fuel-type
+      summary: Day-Ahead Generation Fuel Type
+      description: Generation fuel mix (in megawatts) of units cleared in the day-ahead market for the various fuel types in the MISO footprint, by region in hourly intervals. Available at 2pm EST the day before. 'Coal' includes combination coal/gas units; 'Gas' includes combination oil/gas units; 'Storage' includes pumped storage, ESR, and battery units. 'Solar' data is only available from 2022-01-01 onwards.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: region
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - NORTH
+          - CENTRAL
+          - SOUTH
+          - MISO
+          - NO_REGION
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Generation-Fuel-TypeResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  region: NORTH
+                  fuelTypes:
+                    coal: 0
+                    gas: 0
+                    nuclear: 0
+                    water: 0
+                    wind: 0
+                    solar: 0
+                    other: 0
+                    storage: 0
+                  totalMw: 0
+                  interval: string
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Day Ahead
+  /v1/day-ahead/{date}/generation/offered/ecomax:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-day-ahead-date-generation-offered-ecomax
+      summary: Day-Ahead Offered Generation ECOMAX
+      description: The Economic Maximum offered by generators in the day-ahead market, by region in hourly intervals. Available at 2pm EST the day before.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: region
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - NORTH
+          - CENTRAL
+          - SOUTH
+          - MISO
+          - NO_REGION
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Offered-GenerationResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  region: NORTH
+                  mustRun: 0
+                  economic: 0
+                  emergency: 0
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Day Ahead
+  /v1/day-ahead/{date}/generation/offered/ecomin:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-day-ahead-date-generation-offered-ecomin
+      summary: Day-Ahead Offered Generation ECOMIN
+      description: The Economic Minimum offered by generators in the day-ahead market, by region in hourly intervals. Available at 2pm EST the day before.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: region
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - NORTH
+          - CENTRAL
+          - SOUTH
+          - MISO
+          - NO_REGION
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Offered-GenerationResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  region: NORTH
+                  mustRun: 0
+                  economic: 0
+                  emergency: 0
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Day Ahead
+  /v1/day-ahead/{date}/interchange/net-scheduled:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-day-ahead-date-interchange-net-scheduled
+      summary: Day-Ahead Net Scheduled Interchange
+      description: Net scheduled interchange (NSI) that cleared the day-ahead market, by region in hourly intervals. Positive values indicate imports. Available at 2pm EST the day before.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: region
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - NORTH
+          - CENTRAL
+          - SOUTH
+          - MISO
+          - NO_REGION
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Day-Ahead-Net-Scheduled-InterchangeResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  region: NORTH
+                  nsi: 0
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Day Ahead
+  /v1/day-ahead/{date}/asm-exante:
+    servers:
+    - url: https://apim.misoenergy.org/pricing
+    get:
+      operationId: get-v1-day-ahead-date-asm-exante
+      summary: Day-Ahead Ex-Ante MCP
+      description: Historical ex-ante market clearing prices (MCP) for the day-ahead (DA) ancillary services market (ASM), by reserve zone in hourly intervals. Available at 2pm EST the day before.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: product
+        in: query
+        required: false
+        description: Filter to a specific product (e.g. "Regulation", "Spin", "Supplemental", "STR", "Ramp-up", "Ramp-down").
+        schema:
+          type: string
+          enum:
+          - Regulation
+          - Spin
+          - Supplemental
+          - STR
+          - Ramp-up
+          - Ramp-down
+      - name: zone
+        in: query
+        required: false
+        description: Filter to a specific Reserve Zone (e.g. "Zone 1", ..., "Zone 8").
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-MCPResponse-json'
+              example:
+                data:
+                - interval: '1'
+                  timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  product: Regulation
+                  zone: Zone 1
+                  mcp: 6.48
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Day Ahead
+  /v1/day-ahead/{date}/asm-expost:
+    servers:
+    - url: https://apim.misoenergy.org/pricing
+    get:
+      operationId: get-v1-day-ahead-date-asm-expost
+      summary: Day-Ahead Ex-Post MCP
+      description: Historical ex-post market clearing prices (MCP) for the day-ahead (DA) ancillary services market (ASM), by reserve zone in hourly intervals. Available at 2pm EST the day before.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: product
+        in: query
+        required: false
+        description: Filter to a specific product (e.g. "Regulation", "Spin", "Supplemental", "STR", "Ramp-up", "Ramp-down").
+        schema:
+          type: string
+          enum:
+          - Regulation
+          - Spin
+          - Supplemental
+          - STR
+          - Ramp-up
+          - Ramp-down
+      - name: zone
+        in: query
+        required: false
+        description: Filter to a specific Reserve Zone (e.g. "Zone 1", ..., "Zone 8").
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-MCPResponse-json'
+              example:
+                data:
+                - interval: '1'
+                  timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  product: Regulation
+                  zone: Zone 1
+                  mcp: 6.48
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Day Ahead
+  /v1/day-ahead/{date}/lmp-exante:
+    servers:
+    - url: https://apim.misoenergy.org/pricing
+    get:
+      operationId: get-v1-day-ahead-date-lmp-exante
+      summary: Day-Ahead Ex-Ante LMP
+      description: Historical ex-ante locational marginal prices (LMP) for the day-ahead (DA) energy market, by commercial pricing node (CPNode) in hourly intervals. Available at 2pm EST the day before.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: node
+        in: query
+        required: false
+        description: Filter to a specific Commercial Pricing Node.
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-LMPResponse-json'
+              example:
+                data:
+                - interval: '1'
+                  timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  node: ALTW.WELLS1
+                  lmp: 21.6
+                  mcc: 0.02
+                  mec: 20.94
+                  mlc: 0.64
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Day Ahead
+  /v1/day-ahead/{date}/lmp-expost:
+    servers:
+    - url: https://apim.misoenergy.org/pricing
+    get:
+      operationId: get-v1-day-ahead-date-lmp-expost
+      summary: Day-Ahead Ex-Post LMP
+      description: Historical ex-post locational marginal prices (LMP) for the day-ahead (DA) energy market, by commercial pricing node (CPNode) in hourly intervals. Available at 2pm EST the day before.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: node
+        in: query
+        required: false
+        description: Filter to a specific Commercial Pricing Node.
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-LMPResponse-json'
+              example:
+                data:
+                - interval: '1'
+                  timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  node: ALTW.WELLS1
+                  lmp: 21.6
+                  mcc: 0.02
+                  mec: 20.94
+                  mlc: 0.64
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Day Ahead
+components:
+  schemas:
+    200-OK-MCPResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/MarketClearingPrice'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    ClearedGeneration:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          $ref: '#/components/schemas/Region'
+        supply:
+          type: number
+          description: Total supply cleared (in megawatts) based on physical or virtual offers.
+    TimeInterval:
+      type: object
+      properties:
+        resolution:
+          enum:
+          - 5min
+          - hourly
+          - daily
+          type: string
+          example: daily
+        start:
+          pattern: ([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2}).([0-9]{3})
+          type: string
+          description: In Eastern Standard Time (UTC−05:00).
+          example: '2023-06-28 00:00:00.000'
+        end:
+          pattern: ([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2}).([0-9]{3})
+          type: string
+          description: In Eastern Standard Time (UTC−05:00).
+          example: '2023-06-29 00:00:00.000'
+        value:
+          type: string
+          description: 'Short hand value for time interval. Can be timestamp for 5min resolution (ex: 2023-06-28 00:00:00.000), hour ending value for hourly resolution, 1-24 (ex: 21), or date string for daily (ex: 2023-06-28). In Eastern Standard Time (UTC−05:00).'
+          example: '2023-06-29'
+    200-OK-Day-Ahead-Net-Scheduled-InterchangeResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DayAheadNetScheduledInterchange'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-Offered-GenerationResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferedGeneration'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-Cleared-GenerationResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClearedGeneration'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    OfferedGeneration:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          $ref: '#/components/schemas/Region'
+        mustRun:
+          type: number
+          description: The economic minimum/maximum (in megawatts) offered by generators with the must run commit status in the day-ahead market.
+        economic:
+          type: number
+          description: The economic minimum/maximum (in megawatts) offered by generators as economic in the day-ahead market.
+        emergency:
+          type: number
+          description: The economic minimum/maximum (in megawatts) offered by generators as emergency in the day-ahead market.
+    200-OK-DayAhead-DemandResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DayAheadDemand'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    DayAheadNetScheduledInterchange:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          $ref: '#/components/schemas/Region'
+        nsi:
+          type: number
+    LocationalMarginalPrice:
+      type: object
+      properties:
+        interval:
+          type: string
+          example: '1'
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        node:
+          type: string
+          description: Commercial Pricing Node
+          example: ALTW.WELLS1
+        lmp:
+          type: number
+          description: Locational Marginal Price
+          example: 21.6
+        mcc:
+          type: number
+          description: Marginal Congestion Component
+          example: 0.02
+        mec:
+          type: number
+          description: Marginal Energy Component
+          example: 20.94
+        mlc:
+          type: number
+          description: Marginal Losses Component
+          example: 0.64
+    Region:
+      enum:
+      - NORTH
+      - CENTRAL
+      - SOUTH
+      - MISO
+      - NO_REGION
+      type: string
+    GenerationFuelType:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          $ref: '#/components/schemas/Region'
+        fuelTypes:
+          $ref: '#/components/schemas/FuelType'
+        totalMw:
+          type: number
+        interval:
+          type: string
+    DayAheadDemand:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          $ref: '#/components/schemas/Region'
+        fixed:
+          type: number
+          description: Total demand cleared (in megawatts) based on physical fixed bids.
+        priceSens:
+          type: number
+          description: Total demand cleared (in megawatts) based on physical price sensitive bids.
+        virtual:
+          type: number
+          description: Total demand cleared (in megawatts) based on virtual bids.
+    MarketClearingPrice:
+      type: object
+      properties:
+        interval:
+          type: string
+          example: '1'
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        product:
+          enum:
+          - Regulation
+          - Spin
+          - Supplemental
+          - STR
+          - Ramp-up
+          - Ramp-down
+          type: string
+          description: Ancillary Market product
+        zone:
+          type: string
+          description: Ancillary Services Reserve Zone
+          example: Zone 1
+        mcp:
+          type: number
+          description: Market Clearing Price
+          example: 6.48
+    FuelType:
+      type: object
+      properties:
+        coal:
+          type: number
+        gas:
+          type: number
+        nuclear:
+          type: number
+        water:
+          type: number
+        wind:
+          type: number
+        solar:
+          type: number
+        other:
+          type: number
+        storage:
+          type: number
+    PageInfo:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+        lastPage:
+          type: boolean
+    200-OK-Generation-Fuel-TypeResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerationFuelType'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-LMPResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationalMarginalPrice'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+x-refined-from:
+- miso-data-exchange-load-generation-interchange-api-openapi.json
+- miso-data-exchange-pricing-api-openapi.json

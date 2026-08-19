@@ -1,0 +1,130 @@
+openapi: 3.2.0
+info:
+  title: Pricing Aggregated Pnode API
+  description: 'The target data for the Ancillary Services are the Market Clearing Price (MCP) related to the 5 products in this market: Regulation, Spin, Supplemental, Short-term-reserves (STR), and Ramp (up and down). Ancillary Market prices are published at the Reserve Zone level and there are 8 zones in the current Ancillary Services Market.'
+  version: '1.0'
+  x-provenance:
+    harvestedBy: API Evangelist
+    fetchDate: '2026-07-27'
+    note: Assembled verbatim from MISO's own anonymously served Azure API Management developer-portal data API. MISO's OpenAPI export endpoint returns a valid document whose paths object is EMPTY, so info, servers and components.securitySchemes were taken from that export, while paths, methods, operationIds, summaries, descriptions, parameters, response codes and response examples were taken from the portal operations endpoints, and components.schemas from the portal schemas endpoint. Nothing was invented, inferred or paraphrased.
+    sources:
+    - https://data-exchange.misoenergy.org/developer/apis/pricing-api?export=true&format=openapi%2Bjson&api-version=2022-04-01-preview (HTTP 200)
+    - https://data-exchange.misoenergy.org/developer/apis/pricing-api/operations?api-version=2022-04-01-preview (HTTP 200)
+    - https://data-exchange.misoenergy.org/developer/apis/pricing-api/operations/{operationId}?api-version=2022-04-01-preview (HTTP 200, all operations)
+    - https://data-exchange.misoenergy.org/developer/apis/pricing-api/schemas/6a63cd40fc41c6126471c3cd?api-version=2022-04-01-preview (HTTP 200)
+    gatewayVerification: Anonymous GET to the gateway returns HTTP 401 "Access denied due to missing subscription key"; unknown routes return HTTP 404 "Resource not found" (verified 2026-07-27).
+servers:
+- url: https://apim.misoenergy.org/pricing
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Aggregated Pnode
+paths:
+  /v1/aggregated-pnode:
+    get:
+      operationId: get-v1-aggregated-pnode
+      summary: Aggregated Pnode
+      description: List of Aggregated Pnode with their types.
+      parameters:
+      - name: date
+        in: query
+        required: false
+        description: Filter by date. Defaults to current date if not specified.
+        schema:
+          type: string
+          format: date
+      - name: node
+        in: query
+        required: false
+        description: Filter to a specific Pricing Node.
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Aggregated-NodeResponse-json'
+              example:
+                data:
+                - node: ALTW.WELLS1
+                  nodeType: Hubs
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Aggregated Pnode
+components:
+  schemas:
+    200-OK-Aggregated-NodeResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregatedPnode'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    AggregatedPnode:
+      type: object
+      properties:
+        node:
+          type: string
+          description: Pricing Node
+          example: ALTW.WELLS1
+        nodeType:
+          type: string
+          description: Pricing Node Type
+          example: Hubs
+    PageInfo:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+        lastPage:
+          type: boolean
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query

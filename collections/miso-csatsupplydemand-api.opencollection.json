@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MISO Public Csat Supply Demand API",
+    "version": "2025-12-12"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CsatSupplyDemand",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "CSAT Supply and Demand",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/CsatSupplyDemand"
+          },
+          "docs": "Source data behind the MISO public \"CSAT Supply and Demand\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

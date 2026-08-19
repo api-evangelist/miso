@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MUI - Public Specification Model API",
+    "version": "3.3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Model",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getPnodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/model/pnodes",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "query",
+                "description": "The operating day of the report. Defaults to null (unspecified) if not provided."
+              },
+              {
+                "name": "context",
+                "value": "",
+                "type": "query",
+                "description": "Context filter for the report."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "SortBy filter for report."
+              }
+            ]
+          },
+          "docs": "Return list of pnodes. If query day parameter is not provided then all pnodes are returned irrespective of active dates."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

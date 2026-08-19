@@ -1,0 +1,104 @@
+{
+  "item": [
+    {
+      "id": "c3f59537-dff2-407b-96bc-b214127deb57",
+      "name": "CsatNextDayShortTermReserveRequirement",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e7bdcc64-6972-4259-a75b-6c633afc0e0b",
+          "name": "CSAT Next Day Short Term Reserve Requirement",
+          "request": {
+            "name": "CSAT Next Day Short Term Reserve Requirement",
+            "description": {
+              "content": "Source data behind the MISO public \"CSAT Next Day Short Term Reserve Requirement\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "CsatNextDayShortTermReserveRequirement"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df7975bc-99e8-4ab5-9f27-7b8da21d9fc8",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "CsatNextDayShortTermReserveRequirement"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"forecastPeakHourEst\": \"2026-07-28T16:00:00\",\n    \"region\": \"North/Central\",\n    \"forecastCreatedTime\": \"2026-07-27T07:05:06\",\n    \"strReq\": 0,\n    \"strOverwrite\": 0\n  },\n  {\n    \"forecastPeakHourEst\": \"2026-07-28T16:00:00\",\n    \"region\": \"Systemwide\",\n    \"forecastCreatedTime\": \"2026-07-27T07:05:06\",\n    \"strReq\": 0,\n    \"strOverwrite\": 0\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://public-api.misoenergy.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a00cac6a-6603-4964-b1be-8b7cdbce0627",
+    "name": "MISO Public Csat Next Day Short Term Reserve Requirement API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time market and operations data displays from MISO, served from one host under /api/. Merged from two separately derived documents — Operations Displays and Markets Displays — which described the same API: same server, same (absent) authentication, and the same documentation table. Reported by a reader on 2026-08-04.",
+      "type": "text/plain"
+    }
+  }
+}

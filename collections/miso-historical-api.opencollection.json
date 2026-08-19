@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Load, Generation, and Interchange Historical API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Historical",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Historical Net Scheduled Interchange",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/historical/:date/interchange/net-scheduled",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "adjacentBa",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific adjacent Balancing Authority (ex. PJM, TVA, SWPP)."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Net scheduled interchange (NSI) final volumes, by adjacent balancing authority (BA) in hourly intervals. Includes updates from Dynamic Schedules, Emergency Power Purchases, and ARS/CRSG events. Positive values indicate imports. Available at 7am EST the day after. May be updated up to 105 days after-the-fact."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

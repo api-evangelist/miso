@@ -1,0 +1,204 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MUI - Public Specification Reserves API",
+    "version": "3.3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reserves",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getMkWideDemandDay",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/common/:day/demand-reqs",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "hour",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specifiy the particular hour to be returned, otherwise all hours are returned."
+              }
+            ]
+          },
+          "docs": "Return system Regulation and Contingency Reserve requirements for the specified day.  A set of market-wide demand requirements must be available prior to a market close."
+        },
+        {
+          "info": {
+            "name": "getZonalDemandCurveDay",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/common/:day/zonal-demand-curves",
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Optional element to specify the name of zone for the requested report. Zone names are integers."
+              },
+              {
+                "name": "demandCurveType",
+                "value": "",
+                "type": "query",
+                "description": "Optional element to specify the type of zonal demand curve."
+              }
+            ]
+          },
+          "docs": "Returns the zonal demand curves."
+        },
+        {
+          "info": {
+            "name": "getMkWideDemandCurveDay",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/common/:day/demand-curves",
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "demandCurveType",
+                "value": "",
+                "type": "query",
+                "description": "Optional element to specify the type of market wide demand curve."
+              }
+            ]
+          },
+          "docs": "Returns market wide demand curves."
+        },
+        {
+          "info": {
+            "name": "getZonalDemandRequirements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/common/:day/zonal-demand-reqs",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "hour",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specifiy the particular hour to be returned, otherwise all hours are returned."
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Optional element to specify the name of zone for the requested report. Zone names are specified as integers."
+              }
+            ]
+          },
+          "docs": "Returns Zonal Regulation and Contingency Reserve Requirements for the specified day."
+        },
+        {
+          "info": {
+            "name": "getDayAheadRampCapReq",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/day-ahead/:day/ramp-reqs",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "hour",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specifiy the particular hour to be returned, otherwise all hours are returned."
+              }
+            ]
+          },
+          "docs": "Returns the hourly ramp capability requirements used in the Day-Ahead market. It will only return results after the Day-Ahead results for the operating day are published."
+        },
+        {
+          "info": {
+            "name": "getRealTimeRampCapReq",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/real-time/:day/ramp-reqs",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "interval5",
+                "value": "",
+                "type": "query",
+                "description": "Date-time as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00. Optional element to specify the 5 minute interval for the which the data is to be returned. If not specified then returns all the intervals that already have been dispatched for the operating day."
+              }
+            ]
+          },
+          "docs": "Returns the 5-minute interval level ramp capability requirements used in the Real-Time market. It will only return results for intervals that already have been dispatched for the operating day."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

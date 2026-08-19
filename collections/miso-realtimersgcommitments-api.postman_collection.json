@@ -1,0 +1,104 @@
+{
+  "item": [
+    {
+      "id": "03a7fa63-9423-4ac4-95d7-7031dc180c75",
+      "name": "RealTimeRSGCommitments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7631bd8a-6d56-4332-921a-6c72eac05ac3",
+          "name": "Real Time RSG Commitments",
+          "request": {
+            "name": "Real Time RSG Commitments",
+            "description": {
+              "content": "Source data behind the MISO public \"Real Time RSG Commitments\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "RealTimeRSGCommitments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8169e1cc-d589-4caf-93e2-ce92608dff4c",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "RealTimeRSGCommitments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Commitment\": [\n    {\n      \"MKT_INT_END_EST\": \"2026-07-27 8:15:00 AM\",\n      \"COMMIT_REASON\": \"None\",\n      \"TOTAL_ECON_MAX\": \"0.00\",\n      \"NUM_RESOURCES\": \"None\"\n    }\n  ],\n  \"RefId\": \"27-Jul-2026 - Interval 08:15 EST\",\n  \"MktDay\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://public-api.misoenergy.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e1aab783-110c-47a0-9ad4-8a7586969c68",
+    "name": "MISO Public Real Time RSG Commitments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time market and operations data displays from MISO, served from one host under /api/. Merged from two separately derived documents — Operations Displays and Markets Displays — which described the same API: same server, same (absent) authentication, and the same documentation table. Reported by a reader on 2026-08-04.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,482 @@
+{
+  "item": [
+    {
+      "id": "5a62ad31-d4d5-4dbd-adcf-cbd692ee80b0",
+      "name": "MarketPricing",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7d64f668-77c6-4b3d-93bc-68f9f582c8ff",
+          "name": "Ancillary Services MCP",
+          "request": {
+            "name": "Ancillary Services MCP",
+            "description": {
+              "content": "Source data behind the MISO public \"Ancillary Services MCP\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "MarketPricing",
+                "GetAncillaryServicesMcp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "51d2125c-b5f2-4312-93cd-8590b7ed062a",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "MarketPricing",
+                    "GetAncillaryServicesMcp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MCPData\": {\n    \"RefId\": \"27-Jul-2026 - Interval 08:15 EST\",\n    \"MktDay\": \"07-27-2026\",\n    \"RealTimeMCP\": {\n      \"HourAndMin\": \"08:15\",\n      \"Zone\": [\n        {\n          \"number\": \"1\",\n          \"GenRegMCP\": \"9.34\",\n          \"GenSpinMCP\": \"0.16\",\n          \"GenSuppMCP\": \"0.16\",\n          \"StrMcp\": \"0.10\",\n          \"DemandRegMcp\": \"9.34\",\n          \"DemandSpinMcp\": \"0.16\",\n          \"DemandSuppMcp\": \"0.16\",\n          \"RcpUpMcp\": \"0.00\",\n          \"RcpDownMcp\": \"0.00\"\n        },\n        {\n          \"number\": \"2\",\n          \"GenRegMCP\": \"9.34\",\n          \"GenSpinMCP\": \"0.16\",\n          \"GenSuppMCP\": \"0.16\",\n          \"StrMcp\": \"0.10\",\n          \"DemandRegMcp\": \"9.34\",\n          \"DemandSpinMcp\": \"0.16\",\n          \"DemandSuppMcp\": \"0.16\",\n          \"RcpUpMcp\": \"0.00\",\n          \"RcpDownMcp\": \"0.00\"\n        }\n      ]\n    },\n    \"DayAheadMCP\": {\n      \"HourEnding\": \"9\",\n      \"Zone\": [\n        {\n          \"number\": \"1\",\n          \"GenRegMCP\": \"11.91\",\n          \"GenSpinMCP\": \"0.84\",\n          \"GenSuppMCP\": \"0.40\",\n          \"StrMcp\": \"0.85\",\n          \"DemandRegMcp\": \"11.91\",\n          \"DemandSpinMcp\": \"0.84\",\n          \"DemandSuppMcp\": \"0.40\",\n          \"RcpUpMcp\": \"0.00\",\n          \"RcpDownMcp\": \"0.00\"\n        },\n        {\n          \"number\": \"2\",\n          \"GenRegMCP\": \"11.91\",\n          \"GenSpinMCP\": \"0.84\",\n          \"GenSuppMCP\": \"0.40\",\n          \"StrMcp\": \"0.85\",\n          \"DemandRegMcp\": \"11.91\",\n          \"DemandSpinMcp\": \"0.84\",\n          \"DemandSuppMcp\": \"0.40\",\n          \"RcpUpMcp\": \"0.00\",\n          \"RcpDownMcp\": \"0.00\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f295309-bae1-46b9-a027-247664054b88",
+          "name": "ExAnte LMP",
+          "request": {
+            "name": "ExAnte LMP",
+            "description": {
+              "content": "Source data behind the MISO public \"ExAnte LMP\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "MarketPricing",
+                "GetExAnteLmp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c100a0a4-e416-4764-8890-095cb1639425",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "MarketPricing",
+                    "GetExAnteLmp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"LMPData\": {\n    \"RefId\": \"27-Jul-2026 - Interval 08:15 EST\",\n    \"ExAnteLMP\": {\n      \"HourAndMin\": \"08:15\",\n      \"Hub\": [\n        {\n          \"name\": \"ARKANSAS.HUB\",\n          \"LMP\": \"22.12\",\n          \"loss\": \"-1.67\",\n          \"congestion\": \"-1.91\"\n        },\n        {\n          \"name\": \"ILLINOIS.HUB\",\n          \"LMP\": \"24.84\",\n          \"loss\": \"-0.86\",\n          \"congestion\": \"0.00\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "660cad46-13e2-4adf-8258-505284aaf7ce",
+          "name": "LMP Consolidated Table",
+          "request": {
+            "name": "LMP Consolidated Table",
+            "description": {
+              "content": "Source data behind the MISO public \"LMP Consolidated Table\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "MarketPricing",
+                "GetLmpConsolidatedTable"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b9b99f39-b7c2-4c67-9742-ecb528b45f9f",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "MarketPricing",
+                    "GetLmpConsolidatedTable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"LMPData\": {\n    \"RefId\": \"27-Jul-2026 - Interval 08:15 EST\",\n    \"FiveMinLMP\": {\n      \"HourAndMin\": \"08:15\",\n      \"PricingNode\": [\n        {\n          \"name\": \"KCPL\",\n          \"region\": \"Midwest\",\n          \"LMP\": \"24.58\",\n          \"MLC\": \"-1.94\",\n          \"MCC\": \"-3.44\",\n          \"REGMCP\": \"0.00\",\n          \"REGMILEAGEMCP\": \"0.00\",\n          \"SPINMCP\": \"0.00\",\n          \"SUPPMCP\": \"0.00\",\n          \"STRMCP\": \"0.00\",\n          \"RCUPMCP\": \"0.00\",\n          \"RCDOWNMCP\": \"0.00\"\n        },\n        {\n          \"name\": \"LAFA.HARGIS1\",\n          \"region\": \"South\",\n          \"LMP\": \"23.52\",\n          \"MLC\": \"-0.75\",\n          \"MCC\": \"-5.69\",\n          \"REGMCP\": \"9.34\",\n          \"REGMILEAGEMCP\": \"0.75\",\n          \"SPINMCP\": \"0.16\",\n          \"SUPPMCP\": \"0.16\",\n          \"STRMCP\": \"0.00\",\n          \"RCUPMCP\": \"0.00\",\n          \"RCDOWNMCP\": \"0.00\"\n        }\n      ]\n    },\n    \"HourlyIntegratedLMP\": {\n      \"HourAndMin\": \"HE 8\",\n      \"PricingNode\": [\n        {\n          \"name\": \"KCPL\",\n          \"region\": \"Midwest\",\n          \"LMP\": \"31.12\",\n          \"MCC\": \"-6.04\",\n          \"MLC\": \"-2.92\"\n        },\n        {\n          \"name\": \"LAFA.HARGIS1\",\n          \"region\": \"South\",\n          \"LMP\": \"24.01\",\n          \"MCC\": \"-14.91\",\n          \"MLC\": \"-1.15\"\n        }\n      ]\n    },\n    \"DayAheadExAnteLMP\": {\n      \"HourAndMin\": \"HE 9\",\n      \"PricingNode\": [\n        {\n          \"name\": \"KCPL\",\n          \"region\": \"Midwest\",\n          \"LMP\": \"33.83\",\n          \"MCC\": \"-1.75\",\n          \"MLC\": \"-2.18\"\n        },\n        {\n          \"name\": \"LAFA.HARGIS1\",\n          \"region\": \"South\",\n          \"LMP\": \"23.65\",\n          \"MCC\": \"-12.42\",\n          \"MLC\": \"-1.69\"\n        }\n      ]\n    },\n    \"DayAheadExPostLMP\": {\n      \"HourAndMin\": \"HE 9\",\n      \"PricingNode\": [\n        {\n          \"name\": \"KCPL\",\n          \"region\": \"Midwest\",\n          \"LMP\": \"34.35\",\n          \"MCC\": \"-2.06\",\n          \"MLC\": \"-2.23\"\n        },\n        {\n          \"name\": \"LAFA.HARGIS1\",\n          \"region\": \"South\",\n          \"LMP\": \"23.73\",\n          \"MCC\": \"-13.18\",\n          \"MLC\": \"-1.73\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af0ff1b6-6781-48f5-ad35-7867ef4f2160",
+          "name": "Real-Time Five Minute ExPost Intervals — Current",
+          "request": {
+            "name": "Real-Time Five Minute ExPost Intervals — Current",
+            "description": {
+              "content": "Source data behind the MISO public \"Real-Time Five Minute ExPost Intervals\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "MarketPricing",
+                "GetRealTimeFiveMinExPost",
+                "Current"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0cda44fa-73be-4db0-b8ba-ff0982f049fc",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "MarketPricing",
+                    "GetRealTimeFiveMinExPost",
+                    "Current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"headers\": [\n    \"INTERVAL\",\n    \"CPNODE\"\n  ],\n  \"data\": [\n    [\n      \"2026-07-27T08:15:00\",\n      \"EES.KRBYVLE.AZ\"\n    ],\n    [\n      \"2026-07-27T08:15:00\",\n      \"EES.L_CREEK1\"\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9950cf35-1a5e-4df6-b055-32e8da66324f",
+          "name": "Real-Time Five Minute ExPost Intervals — Previous",
+          "request": {
+            "name": "Real-Time Five Minute ExPost Intervals — Previous",
+            "description": {
+              "content": "Source data behind the MISO public \"Real-Time Five Minute ExPost Intervals\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "MarketPricing",
+                "GetRealTimeFiveMinExPost",
+                "Previous"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "34d906ee-5c4c-4139-8e3a-1d7a734b2042",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "MarketPricing",
+                    "GetRealTimeFiveMinExPost",
+                    "Previous"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"headers\": [\n    \"INTERVAL\",\n    \"CPNODE\"\n  ],\n  \"data\": [\n    [\n      \"2026-07-26T00:00:00\",\n      \"AMMO.KAHO_NEM\"\n    ],\n    [\n      \"2026-07-26T00:00:00\",\n      \"AMMO.KEOKUK1\"\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4436a446-3f03-437c-b643-2d4cf207360a",
+          "name": "Real-Time Five Minute ExPost Intervals — Rolling",
+          "request": {
+            "name": "Real-Time Five Minute ExPost Intervals — Rolling",
+            "description": {
+              "content": "Source data behind the MISO public \"Real-Time Five Minute ExPost Intervals\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "MarketPricing",
+                "GetRealTimeFiveMinExPost",
+                "Rolling"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bc63b190-4b65-41b3-b96e-215be2ddfb2e",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "MarketPricing",
+                    "GetRealTimeFiveMinExPost",
+                    "Rolling"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"headers\": [\n    \"INTERVAL\",\n    \"CPNODE\"\n  ],\n  \"data\": [\n    [\n      \"2026-07-27T00:00:00\",\n      \"AMIL.CCG_5.AZ\"\n    ],\n    [\n      \"2026-07-27T00:00:00\",\n      \"AMIL.CEEA\"\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://public-api.misoenergy.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "aa9cd409-fdf4-4458-8729-0efb1e180223",
+    "name": "MISO Public Market Pricing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time market and operations data displays from MISO, served from one host under /api/. Merged from two separately derived documents — Operations Displays and Markets Displays — which described the same API: same server, same (absent) authentication, and the same documentation table. Reported by a reader on 2026-08-04.",
+      "type": "text/plain"
+    }
+  }
+}

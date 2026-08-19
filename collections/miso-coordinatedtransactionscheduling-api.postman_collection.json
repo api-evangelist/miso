@@ -1,0 +1,104 @@
+{
+  "item": [
+    {
+      "id": "826f78f7-51db-430d-b470-48fce297f029",
+      "name": "CoordinatedTransactionScheduling",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2f6011a4-5da3-4bf2-b1e3-8ec9358d1a42",
+          "name": "Coordinated Transaction Scheduling",
+          "request": {
+            "name": "Coordinated Transaction Scheduling",
+            "description": {
+              "content": "Source data behind the MISO public \"Coordinated Transaction Scheduling\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "CoordinatedTransactionScheduling"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3937a060-0b09-450c-a202-026f72f63a98",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "CoordinatedTransactionScheduling"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RefId\": \"27-Jul-2026 - Interval 08:00 EST\",\n  \"Interval\": [\n    {\n      \"CASEAPPROVALDATE\": \"2026-07-27 8:04:09 AM\",\n      \"SOLUTIONTIME\": \"2026-07-27 8:00:00 AM\",\n      \"PJMFORECASTEDLMP\": \"45.73\"\n    },\n    {\n      \"CASEAPPROVALDATE\": \"2026-07-27 8:04:09 AM\",\n      \"SOLUTIONTIME\": \"2026-07-27 8:15:00 AM\",\n      \"PJMFORECASTEDLMP\": \"48.93\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://public-api.misoenergy.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2f435392-16c5-43e2-8416-0e1802315a12",
+    "name": "MISO Public Coordinated Transaction Scheduling API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time market and operations data displays from MISO, served from one host under /api/. Merged from two separately derived documents — Operations Displays and Markets Displays — which described the same API: same server, same (absent) authentication, and the same documentation table. Reported by a reader on 2026-08-04.",
+      "type": "text/plain"
+    }
+  }
+}

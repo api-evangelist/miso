@@ -1,0 +1,104 @@
+{
+  "item": [
+    {
+      "id": "9c1ef2fc-ea54-4963-879c-22588f840cac",
+      "name": "CsatSupplyDemand",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1ceb87ea-5670-4884-92f4-461c55f7ffa1",
+          "name": "CSAT Supply and Demand",
+          "request": {
+            "name": "CSAT Supply and Demand",
+            "description": {
+              "content": "Source data behind the MISO public \"CSAT Supply and Demand\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "CsatSupplyDemand"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb6455d1-4f46-4290-a8af-9053bb39c41b",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "CsatSupplyDemand"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"timeEst\": \"2026-07-27T00:00:00\",\n    \"demand\": 94262,\n    \"committedCapacity\": 102993,\n    \"demandForecast\": null,\n    \"committedCapacityForecast\": null,\n    \"availableCapacity\": null\n  },\n  {\n    \"id\": 2,\n    \"timeEst\": \"2026-07-27T00:15:00\",\n    \"demand\": 92916,\n    \"committedCapacity\": 102106,\n    \"demandForecast\": null,\n    \"committedCapacityForecast\": null,\n    \"availableCapacity\": null\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://public-api.misoenergy.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "49f3e1d1-3a2a-4bc6-afdc-53bd982e9775",
+    "name": "MISO Public Csat Supply Demand API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time market and operations data displays from MISO, served from one host under /api/. Merged from two separately derived documents — Operations Displays and Markets Displays — which described the same API: same server, same (absent) authentication, and the same documentation table. Reported by a reader on 2026-08-04.",
+      "type": "text/plain"
+    }
+  }
+}

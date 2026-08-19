@@ -1,0 +1,661 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Miso Real Time API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Real Time",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Real-Time Binding Constraints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/real-time/:date/binding-constraint",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "The total number of binding constraints in the real-time market, in hourly intervals. Available at 7am EST the day after."
+        },
+        {
+          "info": {
+            "name": "Actual Load",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/real-time/:date/demand/actual",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "geoResolution",
+                "value": "",
+                "type": "query",
+                "description": "Geographic resolution of data"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "localResourceZone",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeResolution",
+                "value": "",
+                "type": "query",
+                "description": "Time resolution of data"
+              }
+            ]
+          },
+          "docs": "Actual load (in megawatt-hours) as used in the real-time market, by region or grouped local resource zones (LRZ) in hourly or daily intervals. Available at 2am EST the day after."
+        },
+        {
+          "info": {
+            "name": "Real-Time Cleared Demand",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/real-time/:date/demand/forecast",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeResolution",
+                "value": "",
+                "type": "query",
+                "description": "Time resolution of data"
+              }
+            ]
+          },
+          "docs": "Demand cleared (in megawatts) in the real-time market, in hourly or daily intervals. Available at 7am EST the day after."
+        },
+        {
+          "info": {
+            "name": "Real-Time State Estimator Load",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/real-time/:date/demand/load-state-estimator",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeResolution",
+                "value": "",
+                "type": "query",
+                "description": "Time resolution of data"
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Preliminary actual load (in megawatt-hours) as determined by the state estimator and reported in EIA-930 filings, in hourly or daily intervals. Available at 7am EST the day after. Aggregated by zone groups to preserve market participant confidentiality."
+        },
+        {
+          "info": {
+            "name": "Real-Time Cleared Generation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/real-time/:date/generation/cleared/supply",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeResolution",
+                "value": "",
+                "type": "query",
+                "description": "Time resolution of data"
+              }
+            ]
+          },
+          "docs": "Generation cleared (in megawatts) in the real-time market, in hourly or 5-minute intervals. Available at 7am EST the day after."
+        },
+        {
+          "info": {
+            "name": "Real-Time Committed Generation, ECOMAX",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/real-time/:date/generation/committed/ecomax",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "The Economic Maximum for all units committed in the real-time market and Forward Reliability Assessment & Commitment (FRAC) process, in hourly intervals. Available at 7am EST the day after."
+        },
+        {
+          "info": {
+            "name": "Real-Time Generation Fuel-on-the-Margin",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/real-time/:date/generation/fuel-on-the-margin",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "fuelType",
+                "value": "",
+                "type": "query",
+                "description": "Filter to specific fuel type (ex. Coal, Gas, Wind, Solar, Hydro, Nuclear, Storage)."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve real-time generation fuel on the margin, by region in 5-minute intervals. Available at 7am EST the day after."
+        },
+        {
+          "info": {
+            "name": "Real-Time Generation Fuel Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/real-time/:date/generation/fuel-type",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Generation fuel mix (in megawatts) as determined by the state estimator for the various fuel types in the MISO footprint, by region in hourly intervals. Available at 7am EST the day after. 'Coal' includes combination coal/gas units; 'Gas' includes combination oil/gas units; 'Storage' includes pumped storage, ESR, and battery units. 'Solar' data is only available from 2022-01-01 onwards."
+        },
+        {
+          "info": {
+            "name": "Real-Time Offered Generation, ECOMAX",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/real-time/:date/generation/offered/ecomax",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "The Economic Maximum from unit offers available to the real-time market and Forward Reliability Assessment & Commitment (FRAC) process, in hourly intervals. Available at 7am EST the day after."
+        },
+        {
+          "info": {
+            "name": "Real-Time Net Actual Interchange",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/real-time/:date/interchange/net-actual",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "adjacentBa",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific adjacent Balancing Authority (ex. PJM, TVA, SWPP)."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Net actual interchange (NAI), by adjacent balancing authority (BA) in hourly intervals. Available at 7am EST the day after."
+        },
+        {
+          "info": {
+            "name": "Real-Time Net Scheduled Interchange",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/real-time/:date/interchange/net-scheduled",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Net scheduled interchange (NSI) used in the Forward Reliability Assessment & Commitment (FRAC) process and Unit Dispatch System (UDS) cases, in hourly intervals. Positive values indicate imports. Available at 7am EST the day after."
+        },
+        {
+          "info": {
+            "name": "Real-Time Outages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/real-time/:date/outage",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "The approved (planned) outages (in megawatt-hours) used in the real-time market and Forward Reliability Assessment & Commitment (FRAC) process, in hourly intervals. Available at 7am EST the day after."
+        },
+        {
+          "info": {
+            "name": "Real-Time Ex-Ante MCP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/real-time/:date/asm-exante",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "product",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific product (e.g. \"Regulation\", \"Spin\", \"Supplemental\", \"STR\", \"Ramp-up\", \"Ramp-down\")."
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific Reserve Zone (e.g. \"Zone 1\", ..., \"Zone 8\")."
+              }
+            ]
+          },
+          "docs": "Historical ex-ante market clearing prices (MCP) for the real-time (RT) ancillary services market (ASM), by reserve zone in 5-minute intervals. Available at 7am EST the day after. [On May 6, 2026 Changes Applied including historical dates] 5-minute interval labels corrected. The database stores end-of-interval timestamps. Previously, the API returned interval values misaligned with database storage. Now corrected: 'value', 'start', and 'end' fields correctly represent period START time (and end t"
+        },
+        {
+          "info": {
+            "name": "Real-Time Ex-Post MCP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/real-time/:date/asm-expost",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "preliminaryFinal",
+                "value": "",
+                "type": "query",
+                "description": "When set, only return data if it's flagged as the given state."
+              },
+              {
+                "name": "product",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific product (ex. \"Regulation\", \"Spin\", etc)."
+              },
+              {
+                "name": "timeResolution",
+                "value": "",
+                "type": "query",
+                "description": "Time resolution of data"
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific Reserve Zone (ex. \"Zone 1\")."
+              }
+            ]
+          },
+          "docs": "Historical ex-post market clearing prices (MCP) for the real-time (RT) ancillary services market (ASM), by reserve zone in hourly or 5-minute intervals. Available at 7am EST the day after. It takes on average 3-5 days to finalize preliminary LMPs. [On May 6, 2026 Changes Applied including historical dates] Interval labels corrected. Database stores end-of-interval timestamps. Previously, API returned 5-minute values misaligned with storage. Now corrected: 'value', 'start', 'end' fields represent"
+        },
+        {
+          "info": {
+            "name": "Real-Time MCP Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/real-time/:date/asm-summary",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "product",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific product (ex. \"Regulation\", \"Spin\", etc)."
+              },
+              {
+                "name": "timeResolution",
+                "value": "",
+                "type": "query",
+                "description": "Time resolution of data"
+              }
+            ]
+          },
+          "docs": "Historical ex-post market clearing prices (MCP) for the real-time (RT) ancillary services market (ASM), at the MISO level in hourly intervals. Available at 7am EST the day after."
+        },
+        {
+          "info": {
+            "name": "Real-Time Ex-Ante LMP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/real-time/:date/lmp-exante",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "node",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific Commercial Pricing Node."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Historical ex-ante locational marginal prices (LMP) for the real-time (RT) energy market, by commercial pricing node (CPNode) in 5-minute intervals. Available at 7am EST the day after. [On May 6, 2026 Changes Applied including historical dates] 5-minute interval labels corrected. The database stores end-of-interval timestamps. Previously, the API returned interval values misaligned with database storage. Now corrected: 'value', 'start', and 'end' fields correctly represent period START time (and"
+        },
+        {
+          "info": {
+            "name": "Real-Time Ex-Post LMP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/real-time/:date/lmp-expost",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "node",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific Commercial Pricing Node."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "preliminaryFinal",
+                "value": "",
+                "type": "query",
+                "description": "When set, only return data if it's flagged as the given state."
+              },
+              {
+                "name": "timeResolution",
+                "value": "",
+                "type": "query",
+                "description": "Time resolution of data"
+              }
+            ]
+          },
+          "docs": "Historical ex-post locational marginal prices (LMP) for the real-time (RT) energy market, by commercial pricing node (CPNode) in hourly or 5-minute intervals. Available at 7am EST the day after. It takes on average 3-5 days to finalize preliminary LMPs. [On May 6, 2026 Changes Applied including historical dates - 5-MINUTE INTERVALS ONLY] Interval labels corrected. Database stores end-of-interval timestamps. Previously, API returned 5-minute values misaligned with storage. Now corrected: 'value',"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

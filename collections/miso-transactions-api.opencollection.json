@@ -1,0 +1,233 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MUI - Public Specification Transactions API",
+    "version": "3.3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getTransactionEvents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/mgms/transactions/events",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number. Optional parameter."
+              },
+              {
+                "name": "pagesize",
+                "value": "",
+                "type": "query",
+                "description": "Page size. It starts from zero. Optional parameter."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of sortable properties, each item must have format: property-name:order. Order can be asc or desc. Available property names: eventTime, startDateTime, endDateTime, operationTypes, operationType, serviceName, submitterName, participantMrid, participantName, transactionId, requestSource"
+              },
+              {
+                "name": "startDateTime",
+                "value": "",
+                "type": "query",
+                "description": "Date-time as defined in RFC 3339 having format 'YYYY-MM-DDTHH:MM:SS-05:00'. Optional parameter."
+              },
+              {
+                "name": "endDateTime",
+                "value": "",
+                "type": "query",
+                "description": "Date-time as defined in RFC 3339 having format 'YYYY-MM-DDTHH:MM:SS-05:00'. Optional parameter."
+              },
+              {
+                "name": "operationTypes",
+                "value": "",
+                "type": "query",
+                "description": "Operation service type. Optional parameter."
+              },
+              {
+                "name": "serviceName",
+                "value": "",
+                "type": "query",
+                "description": "Service name. Optional parameter."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "query",
+                "description": "Participant name. Optional parameter."
+              },
+              {
+                "name": "submitterName",
+                "value": "",
+                "type": "query",
+                "description": "User name. Optional parameter."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Id. Optional parameter."
+              }
+            ]
+          },
+          "docs": "Returns a collection of transaction events for the specified start and end date-time and operation."
+        },
+        {
+          "info": {
+            "name": "getTransactionEvent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/mgms/transactions/events/mrid/:mrid",
+            "params": [
+              {
+                "name": "mrid",
+                "value": "",
+                "type": "path",
+                "description": "The Transaction GUID identifies a specific transaction event item."
+              }
+            ]
+          },
+          "docs": "Returns the transaction event specified by the internal Transaction Event unique identifier(UUID)."
+        },
+        {
+          "info": {
+            "name": "getParticipantTransactionEvents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/mgms/transactions/events/participants/name/:participantName",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number. Optional parameter."
+              },
+              {
+                "name": "pagesize",
+                "value": "",
+                "type": "query",
+                "description": "Page size. It starts from zero. Optional parameter."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of sortable properties, each item must have format: property-name:order. Order can be asc or desc. Available property names: eventTime, startDateTime, endDateTime, operationTypes, operationType, serviceName, submitterName, participantMrid, participantName, transactionId, requestSource"
+              },
+              {
+                "name": "startDateTime",
+                "value": "",
+                "type": "query",
+                "description": "Date-time as defined in RFC 3339 having format 'YYYY-MM-DDTHH:MM:SS-05:00'. Optional parameter."
+              },
+              {
+                "name": "endDateTime",
+                "value": "",
+                "type": "query",
+                "description": "Date-time as defined in RFC 3339 having format 'YYYY-MM-DDTHH:MM:SS-05:00'. Optional parameter."
+              },
+              {
+                "name": "operationTypes",
+                "value": "",
+                "type": "query",
+                "description": "Operation service type. Optional parameter."
+              },
+              {
+                "name": "serviceName",
+                "value": "",
+                "type": "query",
+                "description": "Service name. Optional parameter."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The participant name associated with the transaction."
+              },
+              {
+                "name": "submitterName",
+                "value": "",
+                "type": "query",
+                "description": "User name. Optional parameter."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Id. Optional parameter."
+              }
+            ]
+          },
+          "docs": "Returns a collection of transaction events submitted by the specified participant for the specified start and end date-time and operation."
+        },
+        {
+          "info": {
+            "name": "getTransactionEventPayloads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/mgms/transactions/events/mrid/:mrid/payloads",
+            "params": [
+              {
+                "name": "mrid",
+                "value": "",
+                "type": "path",
+                "description": "The internal Transaction UUID identifies a specific transaction event item."
+              }
+            ]
+          },
+          "docs": "Returns one or more payload documents for transaction event specified by the internal Transaction Event unique identifier(UUID)."
+        },
+        {
+          "info": {
+            "name": "getTransactionEventPayload",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/mgms/transactions/events/mrid/:mrid/payloads/payload-type/:payloadType",
+            "params": [
+              {
+                "name": "mrid",
+                "value": "",
+                "type": "path",
+                "description": "The internal Transaction UUID identifies a specific transaction event item."
+              },
+              {
+                "name": "payloadType",
+                "value": "",
+                "type": "path",
+                "description": "specific payload document type."
+              }
+            ]
+          },
+          "docs": "Returns payload documents for transaction event specified by the internal Transaction Event unique identifier(UUID) and specified payload type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

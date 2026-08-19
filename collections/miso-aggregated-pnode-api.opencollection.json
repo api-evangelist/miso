@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pricing Aggregated Pnode API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Aggregated Pnode",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Aggregated Pnode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/pricing/v1/aggregated-pnode",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Filter by date. Defaults to current date if not specified."
+              },
+              {
+                "name": "node",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific Pricing Node."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List of Aggregated Pnode with their types."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

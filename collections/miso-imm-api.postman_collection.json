@@ -1,0 +1,524 @@
+{
+  "item": [
+    {
+      "id": "b029a1c6-3ce7-4cf1-a028-a0ba9378bb3e",
+      "name": "IMM",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a0f6d7e1-fda2-40ff-9154-3ad2e029691f",
+          "name": "get Participant Imm Offer",
+          "request": {
+            "name": "get Participant Imm Offer",
+            "description": {
+              "content": "Returns the collection of Independant Market Monitor (IMM) resource assignments by pnode location for the day for a particular participant's resources. Message format differs by offerType property which can be one of the following values; - genImmOffer - dirImmOffer - drr1ImmOffer - drr2ImmOffer - earImmOffer - serImmOffer - esrImmOffer",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                ":market",
+                ":day",
+                "imm",
+                "resource-assignment",
+                "participants",
+                ":participantName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pnode",
+                  "value": "<string>",
+                  "description": "(Required) Required parameter to specify the name of a pricing node for the requested data."
+                },
+                {
+                  "disabled": false,
+                  "key": "scheduleId",
+                  "value": "<integer>",
+                  "description": "List of integers used to specify one or more scheduleId to be queried."
+                },
+                {
+                  "disabled": false,
+                  "key": "scheduleType",
+                  "value": "<string>",
+                  "description": "Specifies the assignment type to be queried or all if no query parameter is provided. Valid values are CostSchedule, ReferencePrice, or RSG."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "market",
+                  "description": "(Required) Energy Market or both (day-ahead, real-time, or both)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f635de0-5903-426f-952d-ae3a10bdfc6f",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    ":market",
+                    ":day",
+                    "imm",
+                    "resource-assignment",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "scheduleId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scheduleType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "market",
+                      "description": "(Required) Energy Market or both (day-ahead, real-time, or both)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"offers\": [\n        {\n          \"offerType\": \"genImmOffer\",\n          \"market\": \"real-time\",\n          \"assignmentType\": \"CostSchedule\",\n          \"costScheduleId\": 7109,\n          \"startupCostsDaily\": {\n            \"coldStartupCost\": 120001.7,\n            \"intermediateStartupCost\": 120001.7,\n            \"hotStartupCost\": 120001.7\n          },\n          \"noLoadCostsHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cost\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cost\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"commitStatusHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"runtimesDaily\": {\n            \"minimumRuntime\": \"999:00\",\n            \"maximumRuntime\": \"999:00\",\n            \"minimumDowntime\": \"002:00\",\n            \"hotToColdTime\": \"008:00\",\n            \"hotToIntermediateTime\": \"008:00\",\n            \"maximumDailyStarts\": 1170,\n            \"maximumDailyEnergy\": 120001.7,\n            \"maximumWeeklyStarts\": null,\n            \"maximumWeeklyEnergy\": 120001.7\n          },\n          \"runtimesHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"runtimesHourlyDetail\": {\n                \"coldStartTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"intermediateStartTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"hotStartTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"coldNotificationTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"intermediateNotificationTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"hotNotificationTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"runtimesHourlyDetail\": {\n                \"coldStartTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"intermediateStartTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"hotStartTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"coldNotificationTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"intermediateNotificationTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"hotNotificationTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"unitLimitsHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitLimitsHourlyDetail\": {\n                \"emergencyLimits\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"economicLimits\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"regulationLimits\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"offlineResourceLimit\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"offlineShortTermReserveLimit\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitLimitsHourlyDetail\": {\n                \"emergencyLimits\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"economicLimits\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"regulationLimits\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"offlineResourceLimit\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"offlineShortTermReserveLimit\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"rampRatesHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rampRatesHourlyDetail\": {\n                \"enableRampRateCurvesHourly\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"rampRate\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"rampRateBidirectional\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"rampRateUp\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"rampRateDown\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rampRatesHourlyDetail\": {\n                \"enableRampRateCurvesHourly\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"rampRate\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"rampRateBidirectional\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"rampRateUp\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"rampRateDown\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"rampRateCurves\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rampRateCurve\": null\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rampRateCurve\": null\n            }\n          ],\n          \"energyOfferHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"energyOfferHourlyDetail\": {\n                \"offerPriceCurve\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"energyOfferHourlyDetail\": {\n                \"offerPriceCurve\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"regulationOfferHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"regulationOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"mileageOfferPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"totalRegCost\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"regulationOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"mileageOfferPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"totalRegCost\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"spinningOfferHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spinningOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spinningOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"onlineSuppOfferHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"suppOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"suppOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"offlineSuppOfferHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"suppOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"suppOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"offlineShortTermReserveOfferHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"shortTermReserveOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"shortTermReserveOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"offers\": [\n        {\n          \"offerType\": \"genImmOffer\",\n          \"market\": \"day-ahead\",\n          \"assignmentType\": \"CostSchedule\",\n          \"costScheduleId\": 3979,\n          \"startupCostsDaily\": {\n            \"coldStartupCost\": 120001.7,\n            \"intermediateStartupCost\": 120001.7,\n            \"hotStartupCost\": 120001.7\n          },\n          \"noLoadCostsHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cost\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"cost\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"commitStatusHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"status\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"runtimesDaily\": {\n            \"minimumRuntime\": \"999:00\",\n            \"maximumRuntime\": \"999:00\",\n            \"minimumDowntime\": \"002:00\",\n            \"hotToColdTime\": \"008:00\",\n            \"hotToIntermediateTime\": \"008:00\",\n            \"maximumDailyStarts\": null,\n            \"maximumDailyEnergy\": 120001.7,\n            \"maximumWeeklyStarts\": null,\n            \"maximumWeeklyEnergy\": 120001.7\n          },\n          \"runtimesHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"runtimesHourlyDetail\": {\n                \"coldStartTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"intermediateStartTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"hotStartTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"coldNotificationTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"intermediateNotificationTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"hotNotificationTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"runtimesHourlyDetail\": {\n                \"coldStartTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"intermediateStartTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"hotStartTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"coldNotificationTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"intermediateNotificationTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"hotNotificationTime\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"unitLimitsHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitLimitsHourlyDetail\": {\n                \"emergencyLimits\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"economicLimits\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"regulationLimits\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"offlineResourceLimit\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"offlineShortTermReserveLimit\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"unitLimitsHourlyDetail\": {\n                \"emergencyLimits\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"economicLimits\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"regulationLimits\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"offlineResourceLimit\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"offlineShortTermReserveLimit\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"rampRatesHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rampRatesHourlyDetail\": {\n                \"enableRampRateCurvesHourly\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"rampRate\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"rampRateBidirectional\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"rampRateUp\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"rampRateDown\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rampRatesHourlyDetail\": {\n                \"enableRampRateCurvesHourly\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"rampRate\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"rampRateBidirectional\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"rampRateUp\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"rampRateDown\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"rampRateCurves\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rampRateCurve\": [\n                {\n                  \"mw\": \"\",\n                  \"rampRateUp\": \"\",\n                  \"rampRateDown\": \"\",\n                  \"rampRateBidirectional\": \"\"\n                },\n                {\n                  \"mw\": \"\",\n                  \"rampRateUp\": \"\",\n                  \"rampRateDown\": \"\",\n                  \"rampRateBidirectional\": \"\"\n                }\n              ]\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rampRateCurve\": null\n            }\n          ],\n          \"energyOfferHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"energyOfferHourlyDetail\": {\n                \"offerPriceCurve\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"energyOfferHourlyDetail\": {\n                \"offerPriceCurve\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"regulationOfferHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"regulationOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"mileageOfferPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"totalRegCost\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"regulationOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"mileageOfferPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"totalRegCost\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"spinningOfferHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spinningOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"spinningOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"onlineSuppOfferHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"suppOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"suppOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"offlineSuppOfferHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"suppOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"suppOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ],\n          \"offlineShortTermReserveOfferHourly\": [\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"shortTermReserveOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            },\n            {\n              \"hour\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"shortTermReserveOfferHourlyDetail\": {\n                \"offerPrice\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec580643-9796-415d-8ae4-02026682ac04",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    ":market",
+                    ":day",
+                    "imm",
+                    "resource-assignment",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "scheduleId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scheduleType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "market",
+                      "description": "(Required) Energy Market or both (day-ahead, real-time, or both)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66f998ed-726b-40b2-8565-681b24e63f3b",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    ":market",
+                    ":day",
+                    "imm",
+                    "resource-assignment",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "scheduleId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scheduleType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "market",
+                      "description": "(Required) Energy Market or both (day-ahead, real-time, or both)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6d9967c-8730-470f-a796-88a9b847b29d",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    ":market",
+                    ":day",
+                    "imm",
+                    "resource-assignment",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "scheduleId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scheduleType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "market",
+                      "description": "(Required) Energy Market or both (day-ahead, real-time, or both)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "251cfd41-9c96-47f4-bb7f-e36278e38e41",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    ":market",
+                    ":day",
+                    "imm",
+                    "resource-assignment",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "scheduleId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "scheduleType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "market",
+                      "description": "(Required) Energy Market or both (day-ahead, real-time, or both)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cce.midwestiso.org/dart2/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "55fbc10f-7e71-4acc-a56f-420d63767ad6",
+    "name": "MUI - Public Specification IMM API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MISO Public Specification to support Market System Enhancement (MSE) new Market User Interface (MUI 2.0).\n\nContact Support:\n Name: MUI 2.0 Questions\n Email: MSEQuestions@misoenergy.org",
+      "type": "text/plain"
+    }
+  }
+}

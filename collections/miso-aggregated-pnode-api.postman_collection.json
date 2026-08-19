@@ -1,0 +1,285 @@
+{
+  "item": [
+    {
+      "id": "d647e46e-ab3a-418f-972f-385bd24cddad",
+      "name": "Aggregated Pnode",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e2b410ee-6a01-4226-94db-2f9b6403552c",
+          "name": "Aggregated Pnode",
+          "request": {
+            "name": "Aggregated Pnode",
+            "description": {
+              "content": "List of Aggregated Pnode with their types.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "aggregated-pnode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<date>",
+                  "description": "Filter by date. Defaults to current date if not specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "node",
+                  "value": "<string>",
+                  "description": "Filter to a specific Pricing Node."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "71badbdb-7a38-4a2d-93c7-6d4356d1fc4e",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "aggregated-pnode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "node",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"node\": \"ALTW.WELLS1\",\n      \"nodeType\": \"Hubs\"\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02dd2c1e-4963-4cf0-bf26-c5d16fef505f",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "aggregated-pnode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "node",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4dfaa72a-f54c-4cea-95e6-0f6d6a91e9e5",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "aggregated-pnode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "node",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2b4db0f-6b6e-4170-936f-cdad78948d18",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "aggregated-pnode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "node",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/pricing",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "14f26009-004c-414b-83e5-f6217c9d9a69",
+    "name": "Pricing Aggregated Pnode API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The target data for the Ancillary Services are the Market Clearing Price (MCP) related to the 5 products in this market: Regulation, Spin, Supplemental, Short-term-reserves (STR), and Ramp (up and down). Ancillary Market prices are published at the Reserve Zone level and there are 8 zones in the current Ancillary Services Market.",
+      "type": "text/plain"
+    }
+  }
+}

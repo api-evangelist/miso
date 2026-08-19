@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MISO Public Binding Constraints API",
+    "version": "2025-12-12"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BindingConstraints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Real-Time Transmission Binding Constraints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/BindingConstraints/RealTime"
+          },
+          "docs": "Source data behind the MISO public \"Real-Time Transmission Binding Constraints\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Reserve Products Binding Constraints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/BindingConstraints/Reserve"
+          },
+          "docs": "Source data behind the MISO public \"Reserve Products Binding Constraints\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Real-Time Binding Sub-Regional Power Balance Constraints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/BindingConstraints/SubRegional"
+          },
+          "docs": "Source data behind the MISO public \"Real-Time Binding Sub-Regional Power Balance Constraints\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,104 @@
+{
+  "item": [
+    {
+      "id": "d4e27568-0216-4495-b437-2c661348c5bc",
+      "name": "Ace",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "47d7fcb3-82c8-45ba-987a-97b032558ce6",
+          "name": "Area Control Error (ACE)",
+          "request": {
+            "name": "Area Control Error (ACE)",
+            "description": {
+              "content": "Source data behind the MISO public \"Area Control Error (ACE)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "Ace"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b48bc3e-4595-4e2a-a8e1-aa42ad65daab",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "Ace"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"MktDay\": \"07-27-2026\",\n  \"RefId\": \"27-Jul-2026 - Interval 08:15:00 EST\",\n  \"ACE\": [\n    {\n      \"instantEST\": \"2026-07-27 6:15:30 AM\",\n      \"value\": \"-35.62\"\n    },\n    {\n      \"instantEST\": \"2026-07-27 6:16:00 AM\",\n      \"value\": \"307.35\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://public-api.misoenergy.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6cbac411-07ea-4334-b265-a7995ea21a08",
+    "name": "MISO Public Ace API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time market and operations data displays from MISO, served from one host under /api/. Merged from two separately derived documents — Operations Displays and Markets Displays — which described the same API: same server, same (absent) authentication, and the same documentation table. Reported by a reader on 2026-08-04.",
+      "type": "text/plain"
+    }
+  }
+}

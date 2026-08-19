@@ -1,0 +1,909 @@
+openapi: 3.2.0
+info:
+  title: Miso Forecast API
+  version: '1.0'
+  description: 'Operations tagged Forecast across 2 of this provider''s published API definitions: miso-data-exchange-load-generation-interchange-api-openapi.json, miso-mui-20-api-openapi.yaml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://apim.misoenergy.org/lgi
+- url: https://cce.midwestiso.org/dart2/
+- url: https://markets.midwestiso.org/dart2/
+tags:
+- name: Forecast
+paths:
+  /v1/forecast/{date}/load:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-forecast-date-load
+      summary: Medium Term Load Forecast
+      description: Medium term load forecast (in megawatts), by region and zone in hourly or daily intervals. Use the 'init' parameter to access a specific past run. Available at 7am EST the day after the init date.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: init
+        in: query
+        required: false
+        description: Specify the specific forecast run by the init (creation) date. Must always be before the current date and forecast date. If not set, defaults to 'date - 1d' when date < today, and 'today - 1d' when date >= today.
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: localResourceZone
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: region
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - NORTH
+          - CENTRAL
+          - SOUTH
+          - MISO
+          - NO_REGION
+      - name: timeResolution
+        in: query
+        required: false
+        description: Time resolution of data
+        schema:
+          type: string
+          enum:
+          - hourly
+          - daily
+          default: hourly
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Forecast-LoadResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  region: NORTH
+                  localResourceZone: Z1
+                  loadForecast: 1349
+                  init: '2026-02-02'
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Forecast
+      security:
+      - {}
+      - apiKeyHeader: []
+      - apiKeyQuery: []
+  /v1/forecast/{date}/outage:
+    servers:
+    - url: https://apim.misoenergy.org/lgi
+    get:
+      operationId: get-v1-forecast-date-outage
+      summary: Outage Forecast
+      description: The total capacity (in megawatts at economic maximum) for all units that are expected to be on outage, by region in hourly intervals. This endpoint has no lookback, dates must always be current or future. Available at 6am EST up to 6 days before.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: region
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - NORTH
+          - CENTRAL
+          - SOUTH
+          - MISO
+          - NO_REGION
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Outage-ForecastResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  region: NORTH
+                  onOutage: 0
+                  interval: string
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Forecast
+      security:
+      - {}
+      - apiKeyHeader: []
+      - apiKeyQuery: []
+  /markets/real-time/{day}/forecast/5-minute/participants/{participantName}:
+    description: Returns the 5 minute forecast created by the Midwest ISO forecast tool by pnode or portfolio. Start time will be rounded up to the next 5-minute boundary if it is not already on one and the next 12 intervals will be returned assuming they exist. If forecast does not exist then no data is returned.
+    parameters:
+    - $ref: '#/components/parameters/x-acting-participant'
+    servers:
+    - url: https://cce.midwestiso.org/dart2/
+    - url: https://markets.midwestiso.org/dart2/
+    get:
+      tags:
+      - Forecast
+      description: Returns the collection of 5 minute forecast created by the Midwest ISO forecast tool for Wind and Solar resources by pnode location. Pnode or portfolio query parameters may be provided, otherwise all applicable resources for participant are returned. Start time will be rounded up to the next 5-minute boundary if it is not already on one and the next 12 intervals will be returned assuming they exist. If forecast does not exist then no data is returned.
+      operationId: getRenewableForecastDay
+      parameters:
+      - $ref: '#/components/parameters/MarketOperatingDay'
+      - $ref: '#/components/parameters/Participant'
+      - $ref: '#/components/parameters/Pnode'
+      - $ref: '#/components/parameters/Portfolio'
+      - name: startTime
+        description: Date-time as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00. Start time for 12 contiguous 5-minute intervals that are returned by query. The interval is rounded up to the closest 5-minute interval if not already on one.
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/MarketIntervalLabel'
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RenewablesForecast'
+          headers:
+            http-x-request-id:
+              $ref: '#/components/headers/http-x-request-id'
+        '400':
+          $ref: '#/components/responses/BadRequestApiResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundApiResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorApiResponse'
+  /markets/real-time/{day}/forecast/rt-demand/participants/{participantName}:
+    description: Submits and returns the hourly load forecast for one or more Load Zones, Intermittent and Dispatchable Intermittent Resources (DIR). Data can only be entered until the RSG Notification Deadline. That is data must be entered at least 4 hours prior to the market hour.
+    parameters:
+    - $ref: '#/components/parameters/x-acting-participant'
+    servers:
+    - url: https://cce.midwestiso.org/dart2/
+    - url: https://markets.midwestiso.org/dart2/
+    get:
+      tags:
+      - Forecast
+      description: Returns the collection of hourly load forecast for Load Zones, Intermittent and Dispatchable Intermittent Resources (DIR) by pnode location. Pnode or portfolio query parameters may be provided, otherwise all applicable resources for participant are returned. If forecast does not exist then no data is returned.
+      operationId: getRealTimeDemandDay
+      parameters:
+      - $ref: '#/components/parameters/MarketOperatingDay'
+      - $ref: '#/components/parameters/Participant'
+      - $ref: '#/components/parameters/Pnode'
+      - $ref: '#/components/parameters/Portfolio'
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemandForecast'
+          headers:
+            http-x-request-id:
+              $ref: '#/components/headers/http-x-request-id'
+        '400':
+          $ref: '#/components/responses/BadRequestApiResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundApiResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorApiResponse'
+    post:
+      tags:
+      - Forecast
+      description: Submit the hourly load forecast for one or more Load Zones, Intermittent and Dispatchable Intermittent Resources (DIR). Data can only be entered until the RSG Notification Deadline. That is data must be entered at least 4 hours prior to the market hour.
+      operationId: postRealTimeDemandDay
+      parameters:
+      - $ref: '#/components/parameters/MarketOperatingDay'
+      - $ref: '#/components/parameters/Participant'
+      responses:
+        '200':
+          $ref: '#/components/responses/OkApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestApiResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundApiResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorApiResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DemandForecast'
+  /markets/real-time/{day}/forecast/dir/participants/{participantName}:
+    description: Submit and return the 5 minute generation capability forecast for one or more Dispatchable Intermittent Resources (DIR). Data can be submitted at any time per the market rules.  To be effective for a given hour and date, submittal must have completed prior to Real-Time market clearing (subject to the market rules). The message will accept a maximum of 12 contiguous intervals.  Intervals for this message must fall on 5-minute boundaries and they are allowed to span the market day.
+    parameters:
+    - $ref: '#/components/parameters/x-acting-participant'
+    servers:
+    - url: https://cce.midwestiso.org/dart2/
+    - url: https://markets.midwestiso.org/dart2/
+    get:
+      tags:
+      - Forecast
+      description: Returns the collection of 5 minute generation capability forecast for Dispatchable Intermittent Resources (DIR) by pnode location. Pnode or portfolio query parameters may be provided, otherwise all applicable resources for participant are returned. If forecast does not exist then no data is returned.
+      operationId: getDirForecast
+      parameters:
+      - $ref: '#/components/parameters/MarketOperatingDay'
+      - $ref: '#/components/parameters/Participant'
+      - $ref: '#/components/parameters/Pnode'
+      - $ref: '#/components/parameters/Portfolio'
+      - name: startTime
+        description: Date-time as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00. Start time for 12 contiguous 5-minute intervals that are returned by query. Interval is rounded up to the closest 5-minute interval if not already on one.
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/MarketIntervalLabel'
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DIRForecast'
+          headers:
+            http-x-request-id:
+              $ref: '#/components/headers/http-x-request-id'
+        '400':
+          $ref: '#/components/responses/BadRequestApiResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundApiResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorApiResponse'
+    post:
+      tags:
+      - Forecast
+      description: Submit the 5 minute generation capability forecast for one or more Dispatchable Intermittent Resources (DIR). Data can be submitted at any time per the market rules.  To be effective for a given hour and date, submittal must have completed prior to Real-Time market clearing (subject to the market rules). The message will accept a maximum of 12 contiguous intervals.  Intervals for this message must fall on 5-minute boundaries and they are allowed to span the market day.
+      operationId: postDirForecast
+      parameters:
+      - $ref: '#/components/parameters/MarketOperatingDay'
+      - $ref: '#/components/parameters/Participant'
+      responses:
+        '200':
+          $ref: '#/components/responses/OkApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestApiResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundApiResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorApiResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DIRForecast'
+  /markets/real-time/{day}/forecast/drr-load/participants/{participantName}:
+    description: Manage the 5 minute contingency reserve deployment forecast for one or more DRR Type-I and Type-II resources. The earliest forecast interval that is submitted must fall within the next 10 minutes (from current time) and to be effective for a given hour and date, submittal must have completed prior to Real-Time market clearing (subject to the market rules). The block of forecast times that are submitted must be contiguous. Within the operating date, up to 288 intervals can be specified. If forecast does not exist then no data is returned.
+    parameters:
+    - $ref: '#/components/parameters/x-acting-participant'
+    servers:
+    - url: https://cce.midwestiso.org/dart2/
+    - url: https://markets.midwestiso.org/dart2/
+    get:
+      tags:
+      - Forecast
+      description: Returns the collection of 5 minute contingency reserve deployment forecast for DRR Type-I and Type-II resources by pnode location. Pnode or portfolio query parameters may be provided, otherwise all applicable resources for participant are returned.
+      operationId: getDrrForecast
+      parameters:
+      - $ref: '#/components/parameters/MarketOperatingDay'
+      - $ref: '#/components/parameters/Participant'
+      - $ref: '#/components/parameters/Pnode'
+      - $ref: '#/components/parameters/Portfolio'
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DRRLoadForecast'
+          headers:
+            http-x-request-id:
+              $ref: '#/components/headers/http-x-request-id'
+        '400':
+          $ref: '#/components/responses/BadRequestApiResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundApiResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorApiResponse'
+    post:
+      tags:
+      - Forecast
+      description: Submit the 5 minute contingency reserve deployment forecast for one or more DRR Type-I and Type-II resources. The earliest forecast interval that is submitted must fall within the next 10 minutes (from current time) and to be effective for a given hour and date, submittal must have completed prior to Real-Time market clearing (subject to the market rules). The block of forecast times that are submitted must be contiguous. Within the operating date, up to 288 intervals can be specified.
+      operationId: postDrrForecast
+      parameters:
+      - $ref: '#/components/parameters/MarketOperatingDay'
+      - $ref: '#/components/parameters/Participant'
+      responses:
+        '200':
+          $ref: '#/components/responses/OkApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestApiResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundApiResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorApiResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DRRLoadForecast'
+components:
+  schemas:
+    MarketOperatingDay:
+      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
+      type: string
+      format: date
+      example: '2019-03-14'
+    PNodeName:
+      description: Commercial Pricing Node (PNode) name.
+      type: string
+      minLength: 1
+      maxLength: 30
+      example: PNODE1
+    TimeInterval:
+      type: object
+      properties:
+        resolution:
+          enum:
+          - 5min
+          - hourly
+          - daily
+          type: string
+          example: daily
+        start:
+          pattern: ([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2}).([0-9]{3})
+          type: string
+          description: In Eastern Standard Time (UTC−05:00).
+          example: '2023-06-28 00:00:00.000'
+        end:
+          pattern: ([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2}).([0-9]{3})
+          type: string
+          description: In Eastern Standard Time (UTC−05:00).
+          example: '2023-06-29 00:00:00.000'
+        value:
+          type: string
+          description: 'Short hand value for time interval. Can be timestamp for 5min resolution (ex: 2023-06-28 00:00:00.000), hour ending value for hourly resolution, 1-24 (ex: 21), or date string for daily (ex: 2023-06-28). In Eastern Standard Time (UTC−05:00).'
+          example: '2023-06-29'
+    Interval5Forecast:
+      type: array
+      minItems: 1
+      maxItems: 12
+      items:
+        type: object
+        properties:
+          interval5:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          mw:
+            $ref: '#/components/schemas/RealEnergyResults'
+        required:
+        - mw
+    ParticipantName:
+      description: Market participant name.
+      type: string
+      minLength: 1
+      maxLength: 40
+      example: MP
+    DRRLoadForecast:
+      description: 5-min DRR Deployment Forecast.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        resources:
+          type: array
+          minItems: 0
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
+              drrLoadForecast:
+                type: array
+                minItems: 1
+                maxItems: 288
+                items:
+                  type: object
+                  properties:
+                    interval5:
+                      $ref: '#/components/schemas/MarketIntervalLabel'
+                    mw:
+                      $ref: '#/components/schemas/RealEnergyResults'
+                  required:
+                  - interval5
+                  - mw
+            required:
+            - pnodeName
+            - drrLoadForecast
+      required:
+      - day
+      - resources
+    APIResponse:
+      description: General container for API response.
+      type: object
+      properties:
+        action:
+          description: A general action code summary of the result. HTTP status codes will be applied that match. These indicate the type of operation that was done (or not). Note, some APIs use REST verbiage like created/updated/deleted while others use submit/query.
+          enum:
+          - CREATED
+          - UPDATED
+          - DELETED
+          - CREATE_FAILED
+          - UPDATE_FAILED
+          - DELETE_FAILED
+          - GET_FAILED
+          - SUBMITTED
+          - SUBMIT_FAILED
+          - QUERY
+          - QUERY_FAILED
+        responses:
+          description: List of responses in case multiple resources are modified, or general errors that are not resource specific.
+          type: array
+          minItems: 0
+          items:
+            description: A single response which may contain multiple messages, both error and warning, per response.
+            type: object
+            properties:
+              messages:
+                description: List of warnings and errors resulting from the command.
+                type: array
+                minItems: 0
+                items:
+                  description: An individual warning or error message.  Designed to be either localized or categorized as an event.
+                  type: object
+                  properties:
+                    level:
+                      description: An indication of severity of the message.
+                      type: string
+                      enum:
+                      - ERROR
+                      - WARNING
+                      - INFO
+                    msgId:
+                      description: A categorized ID for this message, identifying it as a particular type of event. Useful for checking for specific errors, or localization.
+                      type: string
+                    params:
+                      description: Ordered list of parameter values for the message.
+                      type: array
+                      items:
+                        type: string
+                    userMsg:
+                      description: The message, fully rendered in the default locale on the service side.
+                      type: string
+        transactionId:
+          description: Unique identifier for the transaction which can be queried at a later date. Identifier is a GUID represented without hyphens. Only returned for submissions and errors though all calls generate a transaction ID that is returned in the http-x-request-id response header.
+          type: string
+          format: guid
+        transactionTime:
+          description: The time at which the transaction was received by the system.
+          type: string
+          format: date-time
+    RenewablesForecast:
+      description: 5-min MISO Renewables Forecast.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        resources:
+          type: array
+          items:
+            type: object
+            properties:
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
+              interval5Forecast:
+                $ref: '#/components/schemas/Interval5Forecast'
+      required:
+      - day
+      - resources
+    OutageForecast:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          $ref: '#/components/schemas/Region'
+        onOutage:
+          type: number
+        interval:
+          type: string
+    RealEnergyResults:
+      description: Used to represent real energy values in market outcomes. Historically simliar to 'MWType'.
+      type: number
+      format: realenergy
+      multipleOf: 0.1
+      minimum: -9.99999999E7
+      maximum: 9.99999999E7
+      example: 120001.7
+    DemandForecast:
+      description: Hourly Demand Forecast.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        resources:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
+              realTimeDemandForecastHourly:
+                type: array
+                minItems: 1
+                maxItems: 24
+                items:
+                  type: object
+                  properties:
+                    hour:
+                      $ref: '#/components/schemas/HourLabel'
+                    mw:
+                      $ref: '#/components/schemas/RealEnergyNullable'
+                  required:
+                  - hour
+                  - mw
+            required:
+            - pnodeName
+            - realTimeDemandForecastHourly
+      required:
+      - day
+      - resources
+    Region:
+      enum:
+      - NORTH
+      - CENTRAL
+      - SOUTH
+      - MISO
+      - NO_REGION
+      type: string
+    HourLabel:
+      description: Hour ending label. Represents an hour segment of time.
+      type: integer
+      minimum: 1
+      maximum: 24
+      example: 1
+    LocalDate:
+      type: string
+      format: date
+    LoadForecast:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          type: string
+          allOf:
+          - $ref: '#/components/schemas/Region'
+          example: NORTH
+        localResourceZone:
+          type: string
+          example: Z1
+        loadForecast:
+          type: number
+          example: 1349
+        init:
+          type: string
+          allOf:
+          - $ref: '#/components/schemas/LocalDate'
+          example: '2026-02-02'
+    RealEnergyNullable:
+      description: Used to represent real energy values submitted to the market. Nullable added to allow for data driven delete behaviour.
+      type:
+      - number
+      - 'null'
+      format: realenergy
+      multipleOf: 0.1
+      minimum: -9.99999999E7
+      maximum: 9.99999999E7
+      example: 1200.7
+    PortfolioName:
+      description: Portfolio name which is unique to a participant company and may be shared among users registered with the same company.
+      type: string
+      minLength: 1
+      maxLength: 40
+      example: Sample Portfolio
+    DIRForecast:
+      description: 5-min DIR Forecast.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        resources:
+          type: array
+          minItems: 0
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
+              dirForecast:
+                $ref: '#/components/schemas/Interval5Forecast'
+            required:
+            - pnodeName
+            - dirForecast
+      required:
+      - day
+      - resources
+    200-OK-Forecast-LoadResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoadForecast'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-Outage-ForecastResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OutageForecast'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    PageInfo:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+        lastPage:
+          type: boolean
+    MarketIntervalLabel:
+      description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data.
+      type: string
+      format: date-time
+      example: '2019-03-14T14:50:00-05:00'
+  headers:
+    http-x-request-id:
+      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
+      schema:
+        type: string
+        format: guid
+      example: 34571c664e48ca0b1e30d7ffb9b3b287
+  parameters:
+    Portfolio:
+      in: query
+      name: portfolio
+      description: Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned.
+      required: false
+      schema:
+        $ref: '#/components/schemas/PortfolioName'
+    Pnode:
+      in: query
+      name: pnode
+      description: Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned.
+      required: false
+      schema:
+        $ref: '#/components/schemas/PNodeName'
+    x-acting-participant:
+      in: header
+      name: x-acting-participant
+      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
+      schema:
+        type: string
+      example: MP
+    MarketOperatingDay:
+      in: path
+      name: day
+      description: The operating day of the data.
+      required: true
+      schema:
+        $ref: '#/components/schemas/MarketOperatingDay'
+    Participant:
+      in: path
+      name: participantName
+      description: The NERC ID of asset owner specified in the path for a collection resource.
+      required: true
+      schema:
+        $ref: '#/components/schemas/ParticipantName'
+  responses:
+    InternalErrorApiResponse:
+      description: Internal error occurred, details in server-side logs.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Internal error message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    BadRequestApiResponse:
+      description: User error. Request was invalid for some reason. See response for details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Bad request message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    OkApiResponse:
+      description: Successful operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses: []
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    UnauthorizedApiResponse:
+      description: Rejected due to insufficient permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Unauthorized message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    NotFoundApiResponse:
+      description: Resource not found. The path provided does not point to an entity in the system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Not found message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+x-refined-from:
+- miso-data-exchange-load-generation-interchange-api-openapi.json
+- miso-mui-20-api-openapi.yaml

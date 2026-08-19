@@ -1,0 +1,412 @@
+openapi: 3.2.0
+info:
+  title: MISO Public Interchange API
+  version: '2025-12-12'
+  description: 'Real-time market and operations data displays from MISO, served from one host under /api/. Merged from two separately derived documents — Operations Displays and Markets Displays — which described the same API: same server, same (absent) authentication, and the same documentation table. Reported by a reader on 2026-08-04.'
+  x-provenance:
+    harvestedBy: API Evangelist
+    fetchDate: '2026-07-27'
+    note: 'MISO publishes no OpenAPI for its Public API. This document was assembled from MISO''s own published artifacts only: every path and every operation summary is taken verbatim from the endpoint table MISO publishes at https://public-api.misoenergy.org/ (section "Operations Displays"), and every response schema and example is derived from the live JSON MISO returned to an anonymous GET on 2026-07-27. No host, path, parameter, field name or value was invented. Examples are the real payloads with long arrays truncated to two elements. No query parameters are documented by MISO for these endpoints and none are asserted here.'
+    sources:
+    - https://www.misoenergy.org/markets-and-operations/RTDataAPIs/ (HTTP 200)
+    - https://public-api.misoenergy.org/ (HTTP 200, endpoint table)
+    - Every path in this document individually fetched anonymously; all returned HTTP 200 application/json on 2026-07-27.
+servers:
+- url: https://public-api.misoenergy.org
+  description: MISO Public API — anonymous, no key, no account.
+tags:
+- name: Interchange
+paths:
+  /api/Interchange/GetNai:
+    get:
+      operationId: getInterchangeGetNai
+      summary: Tie Flow / Net Actual Interchange (NAI) — GetNai
+      description: Source data behind the MISO public "Tie Flow / Net Actual Interchange (NAI)" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Date:
+                    type: string
+                  Actual:
+                    type: object
+                    properties:
+                      HourandMin:
+                        type: string
+                      TieFlow:
+                        type: object
+                        properties:
+                          Name:
+                            type: string
+                          Value:
+                            type: string
+              example:
+                Date: 27-Jul-2026 - Interval 08:10 EST
+                Actual:
+                  HourandMin: 08:10
+                  TieFlow:
+                    Name: MISO
+                    Value: '-5495.34'
+      tags:
+      - Interchange
+  /api/Interchange/GetNai/FiveMinute:
+    get:
+      operationId: getInterchangeGetNaiFiveMinute
+      summary: Tie Flow / Net Actual Interchange (NAI) — FiveMinute
+      description: Source data behind the MISO public "Tie Flow / Net Actual Interchange (NAI)" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Time:
+                      type: string
+                    Value:
+                      type: string
+              example:
+              - Time: 2026-07-26 8:15:00 AM
+                Value: '-5573.87'
+              - Time: 2026-07-26 8:20:00 AM
+                Value: '-5321.07'
+      tags:
+      - Interchange
+  /api/Interchange/GetNai/Imports:
+    get:
+      operationId: getInterchangeGetNaiImports
+      summary: Net Actual Interchange (Imports)
+      description: Source data behind the MISO public "Net Actual Interchange (Imports)" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Time:
+                      type: string
+                    Value:
+                      type: string
+              example:
+              - Time: 2026-07-26 1:15:00 PM
+                Value: '-5572.00'
+              - Time: 2026-07-26 1:20:00 PM
+                Value: '-5319.00'
+      tags:
+      - Interchange
+  /api/Interchange/GetNsi:
+    get:
+      operationId: getInterchangeGetNsi
+      summary: Net Scheduled Interchange — GetNsi
+      description: Source data behind the MISO public "Net Scheduled Interchange" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        timestamp:
+                          type: string
+                        AECI:
+                          type: string
+                        LGEE:
+                          type: string
+                        MHEB:
+                          type: string
+                        MISO:
+                          type: string
+                        ONT:
+                          type: string
+                        PJM:
+                          type: string
+                        SOCO:
+                          type: string
+                        SPA:
+                          type: string
+                        SWPP:
+                          type: string
+                        TVA:
+                          type: string
+                  RefId:
+                    type: string
+                  MktDay: {}
+              example:
+                instance:
+                - timestamp: '2026-07-27 08:08:00'
+                  AECI: '-164'
+                  LGEE: '179'
+                  MHEB: '-2061'
+                  MISO: '-5425'
+                  ONT: '-207'
+                  PJM: '-3151'
+                  SOCO: '138'
+                  SPA: '-6'
+                  SWPP: '-78'
+                  TVA: '16'
+                RefId: 27-Jul-2026 - Interval 08:08 EST
+                MktDay: null
+      tags:
+      - Interchange
+  /api/Interchange/GetNsi/FiveMinute:
+    get:
+      operationId: getInterchangeGetNsiFiveMinute
+      summary: Net Scheduled Interchange — FiveMinute
+      description: Source data behind the MISO public "Net Scheduled Interchange" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        timestamp:
+                          type: string
+                        AECI:
+                          type: string
+                        LGEE:
+                          type: string
+                        MHEB:
+                          type: string
+                        MISO:
+                          type: string
+                        ONT:
+                          type: string
+                        PJM:
+                          type: string
+                        SOCO:
+                          type: string
+                        SPA:
+                          type: string
+                        SWPP:
+                          type: string
+                        TVA:
+                          type: string
+                  RefId:
+                    type: string
+                  MktDay: {}
+              example:
+                instance:
+                - timestamp: '2026-07-25 19:05:00'
+                  AECI: '220'
+                  LGEE: '-75'
+                  MHEB: '-1737'
+                  MISO: '-6906'
+                  ONT: '-1540'
+                  PJM: '-3540'
+                  SOCO: '172'
+                  SPA: '-93'
+                  SWPP: '-196'
+                  TVA: '-370'
+                - timestamp: '2026-07-25 19:10:00'
+                  AECI: '220'
+                  LGEE: '-75'
+                  MHEB: '-1737'
+                  MISO: '-6906'
+                  ONT: '-1540'
+                  PJM: '-3540'
+                  SOCO: '172'
+                  SPA: '-93'
+                  SWPP: '-196'
+                  TVA: '-370'
+                RefId: 27-Jul-2026 - Interval 08:08 EST
+                MktDay: null
+      tags:
+      - Interchange
+  /api/Interchange/GetNsi/MISO:
+    get:
+      operationId: getInterchangeGetNsiMISO
+      summary: Net Scheduled Interchange (MISO) — MISO
+      description: Source data behind the MISO public "Net Scheduled Interchange (MISO)" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        timestamp:
+                          type: string
+                        NSI:
+                          type: string
+                  RefId:
+                    type: string
+                  MktDay: {}
+              example:
+                instance:
+                - timestamp: '2026-07-27 08:13:00'
+                  NSI: '-5405'
+                RefId: 27-Jul-2026 - Interval 08:13 EST
+                MktDay: null
+      tags:
+      - Interchange
+  /api/Interchange/GetNsi/MISOFiveMinute:
+    get:
+      operationId: getInterchangeGetNsiMISOFiveMinute
+      summary: Net Scheduled Interchange (MISO) — MISOFiveMinute
+      description: Source data behind the MISO public "Net Scheduled Interchange (MISO)" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        timestamp:
+                          type: string
+                        NSI:
+                          type: string
+                  RefId:
+                    type: string
+                  MktDay: {}
+              example:
+                instance:
+                - timestamp: '2026-07-26 08:20:00'
+                  NSI: '-5325'
+                - timestamp: '2026-07-26 08:25:00'
+                  NSI: '-5325'
+                RefId: 27-Jul-2026 - Interval 08:13 EST
+                MktDay: null
+      tags:
+      - Interchange
+  /api/Interchange/GetNsi/MISOOneMinute:
+    get:
+      operationId: getInterchangeGetNsiMISOOneMinute
+      summary: Net Scheduled Interchange (MISO) — MISOOneMinute
+      description: Source data behind the MISO public "Net Scheduled Interchange (MISO)" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        timestamp:
+                          type: string
+                        NSI:
+                          type: string
+                  RefId:
+                    type: string
+                  MktDay: {}
+              example:
+                instance:
+                - timestamp: '2026-07-25 19:01:00'
+                  NSI: '-6639'
+                - timestamp: '2026-07-25 19:02:00'
+                  NSI: '-6706'
+                RefId: 27-Jul-2026 - Interval 08:08 EST
+                MktDay: null
+      tags:
+      - Interchange
+  /api/Interchange/GetNsi/OneMinute:
+    get:
+      operationId: getInterchangeGetNsiOneMinute
+      summary: Net Scheduled Interchange — OneMinute
+      description: Source data behind the MISO public "Net Scheduled Interchange" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        timestamp:
+                          type: string
+                        AECI:
+                          type: string
+                        LGEE:
+                          type: string
+                        MHEB:
+                          type: string
+                        MISO:
+                          type: string
+                        ONT:
+                          type: string
+                        PJM:
+                          type: string
+                        SOCO:
+                          type: string
+                        SPA:
+                          type: string
+                        SWPP:
+                          type: string
+                        TVA:
+                          type: string
+                  RefId:
+                    type: string
+                  MktDay: {}
+              example:
+                instance:
+                - timestamp: '2026-07-25 19:01:00'
+                  AECI: '182'
+                  LGEE: '-73'
+                  MHEB: '-1733'
+                  MISO: '-6639'
+                  ONT: '-1543'
+                  PJM: '-3264'
+                  SOCO: '172'
+                  SPA: '-114'
+                  SWPP: '-148'
+                  TVA: '-370'
+                - timestamp: '2026-07-25 19:02:00'
+                  AECI: '191'
+                  LGEE: '-74'
+                  MHEB: '-1734'
+                  MISO: '-6706'
+                  ONT: '-1542'
+                  PJM: '-3333'
+                  SOCO: '172'
+                  SPA: '-109'
+                  SWPP: '-160'
+                  TVA: '-370'
+                RefId: 27-Jul-2026 - Interval 08:08 EST
+                MktDay: null
+      tags:
+      - Interchange

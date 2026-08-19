@@ -1,0 +1,2256 @@
+{
+  "item": [
+    {
+      "id": "0b4205f7-c01f-4688-8812-57997abd8f05",
+      "name": "Reserves",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "48ba7f1b-ab59-44d9-858c-a788d16de8a3",
+          "name": "get Mk Wide Demand Day",
+          "request": {
+            "name": "get Mk Wide Demand Day",
+            "description": {
+              "content": "Return system Regulation and Contingency Reserve requirements for the specified day.  A set of market-wide demand requirements must be available prior to a market close.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "common",
+                ":day",
+                "demand-reqs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "hour",
+                  "value": "<integer>",
+                  "description": "Optional parameter to specifiy the particular hour to be returned, otherwise all hours are returned."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c2e584e-0d5c-4e5b-b2ca-98823b67b496",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "demand-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hour",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"day\": \"2019-03-14\",\n  \"demandRequirementsHourly\": [\n    {\n      \"hour\": 1,\n      \"regReserveRequirement\": 120001.7,\n      \"spinReserveRequirement\": 120001.7,\n      \"suppReserveRequirement\": 120001.7,\n      \"shortTermReserveRequirement\": 120001.7\n    },\n    {\n      \"hour\": 1,\n      \"regReserveRequirement\": 120001.7,\n      \"spinReserveRequirement\": 120001.7,\n      \"suppReserveRequirement\": 120001.7,\n      \"shortTermReserveRequirement\": 120001.7\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1951fc6-52cf-46c5-a022-e61a149d4681",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "demand-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hour",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b4e89aa-edff-4793-b2a7-596574294611",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "demand-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hour",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8449dbd-4c5d-42bd-8357-8c8a52bd9943",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "demand-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hour",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ba7c25e-9897-43fb-9c6d-7082e9a01d6f",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "demand-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hour",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5231f3dc-ef38-49f3-9112-f50a788e3fea",
+          "name": "get Zonal Demand Curve Day",
+          "request": {
+            "name": "get Zonal Demand Curve Day",
+            "description": {
+              "content": "Returns the zonal demand curves.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "common",
+                ":day",
+                "zonal-demand-curves"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "zone",
+                  "value": "<string>",
+                  "description": "Optional element to specify the name of zone for the requested report. Zone names are integers."
+                },
+                {
+                  "disabled": false,
+                  "key": "demandCurveType",
+                  "value": "<string>",
+                  "description": "Optional element to specify the type of zonal demand curve."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "196d0ce8-7d34-46d3-bda7-f95557eef687",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "zonal-demand-curves"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "demandCurveType",
+                      "value": "Operating"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"day\": \"2019-03-14\",\n  \"zonalDemandCurves\": [\n    {\n      \"zone\": 1,\n      \"demandCurveType\": \"Operating\",\n      \"demandCurveSegments\": [\n        {\n          \"mw\": 120001.1234,\n          \"price\": 7089.610000000001\n        },\n        {\n          \"mw\": 120001.1234,\n          \"price\": 12320.18\n        }\n      ]\n    },\n    {\n      \"zone\": 1,\n      \"demandCurveType\": \"Operating\",\n      \"demandCurveSegments\": [\n        {\n          \"mw\": 120001.1234,\n          \"price\": 13033.03\n        },\n        {\n          \"mw\": 120001.1234,\n          \"price\": 13951.54\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "debc1bcf-0532-4e95-82e9-d513c779063b",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "zonal-demand-curves"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "demandCurveType",
+                      "value": "Operating"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f1b6d92-effa-4506-94d3-f6355ce281cb",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "zonal-demand-curves"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "demandCurveType",
+                      "value": "Operating"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b42d4dec-d9d7-48ca-97b8-fdc23d3f1558",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "zonal-demand-curves"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "demandCurveType",
+                      "value": "Operating"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9292b69b-0f8e-41bb-bc4a-f98fc3a469a0",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "zonal-demand-curves"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "demandCurveType",
+                      "value": "Operating"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8243fbf5-ad2a-45be-88e3-afc668410b32",
+          "name": "get Mk Wide Demand Curve Day",
+          "request": {
+            "name": "get Mk Wide Demand Curve Day",
+            "description": {
+              "content": "Returns market wide demand curves.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "common",
+                ":day",
+                "demand-curves"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "demandCurveType",
+                  "value": "<string>",
+                  "description": "Optional element to specify the type of market wide demand curve."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a68a001-684a-41c7-9ccd-0c80626fefbc",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "demand-curves"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "demandCurveType",
+                      "value": "Operating"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"day\": \"2019-03-14\",\n  \"marketDemandCurves\": [\n    {\n      \"demandCurveType\": \"Operating\",\n      \"demandCurveSegments\": [\n        {\n          \"mw\": 120001.1234,\n          \"price\": 953.51\n        },\n        {\n          \"mw\": 120001.1234,\n          \"price\": 19831.63\n        }\n      ]\n    },\n    {\n      \"demandCurveType\": \"Operating\",\n      \"demandCurveSegments\": [\n        {\n          \"mw\": 120001.1234,\n          \"price\": 11059.1\n        },\n        {\n          \"mw\": 120001.1234,\n          \"price\": 2885.06\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17f9a08d-607b-4271-bb45-74adb5700293",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "demand-curves"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "demandCurveType",
+                      "value": "Operating"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fbdbb3e-9e65-4e07-bbeb-e085ff966d41",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "demand-curves"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "demandCurveType",
+                      "value": "Operating"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "710bcc25-a165-4477-b11d-4ab7b70daaf4",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "demand-curves"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "demandCurveType",
+                      "value": "Operating"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4be8a00c-fadd-4451-9b29-a286e89c65e3",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "demand-curves"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "demandCurveType",
+                      "value": "Operating"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5811186-7d72-41aa-9332-fb10be02fa44",
+          "name": "get Zonal Demand Requirements",
+          "request": {
+            "name": "get Zonal Demand Requirements",
+            "description": {
+              "content": "Returns Zonal Regulation and Contingency Reserve Requirements for the specified day.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "common",
+                ":day",
+                "zonal-demand-reqs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "hour",
+                  "value": "<integer>",
+                  "description": "Optional parameter to specifiy the particular hour to be returned, otherwise all hours are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "zone",
+                  "value": "<string>",
+                  "description": "Optional element to specify the name of zone for the requested report. Zone names are specified as integers."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3daad2ec-ef85-44cd-b3c0-c1f4f52b3fe5",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "zonal-demand-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hour",
+                      "value": "1"
+                    },
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"day\": \"2019-03-14\",\n  \"zonalDemandRequirements\": [\n    {\n      \"zone\": 1,\n      \"zonalDemandRequirementsHourly\": [\n        {\n          \"hour\": 1,\n          \"regReserveRequirement\": 120001.7,\n          \"spinReserveRequirement\": 120001.7,\n          \"suppReserveRequirement\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"regReserveRequirement\": 120001.7,\n          \"spinReserveRequirement\": 120001.7,\n          \"suppReserveRequirement\": 120001.7\n        }\n      ]\n    },\n    {\n      \"zone\": 1,\n      \"zonalDemandRequirementsHourly\": [\n        {\n          \"hour\": 1,\n          \"regReserveRequirement\": 120001.7,\n          \"spinReserveRequirement\": 120001.7,\n          \"suppReserveRequirement\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"regReserveRequirement\": 120001.7,\n          \"spinReserveRequirement\": 120001.7,\n          \"suppReserveRequirement\": 120001.7\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bec639f8-9153-4f89-9ef5-1435fee40ecf",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "zonal-demand-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hour",
+                      "value": "1"
+                    },
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a15401b7-6664-4b5a-b189-a4bdbf8b7846",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "zonal-demand-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hour",
+                      "value": "1"
+                    },
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e0bb305-2313-47e1-8358-b484f5f407b1",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "zonal-demand-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hour",
+                      "value": "1"
+                    },
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22f5a2b2-e91d-49ce-b211-c7d2dcb897f3",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "zonal-demand-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hour",
+                      "value": "1"
+                    },
+                    {
+                      "key": "zone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74d7a7ec-bab1-4459-9957-8be5cfc2fb32",
+          "name": "get Day Ahead Ramp Cap Req",
+          "request": {
+            "name": "get Day Ahead Ramp Cap Req",
+            "description": {
+              "content": "Returns the hourly ramp capability requirements used in the Day-Ahead market. It will only return results after the Day-Ahead results for the operating day are published.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "day-ahead",
+                ":day",
+                "ramp-reqs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "hour",
+                  "value": "<integer>",
+                  "description": "Optional parameter to specifiy the particular hour to be returned, otherwise all hours are returned."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b77bf6a2-50fa-4e78-8f47-9e4142c0ca3e",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "ramp-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hour",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"day\": \"2019-03-14\",\n  \"rampCapabilityRequirementsHourly\": [\n    {\n      \"hour\": 1,\n      \"rampCapabilityUpRequirement\": 1200.7,\n      \"rampCapabilityDownRequirement\": 1200.7\n    },\n    {\n      \"hour\": 1,\n      \"rampCapabilityUpRequirement\": 1200.7,\n      \"rampCapabilityDownRequirement\": 1200.7\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "135629ea-884b-4be8-a302-2390b3e6a949",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "ramp-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hour",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c19a03f0-476b-4cc9-b64e-41ea23f5a93f",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "ramp-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hour",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07762f6b-b224-41dd-a024-f897e163f515",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "ramp-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hour",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a38a3852-5766-4d24-af5f-a38f6939d31e",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "ramp-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hour",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae7e96ea-47db-416a-9b9f-33ffabbf6e60",
+          "name": "get Real Time Ramp Cap Req",
+          "request": {
+            "name": "get Real Time Ramp Cap Req",
+            "description": {
+              "content": "Returns the 5-minute interval level ramp capability requirements used in the Real-Time market. It will only return results for intervals that already have been dispatched for the operating day.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "real-time",
+                ":day",
+                "ramp-reqs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval5",
+                  "value": "<dateTime>",
+                  "description": "Date-time as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00. Optional element to specify the 5 minute interval for the which the data is to be returned. If not specified then returns all the intervals that already have been dispatched for the operating day."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1663c92d-1547-47e3-8380-d796ac820dfe",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "ramp-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval5",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"day\": \"2019-03-14\",\n  \"rampCapabilityRequirementsInterval5s\": [\n    {\n      \"interval5\": \"2019-03-14T14:50:00-05:00\",\n      \"rampCapabilityUpRequirement\": 1200.7,\n      \"rampCapabilityDownRequirement\": 1200.7\n    },\n    {\n      \"interval5\": \"2019-03-14T14:50:00-05:00\",\n      \"rampCapabilityUpRequirement\": 1200.7,\n      \"rampCapabilityDownRequirement\": 1200.7\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49d155fc-681b-4f77-b58b-aebc6056be1d",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "ramp-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval5",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1eedb10f-8baa-48c3-9a1e-9421bddbf543",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "ramp-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval5",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bd470e4-6bd2-4647-8134-6657428d88a3",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "ramp-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval5",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2446f10e-e334-4578-b129-c5822905c984",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "ramp-reqs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval5",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cce.midwestiso.org/dart2/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3858d403-6ed8-474c-bf5f-278071ac7105",
+    "name": "MUI - Public Specification Reserves API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MISO Public Specification to support Market System Enhancement (MSE) new Market User Interface (MUI 2.0).\n\nContact Support:\n Name: MUI 2.0 Questions\n Email: MSEQuestions@misoenergy.org",
+      "type": "text/plain"
+    }
+  }
+}

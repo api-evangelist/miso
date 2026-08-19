@@ -1,0 +1,544 @@
+openapi: 3.2.0
+info:
+  description: MISO Public Specification to support Market System Enhancement (MSE) new Market User Interface (MUI 2.0).
+  title: MUI - Public Specification Transactions API
+  contact:
+    name: MUI 2.0 Questions
+    url: https://www.misoenergy.org/markets-and-operations/MSE/market-user-interface/
+    email: MSEQuestions@misoenergy.org
+  license:
+    name: For use by MISO member companies and thier vendors
+  version: 3.3.0
+servers:
+- url: https://cce.midwestiso.org/dart2/
+- url: https://markets.midwestiso.org/dart2/
+tags:
+- name: Transactions
+paths:
+  /mgms/transactions/events:
+    description: Returns a collection of transaction events for the specified start and end date-time and operation.
+    parameters:
+    - $ref: '#/components/parameters/x-acting-participant'
+    get:
+      tags:
+      - Transactions
+      description: Returns a collection of transaction events for the specified start and end date-time and operation.
+      operationId: getTransactionEvents
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionEvents'
+          headers:
+            http-x-request-id:
+              $ref: '#/components/headers/http-x-request-id'
+        '400':
+          $ref: '#/components/responses/BadRequestApiResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundApiResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorApiResponse'
+      parameters:
+      - name: page
+        description: Page number. Optional parameter.
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: pagesize
+        description: Page size. It starts from zero. Optional parameter.
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: sort
+        description: 'A comma separated list of sortable properties, each item must have format: property-name:order. Order can be asc or desc. Available property names: eventTime, startDateTime, endDateTime, operationTypes, operationType, serviceName, submitterName, participantMrid, participantName, transactionId, requestSource'
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: startDateTime
+        description: Date-time as defined in RFC 3339 having format 'YYYY-MM-DDTHH:MM:SS-05:00'. Optional parameter.
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/MarketIntervalLabel'
+      - name: endDateTime
+        description: Date-time as defined in RFC 3339 having format 'YYYY-MM-DDTHH:MM:SS-05:00'. Optional parameter.
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/MarketIntervalLabel'
+      - name: operationTypes
+        description: Operation service type. Optional parameter.
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/OperationType'
+      - name: serviceName
+        description: Service name. Optional parameter.
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/ServiceName'
+      - name: participantName
+        description: Participant name. Optional parameter.
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: submitterName
+        description: User name. Optional parameter.
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: transactionId
+        description: Transaction Id. Optional parameter.
+        in: query
+        required: false
+        schema:
+          type: string
+          format: guid
+  /mgms/transactions/events/mrid/{mrid}:
+    description: Returns the transaction event specified by the internal Transaction Event unique identifier(UUID).
+    get:
+      tags:
+      - Transactions
+      description: Returns the transaction event specified by the internal Transaction Event unique identifier(UUID).
+      operationId: getTransactionEvent
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionEvent'
+          headers:
+            http-x-request-id:
+              $ref: '#/components/headers/http-x-request-id'
+        '400':
+          $ref: '#/components/responses/BadRequestApiResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundApiResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorApiResponse'
+      parameters:
+      - name: mrid
+        description: The Transaction GUID identifies a specific transaction event item.
+        in: path
+        required: true
+        schema:
+          type: string
+  /mgms/transactions/events/participants/name/{participantName}:
+    description: Returns a collection of transaction events submitted by the specified participant for the specified start and end date-time and operation.
+    get:
+      tags:
+      - Transactions
+      description: Returns a collection of transaction events submitted by the specified participant for the specified start and end date-time and operation.
+      operationId: getParticipantTransactionEvents
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionEvents'
+          headers:
+            http-x-request-id:
+              $ref: '#/components/headers/http-x-request-id'
+        '400':
+          $ref: '#/components/responses/BadRequestApiResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundApiResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorApiResponse'
+      parameters:
+      - name: page
+        description: Page number. Optional parameter.
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: pagesize
+        description: Page size. It starts from zero. Optional parameter.
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: sort
+        description: 'A comma separated list of sortable properties, each item must have format: property-name:order. Order can be asc or desc. Available property names: eventTime, startDateTime, endDateTime, operationTypes, operationType, serviceName, submitterName, participantMrid, participantName, transactionId, requestSource'
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: startDateTime
+        description: Date-time as defined in RFC 3339 having format 'YYYY-MM-DDTHH:MM:SS-05:00'. Optional parameter.
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/MarketIntervalLabel'
+      - name: endDateTime
+        description: Date-time as defined in RFC 3339 having format 'YYYY-MM-DDTHH:MM:SS-05:00'. Optional parameter.
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/MarketIntervalLabel'
+      - name: operationTypes
+        description: Operation service type. Optional parameter.
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/OperationType'
+      - name: serviceName
+        description: Service name. Optional parameter.
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/ServiceName'
+      - name: participantName
+        description: The participant name associated with the transaction.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: submitterName
+        description: User name. Optional parameter.
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: transactionId
+        description: Transaction Id. Optional parameter.
+        in: query
+        required: false
+        schema:
+          type: string
+          format: guid
+  /mgms/transactions/events/mrid/{mrid}/payloads:
+    description: Returns one or more payload documents for transaction event specified by the internal Transaction Event unique identifier(UUID).
+    get:
+      tags:
+      - Transactions
+      description: Returns one or more payload documents for transaction event specified by the internal Transaction Event unique identifier(UUID).
+      operationId: getTransactionEventPayloads
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionEventPayloads'
+          headers:
+            http-x-request-id:
+              $ref: '#/components/headers/http-x-request-id'
+        '400':
+          $ref: '#/components/responses/BadRequestApiResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundApiResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorApiResponse'
+      parameters:
+      - name: mrid
+        description: The internal Transaction UUID identifies a specific transaction event item.
+        in: path
+        required: true
+        schema:
+          type: string
+  /mgms/transactions/events/mrid/{mrid}/payloads/payload-type/{payloadType}:
+    description: Returns payload documents for transaction event specified by the internal Transaction Event unique identifier(UUID) and specified payload type.
+    get:
+      tags:
+      - Transactions
+      description: Returns payload documents for transaction event specified by the internal Transaction Event unique identifier(UUID) and specified payload type.
+      operationId: getTransactionEventPayload
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionEventPayload'
+          headers:
+            http-x-request-id:
+              $ref: '#/components/headers/http-x-request-id'
+        '400':
+          $ref: '#/components/responses/BadRequestApiResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundApiResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorApiResponse'
+      parameters:
+      - name: mrid
+        description: The internal Transaction UUID identifies a specific transaction event item.
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: payloadType
+        description: specific payload document type.
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/PayloadDocumentType'
+components:
+  headers:
+    http-x-request-id:
+      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
+      schema:
+        type: string
+        format: guid
+      example: 34571c664e48ca0b1e30d7ffb9b3b287
+  schemas:
+    OperationType:
+      description: Enumeration defining the set of valid operation service types corresponding to HTTP operations.
+      type: string
+      enum:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+    PayloadDocumentType:
+      description: Enumeration defining the valid payload document types
+      enum:
+      - INCOMING
+      - OUTGOING
+      type: string
+    TransactionStateType:
+      description: Enumeration defining the set of valid Transaction Event States.
+      type: string
+      enum:
+      - FAILED
+      - PENDING
+      - SUCCESS
+    TransactionEvent:
+      description: Transaction event.
+      type: object
+      properties:
+        mrid:
+          type: string
+          format: uuid
+        transactionId:
+          type: string
+          format: guid
+        eventTime:
+          type: string
+        operationType:
+          $ref: '#/components/schemas/OperationType'
+        transactionState:
+          $ref: '#/components/schemas/TransactionStateType'
+        processingTime:
+          type: number
+        serviceName:
+          $ref: '#/components/schemas/ServiceName'
+        hostName:
+          type: string
+        urlPath:
+          type: string
+        participantName:
+          type: string
+        submitterName:
+          type: string
+        httpResponseCode:
+          type: string
+        marketParticipant:
+          type: object
+          properties:
+            mrid:
+              type: string
+              format: uuid
+            name:
+              type: string
+    ServiceName:
+      description: Enumeration defining the set of valid service names.
+      type: string
+      enum:
+      - portal-governor
+      - mgms
+      - notification
+      - mps
+    TransactionEventPayload:
+      description: Transaction event payload.
+      type: object
+      properties:
+        mrid:
+          type: string
+          format: uuid
+        payloadType:
+          $ref: '#/components/schemas/PayloadDocumentType'
+        payloadDocument:
+          type: string
+        transactionEvent:
+          $ref: '#/components/schemas/TransactionEvent'
+    APIResponse:
+      description: General container for API response.
+      type: object
+      properties:
+        action:
+          description: A general action code summary of the result. HTTP status codes will be applied that match. These indicate the type of operation that was done (or not). Note, some APIs use REST verbiage like created/updated/deleted while others use submit/query.
+          enum:
+          - CREATED
+          - UPDATED
+          - DELETED
+          - CREATE_FAILED
+          - UPDATE_FAILED
+          - DELETE_FAILED
+          - GET_FAILED
+          - SUBMITTED
+          - SUBMIT_FAILED
+          - QUERY
+          - QUERY_FAILED
+        responses:
+          description: List of responses in case multiple resources are modified, or general errors that are not resource specific.
+          type: array
+          minItems: 0
+          items:
+            description: A single response which may contain multiple messages, both error and warning, per response.
+            type: object
+            properties:
+              messages:
+                description: List of warnings and errors resulting from the command.
+                type: array
+                minItems: 0
+                items:
+                  description: An individual warning or error message.  Designed to be either localized or categorized as an event.
+                  type: object
+                  properties:
+                    level:
+                      description: An indication of severity of the message.
+                      type: string
+                      enum:
+                      - ERROR
+                      - WARNING
+                      - INFO
+                    msgId:
+                      description: A categorized ID for this message, identifying it as a particular type of event. Useful for checking for specific errors, or localization.
+                      type: string
+                    params:
+                      description: Ordered list of parameter values for the message.
+                      type: array
+                      items:
+                        type: string
+                    userMsg:
+                      description: The message, fully rendered in the default locale on the service side.
+                      type: string
+        transactionId:
+          description: Unique identifier for the transaction which can be queried at a later date. Identifier is a GUID represented without hyphens. Only returned for submissions and errors though all calls generate a transaction ID that is returned in the http-x-request-id response header.
+          type: string
+          format: guid
+        transactionTime:
+          description: The time at which the transaction was received by the system.
+          type: string
+          format: date-time
+    TransactionEventPayloads:
+      description: Collection of transaction event payloads.
+      type: array
+      items:
+        $ref: '#/components/schemas/TransactionEventPayload'
+    TransactionEvents:
+      description: Collection of transaction events.
+      type: array
+      items:
+        $ref: '#/components/schemas/TransactionEvent'
+    MarketIntervalLabel:
+      description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data.
+      type: string
+      format: date-time
+      example: '2019-03-14T14:50:00-05:00'
+  responses:
+    InternalErrorApiResponse:
+      description: Internal error occurred, details in server-side logs.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Internal error message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    BadRequestApiResponse:
+      description: User error. Request was invalid for some reason. See response for details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Bad request message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    UnauthorizedApiResponse:
+      description: Rejected due to insufficient permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Unauthorized message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    NotFoundApiResponse:
+      description: Resource not found. The path provided does not point to an entity in the system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Not found message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+  parameters:
+    x-acting-participant:
+      in: header
+      name: x-acting-participant
+      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
+      schema:
+        type: string
+      example: MP

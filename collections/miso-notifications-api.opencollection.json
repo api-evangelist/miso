@@ -1,0 +1,450 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MUI - Public Specification Notifications API",
+    "version": "3.3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getResourceStartStopNotificationHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/notifications/:day/resource-start-stop/participants/:participantName/messages",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If not provided then all applicable data is returned."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Date-time as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00. This value does not need to be on a 5-minute boundary. If not provided then messages sent since start of day are returned."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Notification send status filter supporting multiple entries."
+              },
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "query",
+                "description": "External ID"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number, starts from zero."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of sortable properties, each item must have format: property-name:order. Order can be asc or desc. Available property names: status, externalId, created. Default value is created:desc."
+              }
+            ]
+          },
+          "docs": "Returns a filtered list of the Resource Start/Stop notification messages sent to a participant since a certain time for a particular pnode. If since is not provided then return all filtered notifications since start of day requested."
+        },
+        {
+          "info": {
+            "name": "getDispatchInstructionNotificationHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/notifications/:day/dispatch-instruction/participants/:participantName/messages",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If not provided then all applicable data is returned."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Date-time as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00. This value does not need to be on a 5-minute boundary. If not provided then messages sent since start of day are returned."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Notification send status filter supporting multiple entries."
+              },
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "query",
+                "description": "External ID"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number, starts from zero."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of sortable properties, each item must have format: property-name:order. Order can be asc or desc. Available property names: status, externalId, created. Default value is created:desc."
+              }
+            ]
+          },
+          "docs": "Returns a filtered list of the Dispatch Instruction notifications messages sent to a participant since a certain time for a particular pnode. If since is not provided then return all filtered notifications since start of day requested."
+        },
+        {
+          "info": {
+            "name": "getReserveZoneStudyStatusNotificationHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/notifications/:day/reserve-zone-study-status/participants/:participantName/messages",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Date-time as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00. This value does not need to be on a 5-minute boundary. If not provided then messages sent since start of day are returned."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Notification send status filter supporting multiple entries."
+              },
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "query",
+                "description": "External ID"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number, starts from zero."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of sortable properties, each item must have format: property-name:order. Order can be asc or desc. Available property names: status, externalId, created. Default value is created:desc."
+              }
+            ]
+          },
+          "docs": "Returns a filtered list of the Reserve Zone Study Status notification messages sent to a particpant since a certain time. If since is not provided then return all filtered notifications since start of day requested."
+        },
+        {
+          "info": {
+            "name": "getEmergencyNotificationHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/notifications/:day/emergency-notification/participants/:participantName/messages",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Date-time as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00. This value does not need to be on a 5-minute boundary. If not provided then messages sent since start of day are returned."
+              },
+              {
+                "name": "realm",
+                "value": "",
+                "type": "query",
+                "description": "Value specifying the realm to query as public only, private, or both public and private.  If not specified, the query is for public messages only."
+              },
+              {
+                "name": "priority",
+                "value": "",
+                "type": "query",
+                "description": "Element specifying the priority threshold.  A value specified means that only those messages whose priority code is less than or equal to the threshold specified are returned.  By default, all message priorities are returned."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Notification send status filter supporting multiple entries."
+              },
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "query",
+                "description": "External ID"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number, starts from zero."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of sortable properties, each item must have format: property-name:order. Order can be asc or desc. Available property names: status, externalId, created. Default value is created:desc."
+              }
+            ]
+          },
+          "docs": "Returns the filtered list of public and private messages that have been issued by the market operator and sent to a particpant since a certain time. A public message is a message that is available to all market participants.  A private message is a message directed to a specific set (of one or more market participants). A message has an associated priority.  A message's priority is specified as a integer number from 0 through 999. The only meaning applied to these priorities is that the priority"
+        },
+        {
+          "info": {
+            "name": "getCRDeploymentNotificationHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/notifications/:day/contingency-reserve/participants/:participantName/messages",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If not provided then all applicable data is returned."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Date-time as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00. This value does not need to be on a 5-minute boundary. If not provided then messages sent since start of day are returned."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Notification send status filter supporting multiple entries."
+              },
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "query",
+                "description": "External ID"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number, starts from zero."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of sortable properties, each item must have format: property-name:order. Order can be asc or desc. Available property names: status, externalId, created. Default value is created:desc."
+              }
+            ]
+          },
+          "docs": "Returns a filtered list of the CR Deployment notifications messages successfully sent to a participant  since a certain time for a particular pnode. If since is not provided then return all filtered notifications since start of day requested."
+        },
+        {
+          "info": {
+            "name": "getFinancialContractScheduleConfirmationHistory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/notifications/:day/financial-contract-schedule-confirmation/participants/:participantName/messages",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Date-time as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00. This value does not need to be on a 5-minute boundary. If not provided then messages sent since start of day are returned."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Notification send status filter supporting multiple entries."
+              },
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "query",
+                "description": "External ID"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number, starts from zero."
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of sortable properties, each item must have format: property-name:order. Order can be asc or desc. Available property names: status, externalId, created. Default value is created:desc."
+              }
+            ]
+          },
+          "docs": "Returns a filtered list of Financial Contract/Schedule Confirmation notifications messages sent to a participant since a certain time. If since is not provided then return all filtered notifications since start of day requested."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

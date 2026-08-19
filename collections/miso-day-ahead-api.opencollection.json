@@ -1,0 +1,425 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Miso Day Ahead API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Day Ahead",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Day-Ahead Cleared Demand",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/day-ahead/:date/demand",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeResolution",
+                "value": "",
+                "type": "query",
+                "description": "Time resolution of data"
+              }
+            ]
+          },
+          "docs": "Demand cleared in the day-ahead market, by region in hourly or daily intervals. Available at 2pm EST the day before."
+        },
+        {
+          "info": {
+            "name": "Day-Ahead Cleared Generation, Physical",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/day-ahead/:date/generation/cleared/physical",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Physical generation cleared in the day-ahead market, in hourly intervals. Available at 2pm EST the day before."
+        },
+        {
+          "info": {
+            "name": "Day-Ahead Cleared Generation, Virtual",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/day-ahead/:date/generation/cleared/virtual",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Virtual generation cleared in the day-ahead market, in hourly intervals. Available at 2pm EST the day before."
+        },
+        {
+          "info": {
+            "name": "Day-Ahead Generation Fuel Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/day-ahead/:date/generation/fuel-type",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Generation fuel mix (in megawatts) of units cleared in the day-ahead market for the various fuel types in the MISO footprint, by region in hourly intervals. Available at 2pm EST the day before. 'Coal' includes combination coal/gas units; 'Gas' includes combination oil/gas units; 'Storage' includes pumped storage, ESR, and battery units. 'Solar' data is only available from 2022-01-01 onwards."
+        },
+        {
+          "info": {
+            "name": "Day-Ahead Offered Generation ECOMAX",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/day-ahead/:date/generation/offered/ecomax",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "The Economic Maximum offered by generators in the day-ahead market, by region in hourly intervals. Available at 2pm EST the day before."
+        },
+        {
+          "info": {
+            "name": "Day-Ahead Offered Generation ECOMIN",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/day-ahead/:date/generation/offered/ecomin",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "The Economic Minimum offered by generators in the day-ahead market, by region in hourly intervals. Available at 2pm EST the day before."
+        },
+        {
+          "info": {
+            "name": "Day-Ahead Net Scheduled Interchange",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/day-ahead/:date/interchange/net-scheduled",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Net scheduled interchange (NSI) that cleared the day-ahead market, by region in hourly intervals. Positive values indicate imports. Available at 2pm EST the day before."
+        },
+        {
+          "info": {
+            "name": "Day-Ahead Ex-Ante MCP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/day-ahead/:date/asm-exante",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "product",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific product (e.g. \"Regulation\", \"Spin\", \"Supplemental\", \"STR\", \"Ramp-up\", \"Ramp-down\")."
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific Reserve Zone (e.g. \"Zone 1\", ..., \"Zone 8\")."
+              }
+            ]
+          },
+          "docs": "Historical ex-ante market clearing prices (MCP) for the day-ahead (DA) ancillary services market (ASM), by reserve zone in hourly intervals. Available at 2pm EST the day before."
+        },
+        {
+          "info": {
+            "name": "Day-Ahead Ex-Post MCP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/day-ahead/:date/asm-expost",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "product",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific product (e.g. \"Regulation\", \"Spin\", \"Supplemental\", \"STR\", \"Ramp-up\", \"Ramp-down\")."
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific Reserve Zone (e.g. \"Zone 1\", ..., \"Zone 8\")."
+              }
+            ]
+          },
+          "docs": "Historical ex-post market clearing prices (MCP) for the day-ahead (DA) ancillary services market (ASM), by reserve zone in hourly intervals. Available at 2pm EST the day before."
+        },
+        {
+          "info": {
+            "name": "Day-Ahead Ex-Ante LMP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/day-ahead/:date/lmp-exante",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "node",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific Commercial Pricing Node."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Historical ex-ante locational marginal prices (LMP) for the day-ahead (DA) energy market, by commercial pricing node (CPNode) in hourly intervals. Available at 2pm EST the day before."
+        },
+        {
+          "info": {
+            "name": "Day-Ahead Ex-Post LMP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/day-ahead/:date/lmp-expost",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "node",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific Commercial Pricing Node."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Historical ex-post locational marginal prices (LMP) for the day-ahead (DA) energy market, by commercial pricing node (CPNode) in hourly intervals. Available at 2pm EST the day before."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

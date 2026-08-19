@@ -1,0 +1,252 @@
+{
+  "item": [
+    {
+      "id": "dbc43108-2976-453c-b635-31c5d901cc33",
+      "name": "FuelMix",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7dc4b815-da0b-45aa-873e-55b371840ba3",
+          "name": "Fuel Mix — FuelMix",
+          "request": {
+            "name": "Fuel Mix — FuelMix",
+            "description": {
+              "content": "Source data behind the MISO public \"Fuel Mix\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "FuelMix"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ff603fd-2d98-4d24-9f60-d69614d9584f",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "FuelMix"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RefId\": \"27-Jul-2026 - Interval 08:10 EST\",\n  \"TotalMW\": \"96122\",\n  \"Fuel\": {\n    \"Type\": [\n      {\n        \"INTERVALEST\": \"2026-07-27 8:10:00 AM\",\n        \"CATEGORY\": \"Coal\",\n        \"ACT\": \"29517\",\n        \"FUEL_CATEGORY\": \"Coal  (29,517 MW)\"\n      },\n      {\n        \"INTERVALEST\": \"2026-07-27 8:10:00 AM\",\n        \"CATEGORY\": \"Natural Gas\",\n        \"ACT\": \"30223\",\n        \"FUEL_CATEGORY\": \"Natural Gas  (30,223 MW)\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebad6d55-b003-48d9-9168-d4f67ccd3af3",
+          "name": "Fuel Mix — Today",
+          "request": {
+            "name": "Fuel Mix — Today",
+            "description": {
+              "content": "Source data behind the MISO public \"Fuel Mix\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "FuelMix",
+                "Today"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "75931fec-0eb3-4755-addc-7ce4f850aa6a",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "FuelMix",
+                    "Today"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RefId\": \"27-Jul-2026 - Interval 08:10 EST\",\n  \"TotalMW\": \"0\",\n  \"Fuel\": {\n    \"Type\": [\n      {\n        \"INTERVALEST\": \"2026-07-27 12:00:00 AM\",\n        \"CATEGORY\": \"Battery Storage\",\n        \"ACT\": \"39\",\n        \"FUEL_CATEGORY\": \"Battery Storage  (39 MW)\"\n      },\n      {\n        \"INTERVALEST\": \"2026-07-27 12:00:00 AM\",\n        \"CATEGORY\": \"Coal\",\n        \"ACT\": \"33729\",\n        \"FUEL_CATEGORY\": \"Coal  (33,729 MW)\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34ff26b9-836a-4291-aaec-ef788b0cf826",
+          "name": "Fuel Mix — Yesterday",
+          "request": {
+            "name": "Fuel Mix — Yesterday",
+            "description": {
+              "content": "Source data behind the MISO public \"Fuel Mix\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "FuelMix",
+                "Yesterday"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "81be6b29-9c60-4ac4-aa26-feb2798bb446",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "FuelMix",
+                    "Yesterday"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RefId\": \"27-Jul-2026 - Interval 08:10 EST\",\n  \"TotalMW\": \"0\",\n  \"Fuel\": {\n    \"Type\": [\n      {\n        \"INTERVALEST\": \"2026-07-26 12:00:00 AM\",\n        \"CATEGORY\": \"Battery Storage\",\n        \"ACT\": \"-234\",\n        \"FUEL_CATEGORY\": \"Battery Storage  (-234 MW)\"\n      },\n      {\n        \"INTERVALEST\": \"2026-07-26 12:00:00 AM\",\n        \"CATEGORY\": \"Coal\",\n        \"ACT\": \"29335\",\n        \"FUEL_CATEGORY\": \"Coal  (29,335 MW)\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://public-api.misoenergy.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bb8fb2e1-c912-4e7c-b5e2-7b5bebdc9643",
+    "name": "MISO Public Fuel Mix API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time market and operations data displays from MISO, served from one host under /api/. Merged from two separately derived documents — Operations Displays and Markets Displays — which described the same API: same server, same (absent) authentication, and the same documentation table. Reported by a reader on 2026-08-04.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "item": [
+    {
+      "id": "fe7d887e-fb62-409e-a8d4-ed81642ff7e2",
+      "name": "RegionalDirectionalTransfer",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9bc2a537-9c1c-4a53-8b9c-22114508c9a3",
+          "name": "Regional Directional Transfer",
+          "request": {
+            "name": "Regional Directional Transfer",
+            "description": {
+              "content": "Source data behind the MISO public \"Regional Directional Transfer\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "RegionalDirectionalTransfer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ee8a0528-e996-48e1-8a22-293ca8e1e0c3",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "RegionalDirectionalTransfer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"RefId\": \"27-Jul-2026 - Interval 08:15 EST\",\n  \"Interval\": [\n    {\n      \"instantEST\": \"2026-07-26 08:15:00 AM\",\n      \"NORTH_SOUTH_LIMIT\": \"-3000\",\n      \"SOUTH_NORTH_LIMIT\": \"2500\",\n      \"RAW_MW\": \"2594\",\n      \"UDSFLOW_MW\": \"2200\"\n    },\n    {\n      \"instantEST\": \"2026-07-26 08:20:00 AM\",\n      \"NORTH_SOUTH_LIMIT\": \"-3000\",\n      \"SOUTH_NORTH_LIMIT\": \"2500\",\n      \"RAW_MW\": \"2527\",\n      \"UDSFLOW_MW\": \"2200\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://public-api.misoenergy.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c2dc7ee9-374d-470b-a703-d0fced92fa0d",
+    "name": "MISO Public Regional Directional Transfer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time market and operations data displays from MISO, served from one host under /api/. Merged from two separately derived documents — Operations Displays and Markets Displays — which described the same API: same server, same (absent) authentication, and the same documentation table. Reported by a reader on 2026-08-04.",
+      "type": "text/plain"
+    }
+  }
+}

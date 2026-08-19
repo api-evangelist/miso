@@ -1,0 +1,343 @@
+openapi: 3.2.0
+info:
+  title: MISO Public Wind Solar API
+  version: '2025-12-12'
+  description: 'Real-time market and operations data displays from MISO, served from one host under /api/. Merged from two separately derived documents — Operations Displays and Markets Displays — which described the same API: same server, same (absent) authentication, and the same documentation table. Reported by a reader on 2026-08-04.'
+  x-provenance:
+    harvestedBy: API Evangelist
+    fetchDate: '2026-07-27'
+    note: 'MISO publishes no OpenAPI for its Public API. This document was assembled from MISO''s own published artifacts only: every path and every operation summary is taken verbatim from the endpoint table MISO publishes at https://public-api.misoenergy.org/ (section "Operations Displays"), and every response schema and example is derived from the live JSON MISO returned to an anonymous GET on 2026-07-27. No host, path, parameter, field name or value was invented. Examples are the real payloads with long arrays truncated to two elements. No query parameters are documented by MISO for these endpoints and none are asserted here.'
+    sources:
+    - https://www.misoenergy.org/markets-and-operations/RTDataAPIs/ (HTTP 200)
+    - https://public-api.misoenergy.org/ (HTTP 200, endpoint table)
+    - Every path in this document individually fetched anonymously; all returned HTTP 200 application/json on 2026-07-27.
+servers:
+- url: https://public-api.misoenergy.org
+  description: MISO Public API — anonymous, no key, no account.
+tags:
+- name: WindSolar
+paths:
+  /api/WindSolar/GetCombined:
+    get:
+      operationId: getWindSolarGetCombined
+      summary: Wind and Solar Generation — GetCombined
+      description: Source data behind the MISO public "Wind and Solar Generation" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        ForecastDateTimeEST:
+                          type: string
+                        ForecastHourEndingEST:
+                          type: string
+                        ForecastWindValue:
+                          type: string
+                        ForecastSolarValue:
+                          type: string
+                        ActualDateTimeEST:
+                          type: string
+                        ActualHourEndingEST:
+                          type: string
+                        ActualWindValue:
+                          type: string
+                        ActualSolarValue:
+                          type: string
+                  RefId:
+                    type: string
+                  MktDay:
+                    type: string
+              example:
+                instance:
+                - ForecastDateTimeEST: 2026-07-27 12:00:00 AM
+                  ForecastHourEndingEST: '1'
+                  ForecastWindValue: '13582.00'
+                  ForecastSolarValue: '0.00'
+                  ActualDateTimeEST: 2026-07-27 12:00:00 AM
+                  ActualHourEndingEST: '1'
+                  ActualWindValue: '11320.30'
+                  ActualSolarValue: '-48.77'
+                - ForecastDateTimeEST: 2026-07-27 1:00:00 AM
+                  ForecastHourEndingEST: '2'
+                  ForecastWindValue: '13652.00'
+                  ForecastSolarValue: '0.00'
+                  ActualDateTimeEST: 2026-07-27 1:00:00 AM
+                  ActualHourEndingEST: '2'
+                  ActualWindValue: '11166.52'
+                  ActualSolarValue: '-48.95'
+                RefId: 27-Jul-2026 - Interval 08:00 EST
+                MktDay: 07-27-2026
+      tags:
+      - WindSolar
+  /api/WindSolar/getsolar:
+    get:
+      operationId: getWindSolarGetsolar
+      summary: Wind and Solar Generation — getsolar
+      description: Source data behind the MISO public "Wind and Solar Generation" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        ForecastDateTimeEST:
+                          type: string
+                        ForecastHourEndingEST:
+                          type: string
+                        ForecastValue:
+                          type: string
+                        ActualDateTimeEST:
+                          type: string
+                        ActualHourEndingEST:
+                          type: string
+                        ActualValue:
+                          type: string
+                  RefId:
+                    type: string
+                  MktDay:
+                    type: string
+              example:
+                instance:
+                - ForecastDateTimeEST: 2026-07-27 12:00:00 AM
+                  ForecastHourEndingEST: '1'
+                  ForecastValue: '0.00'
+                  ActualDateTimeEST: 2026-07-27 12:00:00 AM
+                  ActualHourEndingEST: '1'
+                  ActualValue: '-48.77'
+                - ForecastDateTimeEST: 2026-07-27 1:00:00 AM
+                  ForecastHourEndingEST: '2'
+                  ForecastValue: '0.00'
+                  ActualDateTimeEST: 2026-07-27 1:00:00 AM
+                  ActualHourEndingEST: '2'
+                  ActualValue: '-48.95'
+                RefId: 27-Jul-2026 - Interval 08:00 EST
+                MktDay: 07-27-2026
+      tags:
+      - WindSolar
+  /api/WindSolar/getsolaractual:
+    get:
+      operationId: getWindSolarGetsolaractual
+      summary: Wind and Solar Generation — getsolaractual
+      description: Source data behind the MISO public "Wind and Solar Generation" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        DateTimeEST:
+                          type: string
+                        HourEndingEST:
+                          type: string
+                        Value:
+                          type: string
+                  RefId:
+                    type: string
+                  MktDay:
+                    type: string
+              example:
+                instance:
+                - DateTimeEST: 2026-07-27 12:00:00 AM
+                  HourEndingEST: '1'
+                  Value: '-48.77'
+                - DateTimeEST: 2026-07-27 1:00:00 AM
+                  HourEndingEST: '2'
+                  Value: '-48.95'
+                RefId: 27-Jul-2026 - Interval 08:00 EST
+                MktDay: 07-27-2026
+      tags:
+      - WindSolar
+  /api/WindSolar/getsolarforecast:
+    get:
+      operationId: getWindSolarGetsolarforecast
+      summary: Wind and Solar Generation — getsolarforecast
+      description: Source data behind the MISO public "Wind and Solar Generation" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Forecast:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        DateTimeEST:
+                          type: string
+                        HourEndingEST:
+                          type: string
+                        Value:
+                          type: string
+                  RefId:
+                    type: string
+                  MktDay:
+                    type: string
+              example:
+                Forecast:
+                - DateTimeEST: 2026-07-27 12:00:00 AM
+                  HourEndingEST: '1'
+                  Value: '0.00'
+                - DateTimeEST: 2026-07-27 1:00:00 AM
+                  HourEndingEST: '2'
+                  Value: '0.00'
+                RefId: 27-Jul-2026 - Interval 08:00 EST
+                MktDay: 07-27-2026
+      tags:
+      - WindSolar
+  /api/WindSolar/getwind:
+    get:
+      operationId: getWindSolarGetwind
+      summary: Wind and Solar Generation — getwind
+      description: Source data behind the MISO public "Wind and Solar Generation" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        ForecastDateTimeEST:
+                          type: string
+                        ForecastHourEndingEST:
+                          type: string
+                        ForecastValue:
+                          type: string
+                        ActualDateTimeEST:
+                          type: string
+                        ActualHourEndingEST:
+                          type: string
+                        ActualValue:
+                          type: string
+                  RefId:
+                    type: string
+                  MktDay:
+                    type: string
+              example:
+                instance:
+                - ForecastDateTimeEST: 2026-07-27 12:00:00 AM
+                  ForecastHourEndingEST: '1'
+                  ForecastValue: '13582.00'
+                  ActualDateTimeEST: 2026-07-27 12:00:00 AM
+                  ActualHourEndingEST: '1'
+                  ActualValue: '11320.30'
+                - ForecastDateTimeEST: 2026-07-27 1:00:00 AM
+                  ForecastHourEndingEST: '2'
+                  ForecastValue: '13652.00'
+                  ActualDateTimeEST: 2026-07-27 1:00:00 AM
+                  ActualHourEndingEST: '2'
+                  ActualValue: '11166.52'
+                RefId: 27-Jul-2026 - Interval 08:00 EST
+                MktDay: 07-27-2026
+      tags:
+      - WindSolar
+  /api/WindSolar/getwindactual:
+    get:
+      operationId: getWindSolarGetwindactual
+      summary: Wind and Solar Generation — getwindactual
+      description: Source data behind the MISO public "Wind and Solar Generation" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  instance:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        DateTimeEST:
+                          type: string
+                        HourEndingEST:
+                          type: string
+                        Value:
+                          type: string
+                  RefId:
+                    type: string
+                  MktDay:
+                    type: string
+              example:
+                instance:
+                - DateTimeEST: 2026-07-27 12:00:00 AM
+                  HourEndingEST: '1'
+                  Value: '11320.30'
+                - DateTimeEST: 2026-07-27 1:00:00 AM
+                  HourEndingEST: '2'
+                  Value: '11166.52'
+                RefId: 27-Jul-2026 - Interval 08:00 EST
+                MktDay: 07-27-2026
+      tags:
+      - WindSolar
+  /api/WindSolar/getwindforecast:
+    get:
+      operationId: getWindSolarGetwindforecast
+      summary: Wind and Solar Generation — getwindforecast
+      description: Source data behind the MISO public "Wind and Solar Generation" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Forecast:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        DateTimeEST:
+                          type: string
+                        HourEndingEST:
+                          type: string
+                        Value:
+                          type: string
+                  RefId:
+                    type: string
+                  MktDay:
+                    type: string
+              example:
+                Forecast:
+                - DateTimeEST: 2026-07-27 12:00:00 AM
+                  HourEndingEST: '1'
+                  Value: '13582.00'
+                - DateTimeEST: 2026-07-27 1:00:00 AM
+                  HourEndingEST: '2'
+                  Value: '13652.00'
+                RefId: 27-Jul-2026 - Interval 08:00 EST
+                MktDay: 07-27-2026
+      tags:
+      - WindSolar

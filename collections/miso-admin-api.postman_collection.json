@@ -1,0 +1,2405 @@
+{
+  "item": [
+    {
+      "id": "cef5a054-6513-4e6b-bf78-2b0aa2fe5221",
+      "name": "Admin",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "87c4cc9b-80cb-4991-ad89-cae286153856",
+          "name": "get Participant Metadata",
+          "request": {
+            "name": "get Participant Metadata",
+            "description": {
+              "content": "Return participant specific MUI metadata. Metadata returned by this call includes:\n1. Participant Control Areas - Control Areas administered by a particular participant. If the participant\ndoes not administer any control area or is invalid participant then an empty list is returned. A control area\nis included if the participant is active from day specified through the end of the market horizon.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "common",
+                ":day",
+                "mui-meta",
+                "participants",
+                ":participantName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3ad4d37-10bc-42aa-bb7a-0b9ab3ef5458",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "mui-meta",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"day\": \"2019-03-14\",\n  \"participantControlAreas\": [\n    {\n      \"areaShortName\": \"Area1\",\n      \"internalArea\": true\n    },\n    {\n      \"areaShortName\": \"Area1\",\n      \"internalArea\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "152f7091-4376-41f3-bc43-c9bda1479ec8",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "mui-meta",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "392fbc72-d9f1-4df6-b71b-7f6b4762360a",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "mui-meta",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "465a0db7-9d87-486d-ac3b-7a07e017c309",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "mui-meta",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02045bb5-9b22-4e20-8928-9d8e92a91fcf",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "mui-meta",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ecab6538-dc9c-4032-be93-d2e4ca9daf0a",
+          "name": "get Mui Metadata",
+          "request": {
+            "name": "get Mui Metadata",
+            "description": {
+              "content": "Return general MUI metadata, that is not participant specific. Metadata returned by this call includes:\n1. Reserve Zones - List of reserve zones available in the system. A reserve zone can appear in this list and still not have any EPnodes assigned to it so it may not appear in reports.\n2. List of Market Participants - The list of Market Participants is used when updating bilateral contracts.\n3. List of Dispatch Status - List of valid Dispatch Status values organized by unit offer type (GEN, DIR, DRR1, DRR2, EAR, SER).\n4. List of Commit Status - List of valid Commit Status values organized by unit offer type (GEN, DIR, DRR1, DRR2, EAR, SER).\n5. List of RT Offer Override Reasons - List of RT Offer Override Reasons organized by unit offer type (GEN, DIR, DRR1, DRR2, EAR, SER).\n6. List of Market Options - List of Market Options which impact MUI behavior provided as name value pairs.\n7. List of CostSchedule Types - List of cost schedule for the Day-Ahead and Balancing (Real-Time) markets.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "common",
+                ":day",
+                "mui-meta"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "metadataGroups",
+                  "value": "<string>",
+                  "description": "Metadata group."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d55d7b21-6eee-4d49-bc17-d877427b862c",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "mui-meta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metadataGroups",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"day\": \"2019-03-14\",\n  \"reserveZones\": [\n    {\n      \"zone\": 1,\n      \"zoneName\": \"NonZone\"\n    },\n    {\n      \"zone\": 1,\n      \"zoneName\": \"NonZone\"\n    }\n  ],\n  \"participants\": [\n    \"MP\",\n    \"MP\"\n  ],\n  \"commitStatus\": [\n    {\n      \"commitStatus\": \"EC\",\n      \"commitStatusCode\": \"1\",\n      \"commitStatusDesc\": \"Economic\",\n      \"unitType\": \"DRR1\"\n    },\n    {\n      \"commitStatus\": \"EC\",\n      \"commitStatusCode\": \"1\",\n      \"commitStatusDesc\": \"Economic\",\n      \"unitType\": \"DRR1\"\n    }\n  ],\n  \"dispatchStatus\": [\n    {\n      \"dispatchStatus\": \"EC\",\n      \"dispatchStatusCode\": \"1\",\n      \"dispatchStatusDesc\": \"Economic\",\n      \"dispatchStatusType\": \"SPIN\",\n      \"unitType\": \"DRR1\"\n    },\n    {\n      \"dispatchStatus\": \"EC\",\n      \"dispatchStatusCode\": \"1\",\n      \"dispatchStatusDesc\": \"Economic\",\n      \"dispatchStatusType\": \"SPIN\",\n      \"unitType\": \"DRR1\"\n    }\n  ],\n  \"rtOfferOverrideReason\": [\n    {\n      \"unitType\": \"DRR1\",\n      \"reasonCode\": \"BoilerTubeLeak\",\n      \"reasonDesc\": \"Boiler Tube Leak\"\n    },\n    {\n      \"unitType\": \"DRR1\",\n      \"reasonCode\": \"BoilerTubeLeak\",\n      \"reasonDesc\": \"Boiler Tube Leak\"\n    }\n  ],\n  \"marketOptions\": [\n    {\n      \"name\": \"NotificationKeepDays\",\n      \"value\": \"4\"\n    },\n    {\n      \"name\": \"NotificationKeepDays\",\n      \"value\": \"4\"\n    }\n  ],\n  \"costScheduleTypes\": [\n    {\n      \"unitScheduleTypeId\": 31,\n      \"unitScheduleTypeDesc\": \"DayAhead Mitigated Cost 31\",\n      \"marketType\": \"real-time\"\n    },\n    {\n      \"unitScheduleTypeId\": 31,\n      \"unitScheduleTypeDesc\": \"DayAhead Mitigated Cost 31\",\n      \"marketType\": \"real-time\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1ba1ac5-d06a-43b9-b421-b805527eb159",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "mui-meta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metadataGroups",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2711a2a7-12ce-4be7-a506-fb8d92c84eba",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "mui-meta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metadataGroups",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acb982ba-c80c-4ea5-b488-6fa175fe768d",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "mui-meta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metadataGroups",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f31476ea-8fca-4804-9d67-6ca0952d9952",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "common",
+                    ":day",
+                    "mui-meta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metadataGroups",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22a5a277-468b-4c56-b57d-c399ea14651b",
+          "name": "get Participant Portfolios",
+          "request": {
+            "name": "get Participant Portfolios",
+            "description": {
+              "content": "Returns pnodes in all portfolios for a participant with an optional filter on day and details to limit what effective pnodes and how much pnode information is included.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "portfolios",
+                "participants",
+                ":participantName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "portfolio",
+                  "value": "<string>",
+                  "description": "Optional parameter to specify an individual Portfolio to return, otherwise return all."
+                },
+                {
+                  "disabled": false,
+                  "key": "details",
+                  "value": "<string>",
+                  "description": "Flag to enable querying of pnode and unit details. Defaults to false if not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "day",
+                  "value": "<date>",
+                  "description": "The operating day for which active pnodes in portfolios will be returned. Defaults to null (unspecified) if not provided."
+                },
+                {
+                  "disabled": false,
+                  "key": "context",
+                  "value": "<string>",
+                  "description": "Context filter for the report."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b8eec54-d33c-4607-baae-e27cbc93de04",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "portfolios",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    },
+                    {
+                      "key": "details",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "day",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "context",
+                      "value": "System"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"Sample Portfolio\",\n    \"portfolioLocations\": [\n      {\n        \"name\": \"PNODE1\",\n        \"pnodeType\": \"Aggregate\",\n        \"virtualIncBidsAllowed\": true,\n        \"virtualDecBidsAllowed\": true,\n        \"unitOfferType\": \"SER\",\n        \"intermittentStatus\": \"Intermittent\"\n      },\n      {\n        \"name\": \"PNODE1\",\n        \"pnodeType\": \"Aggregate\",\n        \"virtualIncBidsAllowed\": true,\n        \"virtualDecBidsAllowed\": true,\n        \"unitOfferType\": \"DRR1\",\n        \"intermittentStatus\": \"Intermittent\"\n      }\n    ]\n  },\n  {\n    \"name\": \"Sample Portfolio\",\n    \"portfolioLocations\": [\n      {\n        \"name\": \"PNODE1\",\n        \"pnodeType\": \"500 KV\",\n        \"virtualIncBidsAllowed\": true,\n        \"virtualDecBidsAllowed\": true,\n        \"unitOfferType\": \"ESR\",\n        \"intermittentStatus\": \"Intermittent\"\n      },\n      {\n        \"name\": \"PNODE1\",\n        \"pnodeType\": \"Bus\",\n        \"virtualIncBidsAllowed\": true,\n        \"virtualDecBidsAllowed\": true,\n        \"unitOfferType\": \"NA\",\n        \"intermittentStatus\": \"Non-Intermittent\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5862373b-368a-450a-8aad-2f81b6be2bde",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "portfolios",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    },
+                    {
+                      "key": "details",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "day",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "context",
+                      "value": "System"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e3c7ed3-b85d-420c-beba-03b7cfa33659",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "portfolios",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    },
+                    {
+                      "key": "details",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "day",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "context",
+                      "value": "System"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "082d07c7-8a34-45ba-b2ce-7a03ccef14f2",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "portfolios",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    },
+                    {
+                      "key": "details",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "day",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "context",
+                      "value": "System"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93a3773b-e38b-4245-a9c1-a3321e14d47f",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "portfolios",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    },
+                    {
+                      "key": "details",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "day",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "context",
+                      "value": "System"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1109f32-dd7c-45aa-9e6d-66567ae4431a",
+          "name": "post Portfolios",
+          "request": {
+            "name": "post Portfolios",
+            "description": {
+              "content": "Creates or updates or removes a participant Portfolio.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "portfolios",
+                "participants",
+                ":participantName",
+                ":action"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "action",
+                  "description": "(Required) An operation to execute."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"portfolioLocations\": \"<array,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7899656f-786c-4ffa-a29e-0a6e5fce48cf",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "portfolios",
+                    "participants",
+                    ":participantName",
+                    ":action"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "action",
+                      "description": "(Required) An operation to execute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Sample Portfolio\",\n  \"portfolioLocations\": \"<array,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "427787ca-5cea-488b-a0d9-d546a7ecfd30",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "portfolios",
+                    "participants",
+                    ":participantName",
+                    ":action"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "action",
+                      "description": "(Required) An operation to execute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Sample Portfolio\",\n  \"portfolioLocations\": \"<array,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5956003f-acfe-47e6-9c7e-7926a3977254",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "portfolios",
+                    "participants",
+                    ":participantName",
+                    ":action"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "action",
+                      "description": "(Required) An operation to execute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Sample Portfolio\",\n  \"portfolioLocations\": \"<array,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc9082f8-38fa-46eb-9c65-1bfff4b25845",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "portfolios",
+                    "participants",
+                    ":participantName",
+                    ":action"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "action",
+                      "description": "(Required) An operation to execute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Sample Portfolio\",\n  \"portfolioLocations\": \"<array,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fede48c-2733-47c0-94dd-9a9f613ef03f",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "portfolios",
+                    "participants",
+                    ":participantName",
+                    ":action"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "action",
+                      "description": "(Required) An operation to execute."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Sample Portfolio\",\n  \"portfolioLocations\": \"<array,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8942d4ae-7b30-4155-9358-b92e6ed73730",
+          "name": "get Swagger Spec Json",
+          "request": {
+            "name": "get Swagger Spec Json",
+            "description": {
+              "content": "Returns the swagger spec in json format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "swagger",
+                "v3",
+                "api-docs",
+                "json",
+                ":spec"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "spec",
+                  "description": "(Required) Internal or Public specification."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "49535dc2-d122-4531-b309-e63022e3ee22",
+              "name": "Successful operation. Returns an OpenAPI/Swagger spec in json.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "swagger",
+                    "v3",
+                    "api-docs",
+                    "json",
+                    ":spec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spec",
+                      "description": "(Required) Internal or Public specification."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f815ba2-6fc2-415e-96c9-c494f90a1b31",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "swagger",
+                    "v3",
+                    "api-docs",
+                    "json",
+                    ":spec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spec",
+                      "description": "(Required) Internal or Public specification."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f6c55f7-c070-4204-bd82-496dff58891a",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "swagger",
+                    "v3",
+                    "api-docs",
+                    "json",
+                    ":spec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spec",
+                      "description": "(Required) Internal or Public specification."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "156f008a-aabf-463b-82dc-cbd25ba3d2c4",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "swagger",
+                    "v3",
+                    "api-docs",
+                    "json",
+                    ":spec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spec",
+                      "description": "(Required) Internal or Public specification."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b15e706a-401c-4465-b657-49ee23af7b5a",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "swagger",
+                    "v3",
+                    "api-docs",
+                    "json",
+                    ":spec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spec",
+                      "description": "(Required) Internal or Public specification."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c2cb896-23e8-4408-9ab6-7aadd99f789c",
+          "name": "get Swagger Spec Yaml",
+          "request": {
+            "name": "get Swagger Spec Yaml",
+            "description": {
+              "content": "Returns the swagger spec in yaml format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "swagger",
+                "v3",
+                "api-docs",
+                "yaml",
+                ":spec"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "spec",
+                  "description": "(Required) Internal or Public specification."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-yaml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eab79551-8ee7-4e48-b266-acc37b065c85",
+              "name": "Successful operation. Returns an OpenAPI/Swagger spec in yaml.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "swagger",
+                    "v3",
+                    "api-docs",
+                    "yaml",
+                    ":spec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spec",
+                      "description": "(Required) Internal or Public specification."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-yaml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-yaml"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "82417a66-fbae-4377-ba38-5d0ec1c4ac26",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "swagger",
+                    "v3",
+                    "api-docs",
+                    "yaml",
+                    ":spec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spec",
+                      "description": "(Required) Internal or Public specification."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd6e7194-d50e-44fb-8aa1-5db676b22f47",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "swagger",
+                    "v3",
+                    "api-docs",
+                    "yaml",
+                    ":spec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spec",
+                      "description": "(Required) Internal or Public specification."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f21960a-de8e-4e24-9085-b3e31a63ce64",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "swagger",
+                    "v3",
+                    "api-docs",
+                    "yaml",
+                    ":spec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spec",
+                      "description": "(Required) Internal or Public specification."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c488698-c36b-4d90-82ba-ba6c78c53ee9",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "swagger",
+                    "v3",
+                    "api-docs",
+                    "yaml",
+                    ":spec"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "spec",
+                      "description": "(Required) Internal or Public specification."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cce.midwestiso.org/dart2/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8d45904c-b6da-4778-a1ca-9d35ec920fbd",
+    "name": "MUI - Public Specification Admin API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MISO Public Specification to support Market System Enhancement (MSE) new Market User Interface (MUI 2.0).\n\nContact Support:\n Name: MUI 2.0 Questions\n Email: MSEQuestions@misoenergy.org",
+      "type": "text/plain"
+    }
+  }
+}

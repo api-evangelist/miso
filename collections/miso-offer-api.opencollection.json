@@ -1,0 +1,557 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MUI - Public Specification Offer API",
+    "version": "3.3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Offer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getOfferRampRateCurves",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/real-time/:day/offer/ramp-curves/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "hour",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specifiy the particular hour to be returned, otherwise all hours are returned."
+              }
+            ]
+          },
+          "docs": "Returns the collection of Real-Time ramp rate curves by pnode location for the day. Pnode or portfolio query parameter may be provided, otherwise all valid resources supporting ramp rate curves for participant are returned. Message format differs by offerType property which can be one of the following values; -  rampCurve -  esrRampCurve"
+        },
+        {
+          "info": {
+            "name": "postOfferRampRateCurves",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/markets/real-time/:day/offer/ramp-curves/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Post the collection hourly ramp rate curves for one or more pnode locations. Message format differs by offerType property which can be one of the following values; -  rampCurve -  esrRampCurve"
+        },
+        {
+          "info": {
+            "name": "getCombinedCycleResourceDay",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/common/:day/offer/cc-status/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              }
+            ]
+          },
+          "docs": "Returns the collection of Combined Cycle status by pnode location for the day. Pnode or portfolio query parameters may be provided, otherwise all Combined Cycle aggregate resources for participant are returned."
+        },
+        {
+          "info": {
+            "name": "postCombinedCycleResourceDay",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/markets/common/:day/offer/cc-status/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit Combined Cycle status for one or more pnode locations."
+        },
+        {
+          "info": {
+            "name": "getScheduleOfferOverrides",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/:market/:day/offer/auto-overrides/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "market",
+                "value": "",
+                "type": "path",
+                "description": "Energy Market (day-ahead, real-time)."
+              },
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              }
+            ]
+          },
+          "docs": "Returns the collection of regulation offer overrides by pnode location for the day. Pnode or portfolio query parameters may be provided, otherwise all applicable resources for participant which have been overriden are returned. Regulation Offers are overridden under the following circumstances.\n1. The Participant’s combined Regulation Capacity and Mileage Offers exceed the allowable Total Regulation Offer range (this can occur if a Deployment Rate change occurs).\n2. The Participant’s Resource is"
+        },
+        {
+          "info": {
+            "name": "getQualificationStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/:market/:day/offer/qualification-status/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "market",
+                "value": "",
+                "type": "path",
+                "description": "Energy Market (day-ahead, real-time)."
+              },
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              }
+            ]
+          },
+          "docs": "Returns the collection of qualification status flags by pnode location for the day. Pnode or portfolio query parameters may be provided, otherwise all applicable resources for participant are returned. parameter must be supplied."
+        },
+        {
+          "info": {
+            "name": "getScheduleOffer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/:market/:day/offer/schedule/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "market",
+                "value": "",
+                "type": "path",
+                "description": "Energy Market or both (day-ahead, real-time, or both)."
+              },
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "locationType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the collection of daily/hourly schedule offers by pnode location for the day. Pnode or portfolio query parameters may be provided, otherwise all applicable resources for participant are returned. Message format differs by offerType property which can be one of the following values; - genOffer - dirOffer - drr1Offer - drr2Offer - earOffer - serOffer - esrOffer"
+        },
+        {
+          "info": {
+            "name": "postScheduleOffer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/markets/:market/:day/offer/schedule/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "market",
+                "value": "",
+                "type": "path",
+                "description": "Energy Market or both (day-ahead, real-time, or both)."
+              },
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit the daily/hourly schedule offers for one or more pnode locations for the day. Message format differs by offerType property which can be one of the following values; - genOffer - dirOffer - drr1Offer - drr2Offer - earOffer - serOffer - esrOffer"
+        },
+        {
+          "info": {
+            "name": "getDefaultDay",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/:market/:day/offer/defaults/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "market",
+                "value": "",
+                "type": "path",
+                "description": "Energy Market or both (day-ahead, real-time, or both)."
+              },
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "locationType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the collection of schedule offer defaults by pnode location for the day.  Pnode or portfolio query parameters may be provided, otherwise all applicable resources for participant are returned. Message format differs by offerType property which can be one of the following values; - genDefaultOffer - dirDefaultOffer - drr1DefaultOffer - drr2DefaultOffer - earDefaultOffer - serDefaultOffer - esrDefaultOffer"
+        },
+        {
+          "info": {
+            "name": "postDefaultDay",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/markets/:market/:day/offer/defaults/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "market",
+                "value": "",
+                "type": "path",
+                "description": "Energy Market or both (day-ahead, real-time, or both)."
+              },
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit schedule offer defaults for one or more pnode locations for the day. Message format differs by offerType property which can be one of the following values; - genDefaultOffer - dirDefaultOffer - drr1DefaultOffer - drr2DefaultOffer - earDefaultOffer - serDefaultOffer - esrDefaultOffer"
+        },
+        {
+          "info": {
+            "name": "getRealTimeOfferOverrides",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/real-time/:day/offer/overrides/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "locationType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interval5Since",
+                "value": "",
+                "type": "query",
+                "description": "Date-time as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00. Optional element to specify the interval since which the overrides are requested. If {day} is today and interval5Since is not provided then currectly active overrides will be returned. If {day} is not today and interval5Since is not provided then data for the day since interval 23:59:59 will be returned."
+              }
+            ]
+          },
+          "docs": "Returns the collection of Real-Time offer overrides by pnode location for the day. Pnode or portfolio query parameters may be provided, otherwise all applicable resources for participant are returned. Message format differs by offerType property which can be one of the following values; - genScheduleOfferOverrides - dirScheduleOfferOverrides - drr1ScheduleOfferOverrides - drr2ScheduleOfferOverrides - earScheduleOfferOverrides - serScheduleOfferOverrides - esrScheduleOfferOverrides"
+        },
+        {
+          "info": {
+            "name": "postRealTimeOfferOverrides",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/markets/real-time/:day/offer/overrides/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit the Real-Time offer overrides by one or more pnode locations for the day. Message format differs by offerType property which can be one of the following values; - genScheduleOfferOverrides - dirScheduleOfferOverrides - drr1ScheduleOfferOverrides - drr2ScheduleOfferOverrides - earScheduleOfferOverrides - serScheduleOfferOverrides - esrScheduleOfferOverrides"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

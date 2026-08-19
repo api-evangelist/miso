@@ -1,0 +1,99 @@
+openapi: 3.2.0
+info:
+  title: MISO Public Real Time Total Load API
+  version: '2025-12-12'
+  description: 'Real-time market and operations data displays from MISO, served from one host under /api/. Merged from two separately derived documents — Operations Displays and Markets Displays — which described the same API: same server, same (absent) authentication, and the same documentation table. Reported by a reader on 2026-08-04.'
+  x-provenance:
+    harvestedBy: API Evangelist
+    fetchDate: '2026-07-27'
+    note: 'MISO publishes no OpenAPI for its Public API. This document was assembled from MISO''s own published artifacts only: every path and every operation summary is taken verbatim from the endpoint table MISO publishes at https://public-api.misoenergy.org/ (section "Operations Displays"), and every response schema and example is derived from the live JSON MISO returned to an anonymous GET on 2026-07-27. No host, path, parameter, field name or value was invented. Examples are the real payloads with long arrays truncated to two elements. No query parameters are documented by MISO for these endpoints and none are asserted here.'
+    sources:
+    - https://www.misoenergy.org/markets-and-operations/RTDataAPIs/ (HTTP 200)
+    - https://public-api.misoenergy.org/ (HTTP 200, endpoint table)
+    - Every path in this document individually fetched anonymously; all returned HTTP 200 application/json on 2026-07-27.
+servers:
+- url: https://public-api.misoenergy.org
+  description: MISO Public API — anonymous, no key, no account.
+tags:
+- name: RealTimeTotalLoad
+paths:
+  /api/RealTimeTotalLoad:
+    get:
+      operationId: getRealTimeTotalLoad
+      summary: Real Time Total Load
+      description: Source data behind the MISO public "Real Time Total Load" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  LoadInfo:
+                    type: object
+                    properties:
+                      RefId:
+                        type: string
+                      ClearedMW:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            ClearedMWHourly:
+                              type: object
+                              properties:
+                                Hour:
+                                  type: string
+                                Value:
+                                  type: string
+                      MediumTermLoadForecast:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            Forecast:
+                              type: object
+                              properties:
+                                HourEnding:
+                                  type: string
+                                LoadForecast:
+                                  type: string
+                      FiveMinTotalLoad:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            Load:
+                              type: object
+                              properties:
+                                Time:
+                                  type: string
+                                Value:
+                                  type: string
+              example:
+                LoadInfo:
+                  RefId: 27-Jul-2026 - Interval 08:10 EST
+                  ClearedMW:
+                  - ClearedMWHourly:
+                      Hour: '1'
+                      Value: '90916'
+                  - ClearedMWHourly:
+                      Hour: '2'
+                      Value: '86496'
+                  MediumTermLoadForecast:
+                  - Forecast:
+                      HourEnding: '1'
+                      LoadForecast: '89367'
+                  - Forecast:
+                      HourEnding: '2'
+                      LoadForecast: '86225'
+                  FiveMinTotalLoad:
+                  - Load:
+                      Time: 00:00
+                      Value: '93419'
+                  - Load:
+                      Time: 00:05
+                      Value: '93087'
+      tags:
+      - RealTimeTotalLoad

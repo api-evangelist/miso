@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MISO Public Interchange API",
+    "version": "2025-12-12"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Interchange",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Tie Flow / Net Actual Interchange (NAI) — GetNai",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/Interchange/GetNai"
+          },
+          "docs": "Source data behind the MISO public \"Tie Flow / Net Actual Interchange (NAI)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Tie Flow / Net Actual Interchange (NAI) — FiveMinute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/Interchange/GetNai/FiveMinute"
+          },
+          "docs": "Source data behind the MISO public \"Tie Flow / Net Actual Interchange (NAI)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Net Actual Interchange (Imports)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/Interchange/GetNai/Imports"
+          },
+          "docs": "Source data behind the MISO public \"Net Actual Interchange (Imports)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Net Scheduled Interchange — GetNsi",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/Interchange/GetNsi"
+          },
+          "docs": "Source data behind the MISO public \"Net Scheduled Interchange\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Net Scheduled Interchange — FiveMinute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/Interchange/GetNsi/FiveMinute"
+          },
+          "docs": "Source data behind the MISO public \"Net Scheduled Interchange\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Net Scheduled Interchange (MISO) — MISO",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/Interchange/GetNsi/MISO"
+          },
+          "docs": "Source data behind the MISO public \"Net Scheduled Interchange (MISO)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Net Scheduled Interchange (MISO) — MISOFiveMinute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/Interchange/GetNsi/MISOFiveMinute"
+          },
+          "docs": "Source data behind the MISO public \"Net Scheduled Interchange (MISO)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Net Scheduled Interchange (MISO) — MISOOneMinute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/Interchange/GetNsi/MISOOneMinute"
+          },
+          "docs": "Source data behind the MISO public \"Net Scheduled Interchange (MISO)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Net Scheduled Interchange — OneMinute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/Interchange/GetNsi/OneMinute"
+          },
+          "docs": "Source data behind the MISO public \"Net Scheduled Interchange\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

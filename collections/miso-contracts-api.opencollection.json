@@ -1,0 +1,250 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MUI - Public Specification Contracts API",
+    "version": "3.3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contracts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getBilateralContracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/bilateral/participants/:participantName/contracts",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "contractName",
+                "value": "",
+                "type": "query",
+                "description": "The name of the contract."
+              },
+              {
+                "name": "counterPartyName",
+                "value": "",
+                "type": "query",
+                "description": "The counter party name involved."
+              },
+              {
+                "name": "effectiveStart",
+                "value": "",
+                "type": "query",
+                "description": "The start date of the contract."
+              },
+              {
+                "name": "effectiveEnd",
+                "value": "",
+                "type": "query",
+                "description": "The end date of the contract."
+              },
+              {
+                "name": "approvalRequired",
+                "value": "",
+                "type": "query",
+                "description": "Whether or not approval is required for the contract. Default is false, meaning that any contract, approved or not, satisfies the query in concert with other specified parameters."
+              },
+              {
+                "name": "counterPartyType",
+                "value": "",
+                "type": "query",
+                "description": "The type of participant the counterparty is."
+              }
+            ]
+          },
+          "docs": "Returns the list of contracts for a specific participant."
+        },
+        {
+          "info": {
+            "name": "postBilateralContracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/markets/bilateral/participants/:participantName/contracts",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit multiple contracts at a time for a specific participant."
+        },
+        {
+          "info": {
+            "name": "getBilateralContractSchedules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/bilateral/participants/:participantName/contract-schedules",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "contractName",
+                "value": "",
+                "type": "query",
+                "description": "Name of contract the schedules should be filtered by."
+              },
+              {
+                "name": "counterPartyName",
+                "value": "",
+                "type": "query",
+                "description": "Name of other participant involved."
+              },
+              {
+                "name": "scheduleDay",
+                "value": "",
+                "type": "query",
+                "description": "Day of the schedule in question."
+              },
+              {
+                "name": "scheduleState",
+                "value": "",
+                "type": "query",
+                "description": "The state that the schedule is in."
+              }
+            ]
+          },
+          "docs": "Query schedules for a specificed day and participant."
+        },
+        {
+          "info": {
+            "name": "postBilateralContractSchedules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/markets/bilateral/participants/:participantName/contract-schedules",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit schedules for a multiple days for a given contract and participant."
+        },
+        {
+          "info": {
+            "name": "postSingleBilateralContractSchedules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/markets/bilateral/participants/:participantName/contract-schedules/:scheduleDay",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "scheduleDay",
+                "value": "",
+                "type": "path",
+                "description": "The day of the schedule."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit schedules for a specificed day and participant."
+        },
+        {
+          "info": {
+            "name": "postBilateralContractsSchedulesApproval",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/markets/bilateral/participants/:participantName/contract-confirmation",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Confirm both contracts and schedules."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

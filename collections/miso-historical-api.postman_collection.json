@@ -1,0 +1,340 @@
+{
+  "item": [
+    {
+      "id": "d7fbbc24-f9ee-4997-be49-6f62c7fe5f4e",
+      "name": "Historical",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "924b8b40-b129-43fb-b0fc-3d32afd64757",
+          "name": "Historical Net Scheduled Interchange",
+          "request": {
+            "name": "Historical Net Scheduled Interchange",
+            "description": {
+              "content": "Net scheduled interchange (NSI) final volumes, by adjacent balancing authority (BA) in hourly intervals. Includes updates from Dynamic Schedules, Emergency Power Purchases, and ARS/CRSG events. Positive values indicate imports. Available at 7am EST the day after. May be updated up to 105 days after-the-fact.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "historical",
+                ":date",
+                "interchange",
+                "net-scheduled"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "adjacentBa",
+                  "value": "<string>",
+                  "description": "Filter to a specific adjacent Balancing Authority (ex. PJM, TVA, SWPP)."
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af6f8be4-8768-4e32-b175-5f8d4759ecdd",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "historical",
+                    ":date",
+                    "interchange",
+                    "net-scheduled"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "adjacentBa",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      },\n      \"adjacentBa\": \"string\",\n      \"nsi\": 0\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "874fbcc0-8326-461b-8085-f03724344c1d",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "historical",
+                    ":date",
+                    "interchange",
+                    "net-scheduled"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "adjacentBa",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70e3fdd7-4598-4411-a3d0-d31b21fa09d8",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "historical",
+                    ":date",
+                    "interchange",
+                    "net-scheduled"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "adjacentBa",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b6b6b7e-7a94-4b5f-afb3-315c0acc5fc6",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "historical",
+                    ":date",
+                    "interchange",
+                    "net-scheduled"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "adjacentBa",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/lgi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "885c6861-8405-4ea1-8145-c0c2dacf7eea",
+    "name": "Load, Generation, and Interchange Historical API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Provides load, generation, and interchange data. Load: Includes demand, load, and load forecast. Generation: Includes generation cleared and offered as well as related data. Interchange: Includes Energy transfers that cross Balancing Authority (BA) Area boundaries. Note: Data available within the interchange endpoints are subject to change up to 105 days after the market day due to reconciliation.",
+      "type": "text/plain"
+    }
+  }
+}

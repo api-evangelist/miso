@@ -1,0 +1,542 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MUI - Public Specification Reports API",
+    "version": "3.3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getDayAheadLmpExAnte",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/day-ahead/:day/reports/lmp-exante",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              }
+            ]
+          },
+          "docs": "Returns the LMP Ex-Ante report for the Day-Ahead market on a specific day. If neither pnode or portfolio query parameters are provided then all public pnodes from the report for all hours of the day are returned."
+        },
+        {
+          "info": {
+            "name": "getDayAheadLmpExPost",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/day-ahead/:day/reports/lmp-expost",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              }
+            ]
+          },
+          "docs": "Returns the LMP Ex-Post report for the Day-Ahead market on a specific day. If neither pnode or portfolio query parameters are provided then all public pnodes from the report for all hours of the day are returned."
+        },
+        {
+          "info": {
+            "name": "getLFHourly",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/day-ahead/:day/reports/lf-hourly",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "hour",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specifiy the particular hour to be returned, otherwise all hours are returned."
+              },
+              {
+                "name": "controlAreaName",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the control area load forecast to return, otherwise system-wide is returned."
+              }
+            ]
+          },
+          "docs": "Return the load forecast report for total the MISO area or an individual control area. If the controlAreaName query parameter filter is not provided the MISO total is returned. If the hour query parameter filter is not provided all hours of the day are returned."
+        },
+        {
+          "info": {
+            "name": "getRealTimeLmpExAnte",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/real-time/:day/reports/lmp-exante",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "interval5",
+                "value": "",
+                "type": "query",
+                "description": "List of up to 12 date-time values as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00 specifying the 5 minute interval(s) for which the LMP report is requested. If not specified then return the latest approved 5 minute interval."
+              }
+            ]
+          },
+          "docs": "Returns the LMP Ex-Ante (UDS) report for the Real-Time market for a specific day and one or more 5 minute intervals. If neither pnode or portfolio query parameters are provided then all public pnodes from the report are returned. If no interval5 query parameter is provided then returns data for the latest 5 minute interval that is available."
+        },
+        {
+          "info": {
+            "name": "getRealTimeLmpExPost",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/real-time/:day/reports/lmp-expost",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "interval5",
+                "value": "",
+                "type": "query",
+                "description": "List of up to 12 date-time values as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00 specifying the 5 minute interval(s) for which the LMP report is requested. If not specified then return the latest approved 5 minute interval."
+              }
+            ]
+          },
+          "docs": "Returns the LMP Ex-Post (RTLMP) report for the Real-Time market for a specific day and one or more 5 minute intervals. If neither pnode or portfolio query parameters are provided then all public pnodes from the report are returned. If no interval5 query parameter is provided then returns data for the latest 5 minute interval that is available."
+        },
+        {
+          "info": {
+            "name": "getRealTimeIntgLmp",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/real-time/:day/reports/hourly-lmp-expost",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "hour",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specifiy the particular hour to be returned, otherwise all hours are returned."
+              }
+            ]
+          },
+          "docs": "Returns the integrated hourly Real-Time locational marginal prices on a per pricing node basis. The integrated hourly totals contain a time-weighted aggregation of the underlying 5 minute reports. The integrated totals are only available for the Ex-Post (RTLMP) study mode. If neither pnode or portfolio or hour query parameters are provided then all public pnodes are returned for all intervals of the day."
+        },
+        {
+          "info": {
+            "name": "getLocationalResult",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/day-ahead/:day/reports/locational-results/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "hour",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specifiy the particular hour to be returned, otherwise all hours are returned."
+              }
+            ]
+          },
+          "docs": "Returns the Day-Ahead market results for all offered products (i.e. energy supply, regulation, spinning reserve, supplemental reserve, ramp capability up, and ramp capability down), as well as any location with cleared demand and virtual bids/offers, by pnode location. Report is participant specific. Data is returned from the Ex-Ante (Day-Ahead) study and are available when the Day-Ahead market closes on the day-ahead of the operating day. Pnode or portfolio query parameters may be provided, oth"
+        },
+        {
+          "info": {
+            "name": "getDistributionFactors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/common/:day/reports/dist-factors",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              }
+            ]
+          },
+          "docs": "REST endpoint calls existing back-end PL/SQL procedure to return the state estimator distribution factors used to allocate the percentage of load distribution of bus nodes to an aggregate node."
+        },
+        {
+          "info": {
+            "name": "getMkWideResult",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/day-ahead/:day/reports/market-wide-results",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              }
+            ]
+          },
+          "docs": "Returns the hourly Day-Ahead summary of market wide results. Output includes forecast MW as well cleared MWs for Energy, Regulation, and the various Contingency Reserve market products. Output data is from the Ex-Ante (Day-Ahead) study."
+        },
+        {
+          "info": {
+            "name": "getDaZonalLmpExAnte",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/day-ahead/:day/reports/zonal-lmp-exante",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "hour",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specifiy the particular hour to be returned, otherwise all hours are returned."
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Optional element to specify the name of zone for the requested report. Zone names are integers."
+              }
+            ]
+          },
+          "docs": "Returns the Day-Ahead market clearing Ex-Ante prices at the zonal level.  This is the Day-Ahead Pricing data. Results are available from the Day-Ahead market after the market has been cleared, the results have been published, and the results publish time for the market has been reached."
+        },
+        {
+          "info": {
+            "name": "getDaZonalLmpExPost",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/day-ahead/:day/reports/zonal-lmp-expost",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "hour",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specifiy the particular hour to be returned, otherwise all hours are returned."
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Optional element to specify the name of zone for the requested report. Zone names are integers."
+              }
+            ]
+          },
+          "docs": "Returns the Day-Ahead market clearing Ex-Post prices at the zonal level. This is the current Day-Ahead ELMP pricing data.  This is the Day-Ahead Pricing data.  Results are available from the Day-Ahead market after the market has been cleared, the results have been published, and the results publish time for the market has been reached."
+        },
+        {
+          "info": {
+            "name": "getBindingLimitsResult",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/day-ahead/:day/reports/binding-limits",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              }
+            ]
+          },
+          "docs": "Returns the binding constraints by hour from the approved Day-Ahead case for a given market day."
+        },
+        {
+          "info": {
+            "name": "getRealTimeZonalPriceResultExAnte",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/real-time/:day/reports/zonal-lmp-exante",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Optional element to specify the name of zone for the requested report. Zone names are integers."
+              },
+              {
+                "name": "interval5",
+                "value": "",
+                "type": "query",
+                "description": "List of up to 12 date-time values as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00 specifying the 5 minute interval(s) for which the LMP report is requested. If not specified then return the latest approved 5 minute interval."
+              }
+            ]
+          },
+          "docs": "Returns the Real Time market clearing Ex-Ante prices at the zonal level."
+        },
+        {
+          "info": {
+            "name": "getRealTimeZonalPriceResultExPost",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/real-time/:day/reports/zonal-lmp-expost",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Optional element to specify the name of zone for the requested report. Zone names are integers."
+              },
+              {
+                "name": "interval5",
+                "value": "",
+                "type": "query",
+                "description": "List of up to 12 date-time values as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00 specifying the 5 minute interval(s) for which the LMP report is requested. If not specified then return the latest approved 5 minute interval."
+              }
+            ]
+          },
+          "docs": "Returns the Real Time market clearing Ex-Post prices at the zonal level."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

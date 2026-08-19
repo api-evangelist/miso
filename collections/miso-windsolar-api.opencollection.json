@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MISO Public Wind Solar API",
+    "version": "2025-12-12"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "WindSolar",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Wind and Solar Generation — GetCombined",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/WindSolar/GetCombined"
+          },
+          "docs": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Wind and Solar Generation — getsolar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/WindSolar/getsolar"
+          },
+          "docs": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Wind and Solar Generation — getsolaractual",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/WindSolar/getsolaractual"
+          },
+          "docs": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Wind and Solar Generation — getsolarforecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/WindSolar/getsolarforecast"
+          },
+          "docs": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Wind and Solar Generation — getwind",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/WindSolar/getwind"
+          },
+          "docs": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Wind and Solar Generation — getwindactual",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/WindSolar/getwindactual"
+          },
+          "docs": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Wind and Solar Generation — getwindforecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/WindSolar/getwindforecast"
+          },
+          "docs": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

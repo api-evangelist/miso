@@ -1,0 +1,1838 @@
+{
+  "item": [
+    {
+      "id": "00196de6-2780-424d-9970-30ae55c343fa",
+      "name": "Bidding",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f688a937-11bf-43a5-b38f-e05ff3c46e30",
+          "name": "get Demand Bid",
+          "request": {
+            "name": "get Demand Bid",
+            "description": {
+              "content": "Returns the collection of Price Sensitive and Fixed Demand Bids by pnode location for the day. Pnode or portfolio query parameters may be provided, otherwise all valid demand bid locations for the participant will be returned for which bids exist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "day-ahead",
+                ":day",
+                "demand",
+                "participants",
+                ":participantName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pnode",
+                  "value": "<string>",
+                  "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "portfolio",
+                  "value": "<string>",
+                  "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af9e1f26-c775-4774-90b1-97bcc357d89d",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"day\": \"2019-03-14\",\n  \"pnodes\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"fixedBids\": null,\n      \"priceSensitiveBids\": null\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"fixedBids\": [\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        },\n        {\n          \"hour\": \"\",\n          \"fixedMw\": \"\"\n        }\n      ],\n      \"priceSensitiveBids\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d520514d-8a24-4f44-af99-8d8ef9add7d5",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe89fc64-0613-49c4-8a44-b92cd861fe0e",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd20a591-5b17-4c09-ac8c-97595c2cc979",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16cebc50-2d47-48fe-90d5-207f258b59c7",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "782b7472-f4d2-481a-9993-357b12725fd6",
+          "name": "post Demand Bids",
+          "request": {
+            "name": "post Demand Bids",
+            "description": {
+              "content": "Post the collection of Fixed and Price Sensitve Demand Bids. Fixed and Price Sensitive Demand bids can be updated individually for one or more pnode locations. Data driven delete behaviour is supported via the incusion of null elements.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "day-ahead",
+                ":day",
+                "demand",
+                "participants",
+                ":participantName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"day\": \"<date>\",\n  \"pnodes\": [\n    {\n      \"pnodeName\": \"<string>\",\n      \"fixedBids\": \"<array,null>\",\n      \"priceSensitiveBids\": \"<array,null>\"\n    },\n    {\n      \"pnodeName\": \"<string>\",\n      \"fixedBids\": \"<array,null>\",\n      \"priceSensitiveBids\": \"<array,null>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c57bedc5-ec48-43d3-81a3-6c1dfe1e7796",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"pnodes\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"fixedBids\": \"<array,null>\",\n      \"priceSensitiveBids\": \"<array,null>\"\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"fixedBids\": \"<array,null>\",\n      \"priceSensitiveBids\": \"<array,null>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00437d7f-8e19-43e6-8e3b-dd09527bebbf",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"pnodes\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"fixedBids\": \"<array,null>\",\n      \"priceSensitiveBids\": \"<array,null>\"\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"fixedBids\": \"<array,null>\",\n      \"priceSensitiveBids\": \"<array,null>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad6d8c44-4f75-48dd-ba0d-8abeb3f6af07",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"pnodes\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"fixedBids\": \"<array,null>\",\n      \"priceSensitiveBids\": \"<array,null>\"\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"fixedBids\": \"<array,null>\",\n      \"priceSensitiveBids\": \"<array,null>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fe7fd2d-5d60-4f7d-a11e-2e66996c4de5",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"pnodes\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"fixedBids\": \"<array,null>\",\n      \"priceSensitiveBids\": \"<array,null>\"\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"fixedBids\": \"<array,null>\",\n      \"priceSensitiveBids\": \"<array,null>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db20a2bb-134e-4707-8f35-de9dcfe10856",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"pnodes\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"fixedBids\": \"<array,null>\",\n      \"priceSensitiveBids\": \"<array,null>\"\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"fixedBids\": \"<array,null>\",\n      \"priceSensitiveBids\": \"<array,null>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a5e5d6a-449e-45bc-8a44-b3293496ebff",
+          "name": "get Virtual Bids And Offers",
+          "request": {
+            "name": "get Virtual Bids And Offers",
+            "description": {
+              "content": "Returns the collection of virtual dids and offers by pnode location for the day. Pnode or portfolio query parameters may be provided, otherwise all valid virtual locations will be returned for which participant bids/offers exist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "day-ahead",
+                ":day",
+                "virtual",
+                "participants",
+                ":participantName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pnode",
+                  "value": "<string>",
+                  "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "portfolio",
+                  "value": "<string>",
+                  "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d3f6629-3bc4-4d68-abc2-e2b85d7c45e8",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "virtual",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"day\": \"2019-03-14\",\n  \"pnodes\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"virtualBids\": [\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        }\n      ],\n      \"virtualOffers\": [\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"virtualBids\": [\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": [\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            },\n            {\n              \"price\": \"\",\n              \"mw\": \"\"\n            }\n          ]\n        },\n        {\n          \"hour\": \"\",\n          \"virtualBidSegments\": null\n        }\n      ],\n      \"virtualOffers\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0444c243-0feb-420a-b1cb-3bca5e5e65d7",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "virtual",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "219bdc69-a021-43b4-977c-f169db3fe72e",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "virtual",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90695926-6ee6-4695-96e1-d7a4019bcade",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "virtual",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7edc52b6-626f-476c-905f-b39eccd41b6e",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "virtual",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "39048778-5661-41a5-9409-8b94b28b3cd0",
+          "name": "post Virtual Bids And Offers",
+          "request": {
+            "name": "post Virtual Bids And Offers",
+            "description": {
+              "content": "Post the collection of virtual demand bids and virtual generation offers. Submittal for a single or multiple pnode locations is supported. Data driven delete behaviour is supported via the incusion of null elements.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "day-ahead",
+                ":day",
+                "virtual",
+                "participants",
+                ":participantName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"day\": \"<date>\",\n  \"pnodes\": [\n    {\n      \"pnodeName\": \"<string>\",\n      \"virtualBids\": \"<array,null>\",\n      \"virtualOffers\": \"<array,null>\"\n    },\n    {\n      \"pnodeName\": \"<string>\",\n      \"virtualBids\": \"<array,null>\",\n      \"virtualOffers\": \"<array,null>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a4584239-cad8-49da-b43e-270d67ec241c",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "virtual",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"pnodes\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"virtualBids\": \"<array,null>\",\n      \"virtualOffers\": \"<array,null>\"\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"virtualBids\": \"<array,null>\",\n      \"virtualOffers\": \"<array,null>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "825b4edc-a759-4a5b-9016-6dd080faa954",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "virtual",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"pnodes\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"virtualBids\": \"<array,null>\",\n      \"virtualOffers\": \"<array,null>\"\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"virtualBids\": \"<array,null>\",\n      \"virtualOffers\": \"<array,null>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66eb3bc1-5425-431f-9a94-b98436951a73",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "virtual",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"pnodes\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"virtualBids\": \"<array,null>\",\n      \"virtualOffers\": \"<array,null>\"\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"virtualBids\": \"<array,null>\",\n      \"virtualOffers\": \"<array,null>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c020d858-138f-4c1b-9b2d-2e9ab495b77b",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "virtual",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"pnodes\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"virtualBids\": \"<array,null>\",\n      \"virtualOffers\": \"<array,null>\"\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"virtualBids\": \"<array,null>\",\n      \"virtualOffers\": \"<array,null>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7aef2237-2ce3-4c8d-b02d-0272866b79f5",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "day-ahead",
+                    ":day",
+                    "virtual",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"pnodes\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"virtualBids\": \"<array,null>\",\n      \"virtualOffers\": \"<array,null>\"\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"virtualBids\": \"<array,null>\",\n      \"virtualOffers\": \"<array,null>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cce.midwestiso.org/dart2/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "73c9681f-4bf7-4c94-b153-4c990591731a",
+    "name": "MUI - Public Specification Bidding API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MISO Public Specification to support Market System Enhancement (MSE) new Market User Interface (MUI 2.0).\n\nContact Support:\n Name: MUI 2.0 Questions\n Email: MSEQuestions@misoenergy.org",
+      "type": "text/plain"
+    }
+  }
+}

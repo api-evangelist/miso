@@ -1,0 +1,550 @@
+{
+  "item": [
+    {
+      "id": "6a89b8ce-5c55-4e5a-89aa-2bbf6d2876ef",
+      "name": "WindSolar",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "65a80fb4-0d5f-44e6-b35f-34ae9cd14964",
+          "name": "Wind and Solar Generation — GetCombined",
+          "request": {
+            "name": "Wind and Solar Generation — GetCombined",
+            "description": {
+              "content": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "WindSolar",
+                "GetCombined"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ac1219b-7e50-4079-ab59-91289df2b289",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "WindSolar",
+                    "GetCombined"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instance\": [\n    {\n      \"ForecastDateTimeEST\": \"2026-07-27 12:00:00 AM\",\n      \"ForecastHourEndingEST\": \"1\",\n      \"ForecastWindValue\": \"13582.00\",\n      \"ForecastSolarValue\": \"0.00\",\n      \"ActualDateTimeEST\": \"2026-07-27 12:00:00 AM\",\n      \"ActualHourEndingEST\": \"1\",\n      \"ActualWindValue\": \"11320.30\",\n      \"ActualSolarValue\": \"-48.77\"\n    },\n    {\n      \"ForecastDateTimeEST\": \"2026-07-27 1:00:00 AM\",\n      \"ForecastHourEndingEST\": \"2\",\n      \"ForecastWindValue\": \"13652.00\",\n      \"ForecastSolarValue\": \"0.00\",\n      \"ActualDateTimeEST\": \"2026-07-27 1:00:00 AM\",\n      \"ActualHourEndingEST\": \"2\",\n      \"ActualWindValue\": \"11166.52\",\n      \"ActualSolarValue\": \"-48.95\"\n    }\n  ],\n  \"RefId\": \"27-Jul-2026 - Interval 08:00 EST\",\n  \"MktDay\": \"07-27-2026\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0e1a3821-c16d-47dc-84f8-a3884221299a",
+          "name": "Wind and Solar Generation — getsolar",
+          "request": {
+            "name": "Wind and Solar Generation — getsolar",
+            "description": {
+              "content": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "WindSolar",
+                "getsolar"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d499b4d-3649-4e24-acfe-4342d7c4af3a",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "WindSolar",
+                    "getsolar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instance\": [\n    {\n      \"ForecastDateTimeEST\": \"2026-07-27 12:00:00 AM\",\n      \"ForecastHourEndingEST\": \"1\",\n      \"ForecastValue\": \"0.00\",\n      \"ActualDateTimeEST\": \"2026-07-27 12:00:00 AM\",\n      \"ActualHourEndingEST\": \"1\",\n      \"ActualValue\": \"-48.77\"\n    },\n    {\n      \"ForecastDateTimeEST\": \"2026-07-27 1:00:00 AM\",\n      \"ForecastHourEndingEST\": \"2\",\n      \"ForecastValue\": \"0.00\",\n      \"ActualDateTimeEST\": \"2026-07-27 1:00:00 AM\",\n      \"ActualHourEndingEST\": \"2\",\n      \"ActualValue\": \"-48.95\"\n    }\n  ],\n  \"RefId\": \"27-Jul-2026 - Interval 08:00 EST\",\n  \"MktDay\": \"07-27-2026\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01436a8c-a656-4fa7-bd3c-4d3415eaee38",
+          "name": "Wind and Solar Generation — getsolaractual",
+          "request": {
+            "name": "Wind and Solar Generation — getsolaractual",
+            "description": {
+              "content": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "WindSolar",
+                "getsolaractual"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "930ac964-9f67-4e2d-97c3-6ebbf323ece2",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "WindSolar",
+                    "getsolaractual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instance\": [\n    {\n      \"DateTimeEST\": \"2026-07-27 12:00:00 AM\",\n      \"HourEndingEST\": \"1\",\n      \"Value\": \"-48.77\"\n    },\n    {\n      \"DateTimeEST\": \"2026-07-27 1:00:00 AM\",\n      \"HourEndingEST\": \"2\",\n      \"Value\": \"-48.95\"\n    }\n  ],\n  \"RefId\": \"27-Jul-2026 - Interval 08:00 EST\",\n  \"MktDay\": \"07-27-2026\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b1120b1a-6ed0-4b73-98a3-9f377da730c2",
+          "name": "Wind and Solar Generation — getsolarforecast",
+          "request": {
+            "name": "Wind and Solar Generation — getsolarforecast",
+            "description": {
+              "content": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "WindSolar",
+                "getsolarforecast"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "98fec789-1e8b-42d8-8181-8d159ccc1e96",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "WindSolar",
+                    "getsolarforecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Forecast\": [\n    {\n      \"DateTimeEST\": \"2026-07-27 12:00:00 AM\",\n      \"HourEndingEST\": \"1\",\n      \"Value\": \"0.00\"\n    },\n    {\n      \"DateTimeEST\": \"2026-07-27 1:00:00 AM\",\n      \"HourEndingEST\": \"2\",\n      \"Value\": \"0.00\"\n    }\n  ],\n  \"RefId\": \"27-Jul-2026 - Interval 08:00 EST\",\n  \"MktDay\": \"07-27-2026\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cea11c65-fec3-45c0-92d6-d7190efaecf6",
+          "name": "Wind and Solar Generation — getwind",
+          "request": {
+            "name": "Wind and Solar Generation — getwind",
+            "description": {
+              "content": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "WindSolar",
+                "getwind"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ef96821-b846-47cc-bd10-aef5ae966494",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "WindSolar",
+                    "getwind"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instance\": [\n    {\n      \"ForecastDateTimeEST\": \"2026-07-27 12:00:00 AM\",\n      \"ForecastHourEndingEST\": \"1\",\n      \"ForecastValue\": \"13582.00\",\n      \"ActualDateTimeEST\": \"2026-07-27 12:00:00 AM\",\n      \"ActualHourEndingEST\": \"1\",\n      \"ActualValue\": \"11320.30\"\n    },\n    {\n      \"ForecastDateTimeEST\": \"2026-07-27 1:00:00 AM\",\n      \"ForecastHourEndingEST\": \"2\",\n      \"ForecastValue\": \"13652.00\",\n      \"ActualDateTimeEST\": \"2026-07-27 1:00:00 AM\",\n      \"ActualHourEndingEST\": \"2\",\n      \"ActualValue\": \"11166.52\"\n    }\n  ],\n  \"RefId\": \"27-Jul-2026 - Interval 08:00 EST\",\n  \"MktDay\": \"07-27-2026\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e0c76bf6-b5e7-40d9-89e3-fc8fe7e63ea0",
+          "name": "Wind and Solar Generation — getwindactual",
+          "request": {
+            "name": "Wind and Solar Generation — getwindactual",
+            "description": {
+              "content": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "WindSolar",
+                "getwindactual"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6e7dce4b-5388-4fde-97a4-41b46a089114",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "WindSolar",
+                    "getwindactual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instance\": [\n    {\n      \"DateTimeEST\": \"2026-07-27 12:00:00 AM\",\n      \"HourEndingEST\": \"1\",\n      \"Value\": \"11320.30\"\n    },\n    {\n      \"DateTimeEST\": \"2026-07-27 1:00:00 AM\",\n      \"HourEndingEST\": \"2\",\n      \"Value\": \"11166.52\"\n    }\n  ],\n  \"RefId\": \"27-Jul-2026 - Interval 08:00 EST\",\n  \"MktDay\": \"07-27-2026\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9371a44d-f7d5-4869-9a09-fd13561fd609",
+          "name": "Wind and Solar Generation — getwindforecast",
+          "request": {
+            "name": "Wind and Solar Generation — getwindforecast",
+            "description": {
+              "content": "Source data behind the MISO public \"Wind and Solar Generation\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "WindSolar",
+                "getwindforecast"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c2da093-60db-45f1-b3e0-91cdf8d119c1",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "WindSolar",
+                    "getwindforecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Forecast\": [\n    {\n      \"DateTimeEST\": \"2026-07-27 12:00:00 AM\",\n      \"HourEndingEST\": \"1\",\n      \"Value\": \"13582.00\"\n    },\n    {\n      \"DateTimeEST\": \"2026-07-27 1:00:00 AM\",\n      \"HourEndingEST\": \"2\",\n      \"Value\": \"13652.00\"\n    }\n  ],\n  \"RefId\": \"27-Jul-2026 - Interval 08:00 EST\",\n  \"MktDay\": \"07-27-2026\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://public-api.misoenergy.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c7116ad1-955a-4a9f-ae95-1fe09a7ad841",
+    "name": "MISO Public Wind Solar API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time market and operations data displays from MISO, served from one host under /api/. Merged from two separately derived documents — Operations Displays and Markets Displays — which described the same API: same server, same (absent) authentication, and the same documentation table. Reported by a reader on 2026-08-04.",
+      "type": "text/plain"
+    }
+  }
+}

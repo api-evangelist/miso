@@ -1,0 +1,2146 @@
+{
+  "item": [
+    {
+      "id": "63b33cfa-14e7-4269-8e97-c7d2592afb46",
+      "name": "Transactions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0f88b08e-87e8-4194-b9ba-bf84e3a44804",
+          "name": "get Transaction Events",
+          "request": {
+            "name": "get Transaction Events",
+            "description": {
+              "content": "Returns a collection of transaction events for the specified start and end date-time and operation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mgms",
+                "transactions",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number. Optional parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "pagesize",
+                  "value": "<integer>",
+                  "description": "Page size. It starts from zero. Optional parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "A comma separated list of sortable properties, each item must have format: property-name:order. Order can be asc or desc. Available property names: eventTime, startDateTime, endDateTime, operationTypes, operationType, serviceName, submitterName, participantMrid, participantName, transactionId, requestSource"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDateTime",
+                  "value": "<dateTime>",
+                  "description": "Date-time as defined in RFC 3339 having format 'YYYY-MM-DDTHH:MM:SS-05:00'. Optional parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDateTime",
+                  "value": "<dateTime>",
+                  "description": "Date-time as defined in RFC 3339 having format 'YYYY-MM-DDTHH:MM:SS-05:00'. Optional parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "operationTypes",
+                  "value": "<string>",
+                  "description": "Operation service type. Optional parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "serviceName",
+                  "value": "<string>",
+                  "description": "Service name. Optional parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "participantName",
+                  "value": "<string>",
+                  "description": "Participant name. Optional parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "submitterName",
+                  "value": "<string>",
+                  "description": "User name. Optional parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionId",
+                  "value": "<guid>",
+                  "description": "Transaction Id. Optional parameter."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7793e9f2-6f2f-415c-9201-076bab3254f4",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagesize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "endDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "operationTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "participantName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "submitterName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<guid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"mrid\": \"5eb8a506-26f6-61a3-ca09-60aaf0607bbd\",\n    \"transactionId\": \"string\",\n    \"eventTime\": \"string\",\n    \"operationType\": \"<string>\",\n    \"transactionState\": \"SUCCESS\",\n    \"processingTime\": 2663.4276372038767,\n    \"serviceName\": \"<string>\",\n    \"hostName\": \"string\",\n    \"urlPath\": \"string\",\n    \"participantName\": \"string\",\n    \"submitterName\": \"string\",\n    \"httpResponseCode\": \"string\",\n    \"marketParticipant\": {\n      \"mrid\": \"ad1c19fa-9cb6-485a-0055-f40e107b7e6c\",\n      \"name\": \"string\"\n    }\n  },\n  {\n    \"mrid\": \"5a143d85-1355-fe20-5a04-89f4a6fcd963\",\n    \"transactionId\": \"string\",\n    \"eventTime\": \"string\",\n    \"operationType\": \"<string>\",\n    \"transactionState\": \"FAILED\",\n    \"processingTime\": 1349.7997251753268,\n    \"serviceName\": \"<string>\",\n    \"hostName\": \"string\",\n    \"urlPath\": \"string\",\n    \"participantName\": \"string\",\n    \"submitterName\": \"string\",\n    \"httpResponseCode\": \"string\",\n    \"marketParticipant\": {\n      \"mrid\": \"c7166e47-5bb2-0968-4c92-7b74eacca5ec\",\n      \"name\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e0d8a89-5175-4bdc-8b4f-fae651ac46b5",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagesize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "endDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "operationTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "participantName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "submitterName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<guid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a8c2039-3a8f-4149-96a8-7d5c380ba7ec",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagesize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "endDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "operationTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "participantName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "submitterName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<guid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d8aa9ec-0085-402c-9ff8-6b4dab209cb0",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagesize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "endDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "operationTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "participantName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "submitterName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<guid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99216c77-a9ae-4e87-9869-b748500a1a46",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagesize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "endDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "operationTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "participantName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "submitterName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<guid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f711c990-7bea-41d1-8f8f-47f33302b85f",
+          "name": "get Transaction Event",
+          "request": {
+            "name": "get Transaction Event",
+            "description": {
+              "content": "Returns the transaction event specified by the internal Transaction Event unique identifier(UUID).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mgms",
+                "transactions",
+                "events",
+                "mrid",
+                ":mrid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mrid",
+                  "description": "(Required) The Transaction GUID identifies a specific transaction event item."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d512bc2-16a5-4e76-ac31-92c72c99e87d",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "mrid",
+                    ":mrid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mrid",
+                      "description": "(Required) The Transaction GUID identifies a specific transaction event item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"mrid\": \"581ab95c-b5dc-dac8-c15e-2a3bb51e0b25\",\n  \"transactionId\": \"string\",\n  \"eventTime\": \"string\",\n  \"operationType\": \"<string>\",\n  \"transactionState\": \"FAILED\",\n  \"processingTime\": 2114.768550733247,\n  \"serviceName\": \"<string>\",\n  \"hostName\": \"string\",\n  \"urlPath\": \"string\",\n  \"participantName\": \"string\",\n  \"submitterName\": \"string\",\n  \"httpResponseCode\": \"string\",\n  \"marketParticipant\": {\n    \"mrid\": \"f5dd8fe5-85f2-39b1-ccf7-9dba96ef14e0\",\n    \"name\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8f9f508-986a-4457-8f24-9f2ff19b392d",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "mrid",
+                    ":mrid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mrid",
+                      "description": "(Required) The Transaction GUID identifies a specific transaction event item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d0b1310-da3d-4cee-a7e4-9a56bfdfbd51",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "mrid",
+                    ":mrid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mrid",
+                      "description": "(Required) The Transaction GUID identifies a specific transaction event item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fce51bd0-1a12-4eb4-822b-00922ffef0e1",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "mrid",
+                    ":mrid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mrid",
+                      "description": "(Required) The Transaction GUID identifies a specific transaction event item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed323613-4927-42a3-a2a2-d4c1d7680bf9",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "mrid",
+                    ":mrid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mrid",
+                      "description": "(Required) The Transaction GUID identifies a specific transaction event item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3b5cc2f-b90e-43ee-9c1d-a0e4f782098a",
+          "name": "get Participant Transaction Events",
+          "request": {
+            "name": "get Participant Transaction Events",
+            "description": {
+              "content": "Returns a collection of transaction events submitted by the specified participant for the specified start and end date-time and operation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mgms",
+                "transactions",
+                "events",
+                "participants",
+                "name",
+                ":participantName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number. Optional parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "pagesize",
+                  "value": "<integer>",
+                  "description": "Page size. It starts from zero. Optional parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "A comma separated list of sortable properties, each item must have format: property-name:order. Order can be asc or desc. Available property names: eventTime, startDateTime, endDateTime, operationTypes, operationType, serviceName, submitterName, participantMrid, participantName, transactionId, requestSource"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDateTime",
+                  "value": "<dateTime>",
+                  "description": "Date-time as defined in RFC 3339 having format 'YYYY-MM-DDTHH:MM:SS-05:00'. Optional parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDateTime",
+                  "value": "<dateTime>",
+                  "description": "Date-time as defined in RFC 3339 having format 'YYYY-MM-DDTHH:MM:SS-05:00'. Optional parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "operationTypes",
+                  "value": "<string>",
+                  "description": "Operation service type. Optional parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "serviceName",
+                  "value": "<string>",
+                  "description": "Service name. Optional parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "submitterName",
+                  "value": "<string>",
+                  "description": "User name. Optional parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionId",
+                  "value": "<guid>",
+                  "description": "Transaction Id. Optional parameter."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The participant name associated with the transaction."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1f952359-a625-403b-ba1f-09106545c4f3",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "participants",
+                    "name",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagesize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "endDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "operationTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "submitterName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<guid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The participant name associated with the transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"mrid\": \"a221d84e-62cd-9b1d-26b4-26d9e8d92cb6\",\n    \"transactionId\": \"string\",\n    \"eventTime\": \"string\",\n    \"operationType\": \"<string>\",\n    \"transactionState\": \"FAILED\",\n    \"processingTime\": 5567.959701590682,\n    \"serviceName\": \"<string>\",\n    \"hostName\": \"string\",\n    \"urlPath\": \"string\",\n    \"participantName\": \"string\",\n    \"submitterName\": \"string\",\n    \"httpResponseCode\": \"string\",\n    \"marketParticipant\": {\n      \"mrid\": \"c501e868-2c52-87ad-ba7e-6b6a6fd42c1d\",\n      \"name\": \"string\"\n    }\n  },\n  {\n    \"mrid\": \"c4066238-5ed4-a91f-9731-e5705366613f\",\n    \"transactionId\": \"string\",\n    \"eventTime\": \"string\",\n    \"operationType\": \"<string>\",\n    \"transactionState\": \"SUCCESS\",\n    \"processingTime\": 8938.91986568191,\n    \"serviceName\": \"<string>\",\n    \"hostName\": \"string\",\n    \"urlPath\": \"string\",\n    \"participantName\": \"string\",\n    \"submitterName\": \"string\",\n    \"httpResponseCode\": \"string\",\n    \"marketParticipant\": {\n      \"mrid\": \"d448b23c-e9ba-0c2d-6409-a64b3ade3784\",\n      \"name\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "773ebf90-3a49-4601-9af7-791f05c6d5fb",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "participants",
+                    "name",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagesize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "endDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "operationTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "submitterName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<guid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The participant name associated with the transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ccc71a2f-eed3-4251-8b93-427445fd1e44",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "participants",
+                    "name",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagesize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "endDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "operationTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "submitterName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<guid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The participant name associated with the transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c68424eb-625e-46be-b9c3-d22a716a58f8",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "participants",
+                    "name",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagesize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "endDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "operationTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "submitterName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<guid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The participant name associated with the transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f3be438-4c2d-450e-be6b-a15e14a30b29",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "participants",
+                    "name",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pagesize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "endDateTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    },
+                    {
+                      "key": "operationTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "serviceName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "submitterName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<guid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The participant name associated with the transaction."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0373d76-dcd8-4033-80e9-e7a0e89963bb",
+          "name": "get Transaction Event Payloads",
+          "request": {
+            "name": "get Transaction Event Payloads",
+            "description": {
+              "content": "Returns one or more payload documents for transaction event specified by the internal Transaction Event unique identifier(UUID).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mgms",
+                "transactions",
+                "events",
+                "mrid",
+                ":mrid",
+                "payloads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mrid",
+                  "description": "(Required) The internal Transaction UUID identifies a specific transaction event item."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d844bbf-8fa1-4595-9b57-aa3aa4837dd7",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "mrid",
+                    ":mrid",
+                    "payloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mrid",
+                      "description": "(Required) The internal Transaction UUID identifies a specific transaction event item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"mrid\": \"13a5c662-5fa4-1cdf-b79d-042bbee652af\",\n    \"payloadType\": \"OUTGOING\",\n    \"payloadDocument\": \"string\",\n    \"transactionEvent\": {\n      \"mrid\": \"803bdfdf-eae6-24f2-8a9c-cba402a6e874\",\n      \"transactionId\": \"string\",\n      \"eventTime\": \"string\",\n      \"operationType\": \"<string>\",\n      \"transactionState\": \"FAILED\",\n      \"processingTime\": 7132.864139709186,\n      \"serviceName\": \"<string>\",\n      \"hostName\": \"string\",\n      \"urlPath\": \"string\",\n      \"participantName\": \"string\",\n      \"submitterName\": \"string\",\n      \"httpResponseCode\": \"string\",\n      \"marketParticipant\": {\n        \"mrid\": \"764ec71d-727d-62ea-3165-76b3be4bdfc1\",\n        \"name\": \"string\"\n      }\n    }\n  },\n  {\n    \"mrid\": \"c6d26b65-2ad4-d59c-8f23-30f22d996d81\",\n    \"payloadType\": \"OUTGOING\",\n    \"payloadDocument\": \"string\",\n    \"transactionEvent\": {\n      \"mrid\": \"02aa1dd5-1be5-0dce-b856-eb4771cf1f65\",\n      \"transactionId\": \"string\",\n      \"eventTime\": \"string\",\n      \"operationType\": \"<string>\",\n      \"transactionState\": \"SUCCESS\",\n      \"processingTime\": 8265.476154521451,\n      \"serviceName\": \"<string>\",\n      \"hostName\": \"string\",\n      \"urlPath\": \"string\",\n      \"participantName\": \"string\",\n      \"submitterName\": \"string\",\n      \"httpResponseCode\": \"string\",\n      \"marketParticipant\": {\n        \"mrid\": \"252264d0-4dd3-b948-b531-353796dbaa8c\",\n        \"name\": \"string\"\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d5f649a-1199-429a-aff4-b7a9abaa6ea4",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "mrid",
+                    ":mrid",
+                    "payloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mrid",
+                      "description": "(Required) The internal Transaction UUID identifies a specific transaction event item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a85feaa2-15ac-4cc8-bdc8-557d921aa434",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "mrid",
+                    ":mrid",
+                    "payloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mrid",
+                      "description": "(Required) The internal Transaction UUID identifies a specific transaction event item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c37f5f5-9d11-4087-b0b9-b17913852989",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "mrid",
+                    ":mrid",
+                    "payloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mrid",
+                      "description": "(Required) The internal Transaction UUID identifies a specific transaction event item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6489ec09-cec5-49bf-8c47-a995b7c30e50",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "mrid",
+                    ":mrid",
+                    "payloads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mrid",
+                      "description": "(Required) The internal Transaction UUID identifies a specific transaction event item."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6499c416-abec-4b69-b385-003c77dc3e6b",
+          "name": "get Transaction Event Payload",
+          "request": {
+            "name": "get Transaction Event Payload",
+            "description": {
+              "content": "Returns payload documents for transaction event specified by the internal Transaction Event unique identifier(UUID) and specified payload type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mgms",
+                "transactions",
+                "events",
+                "mrid",
+                ":mrid",
+                "payloads",
+                "payload-type",
+                ":payloadType"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mrid",
+                  "description": "(Required) The internal Transaction UUID identifies a specific transaction event item."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "payloadType",
+                  "description": "(Required) specific payload document type."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0b8b6888-af3f-4d54-915b-62b43b6a734f",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "mrid",
+                    ":mrid",
+                    "payloads",
+                    "payload-type",
+                    ":payloadType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mrid",
+                      "description": "(Required) The internal Transaction UUID identifies a specific transaction event item."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payloadType",
+                      "description": "(Required) specific payload document type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"mrid\": \"64484b04-9cde-b42a-351a-8cb020824872\",\n  \"payloadType\": \"<string>\",\n  \"payloadDocument\": \"string\",\n  \"transactionEvent\": {\n    \"mrid\": \"91040957-7b68-88df-0913-ddaa2d99a655\",\n    \"transactionId\": \"string\",\n    \"eventTime\": \"string\",\n    \"operationType\": \"<string>\",\n    \"transactionState\": \"PENDING\",\n    \"processingTime\": 1701.7760163714524,\n    \"serviceName\": \"<string>\",\n    \"hostName\": \"string\",\n    \"urlPath\": \"string\",\n    \"participantName\": \"string\",\n    \"submitterName\": \"string\",\n    \"httpResponseCode\": \"string\",\n    \"marketParticipant\": {\n      \"mrid\": \"30c0d9e8-8944-6fa7-8b4b-3b0bb7edbac7\",\n      \"name\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5430e872-5835-46ff-a301-955ff30ffc68",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "mrid",
+                    ":mrid",
+                    "payloads",
+                    "payload-type",
+                    ":payloadType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mrid",
+                      "description": "(Required) The internal Transaction UUID identifies a specific transaction event item."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payloadType",
+                      "description": "(Required) specific payload document type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd0a68fb-7d75-4496-9660-dc33381fb8de",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "mrid",
+                    ":mrid",
+                    "payloads",
+                    "payload-type",
+                    ":payloadType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mrid",
+                      "description": "(Required) The internal Transaction UUID identifies a specific transaction event item."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payloadType",
+                      "description": "(Required) specific payload document type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79bb1a31-a86a-4eb3-81f9-7017f3029077",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "mrid",
+                    ":mrid",
+                    "payloads",
+                    "payload-type",
+                    ":payloadType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mrid",
+                      "description": "(Required) The internal Transaction UUID identifies a specific transaction event item."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payloadType",
+                      "description": "(Required) specific payload document type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f1c4752-bbc8-42fe-b58e-cc5ac398b72f",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mgms",
+                    "transactions",
+                    "events",
+                    "mrid",
+                    ":mrid",
+                    "payloads",
+                    "payload-type",
+                    ":payloadType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mrid",
+                      "description": "(Required) The internal Transaction UUID identifies a specific transaction event item."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payloadType",
+                      "description": "(Required) specific payload document type."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cce.midwestiso.org/dart2/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a1e15e51-9295-43fc-a1fc-e7ed87cf9ce7",
+    "name": "MUI - Public Specification Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MISO Public Specification to support Market System Enhancement (MSE) new Market User Interface (MUI 2.0).\n\nContact Support:\n Name: MUI 2.0 Questions\n Email: MSEQuestions@misoenergy.org",
+      "type": "text/plain"
+    }
+  }
+}

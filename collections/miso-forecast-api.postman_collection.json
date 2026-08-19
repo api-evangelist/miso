@@ -1,0 +1,3986 @@
+{
+  "item": [
+    {
+      "id": "12d9765d-7ded-4d84-b6c9-8d2b1d04e3cc",
+      "name": "Forecast",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9ea3d2ec-2ef1-474e-9e90-758d1e0f9660",
+          "name": "Medium Term Load Forecast",
+          "request": {
+            "name": "Medium Term Load Forecast",
+            "description": {
+              "content": "Medium term load forecast (in megawatts), by region and zone in hourly or daily intervals. Use the 'init' parameter to access a specific past run. Available at 7am EST the day after the init date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "forecast",
+                ":date",
+                "load"
+              ],
+              "host": [
+                "{{v1-forecast-date-load-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "init",
+                  "value": "<date>",
+                  "description": "Specify the specific forecast run by the init (creation) date. Must always be before the current date and forecast date. If not set, defaults to 'date - 1d' when date < today, and 'today - 1d' when date >= today."
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "localResourceZone",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "timeResolution",
+                  "value": "hourly",
+                  "description": "Time resolution of data"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "5f184c65-76bb-4b24-a059-bbfca2d6cea0",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "forecast",
+                    ":date",
+                    "load"
+                  ],
+                  "host": [
+                    "{{v1-forecast-date-load-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "init",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "localResourceZone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      },\n      \"region\": \"NORTH\",\n      \"localResourceZone\": \"Z1\",\n      \"loadForecast\": 1349,\n      \"init\": \"2026-02-02\"\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f984786-f648-45d8-a419-6d9c9b51aeb8",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "forecast",
+                    ":date",
+                    "load"
+                  ],
+                  "host": [
+                    "{{v1-forecast-date-load-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "init",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "localResourceZone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad31b60a-9823-40ab-88cd-56c22054524b",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "forecast",
+                    ":date",
+                    "load"
+                  ],
+                  "host": [
+                    "{{v1-forecast-date-load-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "init",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "localResourceZone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a5aaee3-600f-4f7c-b28b-e5a17e4e1ed7",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "forecast",
+                    ":date",
+                    "load"
+                  ],
+                  "host": [
+                    "{{v1-forecast-date-load-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "init",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "localResourceZone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "timeResolution",
+                      "value": "hourly"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "497f55bd-f531-4a2d-adac-75c2b1095803",
+          "name": "Outage Forecast",
+          "request": {
+            "name": "Outage Forecast",
+            "description": {
+              "content": "The total capacity (in megawatts at economic maximum) for all units that are expected to be on outage, by region in hourly intervals. This endpoint has no lookback, dates must always be current or future. Available at 6am EST up to 6 days before.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "forecast",
+                ":date",
+                "outage"
+              ],
+              "host": [
+                "{{v1-forecast-date-outage-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>",
+                  "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Market date in the form: yyyy-mm-dd"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": [
+            {
+              "id": "51ed28cb-6443-4e5b-af21-025df42ec9a3",
+              "name": "Successful operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "forecast",
+                    ":date",
+                    "outage"
+                  ],
+                  "host": [
+                    "{{v1-forecast-date-outage-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"timeInterval\": {\n        \"resolution\": \"daily\",\n        \"start\": \"2023-06-28 00:00:00.000\",\n        \"end\": \"2023-06-29 00:00:00.000\",\n        \"value\": \"2023-06-29\"\n      },\n      \"region\": \"NORTH\",\n      \"onOutage\": 0,\n      \"interval\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"totalElements\": 0,\n    \"totalPages\": 0,\n    \"lastPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84bea783-0854-4cbf-ba64-f250fa1aebdc",
+              "name": "Invalid date format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "forecast",
+                    ":date",
+                    "outage"
+                  ],
+                  "host": [
+                    "{{v1-forecast-date-outage-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9aad216-0bd7-433e-94f3-2d6986df6456",
+              "name": "Invalid or missing Bearer Token in the Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "forecast",
+                    ":date",
+                    "outage"
+                  ],
+                  "host": [
+                    "{{v1-forecast-date-outage-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9f588b4-ba18-4f21-8814-42bbeea41109",
+              "name": "Date not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "forecast",
+                    ":date",
+                    "outage"
+                  ],
+                  "host": [
+                    "{{v1-forecast-date-outage-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Market date in the form: yyyy-mm-dd"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af4b5076-83a7-4d72-bafd-edc98726409f",
+          "name": "get Renewable Forecast Day",
+          "request": {
+            "name": "get Renewable Forecast Day",
+            "description": {
+              "content": "Returns the collection of 5 minute forecast created by the Midwest ISO forecast tool for Wind and Solar resources by pnode location. Pnode or portfolio query parameters may be provided, otherwise all applicable resources for participant are returned. Start time will be rounded up to the next 5-minute boundary if it is not already on one and the next 12 intervals will be returned assuming they exist. If forecast does not exist then no data is returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "real-time",
+                ":day",
+                "forecast",
+                "5-minute",
+                "participants",
+                ":participantName"
+              ],
+              "host": [
+                "{{markets-real-time-day-forecast-5-minute-participants-participantName-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pnode",
+                  "value": "<string>",
+                  "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "portfolio",
+                  "value": "<string>",
+                  "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "(Required) Date-time as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00. Start time for 12 contiguous 5-minute intervals that are returned by query. The interval is rounded up to the closest 5-minute interval if not already on one."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "442cb92f-1556-4f17-ae3d-6d3978de779f",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "5-minute",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-5-minute-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"interval5Forecast\": [\n        {\n          \"mw\": 120001.7,\n          \"interval5\": \"2019-03-14T14:50:00-05:00\"\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"interval5Forecast\": [\n        {\n          \"mw\": 120001.7,\n          \"interval5\": \"2019-03-14T14:50:00-05:00\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfd647e4-0b32-42a8-9bbc-8a7d3df24cbe",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "5-minute",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-5-minute-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b506430-a7f7-4f91-8879-455685650379",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "5-minute",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-5-minute-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74af3128-accf-41d0-be34-f2c5ca555b0c",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "5-minute",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-5-minute-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "859e826e-3294-4b2f-a615-bd42d50570ac",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "5-minute",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-5-minute-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80b7a798-58b0-4877-a8a2-cfda4cb286f8",
+          "name": "get Real Time Demand Day",
+          "request": {
+            "name": "get Real Time Demand Day",
+            "description": {
+              "content": "Returns the collection of hourly load forecast for Load Zones, Intermittent and Dispatchable Intermittent Resources (DIR) by pnode location. Pnode or portfolio query parameters may be provided, otherwise all applicable resources for participant are returned. If forecast does not exist then no data is returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "real-time",
+                ":day",
+                "forecast",
+                "rt-demand",
+                "participants",
+                ":participantName"
+              ],
+              "host": [
+                "{{markets-real-time-day-forecast-rt-demand-participants-participantName-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pnode",
+                  "value": "<string>",
+                  "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "portfolio",
+                  "value": "<string>",
+                  "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e8e2e554-53b8-4f6a-9c0a-28da645ab03f",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "rt-demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-rt-demand-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"realTimeDemandForecastHourly\": [\n        {\n          \"hour\": 1,\n          \"mw\": 1200.7\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"realTimeDemandForecastHourly\": [\n        {\n          \"hour\": 1,\n          \"mw\": 1200.7\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9dead69b-415c-4439-aea4-4da462b53b75",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "rt-demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-rt-demand-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43f7672f-e034-4e27-8807-a8937a91c450",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "rt-demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-rt-demand-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5109877b-1016-4b73-9e67-79349d1c324d",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "rt-demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-rt-demand-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "461e8319-dd1f-425b-8a0e-dc9c5b20fbc7",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "rt-demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-rt-demand-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61dc2571-c79d-4813-b20a-78f5daad31e2",
+          "name": "post Real Time Demand Day",
+          "request": {
+            "name": "post Real Time Demand Day",
+            "description": {
+              "content": "Submit the hourly load forecast for one or more Load Zones, Intermittent and Dispatchable Intermittent Resources (DIR). Data can only be entered until the RSG Notification Deadline. That is data must be entered at least 4 hours prior to the market hour.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "real-time",
+                ":day",
+                "forecast",
+                "rt-demand",
+                "participants",
+                ":participantName"
+              ],
+              "host": [
+                "{{markets-real-time-day-forecast-rt-demand-participants-participantName-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"day\": \"<date>\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"<string>\",\n      \"realTimeDemandForecastHourly\": [\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<number,null-realenergy>\"\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"<string>\",\n      \"realTimeDemandForecastHourly\": [\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<number,null-realenergy>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "505b2e0d-96a3-4db5-8a76-d2cb0675c7f5",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "rt-demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-rt-demand-participants-participantName-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"realTimeDemandForecastHourly\": [\n        {\n          \"hour\": 1,\n          \"mw\": 1200.7\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"realTimeDemandForecastHourly\": [\n        {\n          \"hour\": 1,\n          \"mw\": 1200.7\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "660232a5-d252-4e44-8186-4a71142ad019",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "rt-demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-rt-demand-participants-participantName-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"realTimeDemandForecastHourly\": [\n        {\n          \"hour\": 1,\n          \"mw\": 1200.7\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"realTimeDemandForecastHourly\": [\n        {\n          \"hour\": 1,\n          \"mw\": 1200.7\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "675f5009-79e5-49e8-8766-61e9798c4935",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "rt-demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-rt-demand-participants-participantName-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"realTimeDemandForecastHourly\": [\n        {\n          \"hour\": 1,\n          \"mw\": 1200.7\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"realTimeDemandForecastHourly\": [\n        {\n          \"hour\": 1,\n          \"mw\": 1200.7\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a67cc86-bbd9-458b-b897-64387e525a5e",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "rt-demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-rt-demand-participants-participantName-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"realTimeDemandForecastHourly\": [\n        {\n          \"hour\": 1,\n          \"mw\": 1200.7\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"realTimeDemandForecastHourly\": [\n        {\n          \"hour\": 1,\n          \"mw\": 1200.7\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2f932a1-fdb6-498d-8f0e-94ed1eddd807",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "rt-demand",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-rt-demand-participants-participantName-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"realTimeDemandForecastHourly\": [\n        {\n          \"hour\": 1,\n          \"mw\": 1200.7\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"realTimeDemandForecastHourly\": [\n        {\n          \"hour\": 1,\n          \"mw\": 1200.7\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d3814aa-599b-4f6f-9f71-8e75e98c5878",
+          "name": "get Dir Forecast",
+          "request": {
+            "name": "get Dir Forecast",
+            "description": {
+              "content": "Returns the collection of 5 minute generation capability forecast for Dispatchable Intermittent Resources (DIR) by pnode location. Pnode or portfolio query parameters may be provided, otherwise all applicable resources for participant are returned. If forecast does not exist then no data is returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "real-time",
+                ":day",
+                "forecast",
+                "dir",
+                "participants",
+                ":participantName"
+              ],
+              "host": [
+                "{{markets-real-time-day-forecast-dir-participants-participantName-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pnode",
+                  "value": "<string>",
+                  "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "portfolio",
+                  "value": "<string>",
+                  "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "(Required) Date-time as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00. Start time for 12 contiguous 5-minute intervals that are returned by query. Interval is rounded up to the closest 5-minute interval if not already on one."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52d7d159-5e9f-4f68-a22a-2451c1caa444",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "dir",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-dir-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"dirForecast\": [\n        {\n          \"mw\": 120001.7,\n          \"interval5\": \"2019-03-14T14:50:00-05:00\"\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"dirForecast\": [\n        {\n          \"mw\": 120001.7,\n          \"interval5\": \"2019-03-14T14:50:00-05:00\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9725242c-c379-4691-aeb9-61161458ed3f",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "dir",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-dir-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6023b3e3-9031-422a-a149-b82a24b4371e",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "dir",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-dir-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9984751f-df78-45b6-8788-b88c88390f32",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "dir",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-dir-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81cdfe62-951b-403b-b1df-ddd5df32b6f0",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "dir",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-dir-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "2019-03-14T14:50:00-05:00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ad0a8fd-999a-4a3b-8e44-371832a29432",
+          "name": "post Dir Forecast",
+          "request": {
+            "name": "post Dir Forecast",
+            "description": {
+              "content": "Submit the 5 minute generation capability forecast for one or more Dispatchable Intermittent Resources (DIR). Data can be submitted at any time per the market rules.  To be effective for a given hour and date, submittal must have completed prior to Real-Time market clearing (subject to the market rules). The message will accept a maximum of 12 contiguous intervals.  Intervals for this message must fall on 5-minute boundaries and they are allowed to span the market day.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "real-time",
+                ":day",
+                "forecast",
+                "dir",
+                "participants",
+                ":participantName"
+              ],
+              "host": [
+                "{{markets-real-time-day-forecast-dir-participants-participantName-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"day\": \"<date>\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"<string>\",\n      \"dirForecast\": [\n        {\n          \"mw\": \"<realenergy>\",\n          \"interval5\": \"<dateTime>\"\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"<string>\",\n      \"dirForecast\": [\n        {\n          \"mw\": \"<realenergy>\",\n          \"interval5\": \"<dateTime>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6f094a30-7b8a-4dc7-9797-328ccec981e8",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "dir",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-dir-participants-participantName-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"dirForecast\": [\n        {\n          \"mw\": 120001.7,\n          \"interval5\": \"2019-03-14T14:50:00-05:00\"\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"dirForecast\": [\n        {\n          \"mw\": 120001.7,\n          \"interval5\": \"2019-03-14T14:50:00-05:00\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5ffd2c8-ab77-4cf0-a7f3-bab11d4571d2",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "dir",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-dir-participants-participantName-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"dirForecast\": [\n        {\n          \"mw\": 120001.7,\n          \"interval5\": \"2019-03-14T14:50:00-05:00\"\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"dirForecast\": [\n        {\n          \"mw\": 120001.7,\n          \"interval5\": \"2019-03-14T14:50:00-05:00\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9476ea2-05f4-4d8e-9012-7dd09f1b5352",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "dir",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-dir-participants-participantName-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"dirForecast\": [\n        {\n          \"mw\": 120001.7,\n          \"interval5\": \"2019-03-14T14:50:00-05:00\"\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"dirForecast\": [\n        {\n          \"mw\": 120001.7,\n          \"interval5\": \"2019-03-14T14:50:00-05:00\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67b93618-cf41-4b84-b3a5-ce298bd8412f",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "dir",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-dir-participants-participantName-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"dirForecast\": [\n        {\n          \"mw\": 120001.7,\n          \"interval5\": \"2019-03-14T14:50:00-05:00\"\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"dirForecast\": [\n        {\n          \"mw\": 120001.7,\n          \"interval5\": \"2019-03-14T14:50:00-05:00\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bbcbe82-c6e3-415b-92a6-a87c076c36b2",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "dir",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-dir-participants-participantName-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"dirForecast\": [\n        {\n          \"mw\": 120001.7,\n          \"interval5\": \"2019-03-14T14:50:00-05:00\"\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"dirForecast\": [\n        {\n          \"mw\": 120001.7,\n          \"interval5\": \"2019-03-14T14:50:00-05:00\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a73657e-d0ea-49d8-a836-70534d07efe0",
+          "name": "get Drr Forecast",
+          "request": {
+            "name": "get Drr Forecast",
+            "description": {
+              "content": "Returns the collection of 5 minute contingency reserve deployment forecast for DRR Type-I and Type-II resources by pnode location. Pnode or portfolio query parameters may be provided, otherwise all applicable resources for participant are returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "real-time",
+                ":day",
+                "forecast",
+                "drr-load",
+                "participants",
+                ":participantName"
+              ],
+              "host": [
+                "{{markets-real-time-day-forecast-drr-load-participants-participantName-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pnode",
+                  "value": "<string>",
+                  "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "portfolio",
+                  "value": "<string>",
+                  "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1818f9ec-538c-4c58-b99c-7e6631a349d9",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "drr-load",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-drr-load-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"drrLoadForecast\": [\n        {\n          \"interval5\": \"2019-03-14T14:50:00-05:00\",\n          \"mw\": 120001.7\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"drrLoadForecast\": [\n        {\n          \"interval5\": \"2019-03-14T14:50:00-05:00\",\n          \"mw\": 120001.7\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f1c78b4-e96d-4948-b9df-e56d1e6b2371",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "drr-load",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-drr-load-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d4301a7-245f-449d-bb5f-599261e0cfaf",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "drr-load",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-drr-load-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f63527b9-7aae-4b54-acfa-e696a1727782",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "drr-load",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-drr-load-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1513e47d-ad8e-46d8-916e-13c593aa57a9",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "drr-load",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-drr-load-participants-participantName-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pnode",
+                      "value": "PNODE1"
+                    },
+                    {
+                      "key": "portfolio",
+                      "value": "Sample Portfolio"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8fa8becf-87e6-49dd-b550-d0a7af0045a2",
+          "name": "post Drr Forecast",
+          "request": {
+            "name": "post Drr Forecast",
+            "description": {
+              "content": "Submit the 5 minute contingency reserve deployment forecast for one or more DRR Type-I and Type-II resources. The earliest forecast interval that is submitted must fall within the next 10 minutes (from current time) and to be effective for a given hour and date, submittal must have completed prior to Real-Time market clearing (subject to the market rules). The block of forecast times that are submitted must be contiguous. Within the operating date, up to 288 intervals can be specified.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "real-time",
+                ":day",
+                "forecast",
+                "drr-load",
+                "participants",
+                ":participantName"
+              ],
+              "host": [
+                "{{markets-real-time-day-forecast-drr-load-participants-participantName-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "day",
+                  "description": "(Required) The operating day of the data."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"day\": \"<date>\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"<string>\",\n      \"drrLoadForecast\": [\n        {\n          \"interval5\": \"<dateTime>\",\n          \"mw\": \"<realenergy>\"\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"<string>\",\n      \"drrLoadForecast\": [\n        {\n          \"interval5\": \"<dateTime>\",\n          \"mw\": \"<realenergy>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cbe72a1e-a00d-4236-af66-b9e910ef75c9",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "drr-load",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-drr-load-participants-participantName-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"drrLoadForecast\": [\n        {\n          \"interval5\": \"2019-03-14T14:50:00-05:00\",\n          \"mw\": 120001.7\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"drrLoadForecast\": [\n        {\n          \"interval5\": \"2019-03-14T14:50:00-05:00\",\n          \"mw\": 120001.7\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e24d1717-d71a-44a0-8834-b29f406eb87a",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "drr-load",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-drr-load-participants-participantName-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"drrLoadForecast\": [\n        {\n          \"interval5\": \"2019-03-14T14:50:00-05:00\",\n          \"mw\": 120001.7\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"drrLoadForecast\": [\n        {\n          \"interval5\": \"2019-03-14T14:50:00-05:00\",\n          \"mw\": 120001.7\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f0600a3-71f0-443b-b5c3-b66ec192090e",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "drr-load",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-drr-load-participants-participantName-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"drrLoadForecast\": [\n        {\n          \"interval5\": \"2019-03-14T14:50:00-05:00\",\n          \"mw\": 120001.7\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"drrLoadForecast\": [\n        {\n          \"interval5\": \"2019-03-14T14:50:00-05:00\",\n          \"mw\": 120001.7\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d65563a8-8c7e-4e9c-abb0-ba1193e9129f",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "drr-load",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-drr-load-participants-participantName-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"drrLoadForecast\": [\n        {\n          \"interval5\": \"2019-03-14T14:50:00-05:00\",\n          \"mw\": 120001.7\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"drrLoadForecast\": [\n        {\n          \"interval5\": \"2019-03-14T14:50:00-05:00\",\n          \"mw\": 120001.7\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd420069-47e8-45f1-83e8-843e21ffb703",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "real-time",
+                    ":day",
+                    "forecast",
+                    "drr-load",
+                    "participants",
+                    ":participantName"
+                  ],
+                  "host": [
+                    "{{markets-real-time-day-forecast-drr-load-participants-participantName-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "day",
+                      "description": "(Required) The operating day of the data."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"day\": \"2019-03-14\",\n  \"resources\": [\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"drrLoadForecast\": [\n        {\n          \"interval5\": \"2019-03-14T14:50:00-05:00\",\n          \"mw\": 120001.7\n        }\n      ]\n    },\n    {\n      \"pnodeName\": \"PNODE1\",\n      \"drrLoadForecast\": [\n        {\n          \"interval5\": \"2019-03-14T14:50:00-05:00\",\n          \"mw\": 120001.7\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/lgi",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/lgi",
+      "key": "v1-forecast-date-load-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://apim.misoenergy.org/lgi",
+      "key": "v1-forecast-date-outage-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://cce.midwestiso.org/dart2/",
+      "key": "markets-real-time-day-forecast-5-minute-participants-participantName-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://cce.midwestiso.org/dart2/",
+      "key": "markets-real-time-day-forecast-rt-demand-participants-participantName-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://cce.midwestiso.org/dart2/",
+      "key": "markets-real-time-day-forecast-dir-participants-participantName-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://cce.midwestiso.org/dart2/",
+      "key": "markets-real-time-day-forecast-drr-load-participants-participantName-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "41e3f78b-68c7-4fc1-93eb-43a6a2916df8",
+    "name": "Miso Forecast API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Operations tagged Forecast across 2 of this provider's published API definitions: miso-data-exchange-load-generation-interchange-api-openapi.json, miso-mui-20-api-openapi.yaml. Each path carries the servers of the definition it was published in.",
+      "type": "text/plain"
+    }
+  }
+}

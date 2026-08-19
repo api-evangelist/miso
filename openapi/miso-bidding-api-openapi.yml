@@ -1,0 +1,521 @@
+openapi: 3.2.0
+info:
+  description: MISO Public Specification to support Market System Enhancement (MSE) new Market User Interface (MUI 2.0).
+  title: MUI - Public Specification Bidding API
+  contact:
+    name: MUI 2.0 Questions
+    url: https://www.misoenergy.org/markets-and-operations/MSE/market-user-interface/
+    email: MSEQuestions@misoenergy.org
+  license:
+    name: For use by MISO member companies and thier vendors
+  version: 3.3.0
+servers:
+- url: https://cce.midwestiso.org/dart2/
+- url: https://markets.midwestiso.org/dart2/
+tags:
+- name: Bidding
+paths:
+  /markets/day-ahead/{day}/demand/participants/{participantName}:
+    description: Submit and return demand bids for use in the Day-Ahead market. A collection of either fixed or price sensitive demand bids for one or more pnode locations.
+    parameters:
+    - $ref: '#/components/parameters/x-acting-participant'
+    get:
+      tags:
+      - Bidding
+      description: Returns the collection of Price Sensitive and Fixed Demand Bids by pnode location for the day. Pnode or portfolio query parameters may be provided, otherwise all valid demand bid locations for the participant will be returned for which bids exist.
+      operationId: getDemandBid
+      parameters:
+      - $ref: '#/components/parameters/MarketOperatingDay'
+      - $ref: '#/components/parameters/Participant'
+      - $ref: '#/components/parameters/Pnode'
+      - $ref: '#/components/parameters/Portfolio'
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemandBids'
+          headers:
+            http-x-request-id:
+              $ref: '#/components/headers/http-x-request-id'
+        '400':
+          $ref: '#/components/responses/BadRequestApiResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundApiResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorApiResponse'
+    post:
+      tags:
+      - Bidding
+      description: Post the collection of Fixed and Price Sensitve Demand Bids. Fixed and Price Sensitive Demand bids can be updated individually for one or more pnode locations. Data driven delete behaviour is supported via the incusion of null elements.
+      operationId: postDemandBids
+      parameters:
+      - $ref: '#/components/parameters/MarketOperatingDay'
+      - $ref: '#/components/parameters/Participant'
+      responses:
+        '200':
+          $ref: '#/components/responses/OkApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestApiResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundApiResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorApiResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DemandBids'
+  /markets/day-ahead/{day}/virtual/participants/{participantName}:
+    description: Submit and return virtual demand bids and virtual generations offers for use in the Day-Ahead market. A collection of either virtual generation offers or virtual demand bids per pnode location. Submission for one or more pnode locations is supported.
+    parameters:
+    - $ref: '#/components/parameters/x-acting-participant'
+    get:
+      tags:
+      - Bidding
+      description: Returns the collection of virtual dids and offers by pnode location for the day. Pnode or portfolio query parameters may be provided, otherwise all valid virtual locations will be returned for which participant bids/offers exist.
+      operationId: getVirtualBidsAndOffers
+      parameters:
+      - $ref: '#/components/parameters/MarketOperatingDay'
+      - $ref: '#/components/parameters/Participant'
+      - $ref: '#/components/parameters/Pnode'
+      - $ref: '#/components/parameters/Portfolio'
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualBidsAndOffers'
+          headers:
+            http-x-request-id:
+              $ref: '#/components/headers/http-x-request-id'
+        '400':
+          $ref: '#/components/responses/BadRequestApiResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundApiResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorApiResponse'
+    post:
+      tags:
+      - Bidding
+      description: Post the collection of virtual demand bids and virtual generation offers. Submittal for a single or multiple pnode locations is supported. Data driven delete behaviour is supported via the incusion of null elements.
+      operationId: postVirtualBidsAndOffers
+      parameters:
+      - $ref: '#/components/parameters/MarketOperatingDay'
+      - $ref: '#/components/parameters/Participant'
+      responses:
+        '200':
+          $ref: '#/components/responses/OkApiResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestApiResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundApiResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorApiResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VirtualBidsAndOffers'
+components:
+  schemas:
+    MarketPrice:
+      description: General type for all market prices.
+      format: money
+      type: number
+      multipleOf: 0.01
+      minimum: -9999.99
+      maximum: 9999.99
+      example: 34.91
+    MarketOperatingDay:
+      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
+      type: string
+      format: date
+      example: '2019-03-14'
+    PNodeName:
+      description: Commercial Pricing Node (PNode) name.
+      type: string
+      minLength: 1
+      maxLength: 30
+      example: PNODE1
+    VirtualBidsAndOffers:
+      description: Collection of virtual generation offers and virtual demand bids for the market.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        pnodes:
+          description: Collection of pnodes.
+          type: array
+          minItems: 0
+          items:
+            description: A resource can have virtual bids and/or virtual offers. Submitted null virtualBids or virtualOffers properties will delete the existing object.
+            type: object
+            additionalProperties: false
+            minProperties: 2
+            maxProperties: 3
+            properties:
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
+              virtualBids:
+                $ref: '#/components/schemas/VirtualBidOrOfferHourly'
+              virtualOffers:
+                $ref: '#/components/schemas/VirtualBidOrOfferHourly'
+            required:
+            - pnodeName
+      required:
+      - day
+      - pnodes
+    ParticipantName:
+      description: Market participant name.
+      type: string
+      minLength: 1
+      maxLength: 40
+      example: MP
+    APIResponse:
+      description: General container for API response.
+      type: object
+      properties:
+        action:
+          description: A general action code summary of the result. HTTP status codes will be applied that match. These indicate the type of operation that was done (or not). Note, some APIs use REST verbiage like created/updated/deleted while others use submit/query.
+          enum:
+          - CREATED
+          - UPDATED
+          - DELETED
+          - CREATE_FAILED
+          - UPDATE_FAILED
+          - DELETE_FAILED
+          - GET_FAILED
+          - SUBMITTED
+          - SUBMIT_FAILED
+          - QUERY
+          - QUERY_FAILED
+        responses:
+          description: List of responses in case multiple resources are modified, or general errors that are not resource specific.
+          type: array
+          minItems: 0
+          items:
+            description: A single response which may contain multiple messages, both error and warning, per response.
+            type: object
+            properties:
+              messages:
+                description: List of warnings and errors resulting from the command.
+                type: array
+                minItems: 0
+                items:
+                  description: An individual warning or error message.  Designed to be either localized or categorized as an event.
+                  type: object
+                  properties:
+                    level:
+                      description: An indication of severity of the message.
+                      type: string
+                      enum:
+                      - ERROR
+                      - WARNING
+                      - INFO
+                    msgId:
+                      description: A categorized ID for this message, identifying it as a particular type of event. Useful for checking for specific errors, or localization.
+                      type: string
+                    params:
+                      description: Ordered list of parameter values for the message.
+                      type: array
+                      items:
+                        type: string
+                    userMsg:
+                      description: The message, fully rendered in the default locale on the service side.
+                      type: string
+        transactionId:
+          description: Unique identifier for the transaction which can be queried at a later date. Identifier is a GUID represented without hyphens. Only returned for submissions and errors though all calls generate a transaction ID that is returned in the http-x-request-id response header.
+          type: string
+          format: guid
+        transactionTime:
+          description: The time at which the transaction was received by the system.
+          type: string
+          format: date-time
+    DemandBids:
+      description: Collection of Demand Bids for the market.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        pnodes:
+          description: Collection of pnodes.
+          type: array
+          minItems: 0
+          items:
+            description: A resource can have both fixedBids and/or pricesenstivieBids. Submitting null fixedBids or priceSensitiveBids properties will delete the existing object.
+            type: object
+            additionalProperties: false
+            minProperties: 2
+            maxProperties: 3
+            properties:
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
+              fixedBids:
+                description: Hourly fixed price demand bid. Submitted null MW values effectively deletes the bid for the hour.
+                type:
+                - array
+                - 'null'
+                minItems: 0
+                maxItems: 24
+                items:
+                  type: object
+                  additionalProperties: false
+                  properties:
+                    hour:
+                      $ref: '#/components/schemas/HourLabel'
+                    fixedMw:
+                      $ref: '#/components/schemas/RealEnergyNullable'
+                  required:
+                  - hour
+                  - fixedMw
+              priceSensitiveBids:
+                description: Price sensitive demand bid curves.
+                type:
+                - array
+                - 'null'
+                minItems: 0
+                maxItems: 24
+                items:
+                  description: Hourly price sensitive demand bid curve.
+                  type: object
+                  additionalProperties: false
+                  properties:
+                    hour:
+                      $ref: '#/components/schemas/HourLabel'
+                    demandBidSegments:
+                      description: Bid segements making up the demand bid curve. MW's and price cap. Sumbitted null array effectively deletes the bid for the hour.
+                      type:
+                      - array
+                      - 'null'
+                      items:
+                        type: object
+                        properties:
+                          price:
+                            $ref: '#/components/schemas/MarketPrice'
+                          mw:
+                            $ref: '#/components/schemas/RealEnergyNullable'
+                        required:
+                        - price
+                        - mw
+                      minItems: 0
+                      maxItems: 9
+                  required:
+                  - hour
+                  - demandBidSegments
+            required:
+            - pnodeName
+      required:
+      - day
+      - pnodes
+    VirtualBidOrOfferHourly:
+      description: This object is used both virtual demand bids and virtual generation offers since the structure is the same.
+      type:
+      - array
+      - 'null'
+      items:
+        description: Hourly bid or offer curve.
+        type: object
+        additionalProperties: false
+        properties:
+          hour:
+            $ref: '#/components/schemas/HourLabel'
+          virtualBidSegments:
+            description: Segements making up the bid or offer curve. MW/price pairs. Sumbitted null array effectively deletes the curve for the hour.
+            type:
+            - array
+            - 'null'
+            items:
+              type: object
+              additionalProperties: false
+              properties:
+                price:
+                  $ref: '#/components/schemas/MarketPrice'
+                mw:
+                  $ref: '#/components/schemas/RealEnergy'
+              required:
+              - price
+              - mw
+            minItems: 0
+            maxItems: 9
+        required:
+        - hour
+        - virtualBidSegments
+      minItems: 0
+      maxItems: 24
+    RealEnergy:
+      description: Used to represent real energy values submitted to the market.
+      type: number
+      format: realenergy
+      multipleOf: 0.1
+      minimum: -9.99999999E7
+      maximum: 9.99999999E7
+      example: 1200.7
+    HourLabel:
+      description: Hour ending label. Represents an hour segment of time.
+      type: integer
+      minimum: 1
+      maximum: 24
+      example: 1
+    RealEnergyNullable:
+      description: Used to represent real energy values submitted to the market. Nullable added to allow for data driven delete behaviour.
+      type:
+      - number
+      - 'null'
+      format: realenergy
+      multipleOf: 0.1
+      minimum: -9.99999999E7
+      maximum: 9.99999999E7
+      example: 1200.7
+    PortfolioName:
+      description: Portfolio name which is unique to a participant company and may be shared among users registered with the same company.
+      type: string
+      minLength: 1
+      maxLength: 40
+      example: Sample Portfolio
+  headers:
+    http-x-request-id:
+      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
+      schema:
+        type: string
+        format: guid
+      example: 34571c664e48ca0b1e30d7ffb9b3b287
+  parameters:
+    Portfolio:
+      in: query
+      name: portfolio
+      description: Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned.
+      required: false
+      schema:
+        $ref: '#/components/schemas/PortfolioName'
+    Pnode:
+      in: query
+      name: pnode
+      description: Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned.
+      required: false
+      schema:
+        $ref: '#/components/schemas/PNodeName'
+    x-acting-participant:
+      in: header
+      name: x-acting-participant
+      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
+      schema:
+        type: string
+      example: MP
+    MarketOperatingDay:
+      in: path
+      name: day
+      description: The operating day of the data.
+      required: true
+      schema:
+        $ref: '#/components/schemas/MarketOperatingDay'
+    Participant:
+      in: path
+      name: participantName
+      description: The NERC ID of asset owner specified in the path for a collection resource.
+      required: true
+      schema:
+        $ref: '#/components/schemas/ParticipantName'
+  responses:
+    InternalErrorApiResponse:
+      description: Internal error occurred, details in server-side logs.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Internal error message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    BadRequestApiResponse:
+      description: User error. Request was invalid for some reason. See response for details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Bad request message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    OkApiResponse:
+      description: Successful operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses: []
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    UnauthorizedApiResponse:
+      description: Rejected due to insufficient permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Unauthorized message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    NotFoundApiResponse:
+      description: Resource not found. The path provided does not point to an entity in the system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Not found message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'

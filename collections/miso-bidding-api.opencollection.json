@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MUI - Public Specification Bidding API",
+    "version": "3.3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bidding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getDemandBid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/day-ahead/:day/demand/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              }
+            ]
+          },
+          "docs": "Returns the collection of Price Sensitive and Fixed Demand Bids by pnode location for the day. Pnode or portfolio query parameters may be provided, otherwise all valid demand bid locations for the participant will be returned for which bids exist."
+        },
+        {
+          "info": {
+            "name": "postDemandBids",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/markets/day-ahead/:day/demand/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Post the collection of Fixed and Price Sensitve Demand Bids. Fixed and Price Sensitive Demand bids can be updated individually for one or more pnode locations. Data driven delete behaviour is supported via the incusion of null elements."
+        },
+        {
+          "info": {
+            "name": "getVirtualBidsAndOffers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/day-ahead/:day/virtual/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              }
+            ]
+          },
+          "docs": "Returns the collection of virtual dids and offers by pnode location for the day. Pnode or portfolio query parameters may be provided, otherwise all valid virtual locations will be returned for which participant bids/offers exist."
+        },
+        {
+          "info": {
+            "name": "postVirtualBidsAndOffers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/markets/day-ahead/:day/virtual/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Post the collection of virtual demand bids and virtual generation offers. Submittal for a single or multiple pnode locations is supported. Data driven delete behaviour is supported via the incusion of null elements."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,214 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MUI - Public Specification Admin API",
+    "version": "3.3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getParticipantMetadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/common/:day/mui-meta/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              }
+            ]
+          },
+          "docs": "Return participant specific MUI metadata. Metadata returned by this call includes:\n1. Participant Control Areas - Control Areas administered by a particular participant. If the participant\ndoes not administer any control area or is invalid participant then an empty list is returned. A control area\nis included if the participant is active from day specified through the end of the market horizon.\n"
+        },
+        {
+          "info": {
+            "name": "getMuiMetadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/common/:day/mui-meta",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "metadataGroups",
+                "value": "",
+                "type": "query",
+                "description": "Metadata group."
+              }
+            ]
+          },
+          "docs": "Return general MUI metadata, that is not participant specific. Metadata returned by this call includes:\n1. Reserve Zones - List of reserve zones available in the system. A reserve zone can appear in this list and still not have any EPnodes assigned to it so it may not appear in reports.\n2. List of Market Participants - The list of Market Participants is used when updating bilateral contracts.\n3. List of Dispatch Status - List of valid Dispatch Status values organized by unit offer type (GEN, DIR"
+        },
+        {
+          "info": {
+            "name": "getParticipantPortfolios",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/portfolios/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify an individual Portfolio to return, otherwise return all."
+              },
+              {
+                "name": "details",
+                "value": "",
+                "type": "query",
+                "description": "Flag to enable querying of pnode and unit details. Defaults to false if not provided."
+              },
+              {
+                "name": "day",
+                "value": "",
+                "type": "query",
+                "description": "The operating day for which active pnodes in portfolios will be returned. Defaults to null (unspecified) if not provided."
+              },
+              {
+                "name": "context",
+                "value": "",
+                "type": "query",
+                "description": "Context filter for the report."
+              }
+            ]
+          },
+          "docs": "Returns pnodes in all portfolios for a participant with an optional filter on day and details to limit what effective pnodes and how much pnode information is included."
+        },
+        {
+          "info": {
+            "name": "postPortfolios",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/markets/portfolios/participants/:participantName/:action",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "path",
+                "description": "An operation to execute."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates or removes a participant Portfolio."
+        },
+        {
+          "info": {
+            "name": "getSwaggerSpecJson",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/swagger/v3/api-docs/json/:spec",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "spec",
+                "value": "",
+                "type": "path",
+                "description": "Internal or Public specification."
+              }
+            ]
+          },
+          "docs": "Returns the swagger spec in json format."
+        },
+        {
+          "info": {
+            "name": "getSwaggerSpecYaml",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/swagger/v3/api-docs/yaml/:spec",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "spec",
+                "value": "",
+                "type": "path",
+                "description": "Internal or Public specification."
+              }
+            ]
+          },
+          "docs": "Returns the swagger spec in yaml format."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

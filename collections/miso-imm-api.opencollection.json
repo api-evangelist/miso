@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MUI - Public Specification IMM API",
+    "version": "3.3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IMM",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getParticipantImmOffer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cce.midwestiso.org/dart2/markets/:market/:day/imm/resource-assignment/participants/:participantName",
+            "params": [
+              {
+                "name": "market",
+                "value": "",
+                "type": "path",
+                "description": "Energy Market or both (day-ahead, real-time, or both)."
+              },
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Required parameter to specify the name of a pricing node for the requested data."
+              },
+              {
+                "name": "scheduleId",
+                "value": "",
+                "type": "query",
+                "description": "List of integers used to specify one or more scheduleId to be queried."
+              },
+              {
+                "name": "scheduleType",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the assignment type to be queried or all if no query parameter is provided. Valid values are CostSchedule, ReferencePrice, or RSG."
+              }
+            ]
+          },
+          "docs": "Returns the collection of Independant Market Monitor (IMM) resource assignments by pnode location for the day for a particular participant's resources. Message format differs by offerType property which can be one of the following values; - genImmOffer - dirImmOffer - drr1ImmOffer - drr2ImmOffer - earImmOffer - serImmOffer - esrImmOffer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

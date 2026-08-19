@@ -1,0 +1,2652 @@
+{
+  "item": [
+    {
+      "id": "8fffc08d-309a-4a2b-bc11-1179d7f44822",
+      "name": "Contracts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "84308861-5fa0-455d-8bef-d1e58cb06970",
+          "name": "get Bilateral Contracts",
+          "request": {
+            "name": "get Bilateral Contracts",
+            "description": {
+              "content": "Returns the list of contracts for a specific participant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "bilateral",
+                "participants",
+                ":participantName",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "contractName",
+                  "value": "<string>",
+                  "description": "The name of the contract."
+                },
+                {
+                  "disabled": false,
+                  "key": "counterPartyName",
+                  "value": "<string>",
+                  "description": "The counter party name involved."
+                },
+                {
+                  "disabled": false,
+                  "key": "effectiveStart",
+                  "value": "<date>",
+                  "description": "The start date of the contract."
+                },
+                {
+                  "disabled": false,
+                  "key": "effectiveEnd",
+                  "value": "<date>",
+                  "description": "The end date of the contract."
+                },
+                {
+                  "disabled": false,
+                  "key": "approvalRequired",
+                  "value": "<string>",
+                  "description": "Whether or not approval is required for the contract. Default is false, meaning that any contract, approved or not, satisfies the query in concert with other specified parameters."
+                },
+                {
+                  "disabled": false,
+                  "key": "counterPartyType",
+                  "value": "<string>",
+                  "description": "The type of participant the counterparty is."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a606449e-7463-48cf-9243-47198a9ef552",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contractName",
+                      "value": "Test Contract"
+                    },
+                    {
+                      "key": "counterPartyName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effectiveStart",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "effectiveEnd",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "approvalRequired",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterPartyType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contracts\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"PureFinancial\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"effectiveStart\": \"2019-03-14\",\n      \"effectiveEnd\": \"2019-03-14\",\n      \"sourceLocation\": \"PNODE1\",\n      \"sinkLocation\": \"PNODE1\",\n      \"scheduleApproval\": \"CounterpartyApproval\",\n      \"settlementMarket\": \"day-ahead\",\n      \"deliveryPoint\": null,\n      \"congestionLosses\": \"SellerPays\",\n      \"buyerComments\": \"Sample comment\",\n      \"sellerComments\": \"Sample comment\",\n      \"contractApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"rsgContract\": true\n    },\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"PureFinancial\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"effectiveStart\": \"2019-03-14\",\n      \"effectiveEnd\": \"2019-03-14\",\n      \"sourceLocation\": \"PNODE1\",\n      \"sinkLocation\": \"PNODE1\",\n      \"scheduleApproval\": \"BuyerAutoApproval\",\n      \"settlementMarket\": \"day-ahead\",\n      \"deliveryPoint\": null,\n      \"congestionLosses\": null,\n      \"buyerComments\": \"Sample comment\",\n      \"sellerComments\": \"Sample comment\",\n      \"contractApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"rsgContract\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c29a1aa0-c689-440f-be25-82de77d6da13",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contractName",
+                      "value": "Test Contract"
+                    },
+                    {
+                      "key": "counterPartyName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effectiveStart",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "effectiveEnd",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "approvalRequired",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterPartyType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3c7684b-8565-44e3-aa4d-e82ab82c09a6",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contractName",
+                      "value": "Test Contract"
+                    },
+                    {
+                      "key": "counterPartyName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effectiveStart",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "effectiveEnd",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "approvalRequired",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterPartyType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8e79ede-19e0-4018-9a2a-0357b73869d3",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contractName",
+                      "value": "Test Contract"
+                    },
+                    {
+                      "key": "counterPartyName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effectiveStart",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "effectiveEnd",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "approvalRequired",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterPartyType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b878792-76fb-413d-a9b9-d7dcbeadcd50",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contractName",
+                      "value": "Test Contract"
+                    },
+                    {
+                      "key": "counterPartyName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "effectiveStart",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "effectiveEnd",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "approvalRequired",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "counterPartyType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42c5463d-e766-4034-b8f0-b8a5cb92787a",
+          "name": "post Bilateral Contracts",
+          "request": {
+            "name": "post Bilateral Contracts",
+            "description": {
+              "content": "Submit multiple contracts at a time for a specific participant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "bilateral",
+                "participants",
+                ":participantName",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contracts\": [\n    {\n      \"contractName\": \"<string>\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"<string>\",\n      \"sellerName\": \"<string>\",\n      \"effectiveStart\": \"<date>\",\n      \"effectiveEnd\": \"<date>\",\n      \"sourceLocation\": \"<string>\",\n      \"sinkLocation\": \"<string>\",\n      \"scheduleApproval\": \"<string>\",\n      \"settlementMarket\": \"<string>\",\n      \"deliveryPoint\": \"<string,null>\",\n      \"congestionLosses\": \"<string,null>\",\n      \"buyerComments\": \"<string>\",\n      \"sellerComments\": \"<string>\",\n      \"contractApproval\": \"<string,null-date-time>\",\n      \"rsgContract\": \"<boolean>\"\n    },\n    {\n      \"contractName\": \"<string>\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"<string>\",\n      \"sellerName\": \"<string>\",\n      \"effectiveStart\": \"<date>\",\n      \"effectiveEnd\": \"<date>\",\n      \"sourceLocation\": \"<string>\",\n      \"sinkLocation\": \"<string>\",\n      \"scheduleApproval\": \"<string>\",\n      \"settlementMarket\": \"<string>\",\n      \"deliveryPoint\": \"<string,null>\",\n      \"congestionLosses\": \"<string,null>\",\n      \"buyerComments\": \"<string>\",\n      \"sellerComments\": \"<string>\",\n      \"contractApproval\": \"<string,null-date-time>\",\n      \"rsgContract\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6bf30b3-4dc6-47a5-83e7-1d8fcd1e7dae",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contracts\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"effectiveStart\": \"2019-03-14\",\n      \"effectiveEnd\": \"2019-03-14\",\n      \"sourceLocation\": \"PNODE1\",\n      \"sinkLocation\": \"PNODE1\",\n      \"scheduleApproval\": \"<string>\",\n      \"settlementMarket\": \"<string>\",\n      \"deliveryPoint\": \"<string,null>\",\n      \"congestionLosses\": \"<string,null>\",\n      \"buyerComments\": \"Sample comment\",\n      \"sellerComments\": \"Sample comment\",\n      \"contractApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"rsgContract\": \"<boolean>\"\n    },\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"effectiveStart\": \"2019-03-14\",\n      \"effectiveEnd\": \"2019-03-14\",\n      \"sourceLocation\": \"PNODE1\",\n      \"sinkLocation\": \"PNODE1\",\n      \"scheduleApproval\": \"<string>\",\n      \"settlementMarket\": \"<string>\",\n      \"deliveryPoint\": \"<string,null>\",\n      \"congestionLosses\": \"<string,null>\",\n      \"buyerComments\": \"Sample comment\",\n      \"sellerComments\": \"Sample comment\",\n      \"contractApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"rsgContract\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c727e178-7513-4c53-9a13-6e37892d0b14",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contracts\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"effectiveStart\": \"2019-03-14\",\n      \"effectiveEnd\": \"2019-03-14\",\n      \"sourceLocation\": \"PNODE1\",\n      \"sinkLocation\": \"PNODE1\",\n      \"scheduleApproval\": \"<string>\",\n      \"settlementMarket\": \"<string>\",\n      \"deliveryPoint\": \"<string,null>\",\n      \"congestionLosses\": \"<string,null>\",\n      \"buyerComments\": \"Sample comment\",\n      \"sellerComments\": \"Sample comment\",\n      \"contractApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"rsgContract\": \"<boolean>\"\n    },\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"effectiveStart\": \"2019-03-14\",\n      \"effectiveEnd\": \"2019-03-14\",\n      \"sourceLocation\": \"PNODE1\",\n      \"sinkLocation\": \"PNODE1\",\n      \"scheduleApproval\": \"<string>\",\n      \"settlementMarket\": \"<string>\",\n      \"deliveryPoint\": \"<string,null>\",\n      \"congestionLosses\": \"<string,null>\",\n      \"buyerComments\": \"Sample comment\",\n      \"sellerComments\": \"Sample comment\",\n      \"contractApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"rsgContract\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "226bcd37-46ec-401b-898d-96d8d61da424",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contracts\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"effectiveStart\": \"2019-03-14\",\n      \"effectiveEnd\": \"2019-03-14\",\n      \"sourceLocation\": \"PNODE1\",\n      \"sinkLocation\": \"PNODE1\",\n      \"scheduleApproval\": \"<string>\",\n      \"settlementMarket\": \"<string>\",\n      \"deliveryPoint\": \"<string,null>\",\n      \"congestionLosses\": \"<string,null>\",\n      \"buyerComments\": \"Sample comment\",\n      \"sellerComments\": \"Sample comment\",\n      \"contractApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"rsgContract\": \"<boolean>\"\n    },\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"effectiveStart\": \"2019-03-14\",\n      \"effectiveEnd\": \"2019-03-14\",\n      \"sourceLocation\": \"PNODE1\",\n      \"sinkLocation\": \"PNODE1\",\n      \"scheduleApproval\": \"<string>\",\n      \"settlementMarket\": \"<string>\",\n      \"deliveryPoint\": \"<string,null>\",\n      \"congestionLosses\": \"<string,null>\",\n      \"buyerComments\": \"Sample comment\",\n      \"sellerComments\": \"Sample comment\",\n      \"contractApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"rsgContract\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bca32937-077f-4db2-bfc7-f5b4717654ba",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contracts\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"effectiveStart\": \"2019-03-14\",\n      \"effectiveEnd\": \"2019-03-14\",\n      \"sourceLocation\": \"PNODE1\",\n      \"sinkLocation\": \"PNODE1\",\n      \"scheduleApproval\": \"<string>\",\n      \"settlementMarket\": \"<string>\",\n      \"deliveryPoint\": \"<string,null>\",\n      \"congestionLosses\": \"<string,null>\",\n      \"buyerComments\": \"Sample comment\",\n      \"sellerComments\": \"Sample comment\",\n      \"contractApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"rsgContract\": \"<boolean>\"\n    },\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"effectiveStart\": \"2019-03-14\",\n      \"effectiveEnd\": \"2019-03-14\",\n      \"sourceLocation\": \"PNODE1\",\n      \"sinkLocation\": \"PNODE1\",\n      \"scheduleApproval\": \"<string>\",\n      \"settlementMarket\": \"<string>\",\n      \"deliveryPoint\": \"<string,null>\",\n      \"congestionLosses\": \"<string,null>\",\n      \"buyerComments\": \"Sample comment\",\n      \"sellerComments\": \"Sample comment\",\n      \"contractApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"rsgContract\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea79c211-b676-4e31-a6ff-cabb4a814f28",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contracts\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"effectiveStart\": \"2019-03-14\",\n      \"effectiveEnd\": \"2019-03-14\",\n      \"sourceLocation\": \"PNODE1\",\n      \"sinkLocation\": \"PNODE1\",\n      \"scheduleApproval\": \"<string>\",\n      \"settlementMarket\": \"<string>\",\n      \"deliveryPoint\": \"<string,null>\",\n      \"congestionLosses\": \"<string,null>\",\n      \"buyerComments\": \"Sample comment\",\n      \"sellerComments\": \"Sample comment\",\n      \"contractApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"rsgContract\": \"<boolean>\"\n    },\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"effectiveStart\": \"2019-03-14\",\n      \"effectiveEnd\": \"2019-03-14\",\n      \"sourceLocation\": \"PNODE1\",\n      \"sinkLocation\": \"PNODE1\",\n      \"scheduleApproval\": \"<string>\",\n      \"settlementMarket\": \"<string>\",\n      \"deliveryPoint\": \"<string,null>\",\n      \"congestionLosses\": \"<string,null>\",\n      \"buyerComments\": \"Sample comment\",\n      \"sellerComments\": \"Sample comment\",\n      \"contractApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"rsgContract\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e90e892d-2b79-4386-b6f7-ca2e64bcbd44",
+          "name": "get Bilateral Contract Schedules",
+          "request": {
+            "name": "get Bilateral Contract Schedules",
+            "description": {
+              "content": "Query schedules for a specificed day and participant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "bilateral",
+                "participants",
+                ":participantName",
+                "contract-schedules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "contractName",
+                  "value": "<string>",
+                  "description": "Name of contract the schedules should be filtered by."
+                },
+                {
+                  "disabled": false,
+                  "key": "counterPartyName",
+                  "value": "<string>",
+                  "description": "Name of other participant involved."
+                },
+                {
+                  "disabled": false,
+                  "key": "scheduleDay",
+                  "value": "<date>",
+                  "description": "Day of the schedule in question."
+                },
+                {
+                  "disabled": false,
+                  "key": "scheduleState",
+                  "value": "<string>",
+                  "description": "The state that the schedule is in."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fd292a11-8c8b-4e48-af80-74b95503f79e",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contractName",
+                      "value": "Test Contract"
+                    },
+                    {
+                      "key": "counterPartyName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scheduleDay",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "scheduleState",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"schedules\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"Approved\"\n    },\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"Pending\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4152477-ff65-42aa-8dff-d85a7e91b363",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contractName",
+                      "value": "Test Contract"
+                    },
+                    {
+                      "key": "counterPartyName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scheduleDay",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "scheduleState",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58e93bad-7d23-4bbd-add5-8c17ff58b179",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contractName",
+                      "value": "Test Contract"
+                    },
+                    {
+                      "key": "counterPartyName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scheduleDay",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "scheduleState",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ccd7bb5-ab22-4043-b638-bfe9823d514f",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contractName",
+                      "value": "Test Contract"
+                    },
+                    {
+                      "key": "counterPartyName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scheduleDay",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "scheduleState",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7ae5c89-4c5d-4ae8-bbb7-781b04842069",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "contractName",
+                      "value": "Test Contract"
+                    },
+                    {
+                      "key": "counterPartyName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scheduleDay",
+                      "value": "2019-03-14"
+                    },
+                    {
+                      "key": "scheduleState",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb23a727-fdc6-4f94-bfae-8a245987d9e9",
+          "name": "post Bilateral Contract Schedules",
+          "request": {
+            "name": "post Bilateral Contract Schedules",
+            "description": {
+              "content": "Submit schedules for a multiple days for a given contract and participant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "bilateral",
+                "participants",
+                ":participantName",
+                "contract-schedules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schedules\": [\n    {\n      \"contractName\": \"<string>\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"<string>\",\n      \"sellerName\": \"<string>\",\n      \"scheduleDay\": \"<date>\",\n      \"hours\": [\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        }\n      ],\n      \"scheduleApproval\": \"<string,null-date-time>\",\n      \"scheduleState\": \"<string>\"\n    },\n    {\n      \"contractName\": \"<string>\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"<string>\",\n      \"sellerName\": \"<string>\",\n      \"scheduleDay\": \"<date>\",\n      \"hours\": [\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        }\n      ],\n      \"scheduleApproval\": \"<string,null-date-time>\",\n      \"scheduleState\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0706a569-b1cf-41a6-b1bb-3c6252f899fa",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schedules\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    },\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8fb261c-ad02-4659-a96b-404fcf7e6482",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schedules\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    },\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a4e83fe-5df2-42bf-84bc-05020afbc486",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schedules\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    },\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32a07f54-5deb-4686-b2cd-526b2ff87c05",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schedules\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    },\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d708cb8-fe75-4ffb-997e-ba2759ebc3eb",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schedules\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    },\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55db576a-26df-40c1-8195-3e9e468b872d",
+          "name": "post Single Bilateral Contract Schedules",
+          "request": {
+            "name": "post Single Bilateral Contract Schedules",
+            "description": {
+              "content": "Submit schedules for a specificed day and participant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "bilateral",
+                "participants",
+                ":participantName",
+                "contract-schedules",
+                ":scheduleDay"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "scheduleDay",
+                  "description": "(Required) The day of the schedule."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schedules\": [\n    {\n      \"contractName\": \"<string>\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"<string>\",\n      \"sellerName\": \"<string>\",\n      \"scheduleDay\": \"<date>\",\n      \"hours\": [\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        }\n      ],\n      \"scheduleApproval\": \"<string,null-date-time>\",\n      \"scheduleState\": \"<string>\"\n    },\n    {\n      \"contractName\": \"<string>\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"<string>\",\n      \"sellerName\": \"<string>\",\n      \"scheduleDay\": \"<date>\",\n      \"hours\": [\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        },\n        {\n          \"hour\": \"<integer>\",\n          \"mw\": \"<realenergy>\"\n        }\n      ],\n      \"scheduleApproval\": \"<string,null-date-time>\",\n      \"scheduleState\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8268520f-8df9-4efc-b3c9-95aaa52c7387",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-schedules",
+                    ":scheduleDay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "scheduleDay",
+                      "description": "(Required) The day of the schedule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schedules\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    },\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3118d623-7a8b-4642-8955-beac05f93c98",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-schedules",
+                    ":scheduleDay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "scheduleDay",
+                      "description": "(Required) The day of the schedule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schedules\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    },\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd283721-b9ec-45af-8250-83192ea338cc",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-schedules",
+                    ":scheduleDay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "scheduleDay",
+                      "description": "(Required) The day of the schedule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schedules\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    },\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc274b90-7cc3-4d17-96db-9c5a4ec2ad4c",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-schedules",
+                    ":scheduleDay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "scheduleDay",
+                      "description": "(Required) The day of the schedule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schedules\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    },\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44a350fb-3c68-4d43-8c32-dbed6c84e530",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-schedules",
+                    ":scheduleDay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "scheduleDay",
+                      "description": "(Required) The day of the schedule."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schedules\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    },\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"hours\": [\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        },\n        {\n          \"hour\": 1,\n          \"mw\": 120001.7\n        }\n      ],\n      \"scheduleApproval\": \"2019-03-14T14:50:00-05:00\",\n      \"scheduleState\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3510d9d5-1474-4c57-b083-0a5e2dede0cd",
+          "name": "post Bilateral Contracts Schedules Approval",
+          "request": {
+            "name": "post Bilateral Contracts Schedules Approval",
+            "description": {
+              "content": "Confirm both contracts and schedules.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "markets",
+                "bilateral",
+                "participants",
+                ":participantName",
+                "contract-confirmation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "participantName",
+                  "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                "key": "x-acting-participant",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"confirmContracts\": [\n    {\n      \"contractName\": \"<string>\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"<string>\",\n      \"sellerName\": \"<string>\",\n      \"confirmation\": \"<string>\"\n    }\n  ],\n  \"confirmSchedules\": [\n    {\n      \"contractName\": \"<string>\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"<string>\",\n      \"sellerName\": \"<string>\",\n      \"scheduleDay\": \"<date>\",\n      \"confirmation\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ac08588b-0f50-4ccb-b8c6-b88783cb4ceb",
+              "name": "Successful operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-confirmation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmContracts\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"confirmation\": \"<string>\"\n    }\n  ],\n  \"confirmSchedules\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"confirmation\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2335d083-d613-4803-baf6-abec8b36a8e1",
+              "name": "User error. Request was invalid for some reason. See response for details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-confirmation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmContracts\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"confirmation\": \"<string>\"\n    }\n  ],\n  \"confirmSchedules\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"confirmation\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Bad request message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9dba681a-effd-4bb5-8b5d-0af00b7389fb",
+              "name": "Rejected due to insufficient permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-confirmation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmContracts\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"confirmation\": \"<string>\"\n    }\n  ],\n  \"confirmSchedules\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"confirmation\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Unauthorized message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "712cd594-7f61-4d7e-87bd-f33490b2c348",
+              "name": "Resource not found. The path provided does not point to an entity in the system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-confirmation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmContracts\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"confirmation\": \"<string>\"\n    }\n  ],\n  \"confirmSchedules\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"confirmation\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Not found message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c454685-ca96-4b41-8c99-760af09fb7f8",
+              "name": "Internal error occurred, details in server-side logs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "markets",
+                    "bilateral",
+                    "participants",
+                    ":participantName",
+                    "contract-confirmation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "participantName",
+                      "description": "(Required) The NERC ID of asset owner specified in the path for a collection resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.",
+                    "key": "x-acting-participant",
+                    "value": "MP"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmContracts\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"confirmation\": \"<string>\"\n    }\n  ],\n  \"confirmSchedules\": [\n    {\n      \"contractName\": \"Test Contract\",\n      \"contractType\": \"<string>\",\n      \"buyerName\": \"MP\",\n      \"sellerName\": \"MP\",\n      \"scheduleDay\": \"2019-03-14\",\n      \"confirmation\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.",
+                  "key": "http-x-request-id",
+                  "value": "34571c664e48ca0b1e30d7ffb9b3b287"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": \"<action enum>\",\n  \"responses\": [\n    {\n      \"messages\": [\n        {\n          \"level\": \"ERROR\",\n          \"msgId\": \"MESSAGE_ID\",\n          \"params\": [],\n          \"userMsg\": \"Internal error message for MESSAGE_ID.\"\n        }\n      ]\n    }\n  ],\n  \"transactionId\": \"34571c664e48ca0b1e30d7ffb9b3b287\",\n  \"transactionTime\": \"2020-07-02T17:45:00-05:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cce.midwestiso.org/dart2/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3617c061-237d-4e3a-90c2-4ef6ff189f1e",
+    "name": "MUI - Public Specification Contracts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "MISO Public Specification to support Market System Enhancement (MSE) new Market User Interface (MUI 2.0).\n\nContact Support:\n Name: MUI 2.0 Questions\n Email: MSEQuestions@misoenergy.org",
+      "type": "text/plain"
+    }
+  }
+}

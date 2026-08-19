@@ -1,0 +1,712 @@
+{
+  "item": [
+    {
+      "id": "710b9647-e713-45ba-bbe6-7bb78814eafc",
+      "name": "Interchange",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5d548f73-33c5-4f71-a083-4934f55995a3",
+          "name": "Tie Flow / Net Actual Interchange (NAI) — GetNai",
+          "request": {
+            "name": "Tie Flow / Net Actual Interchange (NAI) — GetNai",
+            "description": {
+              "content": "Source data behind the MISO public \"Tie Flow / Net Actual Interchange (NAI)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "Interchange",
+                "GetNai"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b8898534-0b1b-40bc-a582-c8fb92e6e284",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "Interchange",
+                    "GetNai"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Date\": \"27-Jul-2026 - Interval 08:10 EST\",\n  \"Actual\": {\n    \"HourandMin\": \"08:10\",\n    \"TieFlow\": {\n      \"Name\": \"MISO\",\n      \"Value\": \"-5495.34\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e38b151-d47e-4f85-b948-3195954430ef",
+          "name": "Tie Flow / Net Actual Interchange (NAI) — FiveMinute",
+          "request": {
+            "name": "Tie Flow / Net Actual Interchange (NAI) — FiveMinute",
+            "description": {
+              "content": "Source data behind the MISO public \"Tie Flow / Net Actual Interchange (NAI)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "Interchange",
+                "GetNai",
+                "FiveMinute"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d632d88d-e951-40a3-ab83-69fedcb6a54a",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "Interchange",
+                    "GetNai",
+                    "FiveMinute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"Time\": \"2026-07-26 8:15:00 AM\",\n    \"Value\": \"-5573.87\"\n  },\n  {\n    \"Time\": \"2026-07-26 8:20:00 AM\",\n    \"Value\": \"-5321.07\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af6f037f-2526-4a79-a6ca-0f1682f9e866",
+          "name": "Net Actual Interchange (Imports)",
+          "request": {
+            "name": "Net Actual Interchange (Imports)",
+            "description": {
+              "content": "Source data behind the MISO public \"Net Actual Interchange (Imports)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "Interchange",
+                "GetNai",
+                "Imports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a07ec567-01ab-400f-853b-154f532d5deb",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "Interchange",
+                    "GetNai",
+                    "Imports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"Time\": \"2026-07-26 1:15:00 PM\",\n    \"Value\": \"-5572.00\"\n  },\n  {\n    \"Time\": \"2026-07-26 1:20:00 PM\",\n    \"Value\": \"-5319.00\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "712e6be3-2dd7-40f8-8c6a-438ec3219463",
+          "name": "Net Scheduled Interchange — GetNsi",
+          "request": {
+            "name": "Net Scheduled Interchange — GetNsi",
+            "description": {
+              "content": "Source data behind the MISO public \"Net Scheduled Interchange\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "Interchange",
+                "GetNsi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ed9b3d6f-c69f-4476-91c9-e1a8c32b7d6d",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "Interchange",
+                    "GetNsi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instance\": [\n    {\n      \"timestamp\": \"2026-07-27 08:08:00\",\n      \"AECI\": \"-164\",\n      \"LGEE\": \"179\",\n      \"MHEB\": \"-2061\",\n      \"MISO\": \"-5425\",\n      \"ONT\": \"-207\",\n      \"PJM\": \"-3151\",\n      \"SOCO\": \"138\",\n      \"SPA\": \"-6\",\n      \"SWPP\": \"-78\",\n      \"TVA\": \"16\"\n    }\n  ],\n  \"RefId\": \"27-Jul-2026 - Interval 08:08 EST\",\n  \"MktDay\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e760759c-2050-40a8-9a14-479c7a13a733",
+          "name": "Net Scheduled Interchange — FiveMinute",
+          "request": {
+            "name": "Net Scheduled Interchange — FiveMinute",
+            "description": {
+              "content": "Source data behind the MISO public \"Net Scheduled Interchange\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "Interchange",
+                "GetNsi",
+                "FiveMinute"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4713140a-77ad-4d88-aec6-bf61274f1f9d",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "Interchange",
+                    "GetNsi",
+                    "FiveMinute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instance\": [\n    {\n      \"timestamp\": \"2026-07-25 19:05:00\",\n      \"AECI\": \"220\",\n      \"LGEE\": \"-75\",\n      \"MHEB\": \"-1737\",\n      \"MISO\": \"-6906\",\n      \"ONT\": \"-1540\",\n      \"PJM\": \"-3540\",\n      \"SOCO\": \"172\",\n      \"SPA\": \"-93\",\n      \"SWPP\": \"-196\",\n      \"TVA\": \"-370\"\n    },\n    {\n      \"timestamp\": \"2026-07-25 19:10:00\",\n      \"AECI\": \"220\",\n      \"LGEE\": \"-75\",\n      \"MHEB\": \"-1737\",\n      \"MISO\": \"-6906\",\n      \"ONT\": \"-1540\",\n      \"PJM\": \"-3540\",\n      \"SOCO\": \"172\",\n      \"SPA\": \"-93\",\n      \"SWPP\": \"-196\",\n      \"TVA\": \"-370\"\n    }\n  ],\n  \"RefId\": \"27-Jul-2026 - Interval 08:08 EST\",\n  \"MktDay\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d148e61-5ad2-4ed2-80ed-dce95e02ba0e",
+          "name": "Net Scheduled Interchange (MISO) — MISO",
+          "request": {
+            "name": "Net Scheduled Interchange (MISO) — MISO",
+            "description": {
+              "content": "Source data behind the MISO public \"Net Scheduled Interchange (MISO)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "Interchange",
+                "GetNsi",
+                "MISO"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1cbdc881-e2fa-4e8e-9929-eaef8f3b4364",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "Interchange",
+                    "GetNsi",
+                    "MISO"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instance\": [\n    {\n      \"timestamp\": \"2026-07-27 08:13:00\",\n      \"NSI\": \"-5405\"\n    }\n  ],\n  \"RefId\": \"27-Jul-2026 - Interval 08:13 EST\",\n  \"MktDay\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fbd78698-8cc5-453a-88b9-3160fa1fe9a8",
+          "name": "Net Scheduled Interchange (MISO) — MISOFiveMinute",
+          "request": {
+            "name": "Net Scheduled Interchange (MISO) — MISOFiveMinute",
+            "description": {
+              "content": "Source data behind the MISO public \"Net Scheduled Interchange (MISO)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "Interchange",
+                "GetNsi",
+                "MISOFiveMinute"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d32c048-034a-4ec9-b907-7f39f647d7bd",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "Interchange",
+                    "GetNsi",
+                    "MISOFiveMinute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instance\": [\n    {\n      \"timestamp\": \"2026-07-26 08:20:00\",\n      \"NSI\": \"-5325\"\n    },\n    {\n      \"timestamp\": \"2026-07-26 08:25:00\",\n      \"NSI\": \"-5325\"\n    }\n  ],\n  \"RefId\": \"27-Jul-2026 - Interval 08:13 EST\",\n  \"MktDay\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca40b665-a11d-438d-a2aa-d78c5011d926",
+          "name": "Net Scheduled Interchange (MISO) — MISOOneMinute",
+          "request": {
+            "name": "Net Scheduled Interchange (MISO) — MISOOneMinute",
+            "description": {
+              "content": "Source data behind the MISO public \"Net Scheduled Interchange (MISO)\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "Interchange",
+                "GetNsi",
+                "MISOOneMinute"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4f59cb1-921c-4ea1-b13a-dfa3913e3d9e",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "Interchange",
+                    "GetNsi",
+                    "MISOOneMinute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instance\": [\n    {\n      \"timestamp\": \"2026-07-25 19:01:00\",\n      \"NSI\": \"-6639\"\n    },\n    {\n      \"timestamp\": \"2026-07-25 19:02:00\",\n      \"NSI\": \"-6706\"\n    }\n  ],\n  \"RefId\": \"27-Jul-2026 - Interval 08:08 EST\",\n  \"MktDay\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "576f518c-ed0d-400a-a8a3-4048aea4b098",
+          "name": "Net Scheduled Interchange — OneMinute",
+          "request": {
+            "name": "Net Scheduled Interchange — OneMinute",
+            "description": {
+              "content": "Source data behind the MISO public \"Net Scheduled Interchange\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "Interchange",
+                "GetNsi",
+                "OneMinute"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a77004f0-ab94-44f2-8c55-08c58ace4e53",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "Interchange",
+                    "GetNsi",
+                    "OneMinute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instance\": [\n    {\n      \"timestamp\": \"2026-07-25 19:01:00\",\n      \"AECI\": \"182\",\n      \"LGEE\": \"-73\",\n      \"MHEB\": \"-1733\",\n      \"MISO\": \"-6639\",\n      \"ONT\": \"-1543\",\n      \"PJM\": \"-3264\",\n      \"SOCO\": \"172\",\n      \"SPA\": \"-114\",\n      \"SWPP\": \"-148\",\n      \"TVA\": \"-370\"\n    },\n    {\n      \"timestamp\": \"2026-07-25 19:02:00\",\n      \"AECI\": \"191\",\n      \"LGEE\": \"-74\",\n      \"MHEB\": \"-1734\",\n      \"MISO\": \"-6706\",\n      \"ONT\": \"-1542\",\n      \"PJM\": \"-3333\",\n      \"SOCO\": \"172\",\n      \"SPA\": \"-109\",\n      \"SWPP\": \"-160\",\n      \"TVA\": \"-370\"\n    }\n  ],\n  \"RefId\": \"27-Jul-2026 - Interval 08:08 EST\",\n  \"MktDay\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://public-api.misoenergy.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "999790c5-a860-408b-ab47-5c06b97f024e",
+    "name": "MISO Public Interchange API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time market and operations data displays from MISO, served from one host under /api/. Merged from two separately derived documents — Operations Displays and Markets Displays — which described the same API: same server, same (absent) authentication, and the same documentation table. Reported by a reader on 2026-08-04.",
+      "type": "text/plain"
+    }
+  }
+}

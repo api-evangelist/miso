@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MISO Public Generation Outages API",
+    "version": "2025-12-12"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GenerationOutages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generation outages Plus or Minus Five Days",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/GenerationOutages/GetGenerationOutagesPlusMinusFiveDays"
+          },
+          "docs": "Source data behind the MISO public \"Generation outages Plus or Minus Five Days\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

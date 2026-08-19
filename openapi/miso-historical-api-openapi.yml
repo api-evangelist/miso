@@ -1,0 +1,163 @@
+openapi: 3.2.0
+info:
+  title: Load, Generation, and Interchange Historical API
+  description: 'Provides load, generation, and interchange data. Load: Includes demand, load, and load forecast. Generation: Includes generation cleared and offered as well as related data. Interchange: Includes Energy transfers that cross Balancing Authority (BA) Area boundaries. Note: Data available within the interchange endpoints are subject to change up to 105 days after the market day due to reconciliation.'
+  version: '1.0'
+  x-provenance:
+    harvestedBy: API Evangelist
+    fetchDate: '2026-07-27'
+    note: Assembled verbatim from MISO's own anonymously served Azure API Management developer-portal data API. MISO's OpenAPI export endpoint returns a valid document whose paths object is EMPTY, so info, servers and components.securitySchemes were taken from that export, while paths, methods, operationIds, summaries, descriptions, parameters, response codes and response examples were taken from the portal operations endpoints, and components.schemas from the portal schemas endpoint. Nothing was invented, inferred or paraphrased.
+    sources:
+    - https://data-exchange.misoenergy.org/developer/apis/load-generation-and-interchange-api?export=true&format=openapi%2Bjson&api-version=2022-04-01-preview (HTTP 200)
+    - https://data-exchange.misoenergy.org/developer/apis/load-generation-and-interchange-api/operations?api-version=2022-04-01-preview (HTTP 200)
+    - https://data-exchange.misoenergy.org/developer/apis/load-generation-and-interchange-api/operations/{operationId}?api-version=2022-04-01-preview (HTTP 200, all operations)
+    - https://data-exchange.misoenergy.org/developer/apis/load-generation-and-interchange-api/schemas/6a63cd40da09a311a00a1048?api-version=2022-04-01-preview (HTTP 200)
+    gatewayVerification: Anonymous GET to the gateway returns HTTP 401 "Access denied due to missing subscription key"; unknown routes return HTTP 404 "Resource not found" (verified 2026-07-27).
+servers:
+- url: https://apim.misoenergy.org/lgi
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Historical
+paths:
+  /v1/historical/{date}/interchange/net-scheduled:
+    get:
+      operationId: get-v1-historical-date-interchange-net-scheduled
+      summary: Historical Net Scheduled Interchange
+      description: Net scheduled interchange (NSI) final volumes, by adjacent balancing authority (BA) in hourly intervals. Includes updates from Dynamic Schedules, Emergency Power Purchases, and ARS/CRSG events. Positive values indicate imports. Available at 7am EST the day after. May be updated up to 105 days after-the-fact.
+      parameters:
+      - name: date
+        in: path
+        required: true
+        description: 'Market date in the form: yyyy-mm-dd'
+        schema:
+          type: string
+          format: date
+      - name: adjacentBa
+        in: query
+        required: false
+        description: Filter to a specific adjacent Balancing Authority (ex. PJM, TVA, SWPP).
+        schema:
+          type: string
+      - name: interval
+        in: query
+        required: false
+        description: Filter to a specific time interval (ex. "13:05", "13"), in Eastern Standard Time (UTC−05:00).
+        schema:
+          type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/200-OK-Historical-Net-Scheduled-InterchangeResponse-json'
+              example:
+                data:
+                - timeInterval:
+                    resolution: daily
+                    start: '2023-06-28 00:00:00.000'
+                    end: '2023-06-29 00:00:00.000'
+                    value: '2023-06-29'
+                  adjacentBa: string
+                  nsi: 0
+                page:
+                  pageNumber: 0
+                  pageSize: 0
+                  totalElements: 0
+                  totalPages: 0
+                  lastPage: true
+        '400':
+          description: Invalid date format
+          content:
+            application/json: {}
+        '401':
+          description: Invalid or missing Bearer Token in the Authorization header
+          content:
+            application/json: {}
+        '404':
+          description: Date not found
+          content:
+            application/json: {}
+      tags:
+      - Historical
+components:
+  schemas:
+    TimeInterval:
+      type: object
+      properties:
+        resolution:
+          enum:
+          - 5min
+          - hourly
+          - daily
+          type: string
+          example: daily
+        start:
+          pattern: ([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2}).([0-9]{3})
+          type: string
+          description: In Eastern Standard Time (UTC−05:00).
+          example: '2023-06-28 00:00:00.000'
+        end:
+          pattern: ([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2}).([0-9]{3})
+          type: string
+          description: In Eastern Standard Time (UTC−05:00).
+          example: '2023-06-29 00:00:00.000'
+        value:
+          type: string
+          description: 'Short hand value for time interval. Can be timestamp for 5min resolution (ex: 2023-06-28 00:00:00.000), hour ending value for hourly resolution, 1-24 (ex: 21), or date string for daily (ex: 2023-06-28). In Eastern Standard Time (UTC−05:00).'
+          example: '2023-06-29'
+    PageInfo:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+        lastPage:
+          type: boolean
+    200-OK-Historical-Net-Scheduled-InterchangeResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/HistoricalNetScheduledInterchange'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    HistoricalNetScheduledInterchange:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        adjacentBa:
+          type: string
+        nsi:
+          type: number
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query

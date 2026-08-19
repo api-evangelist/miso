@@ -692,3 +692,9 @@ tools:
   source_operation: openapi/miso-public-api-operations-displays-openapi.json#getWindSolarGetwindforecast
   input_schema_from: openapi/miso-public-api-operations-displays-openapi.json#getWindSolarGetwindforecast
     parameters
+deployment:
+  mode: none
+  verified: derived
+  tools: 69
+  checked: '2026-08-12'
+  source: catalog MCP census

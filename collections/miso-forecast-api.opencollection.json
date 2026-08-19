@@ -1,0 +1,394 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Miso Forecast API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Forecast",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Medium Term Load Forecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/forecast/:date/load",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "init",
+                "value": "",
+                "type": "query",
+                "description": "Specify the specific forecast run by the init (creation) date. Must always be before the current date and forecast date. If not set, defaults to 'date - 1d' when date < today, and 'today - 1d' when date >= today."
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "localResourceZone",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "timeResolution",
+                "value": "",
+                "type": "query",
+                "description": "Time resolution of data"
+              }
+            ]
+          },
+          "docs": "Medium term load forecast (in megawatts), by region and zone in hourly or daily intervals. Use the 'init' parameter to access a specific past run. Available at 7am EST the day after the init date."
+        },
+        {
+          "info": {
+            "name": "Outage Forecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/v1/forecast/:date/outage",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Market date in the form: yyyy-mm-dd"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific time interval (ex. \"13:05\", \"13\"), in Eastern Standard Time (UTC−05:00)."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "The total capacity (in megawatts at economic maximum) for all units that are expected to be on outage, by region in hourly intervals. This endpoint has no lookback, dates must always be current or future. Available at 6am EST up to 6 days before."
+        },
+        {
+          "info": {
+            "name": "getRenewableForecastDay",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/markets/real-time/:day/forecast/5-minute/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Date-time as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00. Start time for 12 contiguous 5-minute intervals that are returned by query. The interval is rounded up to the closest 5-minute interval if not already on one."
+              }
+            ]
+          },
+          "docs": "Returns the collection of 5 minute forecast created by the Midwest ISO forecast tool for Wind and Solar resources by pnode location. Pnode or portfolio query parameters may be provided, otherwise all applicable resources for participant are returned. Start time will be rounded up to the next 5-minute boundary if it is not already on one and the next 12 intervals will be returned assuming they exist. If forecast does not exist then no data is returned."
+        },
+        {
+          "info": {
+            "name": "getRealTimeDemandDay",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/markets/real-time/:day/forecast/rt-demand/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              }
+            ]
+          },
+          "docs": "Returns the collection of hourly load forecast for Load Zones, Intermittent and Dispatchable Intermittent Resources (DIR) by pnode location. Pnode or portfolio query parameters may be provided, otherwise all applicable resources for participant are returned. If forecast does not exist then no data is returned."
+        },
+        {
+          "info": {
+            "name": "postRealTimeDemandDay",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apim.misoenergy.org/lgi/markets/real-time/:day/forecast/rt-demand/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit the hourly load forecast for one or more Load Zones, Intermittent and Dispatchable Intermittent Resources (DIR). Data can only be entered until the RSG Notification Deadline. That is data must be entered at least 4 hours prior to the market hour."
+        },
+        {
+          "info": {
+            "name": "getDirForecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/markets/real-time/:day/forecast/dir/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Date-time as defined in RFC 3339 having format YYYY-MM-DDTHH:MM:SS-05:00. Start time for 12 contiguous 5-minute intervals that are returned by query. Interval is rounded up to the closest 5-minute interval if not already on one."
+              }
+            ]
+          },
+          "docs": "Returns the collection of 5 minute generation capability forecast for Dispatchable Intermittent Resources (DIR) by pnode location. Pnode or portfolio query parameters may be provided, otherwise all applicable resources for participant are returned. If forecast does not exist then no data is returned."
+        },
+        {
+          "info": {
+            "name": "postDirForecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apim.misoenergy.org/lgi/markets/real-time/:day/forecast/dir/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit the 5 minute generation capability forecast for one or more Dispatchable Intermittent Resources (DIR). Data can be submitted at any time per the market rules.  To be effective for a given hour and date, submittal must have completed prior to Real-Time market clearing (subject to the market rules). The message will accept a maximum of 12 contiguous intervals.  Intervals for this message must fall on 5-minute boundaries and they are allowed to span the market day."
+        },
+        {
+          "info": {
+            "name": "getDrrForecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apim.misoenergy.org/lgi/markets/real-time/:day/forecast/drr-load/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              },
+              {
+                "name": "pnode",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned."
+              },
+              {
+                "name": "portfolio",
+                "value": "",
+                "type": "query",
+                "description": "Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned."
+              }
+            ]
+          },
+          "docs": "Returns the collection of 5 minute contingency reserve deployment forecast for DRR Type-I and Type-II resources by pnode location. Pnode or portfolio query parameters may be provided, otherwise all applicable resources for participant are returned."
+        },
+        {
+          "info": {
+            "name": "postDrrForecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apim.misoenergy.org/lgi/markets/real-time/:day/forecast/drr-load/participants/:participantName",
+            "headers": [
+              {
+                "name": "x-acting-participant",
+                "value": "MP"
+              }
+            ],
+            "params": [
+              {
+                "name": "day",
+                "value": "",
+                "type": "path",
+                "description": "The operating day of the data."
+              },
+              {
+                "name": "participantName",
+                "value": "",
+                "type": "path",
+                "description": "The NERC ID of asset owner specified in the path for a collection resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit the 5 minute contingency reserve deployment forecast for one or more DRR Type-I and Type-II resources. The earliest forecast interval that is submitted must fall within the next 10 minutes (from current time) and to be effective for a given hour and date, submittal must have completed prior to Real-Time market clearing (subject to the market rules). The block of forecast times that are submitted must be contiguous. Within the operating date, up to 288 intervals can be specified."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

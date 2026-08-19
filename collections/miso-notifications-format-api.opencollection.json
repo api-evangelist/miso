@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MUI - Public Specification Notifications Format API",
+    "version": "3.3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notifications Format",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Posted case event notification message which is published to participant configured listener endpoint when Day-Ahead and Real-Time study results are available via the MUI.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/example-listener/case-event",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Posted case event notification message which is published to participant configured listener endpoint when Day-Ahead and Real-Time study results are available via the MUI."
+        },
+        {
+          "info": {
+            "name": "Posted contingency reserve notification message which is published to participant configured listener endpoint.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/example-listener/contingency-reserve",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Posted contingency reserve notification message which is published to participant configured listener endpoint."
+        },
+        {
+          "info": {
+            "name": "Posted emergency notification message which is published to participant configured listener endpoint. Message can be sourced from MISO or the IMM.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/example-listener/emergency-notification",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Posted emergency notification message which is published to participant configured listener endpoint. Message can be sourced from MISO or the IMM."
+        },
+        {
+          "info": {
+            "name": "Posted dispatch instruction notification message which is published to participant configured listener endpoint.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/example-listener/dispatch-instruction",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Posted dispatch instruction notification message which is published to participant configured listener endpoint."
+        },
+        {
+          "info": {
+            "name": "Posted contract schedule confirmation notification message which is published to participant configured listener endpoint.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/example-listener/financial-contract-schedule-confirmation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Posted contract schedule confirmation notification message which is published to participant configured listener endpoint."
+        },
+        {
+          "info": {
+            "name": "Posted reserve zone study status notification message which is published to participant configured listener endpoint.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/example-listener/reserve-zone-study-status",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Posted reserve zone study status notification message which is published to participant configured listener endpoint."
+        },
+        {
+          "info": {
+            "name": "Posted resource start stop notification message which is published to participant configured listener endpoint.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cce.midwestiso.org/dart2/example-listener/resource-start-stop",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Posted resource start stop notification message which is published to participant configured listener endpoint."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

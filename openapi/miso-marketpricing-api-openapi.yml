@@ -1,0 +1,488 @@
+openapi: 3.2.0
+info:
+  title: MISO Public Market Pricing API
+  version: '2025-12-12'
+  description: 'Real-time market and operations data displays from MISO, served from one host under /api/. Merged from two separately derived documents — Operations Displays and Markets Displays — which described the same API: same server, same (absent) authentication, and the same documentation table. Reported by a reader on 2026-08-04.'
+  x-provenance:
+    harvestedBy: API Evangelist
+    fetchDate: '2026-07-27'
+    note: 'MISO publishes no OpenAPI for its Public API. This document was assembled from MISO''s own published artifacts only: every path and every operation summary is taken verbatim from the endpoint table MISO publishes at https://public-api.misoenergy.org/ (section "Operations Displays"), and every response schema and example is derived from the live JSON MISO returned to an anonymous GET on 2026-07-27. No host, path, parameter, field name or value was invented. Examples are the real payloads with long arrays truncated to two elements. No query parameters are documented by MISO for these endpoints and none are asserted here.'
+    sources:
+    - https://www.misoenergy.org/markets-and-operations/RTDataAPIs/ (HTTP 200)
+    - https://public-api.misoenergy.org/ (HTTP 200, endpoint table)
+    - Every path in this document individually fetched anonymously; all returned HTTP 200 application/json on 2026-07-27.
+servers:
+- url: https://public-api.misoenergy.org
+  description: MISO Public API — anonymous, no key, no account.
+tags:
+- name: MarketPricing
+paths:
+  /api/MarketPricing/GetAncillaryServicesMcp:
+    get:
+      operationId: getMarketPricingGetAncillaryServicesMcp
+      summary: Ancillary Services MCP
+      description: Source data behind the MISO public "Ancillary Services MCP" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  MCPData:
+                    type: object
+                    properties:
+                      RefId:
+                        type: string
+                      MktDay:
+                        type: string
+                      RealTimeMCP:
+                        type: object
+                        properties:
+                          HourAndMin:
+                            type: string
+                          Zone:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                number:
+                                  type: string
+                                GenRegMCP:
+                                  type: string
+                                GenSpinMCP:
+                                  type: string
+                                GenSuppMCP:
+                                  type: string
+                                StrMcp:
+                                  type: string
+                                DemandRegMcp:
+                                  type: string
+                                DemandSpinMcp:
+                                  type: string
+                                DemandSuppMcp:
+                                  type: string
+                                RcpUpMcp:
+                                  type: string
+                                RcpDownMcp:
+                                  type: string
+                      DayAheadMCP:
+                        type: object
+                        properties:
+                          HourEnding:
+                            type: string
+                          Zone:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                number:
+                                  type: string
+                                GenRegMCP:
+                                  type: string
+                                GenSpinMCP:
+                                  type: string
+                                GenSuppMCP:
+                                  type: string
+                                StrMcp:
+                                  type: string
+                                DemandRegMcp:
+                                  type: string
+                                DemandSpinMcp:
+                                  type: string
+                                DemandSuppMcp:
+                                  type: string
+                                RcpUpMcp:
+                                  type: string
+                                RcpDownMcp:
+                                  type: string
+              example:
+                MCPData:
+                  RefId: 27-Jul-2026 - Interval 08:15 EST
+                  MktDay: 07-27-2026
+                  RealTimeMCP:
+                    HourAndMin: 08:15
+                    Zone:
+                    - number: '1'
+                      GenRegMCP: '9.34'
+                      GenSpinMCP: '0.16'
+                      GenSuppMCP: '0.16'
+                      StrMcp: '0.10'
+                      DemandRegMcp: '9.34'
+                      DemandSpinMcp: '0.16'
+                      DemandSuppMcp: '0.16'
+                      RcpUpMcp: '0.00'
+                      RcpDownMcp: '0.00'
+                    - number: '2'
+                      GenRegMCP: '9.34'
+                      GenSpinMCP: '0.16'
+                      GenSuppMCP: '0.16'
+                      StrMcp: '0.10'
+                      DemandRegMcp: '9.34'
+                      DemandSpinMcp: '0.16'
+                      DemandSuppMcp: '0.16'
+                      RcpUpMcp: '0.00'
+                      RcpDownMcp: '0.00'
+                  DayAheadMCP:
+                    HourEnding: '9'
+                    Zone:
+                    - number: '1'
+                      GenRegMCP: '11.91'
+                      GenSpinMCP: '0.84'
+                      GenSuppMCP: '0.40'
+                      StrMcp: '0.85'
+                      DemandRegMcp: '11.91'
+                      DemandSpinMcp: '0.84'
+                      DemandSuppMcp: '0.40'
+                      RcpUpMcp: '0.00'
+                      RcpDownMcp: '0.00'
+                    - number: '2'
+                      GenRegMCP: '11.91'
+                      GenSpinMCP: '0.84'
+                      GenSuppMCP: '0.40'
+                      StrMcp: '0.85'
+                      DemandRegMcp: '11.91'
+                      DemandSpinMcp: '0.84'
+                      DemandSuppMcp: '0.40'
+                      RcpUpMcp: '0.00'
+                      RcpDownMcp: '0.00'
+      tags:
+      - MarketPricing
+  /api/MarketPricing/GetExAnteLmp:
+    get:
+      operationId: getMarketPricingGetExAnteLmp
+      summary: ExAnte LMP
+      description: Source data behind the MISO public "ExAnte LMP" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  LMPData:
+                    type: object
+                    properties:
+                      RefId:
+                        type: string
+                      ExAnteLMP:
+                        type: object
+                        properties:
+                          HourAndMin:
+                            type: string
+                          Hub:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                LMP:
+                                  type: string
+                                loss:
+                                  type: string
+                                congestion:
+                                  type: string
+              example:
+                LMPData:
+                  RefId: 27-Jul-2026 - Interval 08:15 EST
+                  ExAnteLMP:
+                    HourAndMin: 08:15
+                    Hub:
+                    - name: ARKANSAS.HUB
+                      LMP: '22.12'
+                      loss: '-1.67'
+                      congestion: '-1.91'
+                    - name: ILLINOIS.HUB
+                      LMP: '24.84'
+                      loss: '-0.86'
+                      congestion: '0.00'
+      tags:
+      - MarketPricing
+  /api/MarketPricing/GetLmpConsolidatedTable:
+    get:
+      operationId: getMarketPricingGetLmpConsolidatedTable
+      summary: LMP Consolidated Table
+      description: Source data behind the MISO public "LMP Consolidated Table" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  LMPData:
+                    type: object
+                    properties:
+                      RefId:
+                        type: string
+                      FiveMinLMP:
+                        type: object
+                        properties:
+                          HourAndMin:
+                            type: string
+                          PricingNode:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                region:
+                                  type: string
+                                LMP:
+                                  type: string
+                                MLC:
+                                  type: string
+                                MCC:
+                                  type: string
+                                REGMCP:
+                                  type: string
+                                REGMILEAGEMCP:
+                                  type: string
+                                SPINMCP:
+                                  type: string
+                                SUPPMCP:
+                                  type: string
+                                STRMCP:
+                                  type: string
+                                RCUPMCP:
+                                  type: string
+                                RCDOWNMCP:
+                                  type: string
+                      HourlyIntegratedLMP:
+                        type: object
+                        properties:
+                          HourAndMin:
+                            type: string
+                          PricingNode:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                region:
+                                  type: string
+                                LMP:
+                                  type: string
+                                MCC:
+                                  type: string
+                                MLC:
+                                  type: string
+                      DayAheadExAnteLMP:
+                        type: object
+                        properties:
+                          HourAndMin:
+                            type: string
+                          PricingNode:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                region:
+                                  type: string
+                                LMP:
+                                  type: string
+                                MCC:
+                                  type: string
+                                MLC:
+                                  type: string
+                      DayAheadExPostLMP:
+                        type: object
+                        properties:
+                          HourAndMin:
+                            type: string
+                          PricingNode:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                region:
+                                  type: string
+                                LMP:
+                                  type: string
+                                MCC:
+                                  type: string
+                                MLC:
+                                  type: string
+              example:
+                LMPData:
+                  RefId: 27-Jul-2026 - Interval 08:15 EST
+                  FiveMinLMP:
+                    HourAndMin: 08:15
+                    PricingNode:
+                    - name: KCPL
+                      region: Midwest
+                      LMP: '24.58'
+                      MLC: '-1.94'
+                      MCC: '-3.44'
+                      REGMCP: '0.00'
+                      REGMILEAGEMCP: '0.00'
+                      SPINMCP: '0.00'
+                      SUPPMCP: '0.00'
+                      STRMCP: '0.00'
+                      RCUPMCP: '0.00'
+                      RCDOWNMCP: '0.00'
+                    - name: LAFA.HARGIS1
+                      region: South
+                      LMP: '23.52'
+                      MLC: '-0.75'
+                      MCC: '-5.69'
+                      REGMCP: '9.34'
+                      REGMILEAGEMCP: '0.75'
+                      SPINMCP: '0.16'
+                      SUPPMCP: '0.16'
+                      STRMCP: '0.00'
+                      RCUPMCP: '0.00'
+                      RCDOWNMCP: '0.00'
+                  HourlyIntegratedLMP:
+                    HourAndMin: HE 8
+                    PricingNode:
+                    - name: KCPL
+                      region: Midwest
+                      LMP: '31.12'
+                      MCC: '-6.04'
+                      MLC: '-2.92'
+                    - name: LAFA.HARGIS1
+                      region: South
+                      LMP: '24.01'
+                      MCC: '-14.91'
+                      MLC: '-1.15'
+                  DayAheadExAnteLMP:
+                    HourAndMin: HE 9
+                    PricingNode:
+                    - name: KCPL
+                      region: Midwest
+                      LMP: '33.83'
+                      MCC: '-1.75'
+                      MLC: '-2.18'
+                    - name: LAFA.HARGIS1
+                      region: South
+                      LMP: '23.65'
+                      MCC: '-12.42'
+                      MLC: '-1.69'
+                  DayAheadExPostLMP:
+                    HourAndMin: HE 9
+                    PricingNode:
+                    - name: KCPL
+                      region: Midwest
+                      LMP: '34.35'
+                      MCC: '-2.06'
+                      MLC: '-2.23'
+                    - name: LAFA.HARGIS1
+                      region: South
+                      LMP: '23.73'
+                      MCC: '-13.18'
+                      MLC: '-1.73'
+      tags:
+      - MarketPricing
+  /api/MarketPricing/GetRealTimeFiveMinExPost/Current:
+    get:
+      operationId: getMarketPricingGetRealTimeFiveMinExPostCurrent
+      summary: Real-Time Five Minute ExPost Intervals — Current
+      description: Source data behind the MISO public "Real-Time Five Minute ExPost Intervals" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  headers:
+                    type: array
+                    items:
+                      type: string
+                  data:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: string
+              example:
+                headers:
+                - INTERVAL
+                - CPNODE
+                data:
+                - - '2026-07-27T08:15:00'
+                  - EES.KRBYVLE.AZ
+                - - '2026-07-27T08:15:00'
+                  - EES.L_CREEK1
+      tags:
+      - MarketPricing
+  /api/MarketPricing/GetRealTimeFiveMinExPost/Previous:
+    get:
+      operationId: getMarketPricingGetRealTimeFiveMinExPostPrevious
+      summary: Real-Time Five Minute ExPost Intervals — Previous
+      description: Source data behind the MISO public "Real-Time Five Minute ExPost Intervals" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  headers:
+                    type: array
+                    items:
+                      type: string
+                  data:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: string
+              example:
+                headers:
+                - INTERVAL
+                - CPNODE
+                data:
+                - - '2026-07-26T00:00:00'
+                  - AMMO.KAHO_NEM
+                - - '2026-07-26T00:00:00'
+                  - AMMO.KEOKUK1
+      tags:
+      - MarketPricing
+  /api/MarketPricing/GetRealTimeFiveMinExPost/Rolling:
+    get:
+      operationId: getMarketPricingGetRealTimeFiveMinExPostRolling
+      summary: Real-Time Five Minute ExPost Intervals — Rolling
+      description: Source data behind the MISO public "Real-Time Five Minute ExPost Intervals" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.
+      responses:
+        '200':
+          description: Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  headers:
+                    type: array
+                    items:
+                      type: string
+                  data:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: string
+              example:
+                headers:
+                - INTERVAL
+                - CPNODE
+                data:
+                - - '2026-07-27T00:00:00'
+                  - AMIL.CCG_5.AZ
+                - - '2026-07-27T00:00:00'
+                  - AMIL.CEEA
+      tags:
+      - MarketPricing

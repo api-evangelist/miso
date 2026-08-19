@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MISO Public Market Pricing API",
+    "version": "2025-12-12"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MarketPricing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ancillary Services MCP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/MarketPricing/GetAncillaryServicesMcp"
+          },
+          "docs": "Source data behind the MISO public \"Ancillary Services MCP\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "ExAnte LMP",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/MarketPricing/GetExAnteLmp"
+          },
+          "docs": "Source data behind the MISO public \"ExAnte LMP\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "LMP Consolidated Table",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/MarketPricing/GetLmpConsolidatedTable"
+          },
+          "docs": "Source data behind the MISO public \"LMP Consolidated Table\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Real-Time Five Minute ExPost Intervals — Current",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/MarketPricing/GetRealTimeFiveMinExPost/Current"
+          },
+          "docs": "Source data behind the MISO public \"Real-Time Five Minute ExPost Intervals\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Real-Time Five Minute ExPost Intervals — Previous",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/MarketPricing/GetRealTimeFiveMinExPost/Previous"
+          },
+          "docs": "Source data behind the MISO public \"Real-Time Five Minute ExPost Intervals\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        },
+        {
+          "info": {
+            "name": "Real-Time Five Minute ExPost Intervals — Rolling",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public-api.misoenergy.org/api/MarketPricing/GetRealTimeFiveMinExPost/Rolling"
+          },
+          "docs": "Source data behind the MISO public \"Real-Time Five Minute ExPost Intervals\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

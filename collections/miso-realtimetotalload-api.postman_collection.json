@@ -1,0 +1,104 @@
+{
+  "item": [
+    {
+      "id": "7ee70605-35fa-4c1e-8636-642870667c05",
+      "name": "RealTimeTotalLoad",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ac3eed76-65b8-43f7-b62f-e373662dd9f7",
+          "name": "Real Time Total Load",
+          "request": {
+            "name": "Real Time Total Load",
+            "description": {
+              "content": "Source data behind the MISO public \"Real Time Total Load\" display. Endpoint published by MISO at https://public-api.misoenergy.org/ ; returns JSON anonymously with no key or account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "RealTimeTotalLoad"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "00f48ac0-4565-4c66-82a9-57741d147659",
+              "name": "Successful response. Verified anonymously (HTTP 200, application/json) on 2026-07-27.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "RealTimeTotalLoad"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"LoadInfo\": {\n    \"RefId\": \"27-Jul-2026 - Interval 08:10 EST\",\n    \"ClearedMW\": [\n      {\n        \"ClearedMWHourly\": {\n          \"Hour\": \"1\",\n          \"Value\": \"90916\"\n        }\n      },\n      {\n        \"ClearedMWHourly\": {\n          \"Hour\": \"2\",\n          \"Value\": \"86496\"\n        }\n      }\n    ],\n    \"MediumTermLoadForecast\": [\n      {\n        \"Forecast\": {\n          \"HourEnding\": \"1\",\n          \"LoadForecast\": \"89367\"\n        }\n      },\n      {\n        \"Forecast\": {\n          \"HourEnding\": \"2\",\n          \"LoadForecast\": \"86225\"\n        }\n      }\n    ],\n    \"FiveMinTotalLoad\": [\n      {\n        \"Load\": {\n          \"Time\": \"00:00\",\n          \"Value\": \"93419\"\n        }\n      },\n      {\n        \"Load\": {\n          \"Time\": \"00:05\",\n          \"Value\": \"93087\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://public-api.misoenergy.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d33a2565-08c2-4a99-9f90-34e655ecc9da",
+    "name": "MISO Public Real Time Total Load API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Real-time market and operations data displays from MISO, served from one host under /api/. Merged from two separately derived documents — Operations Displays and Markets Displays — which described the same API: same server, same (absent) authentication, and the same documentation table. Reported by a reader on 2026-08-04.",
+      "type": "text/plain"
+    }
+  }
+}

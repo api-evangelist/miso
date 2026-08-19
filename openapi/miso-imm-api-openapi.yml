@@ -1,0 +1,2715 @@
+openapi: 3.2.0
+info:
+  description: MISO Public Specification to support Market System Enhancement (MSE) new Market User Interface (MUI 2.0).
+  title: MUI - Public Specification IMM API
+  contact:
+    name: MUI 2.0 Questions
+    url: https://www.misoenergy.org/markets-and-operations/MSE/market-user-interface/
+    email: MSEQuestions@misoenergy.org
+  license:
+    name: For use by MISO member companies and thier vendors
+  version: 3.3.0
+servers:
+- url: https://cce.midwestiso.org/dart2/
+- url: https://markets.midwestiso.org/dart2/
+tags:
+- name: IMM
+paths:
+  /markets/{market}/{day}/imm/resource-assignment/participants/{participantName}:
+    get:
+      tags:
+      - IMM
+      description: Returns the collection of Independant Market Monitor (IMM) resource assignments by pnode location for the day for a particular participant's resources. Message format differs by offerType property which can be one of the following values; - genImmOffer - dirImmOffer - drr1ImmOffer - drr2ImmOffer - earImmOffer - serImmOffer - esrImmOffer
+      operationId: getParticipantImmOffer
+      parameters:
+      - $ref: '#/components/parameters/MarketTypeIncBoth'
+      - $ref: '#/components/parameters/MarketOperatingDay'
+      - $ref: '#/components/parameters/Participant'
+      - $ref: '#/components/parameters/PnodeRequired'
+      - name: scheduleId
+        description: List of integers used to specify one or more scheduleId to be queried.
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: scheduleType
+        description: Specifies the assignment type to be queried or all if no query parameter is provided. Valid values are CostSchedule, ReferencePrice, or RSG.
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - CostSchedule
+          - ReferencePrice
+          - RSG
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultiVariantImmResourceAssignment'
+          headers:
+            http-x-request-id:
+              $ref: '#/components/headers/http-x-request-id'
+        '400':
+          $ref: '#/components/responses/BadRequestApiResponse'
+        '403':
+          $ref: '#/components/responses/UnauthorizedApiResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundApiResponse'
+        '500':
+          $ref: '#/components/responses/InternalErrorApiResponse'
+components:
+  schemas:
+    MarketPrice:
+      description: General type for all market prices.
+      format: money
+      type: number
+      multipleOf: 0.01
+      minimum: -9999.99
+      maximum: 9999.99
+      example: 34.91
+    MarketOperatingDay:
+      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
+      type: string
+      format: date
+      example: '2019-03-14'
+    PNodeName:
+      description: Commercial Pricing Node (PNode) name.
+      type: string
+      minLength: 1
+      maxLength: 30
+      example: PNODE1
+    DRR1ImmResourceAssignmentItem:
+      type: object
+      properties:
+        offerType:
+          type: string
+          enum:
+          - drr1ImmOffer
+          example: drr1ImmOffer
+        market:
+          $ref: '#/components/schemas/MarketType'
+        assignmentType:
+          $ref: '#/components/schemas/IMMScheduleType'
+        costScheduleId:
+          type: integer
+        shutdownCost:
+          $ref: '#/components/schemas/OpCostNullable'
+        drr1CommitStatusHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              status:
+                $ref: '#/components/schemas/DRR1CommitStatusNullable'
+            required:
+            - hour
+            additionalProperties: false
+        drr1RuntimesDaily:
+          type:
+          - object
+          - 'null'
+          properties:
+            minInterruptDuration:
+              $ref: '#/components/schemas/DurationNullable'
+            maxInterruptDuration:
+              $ref: '#/components/schemas/DurationNullable'
+            minNonInterruptInterval:
+              $ref: '#/components/schemas/DurationNullable'
+          additionalProperties: false
+        drr1RuntimesHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              drr1RuntimesHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  shutdownTime:
+                    $ref: '#/components/schemas/DownTimeNullable'
+                  shutdownNotificationTime:
+                    $ref: '#/components/schemas/NotificationTimeNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        drr1EnergyOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              drr1EnergyOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  curtailmentOfferPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                  energyOfferPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        drr1SpinningOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              spinningOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPriceCurve:
+                    type:
+                    - object
+                    - 'null'
+                    description: The scheduled price curve for a given hour ending.
+                    properties:
+                      slope:
+                        type: boolean
+                        description: If slope is true then curve is interpreted as a piece-wise linear curve otherwise it is treated as a block curve. A curve with no segments is given the default slope value of false.
+                      priceCurveSegments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            mw:
+                              $ref: '#/components/schemas/RealEnergy'
+                            price:
+                              $ref: '#/components/schemas/MarketPrice'
+                          required:
+                          - mw
+                          - price
+                          additionalProperties: false
+                        maxItems: 3
+                    required:
+                    - slope
+                    - priceCurveSegments
+                    additionalProperties: false
+                  offerPrice:
+                    $ref: '#/components/schemas/MarketPrice'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        drr1SuppOfferHourly:
+          type: array
+          items:
+            type:
+            - object
+            - 'null'
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              suppOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPriceCurve:
+                    type:
+                    - object
+                    - 'null'
+                    description: The scheduled price curve for a given hour ending.
+                    properties:
+                      slope:
+                        type: boolean
+                        description: If slope is true then curve is interpreted as a piece-wise linear curve otherwise it is treated as a block curve. A curve with no segments is given the default slope value of false.
+                      priceCurveSegments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            mw:
+                              $ref: '#/components/schemas/RealEnergy'
+                            price:
+                              $ref: '#/components/schemas/MarketPrice'
+                          required:
+                          - mw
+                          - price
+                          additionalProperties: false
+                        maxItems: 3
+                    required:
+                    - slope
+                    - priceCurveSegments
+                    additionalProperties: false
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        drr1ShortTermReserveOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              shortTermReserveOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPriceCurve:
+                    type:
+                    - object
+                    - 'null'
+                    description: The scheduled price curve for a given hour ending.
+                    properties:
+                      slope:
+                        type: boolean
+                        description: If slope is true then curve is interpreted as a piece-wise linear curve otherwise it is treated as a block curve. A curve with no segments is given the default slope value of false.
+                      priceCurveSegments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            mw:
+                              $ref: '#/components/schemas/RealEnergy'
+                            price:
+                              $ref: '#/components/schemas/MarketPrice'
+                          required:
+                          - mw
+                          - price
+                          additionalProperties: false
+                        maxItems: 3
+                    required:
+                    - slope
+                    - priceCurveSegments
+                    additionalProperties: false
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+      required:
+      - offerType
+      - market
+      - assignmentType
+      additionalProperties: false
+    ParticipantName:
+      description: Market participant name.
+      type: string
+      minLength: 1
+      maxLength: 40
+      example: MP
+    MaxRunTimeNullable:
+      description: Type used to represent run time for the resource.
+      type:
+      - string
+      - 'null'
+      pattern: ^[0-9]{1,5}[:][0-5][0-9]$
+      example: '999:00'
+    EARImmResourceAssignmentItem:
+      type: object
+      properties:
+        offerType:
+          type: string
+          enum:
+          - earImmOffer
+          example: earImmOffer
+        market:
+          $ref: '#/components/schemas/MarketType'
+        assignmentType:
+          $ref: '#/components/schemas/IMMScheduleType'
+        costScheduleId:
+          type: integer
+        startupCostsDaily:
+          type:
+          - object
+          - 'null'
+          properties:
+            coldStartupCost:
+              $ref: '#/components/schemas/OpCostNullable'
+            intermediateStartupCost:
+              $ref: '#/components/schemas/OpCostNullable'
+            hotStartupCost:
+              $ref: '#/components/schemas/OpCostNullable'
+          additionalProperties: false
+        noLoadCostsHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              cost:
+                $ref: '#/components/schemas/OpCostNullable'
+            required:
+            - hour
+            additionalProperties: false
+        commitStatusHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              status:
+                $ref: '#/components/schemas/EARCommitStatusNullable'
+            required:
+            - hour
+            additionalProperties: false
+        runtimesDaily:
+          type:
+          - object
+          - 'null'
+          properties:
+            minimumRuntime:
+              $ref: '#/components/schemas/RunTimeNullable'
+            maximumRuntime:
+              $ref: '#/components/schemas/MaxRunTimeNullable'
+            minimumDowntime:
+              $ref: '#/components/schemas/DownTimeNullable'
+            hotToColdTime:
+              $ref: '#/components/schemas/NotificationTimeNullable'
+            hotToIntermediateTime:
+              $ref: '#/components/schemas/NotificationTimeNullable'
+            maximumDailyStarts:
+              type:
+              - integer
+              - 'null'
+            maximumDailyEnergy:
+              $ref: '#/components/schemas/RealEnergyResultsSignedNullable'
+            maximumWeeklyStarts:
+              type:
+              - integer
+              - 'null'
+            maximumWeeklyEnergy:
+              $ref: '#/components/schemas/RealEnergyResultsSignedNullable'
+          additionalProperties: false
+        runtimesHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              runtimesHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  coldStartTime:
+                    $ref: '#/components/schemas/StartupTimeNullable'
+                  intermediateStartTime:
+                    $ref: '#/components/schemas/StartupTimeNullable'
+                  hotStartTime:
+                    $ref: '#/components/schemas/StartupTimeNullable'
+                  coldNotificationTime:
+                    $ref: '#/components/schemas/NotificationTimeNullable'
+                  intermediateNotificationTime:
+                    $ref: '#/components/schemas/NotificationTimeNullable'
+                  hotNotificationTime:
+                    $ref: '#/components/schemas/NotificationTimeNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        unitLimitsHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              unitLimitsHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  emergencyLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                    additionalProperties: false
+                  economicLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                    additionalProperties: false
+                  regulationLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                    additionalProperties: false
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        rampRatesHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              rampRatesHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  enableRampRateCurvesHourly:
+                    type: boolean
+                    example: true
+                  rampRate:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                  rampRateBidirectional:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                  rampRateUp:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                  rampRateDown:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        rampRateCurves:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              rampRateCurve:
+                type:
+                - array
+                - 'null'
+                items:
+                  type: object
+                  properties:
+                    mw:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                    rampRateUp:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                    rampRateDown:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                    rampRateBidirectional:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                  required:
+                  - mw
+                  additionalProperties: false
+                maxItems: 10
+            required:
+            - hour
+            additionalProperties: false
+        energyOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              energyOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPriceCurve:
+                    type:
+                    - object
+                    - 'null'
+                    description: The scheduled price curve for a given hour ending.
+                    properties:
+                      slope:
+                        type: boolean
+                        description: If slope is true then curve is interpreted as a piece-wise linear curve otherwise it is treated as a block curve. A curve with no segments is given the default slope value of false.
+                      priceCurveSegments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            mw:
+                              $ref: '#/components/schemas/RealEnergy'
+                            price:
+                              $ref: '#/components/schemas/MarketPrice'
+                          required:
+                          - mw
+                          - price
+                          additionalProperties: false
+                        maxItems: 10
+                    required:
+                    - slope
+                    - priceCurveSegments
+                    additionalProperties: false
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        regulationOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              regulationOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                  totalRegCost:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                  mileageOfferPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        spinningOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              spinningOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        onlineSuppOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              suppOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+      required:
+      - offerType
+      - market
+      - assignmentType
+      additionalProperties: false
+    TransitionTimeNullable:
+      description: Type used to represent time required for transitioning from Hot To Cold state/Hot to Intermediate state for the resource.
+      type:
+      - string
+      - 'null'
+      pattern: ^[0-9]{1,3}[:][0-5][0-9]$
+      example: 008:00
+    APIResponse:
+      description: General container for API response.
+      type: object
+      properties:
+        action:
+          description: A general action code summary of the result. HTTP status codes will be applied that match. These indicate the type of operation that was done (or not). Note, some APIs use REST verbiage like created/updated/deleted while others use submit/query.
+          enum:
+          - CREATED
+          - UPDATED
+          - DELETED
+          - CREATE_FAILED
+          - UPDATE_FAILED
+          - DELETE_FAILED
+          - GET_FAILED
+          - SUBMITTED
+          - SUBMIT_FAILED
+          - QUERY
+          - QUERY_FAILED
+        responses:
+          description: List of responses in case multiple resources are modified, or general errors that are not resource specific.
+          type: array
+          minItems: 0
+          items:
+            description: A single response which may contain multiple messages, both error and warning, per response.
+            type: object
+            properties:
+              messages:
+                description: List of warnings and errors resulting from the command.
+                type: array
+                minItems: 0
+                items:
+                  description: An individual warning or error message.  Designed to be either localized or categorized as an event.
+                  type: object
+                  properties:
+                    level:
+                      description: An indication of severity of the message.
+                      type: string
+                      enum:
+                      - ERROR
+                      - WARNING
+                      - INFO
+                    msgId:
+                      description: A categorized ID for this message, identifying it as a particular type of event. Useful for checking for specific errors, or localization.
+                      type: string
+                    params:
+                      description: Ordered list of parameter values for the message.
+                      type: array
+                      items:
+                        type: string
+                    userMsg:
+                      description: The message, fully rendered in the default locale on the service side.
+                      type: string
+        transactionId:
+          description: Unique identifier for the transaction which can be queried at a later date. Identifier is a GUID represented without hyphens. Only returned for submissions and errors though all calls generate a transaction ID that is returned in the http-x-request-id response header.
+          type: string
+          format: guid
+        transactionTime:
+          description: The time at which the transaction was received by the system.
+          type: string
+          format: date-time
+    MarketType:
+      description: Energy Market types.
+      type: string
+      enum:
+      - day-ahead
+      - real-time
+    RealEnergyResultsSignedNullable:
+      description: Used to represent real energy values in market outcomes. Historically simliar to 'MWType'.
+      type:
+      - number
+      - 'null'
+      format: realenergy
+      multipleOf: 0.1
+      minimum: 0.0
+      maximum: 9.99999999E7
+      example: 120001.7
+    GenImmResourceAssignmentItem:
+      type: object
+      properties:
+        offerType:
+          type: string
+          enum:
+          - genImmOffer
+          example: genImmOffer
+        market:
+          $ref: '#/components/schemas/MarketType'
+        assignmentType:
+          $ref: '#/components/schemas/IMMScheduleType'
+        costScheduleId:
+          type: integer
+        startupCostsDaily:
+          type:
+          - object
+          - 'null'
+          properties:
+            coldStartupCost:
+              $ref: '#/components/schemas/OpCostNullable'
+            intermediateStartupCost:
+              $ref: '#/components/schemas/OpCostNullable'
+            hotStartupCost:
+              $ref: '#/components/schemas/OpCostNullable'
+          additionalProperties: false
+        noLoadCostsHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              cost:
+                $ref: '#/components/schemas/OpCostNullable'
+            required:
+            - hour
+            additionalProperties: false
+        commitStatusHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              status:
+                $ref: '#/components/schemas/GenCommitStatusNullable'
+            required:
+            - hour
+            additionalProperties: false
+        runtimesDaily:
+          type:
+          - object
+          - 'null'
+          properties:
+            minimumRuntime:
+              $ref: '#/components/schemas/RunTimeNullable'
+            maximumRuntime:
+              $ref: '#/components/schemas/MaxRunTimeNullable'
+            minimumDowntime:
+              $ref: '#/components/schemas/DownTimeNullable'
+            hotToColdTime:
+              $ref: '#/components/schemas/TransitionTimeNullable'
+            hotToIntermediateTime:
+              $ref: '#/components/schemas/TransitionTimeNullable'
+            maximumDailyStarts:
+              type:
+              - integer
+              - 'null'
+            maximumDailyEnergy:
+              $ref: '#/components/schemas/RealEnergyResultsSignedNullable'
+            maximumWeeklyStarts:
+              type:
+              - integer
+              - 'null'
+            maximumWeeklyEnergy:
+              $ref: '#/components/schemas/RealEnergyResultsSignedNullable'
+          additionalProperties: false
+        runtimesHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              runtimesHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  coldStartTime:
+                    $ref: '#/components/schemas/StartupTimeNullable'
+                  intermediateStartTime:
+                    $ref: '#/components/schemas/StartupTimeNullable'
+                  hotStartTime:
+                    $ref: '#/components/schemas/StartupTimeNullable'
+                  coldNotificationTime:
+                    $ref: '#/components/schemas/NotificationTimeNullable'
+                  intermediateNotificationTime:
+                    $ref: '#/components/schemas/NotificationTimeNullable'
+                  hotNotificationTime:
+                    $ref: '#/components/schemas/NotificationTimeNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        unitLimitsHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              unitLimitsHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  emergencyLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                    additionalProperties: false
+                  economicLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                    additionalProperties: false
+                  regulationLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                    additionalProperties: false
+                  offlineResourceLimit:
+                    $ref: '#/components/schemas/RealEnergyNullable'
+                  offlineShortTermReserveLimit:
+                    $ref: '#/components/schemas/RealEnergyNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        rampRatesHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              rampRatesHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  enableRampRateCurvesHourly:
+                    type: boolean
+                    example: true
+                  rampRate:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                  rampRateBidirectional:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                  rampRateUp:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                  rampRateDown:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        rampRateCurves:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              rampRateCurve:
+                type:
+                - array
+                - 'null'
+                items:
+                  type: object
+                  properties:
+                    mw:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                    rampRateUp:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                    rampRateDown:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                    rampRateBidirectional:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                  required:
+                  - mw
+                  additionalProperties: false
+                maxItems: 10
+            required:
+            - hour
+            additionalProperties: false
+        energyOfferHourly:
+          type: array
+          items:
+            type:
+            - object
+            - 'null'
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              energyOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPriceCurve:
+                    type:
+                    - object
+                    - 'null'
+                    description: The scheduled price curve for a given hour ending.
+                    properties:
+                      slope:
+                        type: boolean
+                        description: If slope is true then curve is interpreted as a piece-wise linear curve otherwise it is treated as a block curve. A curve with no segments is given the default slope value of false.
+                      priceCurveSegments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            mw:
+                              $ref: '#/components/schemas/RealEnergy'
+                            price:
+                              $ref: '#/components/schemas/MarketPrice'
+                          required:
+                          - mw
+                          - price
+                          additionalProperties: false
+                        maxItems: 10
+                    required:
+                    - slope
+                    - priceCurveSegments
+                    additionalProperties: false
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        regulationOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              regulationOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                  mileageOfferPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                  totalRegCost:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        spinningOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              spinningOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        onlineSuppOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              suppOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        offlineSuppOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              suppOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        offlineShortTermReserveOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              shortTermReserveOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+      required:
+      - offerType
+      - market
+      - assignmentType
+      additionalProperties: false
+    IMMScheduleType:
+      type: string
+      enum:
+      - CostSchedule
+      - ReferencePrice
+      - RSG
+    ESRImmResourceAssignmentItem:
+      type: object
+      properties:
+        offerType:
+          type: string
+          enum:
+          - esrImmOffer
+          example: esrImmOffer
+        market:
+          $ref: '#/components/schemas/MarketType'
+        assignmentType:
+          $ref: '#/components/schemas/IMMScheduleType'
+        costScheduleId:
+          type: integer
+        startupCostsDaily:
+          type:
+          - object
+          - 'null'
+          properties:
+            startupCost:
+              $ref: '#/components/schemas/OpCostNullable'
+          additionalProperties: false
+        noLoadCostsHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              cost:
+                $ref: '#/components/schemas/OpCostNullable'
+            required:
+            - hour
+            additionalProperties: false
+        commitStatusHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              status:
+                $ref: '#/components/schemas/ESRCommitStatusNullable'
+            required:
+            - hour
+            additionalProperties: false
+        runtimesDaily:
+          type:
+          - object
+          - 'null'
+          properties:
+            minimumChargeTime:
+              $ref: '#/components/schemas/RunTimeNullable'
+            maximumChargeTime:
+              $ref: '#/components/schemas/MaxRunTimeNullable'
+            minimumDischargeTime:
+              $ref: '#/components/schemas/RunTimeNullable'
+            maximumDischargeTime:
+              $ref: '#/components/schemas/MaxRunTimeNullable'
+            maximumDailyStarts:
+              type:
+              - integer
+              - 'null'
+            maximumDailyEnergy:
+              $ref: '#/components/schemas/RealEnergyResultsSignedNullable'
+            maximumWeeklyStarts:
+              type:
+              - integer
+              - 'null'
+            maximumWeeklyEnergy:
+              $ref: '#/components/schemas/RealEnergyResultsSignedNullable'
+          additionalProperties: false
+        runtimesHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              runtimesHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  coldStartTime:
+                    $ref: '#/components/schemas/StartupTimeNullable'
+                  intermediateStartTime:
+                    $ref: '#/components/schemas/StartupTimeNullable'
+                  hotStartTime:
+                    $ref: '#/components/schemas/StartupTimeNullable'
+                  coldNotificationTime:
+                    $ref: '#/components/schemas/NotificationTimeNullable'
+                  intermediateNotificationTime:
+                    $ref: '#/components/schemas/NotificationTimeNullable'
+                  hotNotificationTime:
+                    $ref: '#/components/schemas/NotificationTimeNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        unitLimitsHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              unitLimitsHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  chargeEmergencyLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergyNegativeNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergyNegativeNullable'
+                    additionalProperties: false
+                  chargeEconomicLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergyNegativeNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergyNegativeNullable'
+                    additionalProperties: false
+                  chargeRegulationLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergyNegativeNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergyNegativeNullable'
+                    additionalProperties: false
+                  dischargeEmergencyLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergySignedNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergySignedNullable'
+                    additionalProperties: false
+                  dischargeEconomicLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergySignedNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergySignedNullable'
+                    additionalProperties: false
+                  dischargeRegulationLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergySignedNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergySignedNullable'
+                    additionalProperties: false
+                  offlineResourceLimit:
+                    $ref: '#/components/schemas/RealEnergyNullable'
+                  offlineShortTermReserveLimit:
+                    $ref: '#/components/schemas/RealEnergyNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        rampRatesHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              rampRatesHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  enableRampRateCurvesHourly:
+                    type: boolean
+                    example: true
+                  chargeRampRate:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                  dischargeRampRate:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        rampRateCurves:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              rampRateCurve:
+                type:
+                - array
+                - 'null'
+                items:
+                  type: object
+                  properties:
+                    mw:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                    chargeRampRate:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                    dischargeRampRate:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                  required:
+                  - mw
+                  additionalProperties: false
+                maxItems: 10
+            required:
+            - hour
+            additionalProperties: false
+        energyOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              energyOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPriceCurve:
+                    type:
+                    - object
+                    - 'null'
+                    description: The scheduled price curve for a given hour ending.
+                    properties:
+                      slope:
+                        type: boolean
+                        description: If slope is true then curve is interpreted as a piece-wise linear curve otherwise it is treated as a block curve. A curve with no segments is given the default slope value of false.
+                      priceCurveSegments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            mw:
+                              $ref: '#/components/schemas/RealEnergy'
+                            price:
+                              $ref: '#/components/schemas/MarketPrice'
+                          required:
+                          - mw
+                          - price
+                          additionalProperties: false
+                        maxItems: 10
+                    required:
+                    - slope
+                    - priceCurveSegments
+                    additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        regulationOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              regulationOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                  totalRegCost:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                  mileageOfferPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        spinningOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              spinningOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPriceCurve:
+                    type:
+                    - object
+                    - 'null'
+                    description: The scheduled price curve for a given hour ending.
+                    properties:
+                      slope:
+                        type: boolean
+                        description: If slope is true then curve is interpreted as a piece-wise linear curve otherwise it is treated as a block curve. A curve with no segments is given the default slope value of false.
+                      priceCurveSegments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            mw:
+                              $ref: '#/components/schemas/RealEnergy'
+                            price:
+                              $ref: '#/components/schemas/MarketPrice'
+                          required:
+                          - mw
+                          - price
+                          additionalProperties: false
+                        maxItems: 3
+                    required:
+                    - slope
+                    - priceCurveSegments
+                    additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        onlineSuppOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              suppOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPriceCurve:
+                    type:
+                    - object
+                    - 'null'
+                    description: The scheduled price curve for a given hour ending.
+                    properties:
+                      slope:
+                        type: boolean
+                        description: If slope is true then curve is interpreted as a piece-wise linear curve otherwise it is treated as a block curve. A curve with no segments is given the default slope value of false.
+                      priceCurveSegments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            mw:
+                              $ref: '#/components/schemas/RealEnergy'
+                            price:
+                              $ref: '#/components/schemas/MarketPrice'
+                          required:
+                          - mw
+                          - price
+                          additionalProperties: false
+                        maxItems: 3
+                    required:
+                    - slope
+                    - priceCurveSegments
+                    additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        offlineSuppOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              suppOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPriceCurve:
+                    type:
+                    - object
+                    - 'null'
+                    description: The scheduled price curve for a given hour ending.
+                    properties:
+                      slope:
+                        type: boolean
+                        description: If slope is true then curve is interpreted as a piece-wise linear curve otherwise it is treated as a block curve. A curve with no segments is given the default slope value of false.
+                      priceCurveSegments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            mw:
+                              $ref: '#/components/schemas/RealEnergy'
+                            price:
+                              $ref: '#/components/schemas/MarketPrice'
+                          required:
+                          - mw
+                          - price
+                          additionalProperties: false
+                        maxItems: 3
+                    required:
+                    - slope
+                    - priceCurveSegments
+                    additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        offlineShortTermReserveOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              shortTermReserveOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPriceCurve:
+                    type:
+                    - object
+                    - 'null'
+                    description: The scheduled price curve for a given hour ending.
+                    properties:
+                      slope:
+                        type: boolean
+                        description: If slope is true then curve is interpreted as a piece-wise linear curve otherwise it is treated as a block curve. A curve with no segments is given the default slope value of false.
+                      priceCurveSegments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            mw:
+                              $ref: '#/components/schemas/RealEnergy'
+                            price:
+                              $ref: '#/components/schemas/MarketPrice'
+                          required:
+                          - mw
+                          - price
+                          additionalProperties: false
+                        maxItems: 3
+                    required:
+                    - slope
+                    - priceCurveSegments
+                    additionalProperties: false
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+      required:
+      - offerType
+      - market
+      - assignmentType
+      additionalProperties: false
+    MarketTypeIncBoth:
+      description: Energy Market types, includes support for both markets.
+      type: string
+      enum:
+      - day-ahead
+      - real-time
+      - both
+    GenCommitStatusNullable:
+      type:
+      - string
+      - 'null'
+      enum:
+      - NotParticipating
+      - Economic
+      - Emergency
+      - MustRun
+      - Outage
+      - null
+    MarketPriceNullable:
+      description: General type for all market prices.
+      format: money
+      type:
+      - number
+      - 'null'
+      multipleOf: 0.01
+      minimum: -9999.99
+      maximum: 9999.99
+      example: 34.91
+    ESRCommitStatusNullable:
+      type:
+      - string
+      - 'null'
+      enum:
+      - Discharge
+      - Charge
+      - Continuous
+      - EmergencyDischarge
+      - EmergencyCharge
+      - Available
+      - NotParticipating
+      - Outage
+      - null
+    RealEnergy:
+      description: Used to represent real energy values submitted to the market.
+      type: number
+      format: realenergy
+      multipleOf: 0.1
+      minimum: -9.99999999E7
+      maximum: 9.99999999E7
+      example: 1200.7
+    MWRampRateNullable:
+      description: Used to represent a ramp rate which is measured in MW/Min.
+      type:
+      - number
+      - 'null'
+      format: realenergy
+      multipleOf: 0.1
+      minimum: 0
+      maximum: 9.99999999E7
+      example: 121.7
+    EARCommitStatusNullable:
+      type:
+      - string
+      - 'null'
+      enum:
+      - Available
+      - Unavailable
+      - null
+    DIRImmResourceAssignmentItem:
+      type: object
+      properties:
+        offerType:
+          type: string
+          enum:
+          - dirImmOffer
+          example: dirImmOffer
+        market:
+          $ref: '#/components/schemas/MarketType'
+        assignmentType:
+          $ref: '#/components/schemas/IMMScheduleType'
+        costScheduleId:
+          type: integer
+        startupCostsDaily:
+          type:
+          - object
+          - 'null'
+          properties:
+            coldStartupCost:
+              $ref: '#/components/schemas/OpCostNullable'
+            intermediateStartupCost:
+              $ref: '#/components/schemas/OpCostNullable'
+            hotStartupCost:
+              $ref: '#/components/schemas/OpCostNullable'
+          additionalProperties: false
+        noLoadCostsHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              cost:
+                $ref: '#/components/schemas/OpCostNullable'
+            required:
+            - hour
+            additionalProperties: false
+        commitStatusHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              status:
+                $ref: '#/components/schemas/GenCommitStatusNullable'
+            required:
+            - hour
+            additionalProperties: false
+        runtimesDaily:
+          type:
+          - object
+          - 'null'
+          properties:
+            minimumRuntime:
+              $ref: '#/components/schemas/RunTimeNullable'
+            maximumRuntime:
+              $ref: '#/components/schemas/MaxRunTimeNullable'
+            minimumDowntime:
+              $ref: '#/components/schemas/DownTimeNullable'
+            hotToColdTime:
+              $ref: '#/components/schemas/TransitionTimeNullable'
+            hotToIntermediateTime:
+              $ref: '#/components/schemas/TransitionTimeNullable'
+            maximumDailyStarts:
+              type:
+              - integer
+              - 'null'
+            maximumDailyEnergy:
+              $ref: '#/components/schemas/RealEnergyResultsSignedNullable'
+            maximumWeeklyStarts:
+              type:
+              - integer
+              - 'null'
+            maximumWeeklyEnergy:
+              $ref: '#/components/schemas/RealEnergyResultsSignedNullable'
+          additionalProperties: false
+        runtimesHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              runtimesHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  coldStartTime:
+                    $ref: '#/components/schemas/StartupTimeNullable'
+                  intermediateStartTime:
+                    $ref: '#/components/schemas/StartupTimeNullable'
+                  hotStartTime:
+                    $ref: '#/components/schemas/StartupTimeNullable'
+                  coldNotificationTime:
+                    $ref: '#/components/schemas/NotificationTimeNullable'
+                  intermediateNotificationTime:
+                    $ref: '#/components/schemas/NotificationTimeNullable'
+                  hotNotificationTime:
+                    $ref: '#/components/schemas/NotificationTimeNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        unitLimitsHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              unitLimitsHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  emergencyLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                    additionalProperties: false
+                  economicLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                    additionalProperties: false
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        rampRatesHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              rampRatesHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  enableRampRateCurvesHourly:
+                    type: boolean
+                    example: true
+                  rampRate:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                  rampRateBidirectional:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                  rampRateUp:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                  rampRateDown:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        rampRateCurves:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              rampRateCurve:
+                type:
+                - array
+                - 'null'
+                items:
+                  type: object
+                  properties:
+                    mw:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                    rampRateUp:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                    rampRateDown:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                    rampRateBidirectional:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                  required:
+                  - mw
+                  additionalProperties: false
+                maxItems: 10
+            required:
+            - hour
+            additionalProperties: false
+        energyOfferHourly:
+          type: array
+          items:
+            type:
+            - object
+            - 'null'
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              energyOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPriceCurve:
+                    type:
+                    - object
+                    - 'null'
+                    description: The scheduled price curve for a given hour ending.
+                    properties:
+                      slope:
+                        type: boolean
+                        description: If slope is true then curve is interpreted as a piece-wise linear curve otherwise it is treated as a block curve. A curve with no segments is given the default slope value of false.
+                      priceCurveSegments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            mw:
+                              $ref: '#/components/schemas/RealEnergy'
+                            price:
+                              $ref: '#/components/schemas/MarketPrice'
+                          required:
+                          - mw
+                          - price
+                          additionalProperties: false
+                        maxItems: 10
+                    required:
+                    - slope
+                    - priceCurveSegments
+                    additionalProperties: false
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+      required:
+      - offerType
+      - market
+      - assignmentType
+      additionalProperties: false
+    HourLabel:
+      description: Hour ending label. Represents an hour segment of time.
+      type: integer
+      minimum: 1
+      maximum: 24
+      example: 1
+    RunTimeNullable:
+      description: Type used to represent run time for the resource.
+      type:
+      - string
+      - 'null'
+      pattern: ^[0-9]{1,3}[:][0-5][0-9]$
+      example: '999:00'
+    DownTimeNullable:
+      description: Type used to represent down time for the resource.
+      type:
+      - string
+      - 'null'
+      pattern: ^[0-9]{1,3}[:][0-5][0-9]$
+      example: 002:00
+    RealEnergyNullable:
+      description: Used to represent real energy values submitted to the market. Nullable added to allow for data driven delete behaviour.
+      type:
+      - number
+      - 'null'
+      format: realenergy
+      multipleOf: 0.1
+      minimum: -9.99999999E7
+      maximum: 9.99999999E7
+      example: 1200.7
+    DurationNullable:
+      description: Type used to represent time duration.
+      type:
+      - string
+      - 'null'
+      pattern: ^[0-9]{1,3}[:][0-5][0-9]$
+      example: 001:00
+    DRR2ImmResourceAssignmentItem:
+      type: object
+      properties:
+        offerType:
+          type: string
+          enum:
+          - drr2ImmOffer
+          example: drr2ImmOffer
+        market:
+          $ref: '#/components/schemas/MarketType'
+        assignmentType:
+          $ref: '#/components/schemas/IMMScheduleType'
+        costScheduleId:
+          type: integer
+        startupCostsDaily:
+          type:
+          - object
+          - 'null'
+          properties:
+            coldStartupCost:
+              $ref: '#/components/schemas/OpCostNullable'
+            intermediateStartupCost:
+              $ref: '#/components/schemas/OpCostNullable'
+            hotStartupCost:
+              $ref: '#/components/schemas/OpCostNullable'
+          additionalProperties: false
+        noLoadCostsHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              cost:
+                $ref: '#/components/schemas/OpCostNullable'
+            required:
+            - hour
+            additionalProperties: false
+        commitStatusHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              status:
+                $ref: '#/components/schemas/DRR2CommitStatusNullable'
+            required:
+            - hour
+            additionalProperties: false
+        runtimesDaily:
+          type:
+          - object
+          - 'null'
+          properties:
+            minimumRuntime:
+              $ref: '#/components/schemas/RunTimeNullable'
+            maximumRuntime:
+              $ref: '#/components/schemas/MaxRunTimeNullable'
+            minimumDowntime:
+              $ref: '#/components/schemas/DownTimeNullable'
+            hotToColdTime:
+              $ref: '#/components/schemas/TransitionTimeNullable'
+            hotToIntermediateTime:
+              $ref: '#/components/schemas/TransitionTimeNullable'
+            maximumDailyStarts:
+              type:
+              - integer
+              - 'null'
+            maximumDailyEnergy:
+              $ref: '#/components/schemas/RealEnergyResultsSignedNullable'
+            maximumWeeklyStarts:
+              type:
+              - integer
+              - 'null'
+            maximumWeeklyEnergy:
+              $ref: '#/components/schemas/RealEnergyResultsSignedNullable'
+          additionalProperties: false
+        runtimesHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              runtimesHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  coldStartTime:
+                    $ref: '#/components/schemas/StartupTimeNullable'
+                  intermediateStartTime:
+                    $ref: '#/components/schemas/StartupTimeNullable'
+                  hotStartTime:
+                    $ref: '#/components/schemas/StartupTimeNullable'
+                  coldNotificationTime:
+                    $ref: '#/components/schemas/NotificationTimeNullable'
+                  intermediateNotificationTime:
+                    $ref: '#/components/schemas/NotificationTimeNullable'
+                  hotNotificationTime:
+                    $ref: '#/components/schemas/NotificationTimeNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        unitLimitsHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              unitLimitsHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  emergencyLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                    additionalProperties: false
+                  economicLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                    additionalProperties: false
+                  regulationLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                    additionalProperties: false
+                  offlineResourceLimit:
+                    $ref: '#/components/schemas/RealEnergyNullable'
+                  offlineShortTermReserveLimit:
+                    $ref: '#/components/schemas/RealEnergyNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        rampRatesHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              rampRatesHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  enableRampRateCurvesHourly:
+                    type: boolean
+                    example: true
+                  rampRate:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                  rampRateBidirectional:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                  rampRateUp:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                  rampRateDown:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        rampRateCurves:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              rampRateCurve:
+                type:
+                - array
+                - 'null'
+                items:
+                  type: object
+                  properties:
+                    mw:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                    rampRateUp:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                    rampRateDown:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                    rampRateBidirectional:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                  required:
+                  - mw
+                  additionalProperties: false
+                maxItems: 10
+            required:
+            - hour
+            additionalProperties: false
+        energyOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              energyOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPriceCurve:
+                    type:
+                    - object
+                    - 'null'
+                    description: The scheduled price curve for a given hour ending.
+                    properties:
+                      slope:
+                        type: boolean
+                        description: If slope is true then curve is interpreted as a piece-wise linear curve otherwise it is treated as a block curve. A curve with no segments is given the default slope value of false.
+                      priceCurveSegments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            mw:
+                              $ref: '#/components/schemas/RealEnergy'
+                            price:
+                              $ref: '#/components/schemas/MarketPrice'
+                          required:
+                          - mw
+                          - price
+                          additionalProperties: false
+                        maxItems: 10
+                    required:
+                    - slope
+                    - priceCurveSegments
+                    additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        regulationOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              regulationOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                  totalRegCost:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                  mileageOfferPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        spinningOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              spinningOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPriceCurve:
+                    type:
+                    - object
+                    - 'null'
+                    description: The scheduled price curve for a given hour ending.
+                    properties:
+                      slope:
+                        type: boolean
+                        description: If slope is true then curve is interpreted as a piece-wise linear curve otherwise it is treated as a block curve. A curve with no segments is given the default slope value of false.
+                      priceCurveSegments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            mw:
+                              $ref: '#/components/schemas/RealEnergy'
+                            price:
+                              $ref: '#/components/schemas/MarketPrice'
+                          required:
+                          - mw
+                          - price
+                          additionalProperties: false
+                        maxItems: 3
+                    required:
+                    - slope
+                    - priceCurveSegments
+                    additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        onlineSuppOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              suppOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPriceCurve:
+                    type:
+                    - object
+                    - 'null'
+                    description: The scheduled price curve for a given hour ending.
+                    properties:
+                      slope:
+                        type: boolean
+                        description: If slope is true then curve is interpreted as a piece-wise linear curve otherwise it is treated as a block curve. A curve with no segments is given the default slope value of false.
+                      priceCurveSegments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            mw:
+                              $ref: '#/components/schemas/RealEnergy'
+                            price:
+                              $ref: '#/components/schemas/MarketPrice'
+                          required:
+                          - mw
+                          - price
+                          additionalProperties: false
+                        maxItems: 3
+                    required:
+                    - slope
+                    - priceCurveSegments
+                    additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        offlineSuppOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              suppOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPriceCurve:
+                    type:
+                    - object
+                    - 'null'
+                    description: The scheduled price curve for a given hour ending.
+                    properties:
+                      slope:
+                        type: boolean
+                        description: If slope is true then curve is interpreted as a piece-wise linear curve otherwise it is treated as a block curve. A curve with no segments is given the default slope value of false.
+                      priceCurveSegments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            mw:
+                              $ref: '#/components/schemas/RealEnergy'
+                            price:
+                              $ref: '#/components/schemas/MarketPrice'
+                          required:
+                          - mw
+                          - price
+                          additionalProperties: false
+                        maxItems: 3
+                    required:
+                    - slope
+                    - priceCurveSegments
+                    additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        offlineShortTermReserveOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              shortTermReserveOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPriceCurve:
+                    type:
+                    - object
+                    - 'null'
+                    description: The scheduled price curve for a given hour ending.
+                    properties:
+                      slope:
+                        type: boolean
+                        description: If slope is true then curve is interpreted as a piece-wise linear curve otherwise it is treated as a block curve. A curve with no segments is given the default slope value of false.
+                      priceCurveSegments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            mw:
+                              $ref: '#/components/schemas/RealEnergy'
+                            price:
+                              $ref: '#/components/schemas/MarketPrice'
+                          required:
+                          - mw
+                          - price
+                          additionalProperties: false
+                        maxItems: 3
+                    required:
+                    - slope
+                    - priceCurveSegments
+                    additionalProperties: false
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+      required:
+      - offerType
+      - market
+      - assignmentType
+      additionalProperties: false
+    DRR2CommitStatusNullable:
+      type:
+      - string
+      - 'null'
+      enum:
+      - NotParticipating
+      - Economic
+      - Emergency
+      - MustRun
+      - Outage
+      - null
+    SERCommitStatusNullable:
+      type:
+      - string
+      - 'null'
+      enum:
+      - Available
+      - Unavailable
+      - null
+    OpCostNullable:
+      description: Operational cost for resource such as startup, noload, or shutdown costs.
+      type:
+      - number
+      - 'null'
+      format: money
+      multipleOf: 0.01
+      minimum: 0.0
+      maximum: 9.999999999E7
+      example: 120001.7
+    DRR1CommitStatusNullable:
+      type:
+      - string
+      - 'null'
+      enum:
+      - NotParticipating
+      - Economic
+      - Emergency
+      - null
+    RealEnergyNegativeNullable:
+      description: Used to represent real energy values submitted to the market that must be less than or equal to zero. Nullable added to allow for data driven delete behaviour.
+      type:
+      - number
+      - 'null'
+      format: realenergy
+      multipleOf: 0.1
+      minimum: -9.99999999E7
+      maximum: 0
+      example: -1200.7
+    NotificationTimeNullable:
+      description: Type used to represent time required for Cold Notification/Intermediate Notification/Hot Notification for the resource.
+      type:
+      - string
+      - 'null'
+      pattern: ^[0-9]{1,3}[:][0-5][0-9]$
+      example: 001:59
+    SERImmResourceAssignmentItem:
+      type: object
+      properties:
+        offerType:
+          type: string
+          enum:
+          - serImmOffer
+          example: serImmOffer
+        market:
+          $ref: '#/components/schemas/MarketType'
+        assignmentType:
+          $ref: '#/components/schemas/IMMScheduleType'
+        costScheduleId:
+          type: integer
+        commitStatusHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              status:
+                $ref: '#/components/schemas/SERCommitStatusNullable'
+            required:
+            - hour
+            additionalProperties: false
+        unitLimitsHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              unitLimitsHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  regulationLimits:
+                    type:
+                    - object
+                    - 'null'
+                    description: Either one or both the MW limit properties can be submitted to update the unit limit pair with a MW value or with a null. Submitting mixed null and MW values when both are submitted is not allowed.
+                    properties:
+                      minMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                      maxMW:
+                        $ref: '#/components/schemas/RealEnergyNullable'
+                    additionalProperties: false
+                  offlineResourceLimit:
+                    $ref: '#/components/schemas/RealEnergyNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        regulationOfferHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              regulationOfferHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  offerPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                  totalRegCost:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                  mileageOfferPrice:
+                    $ref: '#/components/schemas/MarketPriceNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        rampRatesHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              rampRatesHourlyDetail:
+                type:
+                - object
+                - 'null'
+                properties:
+                  enableRampRateCurvesHourly:
+                    type: boolean
+                    example: true
+                  rampRate:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                  rampRateBidirectional:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                  rampRateUp:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                  rampRateDown:
+                    $ref: '#/components/schemas/MWRampRateNullable'
+                additionalProperties: false
+            required:
+            - hour
+            additionalProperties: false
+        rampRateCurves:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              rampRateCurve:
+                type:
+                - array
+                - 'null'
+                items:
+                  type: object
+                  properties:
+                    mw:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                    rampRateUp:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                    rampRateDown:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                    rampRateBidirectional:
+                      $ref: '#/components/schemas/MWRampRateNullable'
+                  required:
+                  - mw
+                  additionalProperties: false
+                maxItems: 10
+            required:
+            - hour
+            additionalProperties: false
+      required:
+      - offerType
+      - market
+      - assignmentType
+      additionalProperties: false
+    MultiVariantImmResourceAssignment:
+      description: IMM ResourceAssignment
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        resources:
+          type: array
+          items:
+            type: object
+            properties:
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
+              offers:
+                type: array
+                minItems: 1
+                items:
+                  oneOf:
+                  - $ref: '#/components/schemas/GenImmResourceAssignmentItem'
+                  - $ref: '#/components/schemas/DRR2ImmResourceAssignmentItem'
+                  - $ref: '#/components/schemas/DRR1ImmResourceAssignmentItem'
+                  - $ref: '#/components/schemas/EARImmResourceAssignmentItem'
+                  - $ref: '#/components/schemas/SERImmResourceAssignmentItem'
+                  - $ref: '#/components/schemas/DIRImmResourceAssignmentItem'
+                  - $ref: '#/components/schemas/ESRImmResourceAssignmentItem'
+            required:
+            - pnodeName
+            - offers
+      required:
+      - day
+      - resources
+    RealEnergySignedNullable:
+      description: Used to represent real energy values submitted to the market. Nullable added to allow for data driven delete behaviour.
+      type:
+      - number
+      - 'null'
+      format: realenergy
+      multipleOf: 0.1
+      minimum: 0
+      maximum: 9.99999999E7
+      example: 1200.7
+    StartupTimeNullable:
+      description: Type used to represent time required for Cold Startup/Intermediate Startup/Hot Startup for the resource.
+      type:
+      - string
+      - 'null'
+      pattern: ^[0-9]{1,3}[:][0-5][0-9]$
+      example: 001:50
+  headers:
+    http-x-request-id:
+      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
+      schema:
+        type: string
+        format: guid
+      example: 34571c664e48ca0b1e30d7ffb9b3b287
+  responses:
+    BadRequestApiResponse:
+      description: User error. Request was invalid for some reason. See response for details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Bad request message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    InternalErrorApiResponse:
+      description: Internal error occurred, details in server-side logs.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Internal error message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    UnauthorizedApiResponse:
+      description: Rejected due to insufficient permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Unauthorized message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    NotFoundApiResponse:
+      description: Resource not found. The path provided does not point to an entity in the system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Not found message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+  parameters:
+    MarketTypeIncBoth:
+      in: path
+      name: market
+      description: Energy Market or both (day-ahead, real-time, or both).
+      required: true
+      schema:
+        $ref: '#/components/schemas/MarketTypeIncBoth'
+    PnodeRequired:
+      in: query
+      name: pnode
+      description: Required parameter to specify the name of a pricing node for the requested data.
+      required: true
+      schema:
+        $ref: '#/components/schemas/PNodeName'
+    MarketOperatingDay:
+      in: path
+      name: day
+      description: The operating day of the data.
+      required: true
+      schema:
+        $ref: '#/components/schemas/MarketOperatingDay'
+    Participant:
+      in: path
+      name: participantName
+      description: The NERC ID of asset owner specified in the path for a collection resource.
+      required: true
+      schema:
+        $ref: '#/components/schemas/ParticipantName'
