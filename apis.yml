@@ -60,6 +60,13 @@ apis:
   - Open Data
   - CSV
   - Market Reports
+  - Settlement
+  - Energy Markets
+  - Anonymous Access
+  tags_raw:
+  - Open Data
+  - CSV
+  - Market Reports
   - Settlements
   - Energy Markets
   - Anonymous Access
@@ -90,6 +97,13 @@ apis:
   humanURL: https://cdn.misoenergy.org/MISO%20-%20File%20Download%20Specification424459.pdf
   baseURL: https://markets.midwestiso.org/portalDownload
   tags:
+  - Energy Markets
+  - Market Participants
+  - Bulk Download
+  - Settlement
+  - Invoices
+  - Client Certificate
+  tags_raw:
   - Energy Markets
   - Market Participants
   - Bulk Download
@@ -233,6 +247,11 @@ apis:
   tags:
   - Energy Markets
   - Meter Data
+  - Settlement
+  - Market Participants
+  tags_raw:
+  - Energy Markets
+  - Meter Data
   - Settlements
   - Market Participants
   properties:
@@ -250,6 +269,8 @@ apis:
   humanURL: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
   baseURL: https://public-api.misoenergy.org
   tags:
+  - ACE
+  tags_raw:
   - Ace
   properties:
   - type: OpenAPI
@@ -615,6 +636,8 @@ apis:
   humanURL: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
   baseURL: https://public-api.misoenergy.org
   tags:
+  - Fuel Mix
+  tags_raw:
   - FuelMix
   properties:
   - type: OpenAPI
@@ -846,6 +869,8 @@ apis:
   humanURL: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
   baseURL: https://public-api.misoenergy.org
   tags:
+  - Notification
+  tags_raw:
   - Notifications
   properties:
   - type: OpenAPI
@@ -945,6 +970,8 @@ apis:
   humanURL: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
   baseURL: https://public-api.misoenergy.org
   tags:
+  - Real-Time
+  tags_raw:
   - Real Time
   properties:
   - type: OpenAPI
@@ -1177,6 +1204,8 @@ apis:
   humanURL: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
   baseURL: https://public-api.misoenergy.org
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
