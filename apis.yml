@@ -22,6 +22,18 @@ description: 'MISO — the Midcontinent Independent System Operator — is the n
   developer portal adds a keyed but self-serve tier over historical market report data, and its MUI 2.0
   market interface is a genuinely closed, client-certificate-gated API for registered market participants
   only.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.misoenergy.org/siteassets/favicons/miso-icon-only---blue-green---whitebg_rgb_192.png
 tags:
 - Energy
