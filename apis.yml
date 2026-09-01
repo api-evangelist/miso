@@ -281,7 +281,7 @@ apis:
   humanURL: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
   baseURL: https://public-api.misoenergy.org
   tags:
-  - Ace
+  - ACE
   tags_raw:
   - Ace
   properties:
@@ -648,7 +648,7 @@ apis:
   humanURL: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
   baseURL: https://public-api.misoenergy.org
   tags:
-  - FuelMix
+  - Fuel Mix
   tags_raw:
   - FuelMix
   properties:
