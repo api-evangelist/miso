@@ -992,41 +992,6 @@ apis:
     url: https://www.misoenergy.org/markets-and-operations/mp-registration/market-participation/
   - type: X-OpenAPI-Source
     url: https://cdn.misoenergy.org/miso_wii_api_spec636543.zip
-- aid: miso:miso-real-time-api
-  name: MISO Real Time API
-  description: The Real Time API from MISO — 17 operation(s) for real time.
-  humanURL: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
-  baseURL: https://public-api.misoenergy.org
-  tags:
-  - Real-Time
-  tags_raw:
-  - Real Time
-  properties:
-  - type: OpenAPI
-    url: openapi/miso-real-time-api-openapi.yml
-  - type: Documentation
-    url: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
-  - type: APIReference
-    url: https://public-api.misoenergy.org/
-  - type: Website
-    url: >-
-      https://www.misoenergy.org/markets-and-operations/real-time--market-data/operations-displays/
-  - type: DeveloperPortal
-    url: https://data-exchange.misoenergy.org/
-  - type: APIReference
-    url: https://data-exchange.misoenergy.org/apis
-  - type: Documentation
-    url: https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us
-  - type: Plans
-    url: https://data-exchange.misoenergy.org/products
-  - type: X-OpenAPI-Source
-    url: https://cdn.misoenergy.org/MUI%202.0%20Specification%203.3.0623177.yaml
-  - type: Documentation
-    url: https://cdn.misoenergy.org/MUI%202.0%20API%20User%20Guide629008.pdf
-  - type: Onboarding
-    url: https://www.misoenergy.org/markets-and-operations/mp-registration/market-participation/
-  - type: X-OpenAPI-Source
-    url: https://cdn.misoenergy.org/miso_wii_api_spec636543.zip
 - aid: miso:miso-realtimersgcommitments-api
   name: MISO Real Time RSG Commitments API
   description: The RealTimeRSGCommitments API from MISO — 1 operation(s) for realtimersgcommitments.
@@ -1304,6 +1269,39 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/miso-windsolar-api-openapi.yml
+  - type: Documentation
+    url: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
+  - type: APIReference
+    url: https://public-api.misoenergy.org/
+  - type: Website
+    url: >-
+      https://www.misoenergy.org/markets-and-operations/real-time--market-data/operations-displays/
+  - type: DeveloperPortal
+    url: https://data-exchange.misoenergy.org/
+  - type: APIReference
+    url: https://data-exchange.misoenergy.org/apis
+  - type: Documentation
+    url: https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us
+  - type: Plans
+    url: https://data-exchange.misoenergy.org/products
+  - type: X-OpenAPI-Source
+    url: https://cdn.misoenergy.org/MUI%202.0%20Specification%203.3.0623177.yaml
+  - type: Documentation
+    url: https://cdn.misoenergy.org/MUI%202.0%20API%20User%20Guide629008.pdf
+  - type: Onboarding
+    url: https://www.misoenergy.org/markets-and-operations/mp-registration/market-participation/
+  - type: X-OpenAPI-Source
+    url: https://cdn.misoenergy.org/miso_wii_api_spec636543.zip
+- aid: miso:miso-realtime-api
+  name: MISO Realtime API
+  description: The Realtime API from MISO — 17 operation(s) for realtime.
+  humanURL: https://www.misoenergy.org/markets-and-operations/real-time--market-data/market-reports/
+  baseURL: https://docs.misoenergy.org/marketreports
+  tags:
+  - Realtime
+  properties:
+  - type: OpenAPI
+    url: openapi/miso-realtime-api-openapi.yml
   - type: Documentation
     url: https://www.misoenergy.org/markets-and-operations/RTDataAPIs/
   - type: APIReference
