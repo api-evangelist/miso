@@ -2,6 +2,8 @@ openapi: 3.2.0
 info:
   title: Miso Day Ahead API
   version: '1.0'
+  x-refined-note:
+  - x-provenance differs across the merged source definitions and was not carried
   description: 'Operations tagged Day Ahead across 2 of this provider''s published API definitions: miso-data-exchange-load-generation-interchange-api-openapi.json, miso-data-exchange-pricing-api-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://apim.misoenergy.org/lgi
@@ -14,8 +16,6 @@ tags:
 - name: Day Ahead
 paths:
   /v1/day-ahead/{date}/demand:
-    servers:
-    - url: https://apim.misoenergy.org/lgi
     get:
       operationId: get-v1-day-ahead-date-demand
       summary: Day-Ahead Cleared Demand
@@ -100,9 +100,9 @@ paths:
             application/json: {}
       tags:
       - Day Ahead
-  /v1/day-ahead/{date}/generation/cleared/physical:
     servers:
     - url: https://apim.misoenergy.org/lgi
+  /v1/day-ahead/{date}/generation/cleared/physical:
     get:
       operationId: get-v1-day-ahead-date-generation-cleared-physical
       summary: Day-Ahead Cleared Generation, Physical
@@ -175,9 +175,9 @@ paths:
             application/json: {}
       tags:
       - Day Ahead
-  /v1/day-ahead/{date}/generation/cleared/virtual:
     servers:
     - url: https://apim.misoenergy.org/lgi
+  /v1/day-ahead/{date}/generation/cleared/virtual:
     get:
       operationId: get-v1-day-ahead-date-generation-cleared-virtual
       summary: Day-Ahead Cleared Generation, Virtual
@@ -250,9 +250,9 @@ paths:
             application/json: {}
       tags:
       - Day Ahead
-  /v1/day-ahead/{date}/generation/fuel-type:
     servers:
     - url: https://apim.misoenergy.org/lgi
+  /v1/day-ahead/{date}/generation/fuel-type:
     get:
       operationId: get-v1-day-ahead-date-generation-fuel-type
       summary: Day-Ahead Generation Fuel Type
@@ -335,9 +335,9 @@ paths:
             application/json: {}
       tags:
       - Day Ahead
-  /v1/day-ahead/{date}/generation/offered/ecomax:
     servers:
     - url: https://apim.misoenergy.org/lgi
+  /v1/day-ahead/{date}/generation/offered/ecomax:
     get:
       operationId: get-v1-day-ahead-date-generation-offered-ecomax
       summary: Day-Ahead Offered Generation ECOMAX
@@ -412,9 +412,9 @@ paths:
             application/json: {}
       tags:
       - Day Ahead
-  /v1/day-ahead/{date}/generation/offered/ecomin:
     servers:
     - url: https://apim.misoenergy.org/lgi
+  /v1/day-ahead/{date}/generation/offered/ecomin:
     get:
       operationId: get-v1-day-ahead-date-generation-offered-ecomin
       summary: Day-Ahead Offered Generation ECOMIN
@@ -489,9 +489,9 @@ paths:
             application/json: {}
       tags:
       - Day Ahead
-  /v1/day-ahead/{date}/interchange/net-scheduled:
     servers:
     - url: https://apim.misoenergy.org/lgi
+  /v1/day-ahead/{date}/interchange/net-scheduled:
     get:
       operationId: get-v1-day-ahead-date-interchange-net-scheduled
       summary: Day-Ahead Net Scheduled Interchange
@@ -564,9 +564,9 @@ paths:
             application/json: {}
       tags:
       - Day Ahead
-  /v1/day-ahead/{date}/asm-exante:
     servers:
-    - url: https://apim.misoenergy.org/pricing
+    - url: https://apim.misoenergy.org/lgi
+  /v1/day-ahead/{date}/asm-exante:
     get:
       operationId: get-v1-day-ahead-date-asm-exante
       summary: Day-Ahead Ex-Ante MCP
@@ -649,9 +649,9 @@ paths:
             application/json: {}
       tags:
       - Day Ahead
-  /v1/day-ahead/{date}/asm-expost:
     servers:
     - url: https://apim.misoenergy.org/pricing
+  /v1/day-ahead/{date}/asm-expost:
     get:
       operationId: get-v1-day-ahead-date-asm-expost
       summary: Day-Ahead Ex-Post MCP
@@ -734,9 +734,9 @@ paths:
             application/json: {}
       tags:
       - Day Ahead
-  /v1/day-ahead/{date}/lmp-exante:
     servers:
     - url: https://apim.misoenergy.org/pricing
+  /v1/day-ahead/{date}/lmp-exante:
     get:
       operationId: get-v1-day-ahead-date-lmp-exante
       summary: Day-Ahead Ex-Ante LMP
@@ -808,9 +808,9 @@ paths:
             application/json: {}
       tags:
       - Day Ahead
-  /v1/day-ahead/{date}/lmp-expost:
     servers:
     - url: https://apim.misoenergy.org/pricing
+  /v1/day-ahead/{date}/lmp-expost:
     get:
       operationId: get-v1-day-ahead-date-lmp-expost
       summary: Day-Ahead Ex-Post LMP
@@ -882,18 +882,10 @@ paths:
             application/json: {}
       tags:
       - Day Ahead
+    servers:
+    - url: https://apim.misoenergy.org/pricing
 components:
   schemas:
-    200-OK-MCPResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/MarketClearingPrice'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
     ClearedGeneration:
       type: object
       properties:
@@ -904,6 +896,54 @@ components:
         supply:
           type: number
           description: Total supply cleared (in megawatts) based on physical or virtual offers.
+    Region:
+      enum:
+      - NORTH
+      - CENTRAL
+      - SOUTH
+      - MISO
+      - NO_REGION
+      type: string
+    PageInfo:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+        lastPage:
+          type: boolean
+    GenerationFuelType:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          $ref: '#/components/schemas/Region'
+        fuelTypes:
+          $ref: '#/components/schemas/FuelType'
+        totalMw:
+          type: number
+        interval:
+          type: string
+    200-OK-Generation-Fuel-TypeResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerationFuelType'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
     TimeInterval:
       type: object
       properties:
@@ -928,6 +968,50 @@ components:
           type: string
           description: 'Short hand value for time interval. Can be timestamp for 5min resolution (ex: 2023-06-28 00:00:00.000), hour ending value for hourly resolution, 1-24 (ex: 21), or date string for daily (ex: 2023-06-28). In Eastern Standard Time (UTC−05:00).'
           example: '2023-06-29'
+    OfferedGeneration:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          $ref: '#/components/schemas/Region'
+        mustRun:
+          type: number
+          description: The economic minimum/maximum (in megawatts) offered by generators with the must run commit status in the day-ahead market.
+        economic:
+          type: number
+          description: The economic minimum/maximum (in megawatts) offered by generators as economic in the day-ahead market.
+        emergency:
+          type: number
+          description: The economic minimum/maximum (in megawatts) offered by generators as emergency in the day-ahead market.
+    FuelType:
+      type: object
+      properties:
+        coal:
+          type: number
+        gas:
+          type: number
+        nuclear:
+          type: number
+        water:
+          type: number
+        wind:
+          type: number
+        solar:
+          type: number
+        other:
+          type: number
+        storage:
+          type: number
+    DayAheadNetScheduledInterchange:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          $ref: '#/components/schemas/Region'
+        nsi:
+          type: number
     200-OK-Day-Ahead-Net-Scheduled-InterchangeResponse-json:
       type: object
       properties:
@@ -958,22 +1042,6 @@ components:
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true
-    OfferedGeneration:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        region:
-          $ref: '#/components/schemas/Region'
-        mustRun:
-          type: number
-          description: The economic minimum/maximum (in megawatts) offered by generators with the must run commit status in the day-ahead market.
-        economic:
-          type: number
-          description: The economic minimum/maximum (in megawatts) offered by generators as economic in the day-ahead market.
-        emergency:
-          type: number
-          description: The economic minimum/maximum (in megawatts) offered by generators as emergency in the day-ahead market.
     200-OK-DayAhead-DemandResponse-json:
       type: object
       properties:
@@ -984,15 +1052,58 @@ components:
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true
-    DayAheadNetScheduledInterchange:
+    DayAheadDemand:
       type: object
       properties:
         timeInterval:
           $ref: '#/components/schemas/TimeInterval'
         region:
           $ref: '#/components/schemas/Region'
-        nsi:
+        fixed:
           type: number
+          description: Total demand cleared (in megawatts) based on physical fixed bids.
+        priceSens:
+          type: number
+          description: Total demand cleared (in megawatts) based on physical price sensitive bids.
+        virtual:
+          type: number
+          description: Total demand cleared (in megawatts) based on virtual bids.
+    200-OK-LMPResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationalMarginalPrice'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    MarketClearingPrice:
+      type: object
+      properties:
+        interval:
+          type: string
+          example: '1'
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        product:
+          enum:
+          - Regulation
+          - Spin
+          - Supplemental
+          - STR
+          - Ramp-up
+          - Ramp-down
+          type: string
+          description: Ancillary Market product
+        zone:
+          type: string
+          description: Ancillary Services Reserve Zone
+          example: Zone 1
+        mcp:
+          type: number
+          description: Market Clearing Price
+          example: 6.48
     LocationalMarginalPrice:
       type: object
       properties:
@@ -1021,122 +1132,13 @@ components:
           type: number
           description: Marginal Losses Component
           example: 0.64
-    Region:
-      enum:
-      - NORTH
-      - CENTRAL
-      - SOUTH
-      - MISO
-      - NO_REGION
-      type: string
-    GenerationFuelType:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        region:
-          $ref: '#/components/schemas/Region'
-        fuelTypes:
-          $ref: '#/components/schemas/FuelType'
-        totalMw:
-          type: number
-        interval:
-          type: string
-    DayAheadDemand:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        region:
-          $ref: '#/components/schemas/Region'
-        fixed:
-          type: number
-          description: Total demand cleared (in megawatts) based on physical fixed bids.
-        priceSens:
-          type: number
-          description: Total demand cleared (in megawatts) based on physical price sensitive bids.
-        virtual:
-          type: number
-          description: Total demand cleared (in megawatts) based on virtual bids.
-    MarketClearingPrice:
-      type: object
-      properties:
-        interval:
-          type: string
-          example: '1'
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        product:
-          enum:
-          - Regulation
-          - Spin
-          - Supplemental
-          - STR
-          - Ramp-up
-          - Ramp-down
-          type: string
-          description: Ancillary Market product
-        zone:
-          type: string
-          description: Ancillary Services Reserve Zone
-          example: Zone 1
-        mcp:
-          type: number
-          description: Market Clearing Price
-          example: 6.48
-    FuelType:
-      type: object
-      properties:
-        coal:
-          type: number
-        gas:
-          type: number
-        nuclear:
-          type: number
-        water:
-          type: number
-        wind:
-          type: number
-        solar:
-          type: number
-        other:
-          type: number
-        storage:
-          type: number
-    PageInfo:
-      type: object
-      properties:
-        pageNumber:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int64
-        lastPage:
-          type: boolean
-    200-OK-Generation-Fuel-TypeResponse-json:
+    200-OK-MCPResponse-json:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/GenerationFuelType'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    200-OK-LMPResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/LocationalMarginalPrice'
+            $ref: '#/components/schemas/MarketClearingPrice'
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true

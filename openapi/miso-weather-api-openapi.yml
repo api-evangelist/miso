@@ -8772,6 +8772,8 @@ paths:
                   value:
                     error:
                       message: Unexpected internal issue encountered. If the problem persists please contact support.
+      operationId: getV{version}Weather
+      x-operation-id-source: derived
 components:
   schemas:
     ApiWeatherResponse:
@@ -8851,33 +8853,6 @@ components:
           - 37.7
       additionalProperties: false
       description: Geometry location of station
-    WeatherHourData:
-      type: object
-      properties:
-        number:
-          type: integer
-          description: Sequence number of the hour in the forecast collection
-          format: int32
-          example: 1
-        startTime:
-          type:
-          - string
-          - 'null'
-          description: Hour of the forecast
-          example: '2024-06-05T22:00:00Z'
-        isObserved:
-          type: integer
-          description: Indicates if the data is observed or predicted. A value of 1 indicates observed data, 0 indicates predicted data.
-          format: int32
-          example: 1
-        temperature:
-          $ref: '#/components/schemas/ReadingData'
-        sunrise:
-          $ref: '#/components/schemas/ReadingData'
-        sunset:
-          $ref: '#/components/schemas/ReadingData'
-      additionalProperties: false
-      description: Weather metrics for an individual hour
     WeatherFeature:
       type: object
       properties:
@@ -8915,3 +8890,30 @@ components:
           example: Informative error message
       additionalProperties: false
       description: Metadata for error response
+    WeatherHourData:
+      type: object
+      properties:
+        number:
+          type: integer
+          description: Sequence number of the hour in the forecast collection
+          format: int32
+          example: 1
+        startTime:
+          type:
+          - string
+          - 'null'
+          description: Hour of the forecast
+          example: '2024-06-05T22:00:00Z'
+        isObserved:
+          type: integer
+          description: Indicates if the data is observed or predicted. A value of 1 indicates observed data, 0 indicates predicted data.
+          format: int32
+          example: 1
+        temperature:
+          $ref: '#/components/schemas/ReadingData'
+        sunrise:
+          $ref: '#/components/schemas/ReadingData'
+        sunset:
+          $ref: '#/components/schemas/ReadingData'
+      additionalProperties: false
+      description: Weather metrics for an individual hour

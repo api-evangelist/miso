@@ -104,6 +104,8 @@ paths:
         schema:
           type: string
           format: guid
+      summary: Get transaction events
+      x-summary-source: derived
   /mgms/transactions/events/mrid/{mrid}:
     description: Returns the transaction event specified by the internal Transaction Event unique identifier(UUID).
     get:
@@ -136,6 +138,8 @@ paths:
         required: true
         schema:
           type: string
+      summary: Get transaction event
+      x-summary-source: derived
   /mgms/transactions/events/participants/name/{participantName}:
     description: Returns a collection of transaction events submitted by the specified participant for the specified start and end date-time and operation.
     get:
@@ -223,6 +227,8 @@ paths:
         schema:
           type: string
           format: guid
+      summary: Get participant transaction events
+      x-summary-source: derived
   /mgms/transactions/events/mrid/{mrid}/payloads:
     description: Returns one or more payload documents for transaction event specified by the internal Transaction Event unique identifier(UUID).
     get:
@@ -255,6 +261,8 @@ paths:
         required: true
         schema:
           type: string
+      summary: Get transaction event payloads
+      x-summary-source: derived
   /mgms/transactions/events/mrid/{mrid}/payloads/payload-type/{payloadType}:
     description: Returns payload documents for transaction event specified by the internal Transaction Event unique identifier(UUID) and specified payload type.
     get:
@@ -293,29 +301,97 @@ paths:
         required: true
         schema:
           $ref: '#/components/schemas/PayloadDocumentType'
+      summary: Get transaction event payload
+      x-summary-source: derived
 components:
-  headers:
-    http-x-request-id:
-      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
-      schema:
-        type: string
-        format: guid
-      example: 34571c664e48ca0b1e30d7ffb9b3b287
+  responses:
+    InternalErrorApiResponse:
+      description: Internal error occurred, details in server-side logs.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Internal error message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    NotFoundApiResponse:
+      description: Resource not found. The path provided does not point to an entity in the system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Not found message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    UnauthorizedApiResponse:
+      description: Rejected due to insufficient permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Unauthorized message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    BadRequestApiResponse:
+      description: User error. Request was invalid for some reason. See response for details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Bad request message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
   schemas:
-    OperationType:
-      description: Enumeration defining the set of valid operation service types corresponding to HTTP operations.
-      type: string
-      enum:
-      - GET
-      - POST
-      - PUT
-      - DELETE
-    PayloadDocumentType:
-      description: Enumeration defining the valid payload document types
-      enum:
-      - INCOMING
-      - OUTGOING
-      type: string
+    TransactionEventPayloads:
+      description: Collection of transaction event payloads.
+      type: array
+      items:
+        $ref: '#/components/schemas/TransactionEventPayload'
+    TransactionEvents:
+      description: Collection of transaction events.
+      type: array
+      items:
+        $ref: '#/components/schemas/TransactionEvent'
     TransactionStateType:
       description: Enumeration defining the set of valid Transaction Event States.
       type: string
@@ -323,6 +399,27 @@ components:
       - FAILED
       - PENDING
       - SUCCESS
+    TransactionEventPayload:
+      description: Transaction event payload.
+      type: object
+      properties:
+        mrid:
+          type: string
+          format: uuid
+        payloadType:
+          $ref: '#/components/schemas/PayloadDocumentType'
+        payloadDocument:
+          type: string
+        transactionEvent:
+          $ref: '#/components/schemas/TransactionEvent'
+    ServiceName:
+      description: Enumeration defining the set of valid service names.
+      type: string
+      enum:
+      - portal-governor
+      - mgms
+      - notification
+      - mps
     TransactionEvent:
       description: Transaction event.
       type: object
@@ -361,27 +458,12 @@ components:
               format: uuid
             name:
               type: string
-    ServiceName:
-      description: Enumeration defining the set of valid service names.
-      type: string
+    PayloadDocumentType:
+      description: Enumeration defining the valid payload document types
       enum:
-      - portal-governor
-      - mgms
-      - notification
-      - mps
-    TransactionEventPayload:
-      description: Transaction event payload.
-      type: object
-      properties:
-        mrid:
-          type: string
-          format: uuid
-        payloadType:
-          $ref: '#/components/schemas/PayloadDocumentType'
-        payloadDocument:
-          type: string
-        transactionEvent:
-          $ref: '#/components/schemas/TransactionEvent'
+      - INCOMING
+      - OUTGOING
+      type: string
     APIResponse:
       description: General container for API response.
       type: object
@@ -442,98 +524,19 @@ components:
           description: The time at which the transaction was received by the system.
           type: string
           format: date-time
-    TransactionEventPayloads:
-      description: Collection of transaction event payloads.
-      type: array
-      items:
-        $ref: '#/components/schemas/TransactionEventPayload'
-    TransactionEvents:
-      description: Collection of transaction events.
-      type: array
-      items:
-        $ref: '#/components/schemas/TransactionEvent'
+    OperationType:
+      description: Enumeration defining the set of valid operation service types corresponding to HTTP operations.
+      type: string
+      enum:
+      - GET
+      - POST
+      - PUT
+      - DELETE
     MarketIntervalLabel:
       description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data.
       type: string
       format: date-time
       example: '2019-03-14T14:50:00-05:00'
-  responses:
-    InternalErrorApiResponse:
-      description: Internal error occurred, details in server-side logs.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Internal error message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    BadRequestApiResponse:
-      description: User error. Request was invalid for some reason. See response for details.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Bad request message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    UnauthorizedApiResponse:
-      description: Rejected due to insufficient permissions.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Unauthorized message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    NotFoundApiResponse:
-      description: Resource not found. The path provided does not point to an entity in the system.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Not found message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
   parameters:
     x-acting-participant:
       in: header
@@ -542,3 +545,10 @@ components:
       schema:
         type: string
       example: MP
+  headers:
+    http-x-request-id:
+      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
+      schema:
+        type: string
+        format: guid
+      example: 34571c664e48ca0b1e30d7ffb9b3b287

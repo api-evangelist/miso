@@ -15,7 +15,7 @@ servers:
 - url: https://public-api.misoenergy.org
   description: MISO Public API — anonymous, no key, no account.
 tags:
-- name: Ace
+- name: ace
 paths:
   /api/Ace:
     get:
@@ -52,4 +52,4 @@ paths:
                 - instantEST: 2026-07-27 6:16:00 AM
                   value: '307.35'
       tags:
-      - Ace
+      - ace

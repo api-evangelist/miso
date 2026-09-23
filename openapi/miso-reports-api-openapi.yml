@@ -46,6 +46,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get day ahead lmp ex ante
+      x-summary-source: derived
   /markets/day-ahead/{day}/reports/lmp-expost:
     description: LMP Ex-Post report for the Day-Ahead market on a specific day.
     parameters:
@@ -77,6 +79,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get day ahead lmp ex post
+      x-summary-source: derived
   /markets/day-ahead/{day}/reports/lf-hourly:
     description: The hourly load forecast report for the total MISO area or an individual control area.
     parameters:
@@ -113,6 +117,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get LF hourly
+      x-summary-source: derived
   /markets/real-time/{day}/reports/lmp-exante:
     description: LMP Ex-Ante report for the Real-Time market for a specific day that returns a single interval.
     parameters:
@@ -155,6 +161,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get real time lmp ex ante
+      x-summary-source: derived
   /markets/real-time/{day}/reports/lmp-expost:
     description: LMP Ex-Post report for the Real-Time market for a specific day that returns a single interval.
     parameters:
@@ -197,6 +205,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get real time lmp ex post
+      x-summary-source: derived
   /markets/real-time/{day}/reports/hourly-lmp-expost:
     description: Integrated hourly Real-Time locational marginal prices on a per pricing node basis.
     parameters:
@@ -229,6 +239,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get real time intg lmp
+      x-summary-source: derived
   /markets/day-ahead/{day}/reports/locational-results/participants/{participantName}:
     description: Returns the Day-Ahead market results for all offered products (i.e. energy supply, regulation, spinning reserve, supplemental reserve, ramp capability up, and ramp capability down. Data is returned from the Ex-Ante (Day-Ahead) study.
     parameters:
@@ -262,6 +274,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get locational result
+      x-summary-source: derived
   /markets/common/{day}/reports/dist-factors:
     description: Returns the state estimator distribution factors used to allocate the percentage of load distribution of bus nodes to an aggregate node.
     parameters:
@@ -293,6 +307,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get distribution factors
+      x-summary-source: derived
   /markets/day-ahead/{day}/reports/market-wide-results:
     description: Returns the hourly Day-Ahead summary of market wide results. Output includes forecast MW as well cleared MWs for Energy, Regulation, and the various Contingency Reserve market products. Output data is from the Ex-Ante (Day-Ahead) study.
     parameters:
@@ -322,6 +338,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get mk wide result
+      x-summary-source: derived
   /markets/day-ahead/{day}/reports/zonal-lmp-exante:
     description: Returns the Day-Ahead market clearing Ex-Ante prices at the zonal level. This is the Day-Ahead Pricing data.  Results are available from the Day-Ahead market after the market has been cleared, the results have been published, and the results publish time for the market has been reached.
     parameters:
@@ -329,7 +347,7 @@ paths:
     get:
       tags:
       - Reports
-      description: Returns the Day-Ahead market clearing Ex-Ante prices at the zonal level.  This is the Day-Ahead Pricing data. Results are available from the Day-Ahead market after the market has been cleared, the results have been published, and the results publish time for the market has been reached.
+      description: Returns the Day-Ahead market clearing Ex-Ante prices at the zonal level. This is the Day-Ahead Pricing data. Results are available from the Day-Ahead market after the market has been cleared, the results have been published, and the results publish time for the market has been reached.
       operationId: getDaZonalLmpExAnte
       parameters:
       - $ref: '#/components/parameters/MarketOperatingDay'
@@ -358,6 +376,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get da zonal lmp ex ante
+      x-summary-source: derived
   /markets/day-ahead/{day}/reports/zonal-lmp-expost:
     description: Returns the Day-Ahead market clearing Ex-Post prices at the zonal level. This is the current Day-Ahead ELMP pricing data. Results are available from the Day-Ahead market after the market has been cleared, the results have been published, and the results publish time for the market has been reached.
     parameters:
@@ -365,7 +385,7 @@ paths:
     get:
       tags:
       - Reports
-      description: Returns the Day-Ahead market clearing Ex-Post prices at the zonal level. This is the current Day-Ahead ELMP pricing data.  This is the Day-Ahead Pricing data.  Results are available from the Day-Ahead market after the market has been cleared, the results have been published, and the results publish time for the market has been reached.
+      description: Returns the Day-Ahead market clearing Ex-Post prices at the zonal level. This is the current Day-Ahead ELMP pricing data. This is the Day-Ahead Pricing data. Results are available from the Day-Ahead market after the market has been cleared, the results have been published, and the results publish time for the market has been reached.
       operationId: getDaZonalLmpExPost
       parameters:
       - $ref: '#/components/parameters/MarketOperatingDay'
@@ -394,6 +414,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get da zonal lmp ex post
+      x-summary-source: derived
   /markets/day-ahead/{day}/reports/binding-limits:
     description: Returns the binding constraints by hour from the approved Day-Ahead case for a given market day.
     parameters:
@@ -423,6 +445,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get binding limits result
+      x-summary-source: derived
   /markets/real-time/{day}/reports/zonal-lmp-exante:
     description: Returns the Real Time market clearing Ex-Ante prices at the zonal level.
     parameters:
@@ -469,6 +493,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get real time zonal price result ex ante
+      x-summary-source: derived
   /markets/real-time/{day}/reports/zonal-lmp-expost:
     description: Returns the Real Time market clearing Ex-Post prices at the zonal level.
     parameters:
@@ -515,107 +541,10 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get real time zonal price result ex post
+      x-summary-source: derived
 components:
   schemas:
-    MarketOperatingDay:
-      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
-      type: string
-      format: date
-      example: '2019-03-14'
-    PNodeName:
-      description: Commercial Pricing Node (PNode) name.
-      type: string
-      minLength: 1
-      maxLength: 30
-      example: PNODE1
-    DistributionFactors:
-      description: All distribution factors, filtered by query params.
-      type: object
-      properties:
-        day:
-          type: string
-          example: '2019-03-14'
-        aggregatePnodes:
-          description: A pnode at which load from other pnodes is aggregated to for repsentation in the market.
-          type: array
-          items:
-            type: object
-            properties:
-              pnodeName:
-                $ref: '#/components/schemas/PNodeName'
-              busPnodes:
-                description: Bus pnode for a particular pnode.
-                type: array
-                items:
-                  type: object
-                  properties:
-                    pnodeName:
-                      $ref: '#/components/schemas/PNodeName'
-                    factor:
-                      type: number
-                      example: 0.17468
-                  required:
-                  - pnodeName
-                  - factor
-      required:
-      - day
-      - aggregatePnodes
-    DayAheadLmpExAnte:
-      description: A LMP Ex-Ante report from the Day-Ahead market.
-      type: object
-      properties:
-        day:
-          $ref: '#/components/schemas/MarketOperatingDay'
-        priceType:
-          $ref: '#/components/schemas/PriceTypeExAnte'
-        pnodes:
-          description: Pricing nodes in the report.
-          type: array
-          items:
-            type: object
-            properties:
-              pnodeName:
-                $ref: '#/components/schemas/PNodeName'
-              hours:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    hour:
-                      $ref: '#/components/schemas/HourLabel'
-                    lmp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    mcc:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    mlc:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    regMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    spinMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    suppMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    strMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    rcUpMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    rcDownMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-      required:
-      - day
-      - priceType
-    PriceTypeExAnte:
-      description: Market pricing type - Ex-Ante.
-      type: string
-      enum:
-      - ExAnte
-      example: ExAnte
-    ParticipantName:
-      description: Market participant name.
-      type: string
-      minLength: 1
-      maxLength: 40
-      example: MP
     RealTimeZonalLMPResultsExAnte:
       description: Real-Time zonal LMP results.
       type: object
@@ -660,14 +589,20 @@ components:
       - day
       - priceType
       - interval5s
-    RealTimeLmpExAnte:
-      description: A LMP Ex-Ante report from the Real-Time market.
+    PortfolioName:
+      description: Portfolio name which is unique to a participant company and may be shared among users registered with the same company.
+      type: string
+      minLength: 1
+      maxLength: 40
+      example: Sample Portfolio
+    RealTimeLmpExPost:
+      description: A LMP Ex-Post report from the Real-Time market.
       type: object
       properties:
         day:
           $ref: '#/components/schemas/MarketOperatingDay'
         priceType:
-          $ref: '#/components/schemas/PriceTypeExAnte'
+          $ref: '#/components/schemas/PriceTypeExPost'
         pnodes:
           description: Pricing nodes in the report.
           type: array
@@ -690,23 +625,59 @@ components:
       - day
       - priceType
       - pnodes
-    LFHourly:
-      description: Load Forecast report for the Day-Ahead market.
+    RealTimeIntvlLmp:
+      description: RT LMP data for an interval
+      type: object
+      properties:
+        interval5:
+          $ref: '#/components/schemas/MarketIntervalLabel'
+        lmp:
+          $ref: '#/components/schemas/MarketPriceResults'
+        mcc:
+          $ref: '#/components/schemas/MarketPriceResults'
+        mlc:
+          $ref: '#/components/schemas/MarketPriceResults'
+        regMcp:
+          $ref: '#/components/schemas/MarketPriceResults'
+        regMileageMcp:
+          $ref: '#/components/schemas/MarketPriceResults'
+        spinMcp:
+          $ref: '#/components/schemas/MarketPriceResults'
+        suppMcp:
+          $ref: '#/components/schemas/MarketPriceResults'
+        strMcp:
+          $ref: '#/components/schemas/MarketPriceResults'
+        rcUpMcp:
+          $ref: '#/components/schemas/MarketPriceResults'
+        rcDownMcp:
+          $ref: '#/components/schemas/MarketPriceResults'
+      required:
+      - interval5
+      - lmp
+      - mcc
+      - mlc
+    ReserveZone:
+      description: Used to represent a reserve zone.
+      type: number
+      minimum: 1
+      maximum: 999
+      example: 1
+    DayAheadLmpExPost:
+      description: A LMP Ex-Post report from the Day-Ahead market.
       type: object
       properties:
         day:
           $ref: '#/components/schemas/MarketOperatingDay'
-        controlAreas:
-          description: Collection of Control Areas.
+        priceType:
+          $ref: '#/components/schemas/PriceTypeExPost'
+        pnodes:
+          description: Pricing nodes in the report.
           type: array
           items:
-            description: Control Area.
             type: object
             properties:
-              areaName:
-                description: Name of the local balancing authority or label for MISO total.
-                type: string
-                example: Area1
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
               hours:
                 type: array
                 items:
@@ -714,15 +685,248 @@ components:
                   properties:
                     hour:
                       $ref: '#/components/schemas/HourLabel'
-                    mw:
-                      $ref: '#/components/schemas/RealEnergyResults'
-                minItems: 1
-                maxItems: 24
-            required:
-            - areaName
-            - hours
+                    lmp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    mcc:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    mlc:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    regMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    spinMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    suppMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    strMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    rcUpMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    rcDownMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
       required:
       - day
+      - priceType
+    RealTimeZonalLMPResultsExPost:
+      description: Real-Time zonal LMP results.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        priceType:
+          $ref: '#/components/schemas/PriceTypeExPost'
+        interval5s:
+          type: array
+          items:
+            type: object
+            properties:
+              interval5:
+                $ref: '#/components/schemas/MarketIntervalLabel'
+              zones:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    zone:
+                      $ref: '#/components/schemas/ReserveZone'
+                    genRegMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    genSpinMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    genSuppMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    strMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    demandRegMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    demandSpinMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    demandSuppMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    rcpUpMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    rcpDownMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+      required:
+      - day
+      - priceType
+      - interval5s
+    ParticipantName:
+      description: Market participant name.
+      type: string
+      minLength: 1
+      maxLength: 40
+      example: MP
+    RealTimeIntegratedLmpExPost:
+      description: A hourly LMP integrated prices report from the Real-Time market.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        priceType:
+          $ref: '#/components/schemas/PriceTypeExPost'
+        pnodes:
+          description: Pricing nodes in the report.
+          type: array
+          items:
+            type: object
+            properties:
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
+              hours:
+                type: array
+                description: Integrated market prices at the pnode, for the period.
+                items:
+                  type: object
+                  properties:
+                    hour:
+                      $ref: '#/components/schemas/HourLabel'
+                    lmp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    mcc:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    mlc:
+                      $ref: '#/components/schemas/MarketPriceResults'
+      required:
+      - day
+      - priceType
+      - pnodes
+    MarketOperatingDay:
+      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
+      type: string
+      format: date
+      example: '2019-03-14'
+    MarketPriceResults:
+      description: General type for all market price results.
+      format: money
+      type: number
+      multipleOf: 0.01
+      minimum: -9.999999999E7
+      maximum: 9.999999999E7
+      example: 34.91
+    DayAheadZonalLMPResultsExPost:
+      description: Day-ahead zonal LMP results.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        priceType:
+          $ref: '#/components/schemas/PriceTypeExPost'
+        hours:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              zones:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    zone:
+                      $ref: '#/components/schemas/ReserveZone'
+                    genRegMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    genSpinMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    genSuppMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    strMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    demandRegMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    demandSpinMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    demandSuppMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    rcpUpMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    rcpDownMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+      required:
+      - day
+      - priceType
+      - hours
+    DistributionFactors:
+      description: All distribution factors, filtered by query params.
+      type: object
+      properties:
+        day:
+          type: string
+          example: '2019-03-14'
+        aggregatePnodes:
+          description: A pnode at which load from other pnodes is aggregated to for repsentation in the market.
+          type: array
+          items:
+            type: object
+            properties:
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
+              busPnodes:
+                description: Bus pnode for a particular pnode.
+                type: array
+                items:
+                  type: object
+                  properties:
+                    pnodeName:
+                      $ref: '#/components/schemas/PNodeName'
+                    factor:
+                      type: number
+                      example: 0.17468
+                  required:
+                  - pnodeName
+                  - factor
+      required:
+      - day
+      - aggregatePnodes
+    DayAheadMarketWideResults:
+      description: Hourly Day-Ahead summary of market wide results.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        hours:
+          type:
+          - array
+          - 'null'
+          minItems: 0
+          maxItems: 24
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              forecastMw:
+                $ref: '#/components/schemas/RealEnergyResults'
+              energyMw:
+                $ref: '#/components/schemas/RealEnergyResults'
+              regulationMw:
+                $ref: '#/components/schemas/RealEnergyResults'
+              spinningReserveMw:
+                $ref: '#/components/schemas/RealEnergyResults'
+              supplementalReserveMw:
+                $ref: '#/components/schemas/RealEnergyResults'
+              shortTermReserveMw:
+                $ref: '#/components/schemas/RealEnergyResults'
+              rampCapabilityUpMw:
+                $ref: '#/components/schemas/RealEnergyResults'
+              rampCapabilityDownMw:
+                $ref: '#/components/schemas/RealEnergyResults'
+      required:
+      - day
+      - hours
+    PriceTypeExAnte:
+      description: Market pricing type - Ex-Ante.
+      type: string
+      enum:
+      - ExAnte
+      example: ExAnte
+    HourLabel:
+      description: Hour ending label. Represents an hour segment of time.
+      type: integer
+      minimum: 1
+      maximum: 24
+      example: 1
     APIResponse:
       description: General container for API response.
       type: object
@@ -783,36 +987,12 @@ components:
           description: The time at which the transaction was received by the system.
           type: string
           format: date-time
-    RealTimeLmpExPost:
-      description: A LMP Ex-Post report from the Real-Time market.
-      type: object
-      properties:
-        day:
-          $ref: '#/components/schemas/MarketOperatingDay'
-        priceType:
-          $ref: '#/components/schemas/PriceTypeExPost'
-        pnodes:
-          description: Pricing nodes in the report.
-          type: array
-          minItems: 0
-          items:
-            type: object
-            properties:
-              pnodeName:
-                $ref: '#/components/schemas/PNodeName'
-              interval5s:
-                type: array
-                minItems: 0
-                maxItems: 288
-                items:
-                  $ref: '#/components/schemas/RealTimeIntvlLmp'
-            required:
-            - pnodeName
-            - interval5s
-      required:
-      - day
-      - priceType
-      - pnodes
+    PNodeName:
+      description: Commercial Pricing Node (PNode) name.
+      type: string
+      minLength: 1
+      maxLength: 30
+      example: PNODE1
     DayAheadLocationalResults:
       description: Day-ahead locational results.
       type: object
@@ -905,225 +1085,11 @@ components:
       required:
       - day
       - pnodes
-    DayAheadLmpExPost:
-      description: A LMP Ex-Post report from the Day-Ahead market.
-      type: object
-      properties:
-        day:
-          $ref: '#/components/schemas/MarketOperatingDay'
-        priceType:
-          $ref: '#/components/schemas/PriceTypeExPost'
-        pnodes:
-          description: Pricing nodes in the report.
-          type: array
-          items:
-            type: object
-            properties:
-              pnodeName:
-                $ref: '#/components/schemas/PNodeName'
-              hours:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    hour:
-                      $ref: '#/components/schemas/HourLabel'
-                    lmp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    mcc:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    mlc:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    regMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    spinMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    suppMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    strMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    rcUpMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    rcDownMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-      required:
-      - day
-      - priceType
-    MarketPriceResults:
-      description: General type for all market price results.
-      format: money
-      type: number
-      multipleOf: 0.01
-      minimum: -9.999999999E7
-      maximum: 9.999999999E7
-      example: 34.91
-    RealEnergyResults:
-      description: Used to represent real energy values in market outcomes. Historically simliar to 'MWType'.
-      type: number
-      format: realenergy
-      multipleOf: 0.1
-      minimum: -9.99999999E7
-      maximum: 9.99999999E7
-      example: 120001.7
-    RealTimeZonalLMPResultsExPost:
-      description: Real-Time zonal LMP results.
-      type: object
-      properties:
-        day:
-          $ref: '#/components/schemas/MarketOperatingDay'
-        priceType:
-          $ref: '#/components/schemas/PriceTypeExPost'
-        interval5s:
-          type: array
-          items:
-            type: object
-            properties:
-              interval5:
-                $ref: '#/components/schemas/MarketIntervalLabel'
-              zones:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    zone:
-                      $ref: '#/components/schemas/ReserveZone'
-                    genRegMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    genSpinMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    genSuppMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    strMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    demandRegMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    demandSpinMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    demandSuppMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    rcpUpMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    rcpDownMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-      required:
-      - day
-      - priceType
-      - interval5s
-    HourLabel:
-      description: Hour ending label. Represents an hour segment of time.
-      type: integer
-      minimum: 1
-      maximum: 24
-      example: 1
-    DayAheadBindingLimitsResults:
-      description: Day-ahead binding limits results.
-      type: object
-      properties:
-        day:
-          $ref: '#/components/schemas/MarketOperatingDay'
-        bindingConstraints:
-          type: array
-          items:
-            type: object
-            properties:
-              hour:
-                $ref: '#/components/schemas/HourLabel'
-              constraints:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    constraintName:
-                      type: string
-                      example: Constraint1
-                    contingencyName:
-                      type: string
-                      example: ContingencyA
-      required:
-      - day
-      - bindingConstraints
-    RealTimeIntegratedLmpExPost:
-      description: A hourly LMP integrated prices report from the Real-Time market.
-      type: object
-      properties:
-        day:
-          $ref: '#/components/schemas/MarketOperatingDay'
-        priceType:
-          $ref: '#/components/schemas/PriceTypeExPost'
-        pnodes:
-          description: Pricing nodes in the report.
-          type: array
-          items:
-            type: object
-            properties:
-              pnodeName:
-                $ref: '#/components/schemas/PNodeName'
-              hours:
-                type: array
-                description: Integrated market prices at the pnode, for the period.
-                items:
-                  type: object
-                  properties:
-                    hour:
-                      $ref: '#/components/schemas/HourLabel'
-                    lmp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    mcc:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    mlc:
-                      $ref: '#/components/schemas/MarketPriceResults'
-      required:
-      - day
-      - priceType
-      - pnodes
-    DayAheadMarketWideResults:
-      description: Hourly Day-Ahead summary of market wide results.
-      type: object
-      properties:
-        day:
-          $ref: '#/components/schemas/MarketOperatingDay'
-        hours:
-          type:
-          - array
-          - 'null'
-          minItems: 0
-          maxItems: 24
-          items:
-            type: object
-            properties:
-              hour:
-                $ref: '#/components/schemas/HourLabel'
-              forecastMw:
-                $ref: '#/components/schemas/RealEnergyResults'
-              energyMw:
-                $ref: '#/components/schemas/RealEnergyResults'
-              regulationMw:
-                $ref: '#/components/schemas/RealEnergyResults'
-              spinningReserveMw:
-                $ref: '#/components/schemas/RealEnergyResults'
-              supplementalReserveMw:
-                $ref: '#/components/schemas/RealEnergyResults'
-              shortTermReserveMw:
-                $ref: '#/components/schemas/RealEnergyResults'
-              rampCapabilityUpMw:
-                $ref: '#/components/schemas/RealEnergyResults'
-              rampCapabilityDownMw:
-                $ref: '#/components/schemas/RealEnergyResults'
-      required:
-      - day
-      - hours
-    PriceTypeExPost:
-      description: Market pricing type - Ex-Post.
+    MarketIntervalLabel:
+      description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data.
       type: string
-      enum:
-      - ExPost
-      example: ExPost
-    PortfolioName:
-      description: Portfolio name which is unique to a participant company and may be shared among users registered with the same company.
-      type: string
-      minLength: 1
-      maxLength: 40
-      example: Sample Portfolio
+      format: date-time
+      example: '2019-03-14T14:50:00-05:00'
     DayAheadZonalLMPResultsExAnte:
       description: Day-ahead zonal LMP results.
       type: object
@@ -1168,128 +1134,155 @@ components:
       - day
       - priceType
       - hours
-    RealTimeIntvlLmp:
-      description: RT LMP data for an interval
-      type: object
-      properties:
-        interval5:
-          $ref: '#/components/schemas/MarketIntervalLabel'
-        lmp:
-          $ref: '#/components/schemas/MarketPriceResults'
-        mcc:
-          $ref: '#/components/schemas/MarketPriceResults'
-        mlc:
-          $ref: '#/components/schemas/MarketPriceResults'
-        regMcp:
-          $ref: '#/components/schemas/MarketPriceResults'
-        regMileageMcp:
-          $ref: '#/components/schemas/MarketPriceResults'
-        spinMcp:
-          $ref: '#/components/schemas/MarketPriceResults'
-        suppMcp:
-          $ref: '#/components/schemas/MarketPriceResults'
-        strMcp:
-          $ref: '#/components/schemas/MarketPriceResults'
-        rcUpMcp:
-          $ref: '#/components/schemas/MarketPriceResults'
-        rcDownMcp:
-          $ref: '#/components/schemas/MarketPriceResults'
-      required:
-      - interval5
-      - lmp
-      - mcc
-      - mlc
-    ReserveZone:
-      description: Used to represent a reserve zone.
-      type: number
-      minimum: 1
-      maximum: 999
-      example: 1
-    DayAheadZonalLMPResultsExPost:
-      description: Day-ahead zonal LMP results.
+    RealTimeLmpExAnte:
+      description: A LMP Ex-Ante report from the Real-Time market.
       type: object
       properties:
         day:
           $ref: '#/components/schemas/MarketOperatingDay'
         priceType:
-          $ref: '#/components/schemas/PriceTypeExPost'
-        hours:
+          $ref: '#/components/schemas/PriceTypeExAnte'
+        pnodes:
+          description: Pricing nodes in the report.
+          type: array
+          minItems: 0
+          items:
+            type: object
+            properties:
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
+              interval5s:
+                type: array
+                minItems: 0
+                maxItems: 288
+                items:
+                  $ref: '#/components/schemas/RealTimeIntvlLmp'
+            required:
+            - pnodeName
+            - interval5s
+      required:
+      - day
+      - priceType
+      - pnodes
+    DayAheadLmpExAnte:
+      description: A LMP Ex-Ante report from the Day-Ahead market.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        priceType:
+          $ref: '#/components/schemas/PriceTypeExAnte'
+        pnodes:
+          description: Pricing nodes in the report.
+          type: array
+          items:
+            type: object
+            properties:
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
+              hours:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    hour:
+                      $ref: '#/components/schemas/HourLabel'
+                    lmp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    mcc:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    mlc:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    regMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    spinMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    suppMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    strMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    rcUpMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+                    rcDownMcp:
+                      $ref: '#/components/schemas/MarketPriceResults'
+      required:
+      - day
+      - priceType
+    DayAheadBindingLimitsResults:
+      description: Day-ahead binding limits results.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        bindingConstraints:
           type: array
           items:
             type: object
             properties:
               hour:
                 $ref: '#/components/schemas/HourLabel'
-              zones:
+              constraints:
                 type: array
                 items:
                   type: object
                   properties:
-                    zone:
-                      $ref: '#/components/schemas/ReserveZone'
-                    genRegMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    genSpinMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    genSuppMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    strMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    demandRegMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    demandSpinMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    demandSuppMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    rcpUpMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
-                    rcpDownMcp:
-                      $ref: '#/components/schemas/MarketPriceResults'
+                    constraintName:
+                      type: string
+                      example: Constraint1
+                    contingencyName:
+                      type: string
+                      example: ContingencyA
       required:
       - day
-      - priceType
-      - hours
-    MarketIntervalLabel:
-      description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data.
+      - bindingConstraints
+    LFHourly:
+      description: Load Forecast report for the Day-Ahead market.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        controlAreas:
+          description: Collection of Control Areas.
+          type: array
+          items:
+            description: Control Area.
+            type: object
+            properties:
+              areaName:
+                description: Name of the local balancing authority or label for MISO total.
+                type: string
+                example: Area1
+              hours:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    hour:
+                      $ref: '#/components/schemas/HourLabel'
+                    mw:
+                      $ref: '#/components/schemas/RealEnergyResults'
+                minItems: 1
+                maxItems: 24
+            required:
+            - areaName
+            - hours
+      required:
+      - day
+    RealEnergyResults:
+      description: Used to represent real energy values in market outcomes. Historically simliar to 'MWType'.
+      type: number
+      format: realenergy
+      multipleOf: 0.1
+      minimum: -9.99999999E7
+      maximum: 9.99999999E7
+      example: 120001.7
+    PriceTypeExPost:
+      description: Market pricing type - Ex-Post.
       type: string
-      format: date-time
-      example: '2019-03-14T14:50:00-05:00'
-  headers:
-    http-x-request-id:
-      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
-      schema:
-        type: string
-        format: guid
-      example: 34571c664e48ca0b1e30d7ffb9b3b287
+      enum:
+      - ExPost
+      example: ExPost
   parameters:
-    Portfolio:
-      in: query
-      name: portfolio
-      description: Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned.
-      required: false
-      schema:
-        $ref: '#/components/schemas/PortfolioName'
-    Pnode:
-      in: query
-      name: pnode
-      description: Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned.
-      required: false
-      schema:
-        $ref: '#/components/schemas/PNodeName'
-    x-acting-participant:
-      in: header
-      name: x-acting-participant
-      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
-      schema:
-        type: string
-      example: MP
-    MarketOperatingDay:
-      in: path
-      name: day
-      description: The operating day of the data.
-      required: true
-      schema:
-        $ref: '#/components/schemas/MarketOperatingDay'
     Participant:
       in: path
       name: participantName
@@ -1304,45 +1297,35 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/HourLabel'
+    MarketOperatingDay:
+      in: path
+      name: day
+      description: The operating day of the data.
+      required: true
+      schema:
+        $ref: '#/components/schemas/MarketOperatingDay'
+    x-acting-participant:
+      in: header
+      name: x-acting-participant
+      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
+      schema:
+        type: string
+      example: MP
+    Pnode:
+      in: query
+      name: pnode
+      description: Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned.
+      required: false
+      schema:
+        $ref: '#/components/schemas/PNodeName'
+    Portfolio:
+      in: query
+      name: portfolio
+      description: Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned.
+      required: false
+      schema:
+        $ref: '#/components/schemas/PortfolioName'
   responses:
-    InternalErrorApiResponse:
-      description: Internal error occurred, details in server-side logs.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Internal error message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    BadRequestApiResponse:
-      description: User error. Request was invalid for some reason. See response for details.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Bad request message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
     UnauthorizedApiResponse:
       description: Rejected due to insufficient permissions.
       content:
@@ -1381,3 +1364,48 @@ components:
       headers:
         http-x-request-id:
           $ref: '#/components/headers/http-x-request-id'
+    InternalErrorApiResponse:
+      description: Internal error occurred, details in server-side logs.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Internal error message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    BadRequestApiResponse:
+      description: User error. Request was invalid for some reason. See response for details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Bad request message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+  headers:
+    http-x-request-id:
+      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
+      schema:
+        type: string
+        format: guid
+      example: 34571c664e48ca0b1e30d7ffb9b3b287

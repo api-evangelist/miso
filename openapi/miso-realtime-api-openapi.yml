@@ -2,6 +2,8 @@ openapi: 3.2.0
 info:
   title: Miso Real Time API
   version: '1.0'
+  x-refined-note:
+  - x-provenance differs across the merged source definitions and was not carried
   description: 'Operations tagged Real Time across 2 of this provider''s published API definitions: miso-data-exchange-load-generation-interchange-api-openapi.json, miso-data-exchange-pricing-api-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://apim.misoenergy.org/lgi
@@ -11,11 +13,9 @@ security:
 - apiKeyHeader: []
 - apiKeyQuery: []
 tags:
-- name: Real Time
+- name: Realtime
 paths:
   /v1/real-time/{date}/binding-constraint:
-    servers:
-    - url: https://apim.misoenergy.org/lgi
     get:
       operationId: get-v1-real-time-date-binding-constraint
       summary: Real-Time Binding Constraints
@@ -76,10 +76,10 @@ paths:
           content:
             application/json: {}
       tags:
-      - Real Time
-  /v1/real-time/{date}/demand/actual:
+      - Realtime
     servers:
     - url: https://apim.misoenergy.org/lgi
+  /v1/real-time/{date}/demand/actual:
     get:
       operationId: get-v1-real-time-date-demand-actual
       summary: Actual Load
@@ -161,10 +161,10 @@ paths:
           content:
             application/json: {}
       tags:
-      - Real Time
-  /v1/real-time/{date}/demand/forecast:
+      - Realtime
     servers:
     - url: https://apim.misoenergy.org/lgi
+  /v1/real-time/{date}/demand/forecast:
     get:
       operationId: get-v1-real-time-date-demand-forecast
       summary: Real-Time Cleared Demand
@@ -230,10 +230,10 @@ paths:
           content:
             application/json: {}
       tags:
-      - Real Time
-  /v1/real-time/{date}/demand/load-state-estimator:
+      - Realtime
     servers:
     - url: https://apim.misoenergy.org/lgi
+  /v1/real-time/{date}/demand/load-state-estimator:
     get:
       operationId: get-v1-real-time-date-demand-load-state-estimator
       summary: Real-Time State Estimator Load
@@ -309,10 +309,10 @@ paths:
           content:
             application/json: {}
       tags:
-      - Real Time
-  /v1/real-time/{date}/generation/cleared/supply:
+      - Realtime
     servers:
     - url: https://apim.misoenergy.org/lgi
+  /v1/real-time/{date}/generation/cleared/supply:
     get:
       operationId: get-v1-real-time-date-generation-cleared-supply
       summary: Real-Time Cleared Generation
@@ -376,10 +376,10 @@ paths:
           content:
             application/json: {}
       tags:
-      - Real Time
-  /v1/real-time/{date}/generation/committed/ecomax:
+      - Realtime
     servers:
     - url: https://apim.misoenergy.org/lgi
+  /v1/real-time/{date}/generation/committed/ecomax:
     get:
       operationId: get-v1-real-time-date-generation-committed-ecomax
       summary: Real-Time Committed Generation, ECOMAX
@@ -441,10 +441,10 @@ paths:
           content:
             application/json: {}
       tags:
-      - Real Time
-  /v1/real-time/{date}/generation/fuel-on-the-margin:
+      - Realtime
     servers:
     - url: https://apim.misoenergy.org/lgi
+  /v1/real-time/{date}/generation/fuel-on-the-margin:
     get:
       operationId: get-v1-real-time-date-generation-fuel-on-the-margin
       summary: Real-Time Generation Fuel-on-the-Margin
@@ -524,10 +524,10 @@ paths:
           content:
             application/json: {}
       tags:
-      - Real Time
-  /v1/real-time/{date}/generation/fuel-type:
+      - Realtime
     servers:
     - url: https://apim.misoenergy.org/lgi
+  /v1/real-time/{date}/generation/fuel-type:
     get:
       operationId: get-v1-real-time-date-generation-fuel-type
       summary: Real-Time Generation Fuel Type
@@ -609,10 +609,10 @@ paths:
           content:
             application/json: {}
       tags:
-      - Real Time
-  /v1/real-time/{date}/generation/offered/ecomax:
+      - Realtime
     servers:
     - url: https://apim.misoenergy.org/lgi
+  /v1/real-time/{date}/generation/offered/ecomax:
     get:
       operationId: get-v1-real-time-date-generation-offered-ecomax
       summary: Real-Time Offered Generation, ECOMAX
@@ -674,10 +674,10 @@ paths:
           content:
             application/json: {}
       tags:
-      - Real Time
-  /v1/real-time/{date}/interchange/net-actual:
+      - Realtime
     servers:
     - url: https://apim.misoenergy.org/lgi
+  /v1/real-time/{date}/interchange/net-actual:
     get:
       operationId: get-v1-real-time-date-interchange-net-actual
       summary: Real-Time Net Actual Interchange
@@ -744,10 +744,10 @@ paths:
           content:
             application/json: {}
       tags:
-      - Real Time
-  /v1/real-time/{date}/interchange/net-scheduled:
+      - Realtime
     servers:
     - url: https://apim.misoenergy.org/lgi
+  /v1/real-time/{date}/interchange/net-scheduled:
     get:
       operationId: get-v1-real-time-date-interchange-net-scheduled
       summary: Real-Time Net Scheduled Interchange
@@ -809,10 +809,10 @@ paths:
           content:
             application/json: {}
       tags:
-      - Real Time
-  /v1/real-time/{date}/outage:
+      - Realtime
     servers:
     - url: https://apim.misoenergy.org/lgi
+  /v1/real-time/{date}/outage:
     get:
       operationId: get-v1-real-time-date-outage
       summary: Real-Time Outages
@@ -875,10 +875,10 @@ paths:
           content:
             application/json: {}
       tags:
-      - Real Time
-  /v1/real-time/{date}/asm-exante:
+      - Realtime
     servers:
-    - url: https://apim.misoenergy.org/pricing
+    - url: https://apim.misoenergy.org/lgi
+  /v1/real-time/{date}/asm-exante:
     get:
       operationId: get-v1-real-time-date-asm-exante
       summary: Real-Time Ex-Ante MCP
@@ -960,10 +960,10 @@ paths:
           content:
             application/json: {}
       tags:
-      - Real Time
-  /v1/real-time/{date}/asm-expost:
+      - Realtime
     servers:
     - url: https://apim.misoenergy.org/pricing
+  /v1/real-time/{date}/asm-expost:
     get:
       operationId: get-v1-real-time-date-asm-expost
       summary: Real-Time Ex-Post MCP
@@ -1064,10 +1064,10 @@ paths:
           content:
             application/json: {}
       tags:
-      - Real Time
-  /v1/real-time/{date}/asm-summary:
+      - Realtime
     servers:
     - url: https://apim.misoenergy.org/pricing
+  /v1/real-time/{date}/asm-summary:
     get:
       operationId: get-v1-real-time-date-asm-summary
       summary: Real-Time MCP Summary
@@ -1151,10 +1151,10 @@ paths:
           content:
             application/json: {}
       tags:
-      - Real Time
-  /v1/real-time/{date}/lmp-exante:
+      - Realtime
     servers:
     - url: https://apim.misoenergy.org/pricing
+  /v1/real-time/{date}/lmp-exante:
     get:
       operationId: get-v1-real-time-date-lmp-exante
       summary: Real-Time Ex-Ante LMP
@@ -1225,10 +1225,10 @@ paths:
           content:
             application/json: {}
       tags:
-      - Real Time
-  /v1/real-time/{date}/lmp-expost:
+      - Realtime
     servers:
     - url: https://apim.misoenergy.org/pricing
+  /v1/real-time/{date}/lmp-expost:
     get:
       operationId: get-v1-real-time-date-lmp-expost
       summary: Real-Time Ex-Post LMP
@@ -1318,81 +1318,19 @@ paths:
           content:
             application/json: {}
       tags:
-      - Real Time
+      - Realtime
+    servers:
+    - url: https://apim.misoenergy.org/pricing
 components:
   schemas:
-    NetActualInterchange:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        adjacentBa:
-          type: string
-        nai:
-          type: number
-    RealTimeGenerationFuelMargin:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        peak:
-          type: boolean
-        region:
-          $ref: '#/components/schemas/Region'
-        fuelType:
-          type: string
-        unitCount:
-          type: integer
-          format: int32
-    TimeInterval:
-      type: object
-      properties:
-        resolution:
-          enum:
-          - 5min
-          - hourly
-          - daily
-          type: string
-          example: daily
-        start:
-          pattern: ([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2}).([0-9]{3})
-          type: string
-          description: In Eastern Standard Time (UTC−05:00).
-          example: '2023-06-28 00:00:00.000'
-        end:
-          pattern: ([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2}).([0-9]{3})
-          type: string
-          description: In Eastern Standard Time (UTC−05:00).
-          example: '2023-06-29 00:00:00.000'
-        value:
-          type: string
-          description: 'Short hand value for time interval. Can be timestamp for 5min resolution (ex: 2023-06-28 00:00:00.000), hour ending value for hourly resolution, 1-24 (ex: 21), or date string for daily (ex: 2023-06-28). In Eastern Standard Time (UTC−05:00).'
-          example: '2023-06-29'
-    PreliminaryFinalEnum:
+    Region:
       enum:
-      - Preliminary
-      - Final
+      - NORTH
+      - CENTRAL
+      - SOUTH
+      - MISO
+      - NO_REGION
       type: string
-    200-OK-Demand-EstResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DemandEst'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    200-OK-RealTime-DemandResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RealTimeDemand'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
     RealTimeOutage:
       type: object
       properties:
@@ -1409,67 +1347,79 @@ components:
           description: The difference between the forward and real-time values.
         interval:
           type: string
-    GenerationFuelType:
+    200-OK-Offer-GenerationResponse-json:
       type: object
       properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        region:
-          $ref: '#/components/schemas/Region'
-        fuelTypes:
-          $ref: '#/components/schemas/FuelType'
-        totalMw:
-          type: number
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferGeneration'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-Real-Time-OutageResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeOutage'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-Committed-GenerationResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommittedGeneration'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-RtGenerationFuelOnTheMarginResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeGenerationFuelMargin'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    RealTimeDemand:
+      type: object
+      properties:
         interval:
           type: string
-    GenerationCleared:
+        demand:
+          type: number
+    FuelType:
       type: object
       properties:
-        generation:
+        coal:
           type: number
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-    200-OK-Gen-ClearedResponse-json:
+        gas:
+          type: number
+        nuclear:
+          type: number
+        water:
+          type: number
+        wind:
+          type: number
+        solar:
+          type: number
+        other:
+          type: number
+        storage:
+          type: number
+    200-OK-RealTime-DemandResponse-json:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/GenerationCleared'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    CommittedGeneration:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        committedForwardEcoMax:
-          type: number
-          description: The economic maximum (in megawatts) for all units committed in the Forward Reliability Assessment & Commitment (FRAC) process.
-        committedRealTimeEcoMax:
-          type: number
-          description: The economic maximum (in megawatts) for all units committed in the real-time market, based on the peak case within the hour.
-        committedEcoMaxDelta:
-          type: number
-          description: The difference between the forward and real-time values.
-    200-OK-LMPResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/LocationalMarginalPrice'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    200-OK-RTMCPResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RealTimeExPostMarketClearingPrice'
+            $ref: '#/components/schemas/RealTimeDemand'
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true
@@ -1504,6 +1454,289 @@ components:
           format: int64
         lastPage:
           type: boolean
+    200-OK-LoadResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Load'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-Generation-Fuel-TypeResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerationFuelType'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-Gen-ClearedResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerationCleared'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    GenerationCleared:
+      type: object
+      properties:
+        generation:
+          type: number
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+    DemandEst:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        zone:
+          type: string
+        demand:
+          type: number
+    CommittedGeneration:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        committedForwardEcoMax:
+          type: number
+          description: The economic maximum (in megawatts) for all units committed in the Forward Reliability Assessment & Commitment (FRAC) process.
+        committedRealTimeEcoMax:
+          type: number
+          description: The economic maximum (in megawatts) for all units committed in the real-time market, based on the peak case within the hour.
+        committedEcoMaxDelta:
+          type: number
+          description: The difference between the forward and real-time values.
+    200-OK-Demand-EstResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DemandEst'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    OfferGeneration:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        offerForwardEcoMax:
+          type: number
+          description: The economic maximum (in megawatts) from unit offers available to the Forward Reliability Assessment & Commitment (FRAC) process.
+        offerRealTimeEcoMax:
+          type: number
+          description: The economic maximum (in megawatts) from unit offers available to the real-time market.
+        offerEcoMaxDelta:
+          type: number
+          description: The difference between the forward and real-time values.
+    RealTimeGenerationFuelMargin:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        peak:
+          type: boolean
+        region:
+          $ref: '#/components/schemas/Region'
+        fuelType:
+          type: string
+        unitCount:
+          type: integer
+          format: int32
+    RealTimeBindingConstraints:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        constraintCount:
+          type: number
+        interval:
+          type: string
+    GenerationFuelType:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          $ref: '#/components/schemas/Region'
+        fuelTypes:
+          $ref: '#/components/schemas/FuelType'
+        totalMw:
+          type: number
+        interval:
+          type: string
+    TimeInterval:
+      type: object
+      properties:
+        resolution:
+          enum:
+          - 5min
+          - hourly
+          - daily
+          type: string
+          example: daily
+        start:
+          pattern: ([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2}).([0-9]{3})
+          type: string
+          description: In Eastern Standard Time (UTC−05:00).
+          example: '2023-06-28 00:00:00.000'
+        end:
+          pattern: ([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2}).([0-9]{3})
+          type: string
+          description: In Eastern Standard Time (UTC−05:00).
+          example: '2023-06-29 00:00:00.000'
+        value:
+          type: string
+          description: 'Short hand value for time interval. Can be timestamp for 5min resolution (ex: 2023-06-28 00:00:00.000), hour ending value for hourly resolution, 1-24 (ex: 21), or date string for daily (ex: 2023-06-28). In Eastern Standard Time (UTC−05:00).'
+          example: '2023-06-29'
+    200-OK-Real-Time-BindingConstraintsResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeBindingConstraints'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-Net-Actual-InterchangeResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/NetActualInterchange'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    NetActualInterchange:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        adjacentBa:
+          type: string
+        nai:
+          type: number
+    200-OK-Real-Time-Net-Scheduled-InterchangeResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeNetScheduledInterchange'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    Load:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          type: string
+          description: The applicable region. When geoResolution=region.
+          example: North
+        localResourceZone:
+          type: string
+          description: The applicable localResourceZone. When geoResolution=localResourceZone.
+          example: LRZ3_5
+        load:
+          type: number
+          example: 1349.2
+    200-OK-LMPResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationalMarginalPrice'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-RTMCPResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeExPostMarketClearingPrice'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    RealTimeExPostMarketClearingPrice:
+      type: object
+      properties:
+        preliminaryFinal:
+          type: string
+          allOf:
+          - $ref: '#/components/schemas/PreliminaryFinalEnum'
+          description: Whether the price is preliminary or final.
+        product:
+          enum:
+          - Regulation
+          - Spin
+          - Supplemental
+          - STR
+          - Ramp-up
+          - Ramp-down
+          type: string
+          description: Ancillary Market product
+        zone:
+          type: string
+          description: Ancillary Services Reserve Zone
+          example: Zone 1
+        mcp:
+          type: number
+          description: Market Clearing Price
+          example: 6.48
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+    MarketClearingPrice:
+      type: object
+      properties:
+        interval:
+          type: string
+          example: '1'
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        product:
+          enum:
+          - Regulation
+          - Spin
+          - Supplemental
+          - STR
+          - Ramp-up
+          - Ramp-down
+          type: string
+          description: Ancillary Market product
+        zone:
+          type: string
+          description: Ancillary Services Reserve Zone
+          example: Zone 1
+        mcp:
+          type: number
+          description: Market Clearing Price
+          example: 6.48
+    200-OK-RTLMPResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeExPostLocationalMarginalPrice'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
     LocationalMarginalPrice:
       type: object
       properties:
@@ -1532,124 +1765,11 @@ components:
           type: number
           description: Marginal Losses Component
           example: 0.64
-    DemandEst:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        zone:
-          type: string
-        demand:
-          type: number
-    FuelType:
-      type: object
-      properties:
-        coal:
-          type: number
-        gas:
-          type: number
-        nuclear:
-          type: number
-        water:
-          type: number
-        wind:
-          type: number
-        solar:
-          type: number
-        other:
-          type: number
-        storage:
-          type: number
-    200-OK-Real-Time-OutageResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RealTimeOutage'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    Load:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        region:
-          type: string
-          description: The applicable region. When geoResolution=region.
-          example: North
-        localResourceZone:
-          type: string
-          description: The applicable localResourceZone. When geoResolution=localResourceZone.
-          example: LRZ3_5
-        load:
-          type: number
-          example: 1349.2
-    200-OK-Net-Actual-InterchangeResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/NetActualInterchange'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    200-OK-RTLMPResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RealTimeExPostLocationalMarginalPrice'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    Region:
+    PreliminaryFinalEnum:
       enum:
-      - NORTH
-      - CENTRAL
-      - SOUTH
-      - MISO
-      - NO_REGION
+      - Preliminary
+      - Final
       type: string
-    200-OK-LoadResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Load'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    MarketClearingPrice:
-      type: object
-      properties:
-        interval:
-          type: string
-          example: '1'
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        product:
-          enum:
-          - Regulation
-          - Spin
-          - Supplemental
-          - STR
-          - Ramp-up
-          - Ramp-down
-          type: string
-          description: Ancillary Market product
-        zone:
-          type: string
-          description: Ancillary Services Reserve Zone
-          example: Zone 1
-        mcp:
-          type: number
-          description: Market Clearing Price
-          example: 6.48
     RealTimeExPostLocationalMarginalPrice:
       type: object
       properties:
@@ -1680,58 +1800,6 @@ components:
           type: number
           description: Marginal Losses Component
           example: 0.64
-    RealTimeExPostMarketClearingPrice:
-      type: object
-      properties:
-        preliminaryFinal:
-          type: string
-          allOf:
-          - $ref: '#/components/schemas/PreliminaryFinalEnum'
-          description: Whether the price is preliminary or final.
-        product:
-          enum:
-          - Regulation
-          - Spin
-          - Supplemental
-          - STR
-          - Ramp-up
-          - Ramp-down
-          type: string
-          description: Ancillary Market product
-        zone:
-          type: string
-          description: Ancillary Services Reserve Zone
-          example: Zone 1
-        mcp:
-          type: number
-          description: Market Clearing Price
-          example: 6.48
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-    200-OK-Generation-Fuel-TypeResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/GenerationFuelType'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    OfferGeneration:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        offerForwardEcoMax:
-          type: number
-          description: The economic maximum (in megawatts) from unit offers available to the Forward Reliability Assessment & Commitment (FRAC) process.
-        offerRealTimeEcoMax:
-          type: number
-          description: The economic maximum (in megawatts) from unit offers available to the real-time market.
-        offerEcoMaxDelta:
-          type: number
-          description: The difference between the forward and real-time values.
     200-OK-MCPResponse-json:
       type: object
       properties:
@@ -1739,72 +1807,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MarketClearingPrice'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    200-OK-Real-Time-BindingConstraintsResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RealTimeBindingConstraints'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    RealTimeBindingConstraints:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        constraintCount:
-          type: number
-        interval:
-          type: string
-    RealTimeDemand:
-      type: object
-      properties:
-        interval:
-          type: string
-        demand:
-          type: number
-    200-OK-Committed-GenerationResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommittedGeneration'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    200-OK-Offer-GenerationResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferGeneration'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    200-OK-Real-Time-Net-Scheduled-InterchangeResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RealTimeNetScheduledInterchange'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    200-OK-RtGenerationFuelOnTheMarginResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RealTimeGenerationFuelMargin'
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true

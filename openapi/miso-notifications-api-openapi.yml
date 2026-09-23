@@ -92,6 +92,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get resource start stop notification history
+      x-summary-source: derived
   /markets/notifications/{day}/dispatch-instruction/participants/{participantName}/messages:
     description: Returns a filtered list of the Dispatch Instruction notifications messages sent to a participant.
     parameters:
@@ -169,6 +171,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get dispatch instruction notification history
+      x-summary-source: derived
   /markets/notifications/{day}/reserve-zone-study-status/participants/{participantName}/messages:
     description: Returns a filtered list of the Reserve Zone Study Status notification messages sent to a particpant.
     parameters:
@@ -240,6 +244,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get reserve zone study status notification history
+      x-summary-source: derived
   /markets/notifications/{day}/emergency-notification/participants/{participantName}/messages:
     description: Returns the filtered list of public and private messages that have been issued by the market operator and sent to a particpant.
     parameters:
@@ -247,7 +253,7 @@ paths:
     get:
       tags:
       - Notifications
-      description: Returns the filtered list of public and private messages that have been issued by the market operator and sent to a particpant since a certain time. A public message is a message that is available to all market participants.  A private message is a message directed to a specific set (of one or more market participants). A message has an associated priority.  A message's priority is specified as a integer number from 0 through 999. The only meaning applied to these priorities is that the priority 0 value represents an emergency notification message. If since is not provided then return all filtered notifications since start of day requested.
+      description: Returns the filtered list of public and private messages that have been issued by the market operator and sent to a particpant since a certain time. A public message is a message that is available to all market participants. A private message is a message directed to a specific set (of one or more market participants). A message has an associated priority. A message's priority is specified as a integer number from 0 through 999. The only meaning applied to these priorities is that the priority 0 value represents an emergency notification message. If since is not provided then return all filtered notifications since start of day requested.
       operationId: getEmergencyNotificationHistory
       parameters:
       - $ref: '#/components/parameters/MarketOperatingDay'
@@ -330,6 +336,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get emergency notification history
+      x-summary-source: derived
   /markets/notifications/{day}/contingency-reserve/participants/{participantName}/messages:
     description: Returns a filtered list of the CR Deployment notifications messages successfully sent to a participant.
     parameters:
@@ -337,7 +345,7 @@ paths:
     get:
       tags:
       - Notifications
-      description: Returns a filtered list of the CR Deployment notifications messages successfully sent to a participant  since a certain time for a particular pnode. If since is not provided then return all filtered notifications since start of day requested.
+      description: Returns a filtered list of the CR Deployment notifications messages successfully sent to a participant since a certain time for a particular pnode. If since is not provided then return all filtered notifications since start of day requested.
       operationId: getCRDeploymentNotificationHistory
       parameters:
       - $ref: '#/components/parameters/MarketOperatingDay'
@@ -407,6 +415,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get CR deployment notification history
+      x-summary-source: derived
   /markets/notifications/{day}/financial-contract-schedule-confirmation/participants/{participantName}/messages:
     description: Returns a filtered list of Financial Contract/Schedule Confirmation notifications messages sent to a participant.
     parameters:
@@ -478,13 +488,111 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get financial contract schedule confirmation history
+      x-summary-source: derived
 components:
-  schemas:
+  parameters:
+    Participant:
+      in: path
+      name: participantName
+      description: The NERC ID of asset owner specified in the path for a collection resource.
+      required: true
+      schema:
+        $ref: '#/components/schemas/ParticipantName'
     MarketOperatingDay:
-      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
+      in: path
+      name: day
+      description: The operating day of the data.
+      required: true
+      schema:
+        $ref: '#/components/schemas/MarketOperatingDay'
+    x-acting-participant:
+      in: header
+      name: x-acting-participant
+      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
+      schema:
+        type: string
+      example: MP
+  schemas:
+    ReserveZoneStudyStatusNotificationLog:
+      description: Reserve Zone Study Status Notification log messages.
+      type: array
+      items:
+        type: object
+        required:
+        - eventType
+        - status
+        - effectiveTime
+        - terminationTime
+        - version
+        - participantName
+        - created
+        - requestPayload
+        - responses
+        properties:
+          eventType:
+            type: string
+            enum:
+            - Reserve Zone Study Status
+            example: Reserve Zone Study Status
+          status:
+            $ref: '#/components/schemas/NotifyStatus'
+          effectiveTime:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          terminationTime:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          version:
+            type: string
+            example: 1.0.0
+          externalId:
+            type: string
+            example: ext-id-3
+          url:
+            type: string
+            example: http://mcs-notifications-listener-svc/event
+          participantMrid:
+            type: string
+            example: be553f66-8af1-0436-ffb7-f53ca339d84f
+          participantName:
+            $ref: '#/components/schemas/ParticipantName'
+          created:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          lastmodified:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          requestPayload:
+            type: object
+            required:
+            - test
+            - notificationData
+            properties:
+              test:
+                type: boolean
+                example: false
+              notificationData:
+                type: object
+                properties:
+                  reserveZoneStudyStatus:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        day:
+                          $ref: '#/components/schemas/MarketOperatingDay'
+                        status:
+                          $ref: '#/components/schemas/StudyStatus'
+                      required:
+                      - day
+                      - status
+                required:
+                - reserveZoneStudyStatus
+          responses:
+            $ref: '#/components/schemas/NotificationResponses'
+    StudyStatus:
+      description: The status of the reserve zone study for a given market day.
       type: string
-      format: date
-      example: '2019-03-14'
+      enum:
+      - Complete
+      - Incomplete
     EmergencyNotificationLog:
       description: Emergency Notification log messages.
       type: array
@@ -579,12 +687,6 @@ components:
                 - messages
           responses:
             $ref: '#/components/schemas/NotificationResponses'
-    PNodeName:
-      description: Commercial Pricing Node (PNode) name.
-      type: string
-      minLength: 1
-      maxLength: 30
-      example: PNODE1
     NotificationResponses:
       type: array
       items:
@@ -607,83 +709,6 @@ components:
           retryCount:
             type: integer
             example: 1
-    ParticipantName:
-      description: Market participant name.
-      type: string
-      minLength: 1
-      maxLength: 40
-      example: MP
-    APIResponse:
-      description: General container for API response.
-      type: object
-      properties:
-        action:
-          description: A general action code summary of the result. HTTP status codes will be applied that match. These indicate the type of operation that was done (or not). Note, some APIs use REST verbiage like created/updated/deleted while others use submit/query.
-          enum:
-          - CREATED
-          - UPDATED
-          - DELETED
-          - CREATE_FAILED
-          - UPDATE_FAILED
-          - DELETE_FAILED
-          - GET_FAILED
-          - SUBMITTED
-          - SUBMIT_FAILED
-          - QUERY
-          - QUERY_FAILED
-        responses:
-          description: List of responses in case multiple resources are modified, or general errors that are not resource specific.
-          type: array
-          minItems: 0
-          items:
-            description: A single response which may contain multiple messages, both error and warning, per response.
-            type: object
-            properties:
-              messages:
-                description: List of warnings and errors resulting from the command.
-                type: array
-                minItems: 0
-                items:
-                  description: An individual warning or error message.  Designed to be either localized or categorized as an event.
-                  type: object
-                  properties:
-                    level:
-                      description: An indication of severity of the message.
-                      type: string
-                      enum:
-                      - ERROR
-                      - WARNING
-                      - INFO
-                    msgId:
-                      description: A categorized ID for this message, identifying it as a particular type of event. Useful for checking for specific errors, or localization.
-                      type: string
-                    params:
-                      description: Ordered list of parameter values for the message.
-                      type: array
-                      items:
-                        type: string
-                    userMsg:
-                      description: The message, fully rendered in the default locale on the service side.
-                      type: string
-        transactionId:
-          description: Unique identifier for the transaction which can be queried at a later date. Identifier is a GUID represented without hyphens. Only returned for submissions and errors though all calls generate a transaction ID that is returned in the http-x-request-id response header.
-          type: string
-          format: guid
-        transactionTime:
-          description: The time at which the transaction was received by the system.
-          type: string
-          format: date-time
-    NotifyStatus:
-      description: Notification send status.
-      type: string
-      enum:
-      - SENT
-      - GENERATED
-      - GENERATION_FAILED
-      - RETRYING
-      - SEND_FAILED
-      - EXPIRED
-      - REQUEST_TIMEOUT
     ContractType:
       description: The type of contract established between two participants.
       type: string
@@ -691,372 +716,6 @@ components:
       - PureFinancial
       - GrandFathered
       - PseudoTie
-    ContractScheduleNotificationLog:
-      description: Financial Contract/Schedule Confirmation notification log messages.
-      type: array
-      items:
-        type: object
-        required:
-        - eventType
-        - status
-        - effectiveTime
-        - terminationTime
-        - version
-        - participantName
-        - created
-        - requestPayload
-        - responses
-        properties:
-          eventType:
-            type: string
-            enum:
-            - Financial Contract/Schedule Confirmation
-            example: Financial Contract/Schedule Confirmation
-          status:
-            $ref: '#/components/schemas/NotifyStatus'
-          effectiveTime:
-            $ref: '#/components/schemas/MarketIntervalLabel'
-          terminationTime:
-            $ref: '#/components/schemas/MarketIntervalLabel'
-          version:
-            type: string
-            example: 1.0.0
-          externalId:
-            type: string
-            example: ext-id-3
-          url:
-            type: string
-            example: http://mcs-notifications-listener-svc/event
-          participantMrid:
-            type: string
-            example: be553f66-8af1-0436-ffb7-f53ca339d84f
-          participantName:
-            $ref: '#/components/schemas/ParticipantName'
-          created:
-            $ref: '#/components/schemas/MarketIntervalLabel'
-          lastmodified:
-            $ref: '#/components/schemas/MarketIntervalLabel'
-          requestPayload:
-            type: object
-            required:
-            - test
-            - notificationData
-            properties:
-              test:
-                type: boolean
-                example: false
-              notificationData:
-                type: object
-                properties:
-                  unconfirmedContracts:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        contractName:
-                          $ref: '#/components/schemas/ContractName'
-                        buyerName:
-                          $ref: '#/components/schemas/ParticipantName'
-                        sellerName:
-                          $ref: '#/components/schemas/ParticipantName'
-                        contractType:
-                          $ref: '#/components/schemas/ContractType'
-                      required:
-                      - contractName
-                      - buyerName
-                      - sellerName
-                      - contractType
-                  unconfirmedSchedules:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        contractName:
-                          $ref: '#/components/schemas/ContractName'
-                        buyerName:
-                          $ref: '#/components/schemas/ParticipantName'
-                        sellerName:
-                          $ref: '#/components/schemas/ParticipantName'
-                        contractType:
-                          $ref: '#/components/schemas/ContractType'
-                        scheduleDay:
-                          $ref: '#/components/schemas/MarketOperatingDay'
-                      required:
-                      - contractName
-                      - buyerName
-                      - sellerName
-                      - contractType
-                      - scheduleDay
-                required:
-                - unconfirmedContracts
-                - unconfirmedSchedules
-          responses:
-            $ref: '#/components/schemas/NotificationResponses'
-    MarketPriceResults:
-      description: General type for all market price results.
-      format: money
-      type: number
-      multipleOf: 0.01
-      minimum: -9.999999999E7
-      maximum: 9.999999999E7
-      example: 34.91
-    CRDeploymentNotificationLog:
-      description: CRD Deployment Notification log messages.
-      type: array
-      items:
-        type: object
-        required:
-        - eventType
-        - status
-        - effectiveTime
-        - terminationTime
-        - version
-        - participantName
-        - created
-        - requestPayload
-        - responses
-        properties:
-          eventType:
-            type: string
-            enum:
-            - Contingency Reserve
-            example: Contingency Reserve
-          status:
-            $ref: '#/components/schemas/NotifyStatus'
-          effectiveTime:
-            $ref: '#/components/schemas/MarketIntervalLabel'
-          terminationTime:
-            $ref: '#/components/schemas/MarketIntervalLabel'
-          version:
-            type: string
-            example: 1.0.0
-          externalId:
-            type: string
-            example: ext-id-3
-          url:
-            type: string
-            example: http://mcs-notifications-listener-svc/event
-          participantMrid:
-            type: string
-            example: be553f66-8af1-0436-ffb7-f53ca339d84f
-          participantName:
-            $ref: '#/components/schemas/ParticipantName'
-          created:
-            $ref: '#/components/schemas/MarketIntervalLabel'
-          lastmodified:
-            $ref: '#/components/schemas/MarketIntervalLabel'
-          requestPayload:
-            type: object
-            required:
-            - test
-            - notificationData
-            properties:
-              test:
-                type: boolean
-                example: false
-              notificationData:
-                type: object
-                required:
-                - crDeployments
-                properties:
-                  crDeployments:
-                    type: array
-                    items:
-                      type: object
-                      required:
-                      - pnodeName
-                      - timestamp
-                      - mw
-                      properties:
-                        pnodeName:
-                          $ref: '#/components/schemas/PNodeName'
-                        timestamp:
-                          $ref: '#/components/schemas/MarketIntervalLabel'
-                        mw:
-                          $ref: '#/components/schemas/RealEnergyResults'
-          responses:
-            $ref: '#/components/schemas/NotificationResponses'
-    RealEnergyResults:
-      description: Used to represent real energy values in market outcomes. Historically simliar to 'MWType'.
-      type: number
-      format: realenergy
-      multipleOf: 0.1
-      minimum: -9.99999999E7
-      maximum: 9.99999999E7
-      example: 120001.7
-    ResourceStartStopNotificationLog:
-      description: Resource Start Stop Notification log messages.
-      type: array
-      items:
-        type: object
-        required:
-        - eventType
-        - status
-        - effectiveTime
-        - terminationTime
-        - version
-        - participantName
-        - created
-        - requestPayload
-        - responses
-        properties:
-          eventType:
-            type: string
-            enum:
-            - Resource Start/Stop
-            example: Resource Start/Stop
-          status:
-            $ref: '#/components/schemas/NotifyStatus'
-          effectiveTime:
-            $ref: '#/components/schemas/MarketIntervalLabel'
-          terminationTime:
-            $ref: '#/components/schemas/MarketIntervalLabel'
-          version:
-            type: string
-            example: 1.0.0
-          externalId:
-            type: string
-            example: ext-id-3
-          url:
-            type: string
-            example: http://mcs-notifications-listener-svc/event
-          participantMrid:
-            type: string
-            example: be553f66-8af1-0436-ffb7-f53ca339d84f
-          participantName:
-            $ref: '#/components/schemas/ParticipantName'
-          created:
-            $ref: '#/components/schemas/MarketIntervalLabel'
-          lastmodified:
-            $ref: '#/components/schemas/MarketIntervalLabel'
-          requestPayload:
-            type: object
-            required:
-            - test
-            - notificationData
-            properties:
-              test:
-                type: boolean
-                example: false
-              notificationData:
-                type: object
-                properties:
-                  resourceStartInstructions:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        pnodeName:
-                          $ref: '#/components/schemas/PNodeName'
-                        interval:
-                          $ref: '#/components/schemas/MarketIntervalLabel'
-                        timestamp:
-                          $ref: '#/components/schemas/MarketIntervalLabel'
-                        deployStatus:
-                          type: string
-                          enum:
-                          - online
-                        deployReason:
-                          type: string
-                          enum:
-                          - CRD
-                      required:
-                      - pnodeName
-                      - interval
-                      - timestamp
-                  resourceStopInstructions:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        pnodeName:
-                          $ref: '#/components/schemas/PNodeName'
-                        interval:
-                          $ref: '#/components/schemas/MarketIntervalLabel'
-                        timestamp:
-                          $ref: '#/components/schemas/MarketIntervalLabel'
-                      required:
-                      - pnodeName
-                      - interval
-                      - timestamp
-                required:
-                - resourceStartInstructions
-                - resourceStopInstructions
-          responses:
-            $ref: '#/components/schemas/NotificationResponses'
-    ReserveZoneStudyStatusNotificationLog:
-      description: Reserve Zone Study Status Notification log messages.
-      type: array
-      items:
-        type: object
-        required:
-        - eventType
-        - status
-        - effectiveTime
-        - terminationTime
-        - version
-        - participantName
-        - created
-        - requestPayload
-        - responses
-        properties:
-          eventType:
-            type: string
-            enum:
-            - Reserve Zone Study Status
-            example: Reserve Zone Study Status
-          status:
-            $ref: '#/components/schemas/NotifyStatus'
-          effectiveTime:
-            $ref: '#/components/schemas/MarketIntervalLabel'
-          terminationTime:
-            $ref: '#/components/schemas/MarketIntervalLabel'
-          version:
-            type: string
-            example: 1.0.0
-          externalId:
-            type: string
-            example: ext-id-3
-          url:
-            type: string
-            example: http://mcs-notifications-listener-svc/event
-          participantMrid:
-            type: string
-            example: be553f66-8af1-0436-ffb7-f53ca339d84f
-          participantName:
-            $ref: '#/components/schemas/ParticipantName'
-          created:
-            $ref: '#/components/schemas/MarketIntervalLabel'
-          lastmodified:
-            $ref: '#/components/schemas/MarketIntervalLabel'
-          requestPayload:
-            type: object
-            required:
-            - test
-            - notificationData
-            properties:
-              test:
-                type: boolean
-                example: false
-              notificationData:
-                type: object
-                properties:
-                  reserveZoneStudyStatus:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        day:
-                          $ref: '#/components/schemas/MarketOperatingDay'
-                        status:
-                          $ref: '#/components/schemas/StudyStatus'
-                      required:
-                      - day
-                      - status
-                required:
-                - reserveZoneStudyStatus
-          responses:
-            $ref: '#/components/schemas/NotificationResponses'
     ContractName:
       description: Bilateral contract name.
       type: string
@@ -1223,63 +882,393 @@ components:
                 - dispatchInstructions
           responses:
             $ref: '#/components/schemas/NotificationResponses'
-    StudyStatus:
-      description: The status of the reserve zone study for a given market day.
+    ParticipantName:
+      description: Market participant name.
+      type: string
+      minLength: 1
+      maxLength: 40
+      example: MP
+    MarketPriceResults:
+      description: General type for all market price results.
+      format: money
+      type: number
+      multipleOf: 0.01
+      minimum: -9.999999999E7
+      maximum: 9.999999999E7
+      example: 34.91
+    MarketOperatingDay:
+      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
+      type: string
+      format: date
+      example: '2019-03-14'
+    CRDeploymentNotificationLog:
+      description: CRD Deployment Notification log messages.
+      type: array
+      items:
+        type: object
+        required:
+        - eventType
+        - status
+        - effectiveTime
+        - terminationTime
+        - version
+        - participantName
+        - created
+        - requestPayload
+        - responses
+        properties:
+          eventType:
+            type: string
+            enum:
+            - Contingency Reserve
+            example: Contingency Reserve
+          status:
+            $ref: '#/components/schemas/NotifyStatus'
+          effectiveTime:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          terminationTime:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          version:
+            type: string
+            example: 1.0.0
+          externalId:
+            type: string
+            example: ext-id-3
+          url:
+            type: string
+            example: http://mcs-notifications-listener-svc/event
+          participantMrid:
+            type: string
+            example: be553f66-8af1-0436-ffb7-f53ca339d84f
+          participantName:
+            $ref: '#/components/schemas/ParticipantName'
+          created:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          lastmodified:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          requestPayload:
+            type: object
+            required:
+            - test
+            - notificationData
+            properties:
+              test:
+                type: boolean
+                example: false
+              notificationData:
+                type: object
+                required:
+                - crDeployments
+                properties:
+                  crDeployments:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - pnodeName
+                      - timestamp
+                      - mw
+                      properties:
+                        pnodeName:
+                          $ref: '#/components/schemas/PNodeName'
+                        timestamp:
+                          $ref: '#/components/schemas/MarketIntervalLabel'
+                        mw:
+                          $ref: '#/components/schemas/RealEnergyResults'
+          responses:
+            $ref: '#/components/schemas/NotificationResponses'
+    ResourceStartStopNotificationLog:
+      description: Resource Start Stop Notification log messages.
+      type: array
+      items:
+        type: object
+        required:
+        - eventType
+        - status
+        - effectiveTime
+        - terminationTime
+        - version
+        - participantName
+        - created
+        - requestPayload
+        - responses
+        properties:
+          eventType:
+            type: string
+            enum:
+            - Resource Start/Stop
+            example: Resource Start/Stop
+          status:
+            $ref: '#/components/schemas/NotifyStatus'
+          effectiveTime:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          terminationTime:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          version:
+            type: string
+            example: 1.0.0
+          externalId:
+            type: string
+            example: ext-id-3
+          url:
+            type: string
+            example: http://mcs-notifications-listener-svc/event
+          participantMrid:
+            type: string
+            example: be553f66-8af1-0436-ffb7-f53ca339d84f
+          participantName:
+            $ref: '#/components/schemas/ParticipantName'
+          created:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          lastmodified:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          requestPayload:
+            type: object
+            required:
+            - test
+            - notificationData
+            properties:
+              test:
+                type: boolean
+                example: false
+              notificationData:
+                type: object
+                properties:
+                  resourceStartInstructions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        pnodeName:
+                          $ref: '#/components/schemas/PNodeName'
+                        interval:
+                          $ref: '#/components/schemas/MarketIntervalLabel'
+                        timestamp:
+                          $ref: '#/components/schemas/MarketIntervalLabel'
+                        deployStatus:
+                          type: string
+                          enum:
+                          - online
+                        deployReason:
+                          type: string
+                          enum:
+                          - CRD
+                      required:
+                      - pnodeName
+                      - interval
+                      - timestamp
+                  resourceStopInstructions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        pnodeName:
+                          $ref: '#/components/schemas/PNodeName'
+                        interval:
+                          $ref: '#/components/schemas/MarketIntervalLabel'
+                        timestamp:
+                          $ref: '#/components/schemas/MarketIntervalLabel'
+                      required:
+                      - pnodeName
+                      - interval
+                      - timestamp
+                required:
+                - resourceStartInstructions
+                - resourceStopInstructions
+          responses:
+            $ref: '#/components/schemas/NotificationResponses'
+    NotifyStatus:
+      description: Notification send status.
       type: string
       enum:
-      - Complete
-      - Incomplete
+      - SENT
+      - GENERATED
+      - GENERATION_FAILED
+      - RETRYING
+      - SEND_FAILED
+      - EXPIRED
+      - REQUEST_TIMEOUT
+    ContractScheduleNotificationLog:
+      description: Financial Contract/Schedule Confirmation notification log messages.
+      type: array
+      items:
+        type: object
+        required:
+        - eventType
+        - status
+        - effectiveTime
+        - terminationTime
+        - version
+        - participantName
+        - created
+        - requestPayload
+        - responses
+        properties:
+          eventType:
+            type: string
+            enum:
+            - Financial Contract/Schedule Confirmation
+            example: Financial Contract/Schedule Confirmation
+          status:
+            $ref: '#/components/schemas/NotifyStatus'
+          effectiveTime:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          terminationTime:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          version:
+            type: string
+            example: 1.0.0
+          externalId:
+            type: string
+            example: ext-id-3
+          url:
+            type: string
+            example: http://mcs-notifications-listener-svc/event
+          participantMrid:
+            type: string
+            example: be553f66-8af1-0436-ffb7-f53ca339d84f
+          participantName:
+            $ref: '#/components/schemas/ParticipantName'
+          created:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          lastmodified:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          requestPayload:
+            type: object
+            required:
+            - test
+            - notificationData
+            properties:
+              test:
+                type: boolean
+                example: false
+              notificationData:
+                type: object
+                properties:
+                  unconfirmedContracts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        contractName:
+                          $ref: '#/components/schemas/ContractName'
+                        buyerName:
+                          $ref: '#/components/schemas/ParticipantName'
+                        sellerName:
+                          $ref: '#/components/schemas/ParticipantName'
+                        contractType:
+                          $ref: '#/components/schemas/ContractType'
+                      required:
+                      - contractName
+                      - buyerName
+                      - sellerName
+                      - contractType
+                  unconfirmedSchedules:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        contractName:
+                          $ref: '#/components/schemas/ContractName'
+                        buyerName:
+                          $ref: '#/components/schemas/ParticipantName'
+                        sellerName:
+                          $ref: '#/components/schemas/ParticipantName'
+                        contractType:
+                          $ref: '#/components/schemas/ContractType'
+                        scheduleDay:
+                          $ref: '#/components/schemas/MarketOperatingDay'
+                      required:
+                      - contractName
+                      - buyerName
+                      - sellerName
+                      - contractType
+                      - scheduleDay
+                required:
+                - unconfirmedContracts
+                - unconfirmedSchedules
+          responses:
+            $ref: '#/components/schemas/NotificationResponses'
+    APIResponse:
+      description: General container for API response.
+      type: object
+      properties:
+        action:
+          description: A general action code summary of the result. HTTP status codes will be applied that match. These indicate the type of operation that was done (or not). Note, some APIs use REST verbiage like created/updated/deleted while others use submit/query.
+          enum:
+          - CREATED
+          - UPDATED
+          - DELETED
+          - CREATE_FAILED
+          - UPDATE_FAILED
+          - DELETE_FAILED
+          - GET_FAILED
+          - SUBMITTED
+          - SUBMIT_FAILED
+          - QUERY
+          - QUERY_FAILED
+        responses:
+          description: List of responses in case multiple resources are modified, or general errors that are not resource specific.
+          type: array
+          minItems: 0
+          items:
+            description: A single response which may contain multiple messages, both error and warning, per response.
+            type: object
+            properties:
+              messages:
+                description: List of warnings and errors resulting from the command.
+                type: array
+                minItems: 0
+                items:
+                  description: An individual warning or error message.  Designed to be either localized or categorized as an event.
+                  type: object
+                  properties:
+                    level:
+                      description: An indication of severity of the message.
+                      type: string
+                      enum:
+                      - ERROR
+                      - WARNING
+                      - INFO
+                    msgId:
+                      description: A categorized ID for this message, identifying it as a particular type of event. Useful for checking for specific errors, or localization.
+                      type: string
+                    params:
+                      description: Ordered list of parameter values for the message.
+                      type: array
+                      items:
+                        type: string
+                    userMsg:
+                      description: The message, fully rendered in the default locale on the service side.
+                      type: string
+        transactionId:
+          description: Unique identifier for the transaction which can be queried at a later date. Identifier is a GUID represented without hyphens. Only returned for submissions and errors though all calls generate a transaction ID that is returned in the http-x-request-id response header.
+          type: string
+          format: guid
+        transactionTime:
+          description: The time at which the transaction was received by the system.
+          type: string
+          format: date-time
+    PNodeName:
+      description: Commercial Pricing Node (PNode) name.
+      type: string
+      minLength: 1
+      maxLength: 30
+      example: PNODE1
     MarketIntervalLabel:
       description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data.
       type: string
       format: date-time
       example: '2019-03-14T14:50:00-05:00'
-  headers:
-    http-x-request-id:
-      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
-      schema:
-        type: string
-        format: guid
-      example: 34571c664e48ca0b1e30d7ffb9b3b287
+    RealEnergyResults:
+      description: Used to represent real energy values in market outcomes. Historically simliar to 'MWType'.
+      type: number
+      format: realenergy
+      multipleOf: 0.1
+      minimum: -9.99999999E7
+      maximum: 9.99999999E7
+      example: 120001.7
   responses:
-    InternalErrorApiResponse:
-      description: Internal error occurred, details in server-side logs.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Internal error message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    BadRequestApiResponse:
-      description: User error. Request was invalid for some reason. See response for details.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Bad request message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
     UnauthorizedApiResponse:
       description: Rejected due to insufficient permissions.
       content:
@@ -1318,25 +1307,48 @@ components:
       headers:
         http-x-request-id:
           $ref: '#/components/headers/http-x-request-id'
-  parameters:
-    x-acting-participant:
-      in: header
-      name: x-acting-participant
-      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
+    InternalErrorApiResponse:
+      description: Internal error occurred, details in server-side logs.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Internal error message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    BadRequestApiResponse:
+      description: User error. Request was invalid for some reason. See response for details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Bad request message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+  headers:
+    http-x-request-id:
+      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
       schema:
         type: string
-      example: MP
-    MarketOperatingDay:
-      in: path
-      name: day
-      description: The operating day of the data.
-      required: true
-      schema:
-        $ref: '#/components/schemas/MarketOperatingDay'
-    Participant:
-      in: path
-      name: participantName
-      description: The NERC ID of asset owner specified in the path for a collection resource.
-      required: true
-      schema:
-        $ref: '#/components/schemas/ParticipantName'
+        format: guid
+      example: 34571c664e48ca0b1e30d7ffb9b3b287

@@ -20,7 +20,7 @@ paths:
     post:
       tags:
       - Notifications Format
-      summary: Posted case event notification message which is published to participant configured listener endpoint when Day-Ahead and Real-Time study results are available via the MUI.
+      summary: Posted case event notification message which is published to participant…
       operationId: postCaseEventNotificationFormat
       requestBody:
         required: true
@@ -44,7 +44,7 @@ paths:
     post:
       tags:
       - Notifications Format
-      summary: Posted contingency reserve notification message which is published to participant configured listener endpoint.
+      summary: Posted contingency reserve notification message which is published to…
       operationId: postContingencyReserveNotificationFormat
       requestBody:
         required: true
@@ -68,7 +68,7 @@ paths:
     post:
       tags:
       - Notifications Format
-      summary: Posted emergency notification message which is published to participant configured listener endpoint. Message can be sourced from MISO or the IMM.
+      summary: Posted emergency notification message which is published to participant…
       operationId: postEmergencyNotificationFormat
       requestBody:
         required: true
@@ -92,7 +92,7 @@ paths:
     post:
       tags:
       - Notifications Format
-      summary: Posted dispatch instruction notification message which is published to participant configured listener endpoint.
+      summary: Posted dispatch instruction notification message which is published to…
       operationId: postDispatchInstructionNotificationFormat
       requestBody:
         required: true
@@ -116,7 +116,7 @@ paths:
     post:
       tags:
       - Notifications Format
-      summary: Posted contract schedule confirmation notification message which is published to participant configured listener endpoint.
+      summary: Posted contract schedule confirmation notification message which is published…
       operationId: postFinancialContractScheduleNotificationFormat
       requestBody:
         required: true
@@ -140,7 +140,7 @@ paths:
     post:
       tags:
       - Notifications Format
-      summary: Posted reserve zone study status notification message which is published to participant configured listener endpoint.
+      summary: Posted reserve zone study status notification message which is published to…
       operationId: postReserveZoneStudyStatusNotificationFormat
       requestBody:
         required: true
@@ -164,7 +164,7 @@ paths:
     post:
       tags:
       - Notifications Format
-      summary: Posted resource start stop notification message which is published to participant configured listener endpoint.
+      summary: Posted resource start stop notification message which is published to…
       operationId: postResourceStartStopNotificationFormat
       requestBody:
         required: true
@@ -185,75 +185,17 @@ paths:
           description: OK. Notification received.
 components:
   schemas:
-    MarketOperatingDay:
-      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
-      type: string
-      format: date
-      example: '2019-03-14'
-    MarketPriceResults:
-      description: General type for all market price results.
-      format: money
-      type: number
-      multipleOf: 0.01
-      minimum: -9.999999999E7
-      maximum: 9.999999999E7
-      example: 34.91
     ContractName:
       description: Bilateral contract name.
       type: string
       minLength: 1
       maxLength: 50
       example: Test Contract
-    PNodeName:
-      description: Commercial Pricing Node (PNode) name.
+    MarketIntervalLabel:
+      description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data.
       type: string
-      minLength: 1
-      maxLength: 30
-      example: PNODE1
-    ResourceStartStopNotification:
-      type: object
-      properties:
-        resourceStartInstructions:
-          type: array
-          items:
-            type: object
-            properties:
-              pnodeName:
-                $ref: '#/components/schemas/PNodeName'
-              interval:
-                $ref: '#/components/schemas/MarketIntervalLabel'
-              timestamp:
-                $ref: '#/components/schemas/MarketIntervalLabel'
-              deployStatus:
-                type: string
-                enum:
-                - online
-              deployReason:
-                type: string
-                enum:
-                - CRD
-            required:
-            - pnodeName
-            - interval
-            - timestamp
-        resourceStopInstructions:
-          type: array
-          items:
-            type: object
-            properties:
-              pnodeName:
-                $ref: '#/components/schemas/PNodeName'
-              interval:
-                $ref: '#/components/schemas/MarketIntervalLabel'
-              timestamp:
-                $ref: '#/components/schemas/MarketIntervalLabel'
-            required:
-            - pnodeName
-            - interval
-            - timestamp
-      required:
-      - resourceStartInstructions
-      - resourceStopInstructions
+      format: date-time
+      example: '2019-03-14T14:50:00-05:00'
     FinancialContractScheduleConfirmationNotification:
       type: object
       properties:
@@ -299,39 +241,12 @@ components:
       required:
       - unconfirmedContracts
       - unconfirmedSchedules
-    ParticipantName:
-      description: Market participant name.
-      type: string
-      minLength: 1
-      maxLength: 40
-      example: MP
-    ContingencyReserveDeploymentNotification:
-      type: object
-      properties:
-        crDeployments:
-          type: array
-          items:
-            type: object
-            properties:
-              pnodeName:
-                $ref: '#/components/schemas/PNodeName'
-              timestamp:
-                $ref: '#/components/schemas/MarketIntervalLabel'
-              mw:
-                $ref: '#/components/schemas/RealEnergyResults'
-            required:
-            - pnodeName
-            - timestamp
-            - mw
-      required:
-      - crDeployments
-    PriceTypes:
-      description: Range of market pricing types.
+    StudyStatus:
+      description: The status of the reserve zone study for a given market day.
       type: string
       enum:
-      - ExAnte
-      - ExPost
-      example: ExPost
+      - Complete
+      - Incomplete
     DispatchInstructionNotification:
       type: object
       properties:
@@ -435,6 +350,76 @@ components:
             - rampCapabilityDownDispatch
       required:
       - dispatchInstructions
+    EmergencyNotification:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            type: object
+            properties:
+              realm:
+                type: string
+                enum:
+                - Public
+                - Private
+              source:
+                $ref: '#/components/schemas/ParticipantName'
+              destination:
+                $ref: '#/components/schemas/ParticipantName'
+              priority:
+                type: integer
+                minimum: 0
+                maximum: 999
+              text:
+                type: string
+                maxLength: 1027
+              effectiveTime:
+                $ref: '#/components/schemas/MarketIntervalLabel'
+              terminationTime:
+                $ref: '#/components/schemas/MarketIntervalLabel'
+            required:
+            - realm
+            - source
+            - destination
+            - priority
+            - text
+            - effectiveTime
+            - terminationTime
+      required:
+      - messages
+    ParticipantName:
+      description: Market participant name.
+      type: string
+      minLength: 1
+      maxLength: 40
+      example: MP
+    MarketType:
+      description: Energy Market types.
+      type: string
+      enum:
+      - day-ahead
+      - real-time
+    PriceTypes:
+      description: Range of market pricing types.
+      type: string
+      enum:
+      - ExAnte
+      - ExPost
+      example: ExPost
+    MarketOperatingDay:
+      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
+      type: string
+      format: date
+      example: '2019-03-14'
+    MarketPriceResults:
+      description: General type for all market price results.
+      format: money
+      type: number
+      multipleOf: 0.01
+      minimum: -9.999999999E7
+      maximum: 9.999999999E7
+      example: 34.91
     RealEnergyResults:
       description: Used to represent real energy values in market outcomes. Historically simliar to 'MWType'.
       type: number
@@ -443,29 +428,50 @@ components:
       minimum: -9.99999999E7
       maximum: 9.99999999E7
       example: 120001.7
-    StudyStatus:
-      description: The status of the reserve zone study for a given market day.
-      type: string
-      enum:
-      - Complete
-      - Incomplete
-    ReserveZoneStudyStatusNotification:
+    ResourceStartStopNotification:
       type: object
       properties:
-        reserveZoneStudyStatus:
+        resourceStartInstructions:
           type: array
           items:
             type: object
             properties:
-              day:
-                $ref: '#/components/schemas/MarketOperatingDay'
-              status:
-                $ref: '#/components/schemas/StudyStatus'
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
+              interval:
+                $ref: '#/components/schemas/MarketIntervalLabel'
+              timestamp:
+                $ref: '#/components/schemas/MarketIntervalLabel'
+              deployStatus:
+                type: string
+                enum:
+                - online
+              deployReason:
+                type: string
+                enum:
+                - CRD
             required:
-            - day
-            - status
+            - pnodeName
+            - interval
+            - timestamp
+        resourceStopInstructions:
+          type: array
+          items:
+            type: object
+            properties:
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
+              interval:
+                $ref: '#/components/schemas/MarketIntervalLabel'
+              timestamp:
+                $ref: '#/components/schemas/MarketIntervalLabel'
+            required:
+            - pnodeName
+            - interval
+            - timestamp
       required:
-      - reserveZoneStudyStatus
+      - resourceStartInstructions
+      - resourceStopInstructions
     CaseEventNotification:
       type: object
       properties:
@@ -507,44 +513,12 @@ components:
             - priceType
       required:
       - caseEvents
-    EmergencyNotification:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            type: object
-            properties:
-              realm:
-                type: string
-                enum:
-                - Public
-                - Private
-              source:
-                $ref: '#/components/schemas/ParticipantName'
-              destination:
-                $ref: '#/components/schemas/ParticipantName'
-              priority:
-                type: integer
-                minimum: 0
-                maximum: 999
-              text:
-                type: string
-                maxLength: 1027
-              effectiveTime:
-                $ref: '#/components/schemas/MarketIntervalLabel'
-              terminationTime:
-                $ref: '#/components/schemas/MarketIntervalLabel'
-            required:
-            - realm
-            - source
-            - destination
-            - priority
-            - text
-            - effectiveTime
-            - terminationTime
-      required:
-      - messages
+    PNodeName:
+      description: Commercial Pricing Node (PNode) name.
+      type: string
+      minLength: 1
+      maxLength: 30
+      example: PNODE1
     ContractType:
       description: The type of contract established between two participants.
       type: string
@@ -552,14 +526,40 @@ components:
       - PureFinancial
       - GrandFathered
       - PseudoTie
-    MarketType:
-      description: Energy Market types.
-      type: string
-      enum:
-      - day-ahead
-      - real-time
-    MarketIntervalLabel:
-      description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data.
-      type: string
-      format: date-time
-      example: '2019-03-14T14:50:00-05:00'
+    ContingencyReserveDeploymentNotification:
+      type: object
+      properties:
+        crDeployments:
+          type: array
+          items:
+            type: object
+            properties:
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
+              timestamp:
+                $ref: '#/components/schemas/MarketIntervalLabel'
+              mw:
+                $ref: '#/components/schemas/RealEnergyResults'
+            required:
+            - pnodeName
+            - timestamp
+            - mw
+      required:
+      - crDeployments
+    ReserveZoneStudyStatusNotification:
+      type: object
+      properties:
+        reserveZoneStudyStatus:
+          type: array
+          items:
+            type: object
+            properties:
+              day:
+                $ref: '#/components/schemas/MarketOperatingDay'
+              status:
+                $ref: '#/components/schemas/StudyStatus'
+            required:
+            - day
+            - status
+      required:
+      - reserveZoneStudyStatus

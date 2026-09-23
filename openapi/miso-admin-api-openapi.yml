@@ -28,9 +28,7 @@ paths:
 
         does not administer any control area or is invalid participant then an empty list is returned. A control area
 
-        is included if the participant is active from day specified through the end of the market horizon.
-
-        '
+        is included if the participant is active from day specified through the end of the market horizon.'
       operationId: getParticipantMetadata
       parameters:
       - $ref: '#/components/parameters/MarketOperatingDay'
@@ -53,6 +51,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get participant metadata
+      x-summary-source: derived
   /markets/common/{day}/mui-meta:
     description: Returns general MUI metadata that is not participant specific.
     parameters:
@@ -74,9 +74,7 @@ paths:
 
         6. List of Market Options - List of Market Options which impact MUI behavior provided as name value pairs.
 
-        7. List of CostSchedule Types - List of cost schedule for the Day-Ahead and Balancing (Real-Time) markets.
-
-        '
+        7. List of CostSchedule Types - List of cost schedule for the Day-Ahead and Balancing (Real-Time) markets.'
       operationId: getMuiMetadata
       parameters:
       - $ref: '#/components/parameters/MarketOperatingDay'
@@ -109,6 +107,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get mui metadata
+      x-summary-source: derived
   /markets/portfolios/participants/{participantName}:
     description: Returns pnodes in all portfolios for a participant with an optional filter on day and details to limit what effective pnodes and how much pnode information is included.
     parameters:
@@ -165,6 +165,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get participant portfolios
+      x-summary-source: derived
   /markets/portfolios/participants/{participantName}/{action}:
     description: Returns pnodes for a specific Portfolio with an optional filter on day and details to limit what effective pnodes and how much pnode information is included.
     parameters:
@@ -203,6 +205,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Portfolio'
+      summary: Post portfolios
+      x-summary-source: derived
   /markets/swagger/v3/api-docs/json/{spec}:
     description: Returns the swagger spec in json format.
     parameters:
@@ -240,6 +244,8 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get swagger spec json
+      x-summary-source: derived
   /markets/swagger/v3/api-docs/yaml/{spec}:
     description: Returns the swagger spec in yaml format.
     parameters:
@@ -277,156 +283,32 @@ paths:
           $ref: '#/components/responses/NotFoundApiResponse'
         '500':
           $ref: '#/components/responses/InternalErrorApiResponse'
+      summary: Get swagger spec yaml
+      x-summary-source: derived
 components:
-  schemas:
+  parameters:
+    Participant:
+      in: path
+      name: participantName
+      description: The NERC ID of asset owner specified in the path for a collection resource.
+      required: true
+      schema:
+        $ref: '#/components/schemas/ParticipantName'
     MarketOperatingDay:
-      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
-      type: string
-      format: date
-      example: '2019-03-14'
-    PNodeName:
-      description: Commercial Pricing Node (PNode) name.
-      type: string
-      minLength: 1
-      maxLength: 30
-      example: PNODE1
-    ParticipantName:
-      description: Market participant name.
-      type: string
-      minLength: 1
-      maxLength: 40
+      in: path
+      name: day
+      description: The operating day of the data.
+      required: true
+      schema:
+        $ref: '#/components/schemas/MarketOperatingDay'
+    x-acting-participant:
+      in: header
+      name: x-acting-participant
+      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
+      schema:
+        type: string
       example: MP
-    APIResponse:
-      description: General container for API response.
-      type: object
-      properties:
-        action:
-          description: A general action code summary of the result. HTTP status codes will be applied that match. These indicate the type of operation that was done (or not). Note, some APIs use REST verbiage like created/updated/deleted while others use submit/query.
-          enum:
-          - CREATED
-          - UPDATED
-          - DELETED
-          - CREATE_FAILED
-          - UPDATE_FAILED
-          - DELETE_FAILED
-          - GET_FAILED
-          - SUBMITTED
-          - SUBMIT_FAILED
-          - QUERY
-          - QUERY_FAILED
-        responses:
-          description: List of responses in case multiple resources are modified, or general errors that are not resource specific.
-          type: array
-          minItems: 0
-          items:
-            description: A single response which may contain multiple messages, both error and warning, per response.
-            type: object
-            properties:
-              messages:
-                description: List of warnings and errors resulting from the command.
-                type: array
-                minItems: 0
-                items:
-                  description: An individual warning or error message.  Designed to be either localized or categorized as an event.
-                  type: object
-                  properties:
-                    level:
-                      description: An indication of severity of the message.
-                      type: string
-                      enum:
-                      - ERROR
-                      - WARNING
-                      - INFO
-                    msgId:
-                      description: A categorized ID for this message, identifying it as a particular type of event. Useful for checking for specific errors, or localization.
-                      type: string
-                    params:
-                      description: Ordered list of parameter values for the message.
-                      type: array
-                      items:
-                        type: string
-                    userMsg:
-                      description: The message, fully rendered in the default locale on the service side.
-                      type: string
-        transactionId:
-          description: Unique identifier for the transaction which can be queried at a later date. Identifier is a GUID represented without hyphens. Only returned for submissions and errors though all calls generate a transaction ID that is returned in the http-x-request-id response header.
-          type: string
-          format: guid
-        transactionTime:
-          description: The time at which the transaction was received by the system.
-          type: string
-          format: date-time
-    MarketType:
-      description: Energy Market types.
-      type: string
-      enum:
-      - day-ahead
-      - real-time
-    MetadatGroups:
-      description: Mui Meta-data groups.
-      type: string
-      enum:
-      - ReserveZones
-      - Participants
-      - CommitStatus
-      - DispatchStatus
-      - RealTimeOfferOverrideReasons
-      - MarketOptions
-      - CostScheduleTypes
-    Portfolio:
-      description: A single submitted portfolio. Each portfolio is a named association of resource pricing node (pnode) locations. A portfolio can contain resource pnode locations for generator units, demand response resources, and other pnodes.
-      type: object
-      properties:
-        name:
-          $ref: '#/components/schemas/PortfolioName'
-        portfolioLocations:
-          description: A list of pnodes identified by name.
-          type:
-          - array
-          - 'null'
-          items:
-            type: object
-            additionalProperties: false
-            properties:
-              name:
-                $ref: '#/components/schemas/PNodeName'
-      required:
-      - name
-      - portfolioLocations
-    ContextFilter:
-      description: Context filter for the report.
-      type: string
-      enum:
-      - System
-      - Portfolio
-      - FinSched
-      - Supply
-      - DemandBid
-      - VirtualBid
-      - VirtualOffer
-      - Lmp
-      example: System
-    ParticipantMetadata:
-      description: MUI and participant metadata.
-      type: object
-      properties:
-        day:
-          $ref: '#/components/schemas/MarketOperatingDay'
-        participantControlAreas:
-          description: Control Areas administered by a particular participant.
-          type: array
-          items:
-            type: object
-            properties:
-              areaShortName:
-                type: string
-                example: Area1
-              internalArea:
-                type: boolean
-                example: true
-      required:
-      - day
-      - participantControlAreas
+  schemas:
     PortfolioName:
       description: Portfolio name which is unique to a participant company and may be shared among users registered with the same company.
       type: string
@@ -530,12 +412,140 @@ components:
                 $ref: '#/components/schemas/MarketType'
       required:
       - day
+    MarketType:
+      description: Energy Market types.
+      type: string
+      enum:
+      - day-ahead
+      - real-time
     ReserveZone:
       description: Used to represent a reserve zone.
       type: number
       minimum: 1
       maximum: 999
       example: 1
+    ContextFilter:
+      description: Context filter for the report.
+      type: string
+      enum:
+      - System
+      - Portfolio
+      - FinSched
+      - Supply
+      - DemandBid
+      - VirtualBid
+      - VirtualOffer
+      - Lmp
+      example: System
+    ParticipantName:
+      description: Market participant name.
+      type: string
+      minLength: 1
+      maxLength: 40
+      example: MP
+    MarketOperatingDay:
+      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
+      type: string
+      format: date
+      example: '2019-03-14'
+    MetadatGroups:
+      description: Mui Meta-data groups.
+      type: string
+      enum:
+      - ReserveZones
+      - Participants
+      - CommitStatus
+      - DispatchStatus
+      - RealTimeOfferOverrideReasons
+      - MarketOptions
+      - CostScheduleTypes
+    APIResponse:
+      description: General container for API response.
+      type: object
+      properties:
+        action:
+          description: A general action code summary of the result. HTTP status codes will be applied that match. These indicate the type of operation that was done (or not). Note, some APIs use REST verbiage like created/updated/deleted while others use submit/query.
+          enum:
+          - CREATED
+          - UPDATED
+          - DELETED
+          - CREATE_FAILED
+          - UPDATE_FAILED
+          - DELETE_FAILED
+          - GET_FAILED
+          - SUBMITTED
+          - SUBMIT_FAILED
+          - QUERY
+          - QUERY_FAILED
+        responses:
+          description: List of responses in case multiple resources are modified, or general errors that are not resource specific.
+          type: array
+          minItems: 0
+          items:
+            description: A single response which may contain multiple messages, both error and warning, per response.
+            type: object
+            properties:
+              messages:
+                description: List of warnings and errors resulting from the command.
+                type: array
+                minItems: 0
+                items:
+                  description: An individual warning or error message.  Designed to be either localized or categorized as an event.
+                  type: object
+                  properties:
+                    level:
+                      description: An indication of severity of the message.
+                      type: string
+                      enum:
+                      - ERROR
+                      - WARNING
+                      - INFO
+                    msgId:
+                      description: A categorized ID for this message, identifying it as a particular type of event. Useful for checking for specific errors, or localization.
+                      type: string
+                    params:
+                      description: Ordered list of parameter values for the message.
+                      type: array
+                      items:
+                        type: string
+                    userMsg:
+                      description: The message, fully rendered in the default locale on the service side.
+                      type: string
+        transactionId:
+          description: Unique identifier for the transaction which can be queried at a later date. Identifier is a GUID represented without hyphens. Only returned for submissions and errors though all calls generate a transaction ID that is returned in the http-x-request-id response header.
+          type: string
+          format: guid
+        transactionTime:
+          description: The time at which the transaction was received by the system.
+          type: string
+          format: date-time
+    PNodeName:
+      description: Commercial Pricing Node (PNode) name.
+      type: string
+      minLength: 1
+      maxLength: 30
+      example: PNODE1
+    ParticipantMetadata:
+      description: MUI and participant metadata.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        participantControlAreas:
+          description: Control Areas administered by a particular participant.
+          type: array
+          items:
+            type: object
+            properties:
+              areaShortName:
+                type: string
+                example: Area1
+              internalArea:
+                type: boolean
+                example: true
+      required:
+      - day
+      - participantControlAreas
     RetrievedPortfolios:
       description: A list of portfolios.
       type: array
@@ -590,14 +600,79 @@ components:
         required:
         - name
         - portfolioLocations
-  headers:
-    http-x-request-id:
-      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
-      schema:
-        type: string
-        format: guid
-      example: 34571c664e48ca0b1e30d7ffb9b3b287
+    Portfolio:
+      description: A single submitted portfolio. Each portfolio is a named association of resource pricing node (pnode) locations. A portfolio can contain resource pnode locations for generator units, demand response resources, and other pnodes.
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/PortfolioName'
+        portfolioLocations:
+          description: A list of pnodes identified by name.
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              name:
+                $ref: '#/components/schemas/PNodeName'
+      required:
+      - name
+      - portfolioLocations
   responses:
+    UnauthorizedApiResponse:
+      description: Rejected due to insufficient permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Unauthorized message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    OkApiResponse:
+      description: Successful operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses: []
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    NotFoundApiResponse:
+      description: Resource not found. The path provided does not point to an entity in the system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Not found message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
     InternalErrorApiResponse:
       description: Internal error occurred, details in server-side logs.
       content:
@@ -636,77 +711,10 @@ components:
       headers:
         http-x-request-id:
           $ref: '#/components/headers/http-x-request-id'
-    OkApiResponse:
-      description: Successful operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses: []
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    UnauthorizedApiResponse:
-      description: Rejected due to insufficient permissions.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Unauthorized message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    NotFoundApiResponse:
-      description: Resource not found. The path provided does not point to an entity in the system.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Not found message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-  parameters:
-    x-acting-participant:
-      in: header
-      name: x-acting-participant
-      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
+  headers:
+    http-x-request-id:
+      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
       schema:
         type: string
-      example: MP
-    MarketOperatingDay:
-      in: path
-      name: day
-      description: The operating day of the data.
-      required: true
-      schema:
-        $ref: '#/components/schemas/MarketOperatingDay'
-    Participant:
-      in: path
-      name: participantName
-      description: The NERC ID of asset owner specified in the path for a collection resource.
-      required: true
-      schema:
-        $ref: '#/components/schemas/ParticipantName'
+        format: guid
+      example: 34571c664e48ca0b1e30d7ffb9b3b287
