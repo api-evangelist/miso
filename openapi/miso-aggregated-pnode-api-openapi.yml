@@ -81,6 +81,23 @@ paths:
       - Aggregated Pnode
 components:
   schemas:
+    PageInfo:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+        lastPage:
+          type: boolean
     200-OK-Aggregated-NodeResponse-json:
       type: object
       properties:
@@ -102,23 +119,6 @@ components:
           type: string
           description: Pricing Node Type
           example: Hubs
-    PageInfo:
-      type: object
-      properties:
-        pageNumber:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int64
-        lastPage:
-          type: boolean
   securitySchemes:
     apiKeyHeader:
       type: apiKey

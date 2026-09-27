@@ -8776,83 +8776,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ApiWeatherResponse:
-      type: object
-      properties:
-        url:
-          type:
-          - string
-          - 'null'
-          description: Requested Url
-          example: https://markets.midwestiso.org/wii/api/v1/Weather
-        generatedAt:
-          type:
-          - string
-          - 'null'
-          description: Date and time the response was generated
-          example: '2024-06-05T22:06:40Z'
-        type:
-          type:
-          - string
-          - 'null'
-          description: GeoJson collection type
-          example: FeatureCollection
-        features:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/WeatherFeature'
-          description: Collection of stations and their weather data
-      additionalProperties: false
-      description: Response object for GET /weather endpoint
-    WeatherProperty:
-      type: object
-      properties:
-        periods:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/WeatherHourData'
-          description: Collection of hourly metrics for the station
-      additionalProperties: false
-      description: Collection of station properties
-    ReadingData:
-      type: object
-      properties:
-        value:
-          description: Interger value for Temperature or String date/time for Sunrise or Sunset
-        qualityCheck:
-          type:
-          - string
-          - 'null'
-          description: 'The quality check status of the data. Can contain multiple values which would be comma separated. Available values: Pass, DataMissing, DataNotCurrent'
-          example: Pass
-      additionalProperties: false
-      description: Metric data for a specific weather reading
-    GeometryConstraint:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-          description: Geometry type of station reference
-          example: Point
-        coordinates:
-          type:
-          - array
-          - 'null'
-          items:
-            type: number
-            format: float
-          description: Longitude and Latitude of station
-          example:
-          - -122.5
-          - 37.7
-      additionalProperties: false
-      description: Geometry location of station
     WeatherFeature:
       type: object
       properties:
@@ -8917,3 +8840,80 @@ components:
           $ref: '#/components/schemas/ReadingData'
       additionalProperties: false
       description: Weather metrics for an individual hour
+    WeatherProperty:
+      type: object
+      properties:
+        periods:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WeatherHourData'
+          description: Collection of hourly metrics for the station
+      additionalProperties: false
+      description: Collection of station properties
+    ApiWeatherResponse:
+      type: object
+      properties:
+        url:
+          type:
+          - string
+          - 'null'
+          description: Requested Url
+          example: https://markets.midwestiso.org/wii/api/v1/Weather
+        generatedAt:
+          type:
+          - string
+          - 'null'
+          description: Date and time the response was generated
+          example: '2024-06-05T22:06:40Z'
+        type:
+          type:
+          - string
+          - 'null'
+          description: GeoJson collection type
+          example: FeatureCollection
+        features:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WeatherFeature'
+          description: Collection of stations and their weather data
+      additionalProperties: false
+      description: Response object for GET /weather endpoint
+    GeometryConstraint:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+          description: Geometry type of station reference
+          example: Point
+        coordinates:
+          type:
+          - array
+          - 'null'
+          items:
+            type: number
+            format: float
+          description: Longitude and Latitude of station
+          example:
+          - -122.5
+          - 37.7
+      additionalProperties: false
+      description: Geometry location of station
+    ReadingData:
+      type: object
+      properties:
+        value:
+          description: Interger value for Temperature or String date/time for Sunrise or Sunset
+        qualityCheck:
+          type:
+          - string
+          - 'null'
+          description: 'The quality check status of the data. Can contain multiple values which would be comma separated. Available values: Pass, DataMissing, DataNotCurrent'
+          example: Pass
+      additionalProperties: false
+      description: Metric data for a specific weather reading

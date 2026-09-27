@@ -92,23 +92,16 @@ paths:
       - Historical
 components:
   schemas:
-    PageInfo:
+    200-OK-Historical-Net-Scheduled-InterchangeResponse-json:
       type: object
       properties:
-        pageNumber:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int64
-        lastPage:
-          type: boolean
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/HistoricalNetScheduledInterchange'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
     TimeInterval:
       type: object
       properties:
@@ -133,6 +126,23 @@ components:
           type: string
           description: 'Short hand value for time interval. Can be timestamp for 5min resolution (ex: 2023-06-28 00:00:00.000), hour ending value for hourly resolution, 1-24 (ex: 21), or date string for daily (ex: 2023-06-28). In Eastern Standard Time (UTC−05:00).'
           example: '2023-06-29'
+    PageInfo:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+        lastPage:
+          type: boolean
     HistoricalNetScheduledInterchange:
       type: object
       properties:
@@ -142,16 +152,6 @@ components:
           type: string
         nsi:
           type: number
-    200-OK-Historical-Net-Scheduled-InterchangeResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/HistoricalNetScheduledInterchange'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
   securitySchemes:
     apiKeyHeader:
       type: apiKey

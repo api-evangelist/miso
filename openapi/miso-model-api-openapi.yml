@@ -65,25 +65,6 @@ paths:
       x-summary-source: derived
 components:
   responses:
-    InternalErrorApiResponse:
-      description: Internal error occurred, details in server-side logs.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Internal error message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
     NotFoundApiResponse:
       description: Resource not found. The path provided does not point to an entity in the system.
       content:
@@ -98,25 +79,6 @@ components:
                 msgId: MESSAGE_ID
                 params: []
                 userMsg: Not found message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    UnauthorizedApiResponse:
-      description: Rejected due to insufficient permissions.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Unauthorized message for MESSAGE_ID.
             transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
             transactionTime: '2020-07-02T17:45:00-05:00'
       headers:
@@ -141,6 +103,59 @@ components:
       headers:
         http-x-request-id:
           $ref: '#/components/headers/http-x-request-id'
+    InternalErrorApiResponse:
+      description: Internal error occurred, details in server-side logs.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Internal error message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    UnauthorizedApiResponse:
+      description: Rejected due to insufficient permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Unauthorized message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+  parameters:
+    x-acting-participant:
+      in: header
+      name: x-acting-participant
+      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
+      schema:
+        type: string
+      example: MP
+  headers:
+    http-x-request-id:
+      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
+      schema:
+        type: string
+        format: guid
+      example: 34571c664e48ca0b1e30d7ffb9b3b287
   schemas:
     MarketOperatingDayNullable:
       description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
@@ -149,6 +164,50 @@ components:
       - 'null'
       format: date
       example: '2019-03-14'
+    ContextFilter:
+      description: Context filter for the report.
+      type: string
+      enum:
+      - System
+      - Portfolio
+      - FinSched
+      - Supply
+      - DemandBid
+      - VirtualBid
+      - VirtualOffer
+      - Lmp
+      example: System
+    MarketOperatingDay:
+      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
+      type: string
+      format: date
+      example: '2019-03-14'
+    PNodeName:
+      description: Commercial Pricing Node (PNode) name.
+      type: string
+      minLength: 1
+      maxLength: 30
+      example: PNODE1
+    PNodeList:
+      description: List of active pnodes.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDayNullable'
+        pnodes:
+          description: Pricing nodes in the report.
+          type: array
+          items:
+            type: object
+            properties:
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
+              pnodeType:
+                type: string
+                example: A
+      required:
+      - day
+      - pnodes
     APIResponse:
       description: General container for API response.
       type: object
@@ -209,37 +268,6 @@ components:
           description: The time at which the transaction was received by the system.
           type: string
           format: date-time
-    PNodeName:
-      description: Commercial Pricing Node (PNode) name.
-      type: string
-      minLength: 1
-      maxLength: 30
-      example: PNODE1
-    PNodeList:
-      description: List of active pnodes.
-      type: object
-      properties:
-        day:
-          $ref: '#/components/schemas/MarketOperatingDayNullable'
-        pnodes:
-          description: Pricing nodes in the report.
-          type: array
-          items:
-            type: object
-            properties:
-              pnodeName:
-                $ref: '#/components/schemas/PNodeName'
-              pnodeType:
-                type: string
-                example: A
-      required:
-      - day
-      - pnodes
-    MarketOperatingDay:
-      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
-      type: string
-      format: date
-      example: '2019-03-14'
     SortByFilter:
       description: SortBy filter for the report.
       type: string
@@ -247,31 +275,3 @@ components:
       - Name
       - Type
       example: Name
-    ContextFilter:
-      description: Context filter for the report.
-      type: string
-      enum:
-      - System
-      - Portfolio
-      - FinSched
-      - Supply
-      - DemandBid
-      - VirtualBid
-      - VirtualOffer
-      - Lmp
-      example: System
-  parameters:
-    x-acting-participant:
-      in: header
-      name: x-acting-participant
-      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
-      schema:
-        type: string
-      example: MP
-  headers:
-    http-x-request-id:
-      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
-      schema:
-        type: string
-        format: guid
-      example: 34571c664e48ca0b1e30d7ffb9b3b287

@@ -1323,147 +1323,6 @@ paths:
     - url: https://apim.misoenergy.org/pricing
 components:
   schemas:
-    Region:
-      enum:
-      - NORTH
-      - CENTRAL
-      - SOUTH
-      - MISO
-      - NO_REGION
-      type: string
-    RealTimeOutage:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        realTime:
-          type: number
-          description: The approved (planned) outages (in megawatts) used in the real-time market.
-        forward:
-          type: number
-          description: The approved (planned) outages (in megawatts) used in the Forward Reliability Assessment & Commitment (FRAC) process.
-        delta:
-          type: number
-          description: The difference between the forward and real-time values.
-        interval:
-          type: string
-    200-OK-Offer-GenerationResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferGeneration'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    200-OK-Real-Time-OutageResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RealTimeOutage'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    200-OK-Committed-GenerationResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommittedGeneration'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    200-OK-RtGenerationFuelOnTheMarginResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RealTimeGenerationFuelMargin'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    RealTimeDemand:
-      type: object
-      properties:
-        interval:
-          type: string
-        demand:
-          type: number
-    FuelType:
-      type: object
-      properties:
-        coal:
-          type: number
-        gas:
-          type: number
-        nuclear:
-          type: number
-        water:
-          type: number
-        wind:
-          type: number
-        solar:
-          type: number
-        other:
-          type: number
-        storage:
-          type: number
-    200-OK-RealTime-DemandResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RealTimeDemand'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    RealTimeNetScheduledInterchange:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        nsiForward:
-          type: number
-          description: The net scheduled interchange (in megawatts) as used in the Forward Reliability Assessment Commitment (FRAC) process.
-        nsiRealTime:
-          type: number
-          description: The net scheduled interchange (in megawatts) as used in the real-time market.
-        nsiDelta:
-          type: number
-          description: The difference between the forward and real-time values.
-    PageInfo:
-      type: object
-      properties:
-        pageNumber:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int64
-        lastPage:
-          type: boolean
-    200-OK-LoadResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Load'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
     200-OK-Generation-Fuel-TypeResponse-json:
       type: object
       properties:
@@ -1474,32 +1333,6 @@ components:
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true
-    200-OK-Gen-ClearedResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/GenerationCleared'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    GenerationCleared:
-      type: object
-      properties:
-        generation:
-          type: number
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-    DemandEst:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        zone:
-          type: string
-        demand:
-          type: number
     CommittedGeneration:
       type: object
       properties:
@@ -1514,53 +1347,37 @@ components:
         committedEcoMaxDelta:
           type: number
           description: The difference between the forward and real-time values.
-    200-OK-Demand-EstResponse-json:
+    RealTimeNetScheduledInterchange:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        nsiForward:
+          type: number
+          description: The net scheduled interchange (in megawatts) as used in the Forward Reliability Assessment Commitment (FRAC) process.
+        nsiRealTime:
+          type: number
+          description: The net scheduled interchange (in megawatts) as used in the real-time market.
+        nsiDelta:
+          type: number
+          description: The difference between the forward and real-time values.
+    GenerationCleared:
+      type: object
+      properties:
+        generation:
+          type: number
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+    200-OK-LoadResponse-json:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/DemandEst'
+            $ref: '#/components/schemas/Load'
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true
-    OfferGeneration:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        offerForwardEcoMax:
-          type: number
-          description: The economic maximum (in megawatts) from unit offers available to the Forward Reliability Assessment & Commitment (FRAC) process.
-        offerRealTimeEcoMax:
-          type: number
-          description: The economic maximum (in megawatts) from unit offers available to the real-time market.
-        offerEcoMaxDelta:
-          type: number
-          description: The difference between the forward and real-time values.
-    RealTimeGenerationFuelMargin:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        peak:
-          type: boolean
-        region:
-          $ref: '#/components/schemas/Region'
-        fuelType:
-          type: string
-        unitCount:
-          type: integer
-          format: int32
-    RealTimeBindingConstraints:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        constraintCount:
-          type: number
-        interval:
-          type: string
     GenerationFuelType:
       type: object
       properties:
@@ -1598,6 +1415,59 @@ components:
           type: string
           description: 'Short hand value for time interval. Can be timestamp for 5min resolution (ex: 2023-06-28 00:00:00.000), hour ending value for hourly resolution, 1-24 (ex: 21), or date string for daily (ex: 2023-06-28). In Eastern Standard Time (UTC−05:00).'
           example: '2023-06-29'
+    NetActualInterchange:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        adjacentBa:
+          type: string
+        nai:
+          type: number
+    Region:
+      enum:
+      - NORTH
+      - CENTRAL
+      - SOUTH
+      - MISO
+      - NO_REGION
+      type: string
+    200-OK-Offer-GenerationResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferGeneration'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    RealTimeBindingConstraints:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        constraintCount:
+          type: number
+        interval:
+          type: string
+    200-OK-RtGenerationFuelOnTheMarginResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeGenerationFuelMargin'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    RealTimeDemand:
+      type: object
+      properties:
+        interval:
+          type: string
+        demand:
+          type: number
     200-OK-Real-Time-BindingConstraintsResponse-json:
       type: object
       properties:
@@ -1605,6 +1475,85 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RealTimeBindingConstraints'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-RealTime-DemandResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeDemand'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-Committed-GenerationResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommittedGeneration'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    RealTimeGenerationFuelMargin:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        peak:
+          type: boolean
+        region:
+          $ref: '#/components/schemas/Region'
+        fuelType:
+          type: string
+        unitCount:
+          type: integer
+          format: int32
+    RealTimeOutage:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        realTime:
+          type: number
+          description: The approved (planned) outages (in megawatts) used in the real-time market.
+        forward:
+          type: number
+          description: The approved (planned) outages (in megawatts) used in the Forward Reliability Assessment & Commitment (FRAC) process.
+        delta:
+          type: number
+          description: The difference between the forward and real-time values.
+        interval:
+          type: string
+    FuelType:
+      type: object
+      properties:
+        coal:
+          type: number
+        gas:
+          type: number
+        nuclear:
+          type: number
+        water:
+          type: number
+        wind:
+          type: number
+        solar:
+          type: number
+        other:
+          type: number
+        storage:
+          type: number
+    200-OK-Real-Time-Net-Scheduled-InterchangeResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeNetScheduledInterchange'
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true
@@ -1618,25 +1567,66 @@ components:
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true
-    NetActualInterchange:
+    OfferGeneration:
       type: object
       properties:
         timeInterval:
           $ref: '#/components/schemas/TimeInterval'
-        adjacentBa:
-          type: string
-        nai:
+        offerForwardEcoMax:
           type: number
-    200-OK-Real-Time-Net-Scheduled-InterchangeResponse-json:
+          description: The economic maximum (in megawatts) from unit offers available to the Forward Reliability Assessment & Commitment (FRAC) process.
+        offerRealTimeEcoMax:
+          type: number
+          description: The economic maximum (in megawatts) from unit offers available to the real-time market.
+        offerEcoMaxDelta:
+          type: number
+          description: The difference between the forward and real-time values.
+    DemandEst:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        zone:
+          type: string
+        demand:
+          type: number
+    200-OK-Real-Time-OutageResponse-json:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/RealTimeNetScheduledInterchange'
+            $ref: '#/components/schemas/RealTimeOutage'
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true
+    200-OK-Demand-EstResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DemandEst'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    PageInfo:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+        lastPage:
+          type: boolean
     Load:
       type: object
       properties:
@@ -1653,23 +1643,13 @@ components:
         load:
           type: number
           example: 1349.2
-    200-OK-LMPResponse-json:
+    200-OK-Gen-ClearedResponse-json:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/LocationalMarginalPrice'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    200-OK-RTMCPResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RealTimeExPostMarketClearingPrice'
+            $ref: '#/components/schemas/GenerationCleared'
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true
@@ -1701,6 +1681,31 @@ components:
           example: 6.48
         timeInterval:
           $ref: '#/components/schemas/TimeInterval'
+    200-OK-RTLMPResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeExPostLocationalMarginalPrice'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    PreliminaryFinalEnum:
+      enum:
+      - Preliminary
+      - Final
+      type: string
+    200-OK-RTMCPResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RealTimeExPostMarketClearingPrice'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
     MarketClearingPrice:
       type: object
       properties:
@@ -1727,13 +1732,13 @@ components:
           type: number
           description: Market Clearing Price
           example: 6.48
-    200-OK-RTLMPResponse-json:
+    200-OK-MCPResponse-json:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/RealTimeExPostLocationalMarginalPrice'
+            $ref: '#/components/schemas/MarketClearingPrice'
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true
@@ -1765,11 +1770,16 @@ components:
           type: number
           description: Marginal Losses Component
           example: 0.64
-    PreliminaryFinalEnum:
-      enum:
-      - Preliminary
-      - Final
-      type: string
+    200-OK-LMPResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationalMarginalPrice'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
     RealTimeExPostLocationalMarginalPrice:
       type: object
       properties:
@@ -1800,16 +1810,6 @@ components:
           type: number
           description: Marginal Losses Component
           example: 0.64
-    200-OK-MCPResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/MarketClearingPrice'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
   securitySchemes:
     apiKeyHeader:
       type: apiKey

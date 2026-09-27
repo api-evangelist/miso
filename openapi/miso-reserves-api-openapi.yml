@@ -229,92 +229,28 @@ paths:
       summary: Get real time ramp cap req
       x-summary-source: derived
 components:
-  responses:
-    UnauthorizedApiResponse:
-      description: Rejected due to insufficient permissions.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Unauthorized message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    NotFoundApiResponse:
-      description: Resource not found. The path provided does not point to an entity in the system.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Not found message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    InternalErrorApiResponse:
-      description: Internal error occurred, details in server-side logs.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Internal error message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    BadRequestApiResponse:
-      description: User error. Request was invalid for some reason. See response for details.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Bad request message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
   schemas:
-    ZonalDemandCurveType:
-      description: Type of zonal demand curve.
-      type: string
-      enum:
-      - Operating
-      - Regulation
-      - Regulation-Spinning
-      example: Operating
+    DemandCurveSegments:
+      description: Demand curve segments.
+      type: array
+      items:
+        type: object
+        properties:
+          mw:
+            $ref: '#/components/schemas/RealEnergyDemandCurve'
+          price:
+            $ref: '#/components/schemas/MarketPrice'
+        required:
+        - mw
+        - price
+    RealEnergyDemandCurve:
+      description: Specifies the MW value on the curve as a decimal value of up to 11 digits with four decimal precision.  Can contain a MW (fixed) or Percentage (variable) breakpoint.
+      type: number
+      format: realenergy
+      multipleOf: 0.0001
+      minimum: -9999999.9999
+      maximum: 9999999.9999
+      example: 120001.1234
     RampCapabilityRequirementsHourly:
       description: Hourly Ramp Capability Requirements.
       type: object
@@ -335,6 +271,143 @@ components:
       required:
       - day
       - rampCapabilityRequirementsHourly
+    ZonalDemandCurveType:
+      description: Type of zonal demand curve.
+      type: string
+      enum:
+      - Operating
+      - Regulation
+      - Regulation-Spinning
+      example: Operating
+    RampCapabilityRequirementsInterval5s:
+      description: Ramp Capability Requirements for 5 minute intervals.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        rampCapabilityRequirementsInterval5s:
+          type: array
+          items:
+            type: object
+            properties:
+              interval5:
+                $ref: '#/components/schemas/MarketIntervalLabel'
+              rampCapabilityUpRequirement:
+                $ref: '#/components/schemas/RealEnergyNullable'
+              rampCapabilityDownRequirement:
+                $ref: '#/components/schemas/RealEnergyNullable'
+      required:
+      - day
+      - rampCapabilityRequirementsInterval5s
+    MarketWideDemandCurves:
+      description: Market Wide Demand Curves.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        marketDemandCurves:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              demandCurveType:
+                $ref: '#/components/schemas/MarketWideDemandCurveType'
+              demandCurveSegments:
+                $ref: '#/components/schemas/DemandCurveSegments'
+            required:
+            - demandCurveType
+            - demandCurveSegments
+      required:
+      - day
+      - marketDemandCurves
+    RealEnergyNullable:
+      description: Used to represent real energy values submitted to the market. Nullable added to allow for data driven delete behaviour.
+      type:
+      - number
+      - 'null'
+      format: realenergy
+      multipleOf: 0.1
+      minimum: -9.99999999E7
+      maximum: 9.99999999E7
+      example: 1200.7
+    MarketOperatingDay:
+      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
+      type: string
+      format: date
+      example: '2019-03-14'
+    ZonalDemandReqsResults:
+      description: Zonal Regulation and Contingency Reserve Requirements.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        zonalDemandRequirements:
+          type: array
+          items:
+            type: object
+            properties:
+              zone:
+                $ref: '#/components/schemas/ReserveZone'
+              zonalDemandRequirementsHourly:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    hour:
+                      $ref: '#/components/schemas/HourLabel'
+                    regReserveRequirement:
+                      $ref: '#/components/schemas/RealEnergyResults'
+                    spinReserveRequirement:
+                      $ref: '#/components/schemas/RealEnergyResults'
+                    suppReserveRequirement:
+                      $ref: '#/components/schemas/RealEnergyResults'
+      required:
+      - day
+      - zonalDemandRequirements
+    HourLabel:
+      description: Hour ending label. Represents an hour segment of time.
+      type: integer
+      minimum: 1
+      maximum: 24
+      example: 1
+    MarketWideDemandReqsResults:
+      description: market wide demand requirements results.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        demandRequirementsHourly:
+          type: array
+          items:
+            type: object
+            properties:
+              hour:
+                $ref: '#/components/schemas/HourLabel'
+              regReserveRequirement:
+                $ref: '#/components/schemas/RealEnergyResults'
+              spinReserveRequirement:
+                $ref: '#/components/schemas/RealEnergyResults'
+              suppReserveRequirement:
+                $ref: '#/components/schemas/RealEnergyResults'
+              shortTermReserveRequirement:
+                $ref: '#/components/schemas/RealEnergyResults'
+      required:
+      - day
+      - demandRequirementsHourly
+    MarketPrice:
+      description: General type for all market prices.
+      format: money
+      type: number
+      multipleOf: 0.01
+      minimum: -9999.99
+      maximum: 9999.99
+      example: 34.91
+    MarketIntervalLabel:
+      description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data.
+      type: string
+      format: date-time
+      example: '2019-03-14T14:50:00-05:00'
     ReserveZone:
       description: Used to represent a reserve zone.
       type: number
@@ -366,29 +439,6 @@ components:
       required:
       - day
       - zonalDemandCurves
-    RealEnergyDemandCurve:
-      description: Specifies the MW value on the curve as a decimal value of up to 11 digits with four decimal precision.  Can contain a MW (fixed) or Percentage (variable) breakpoint.
-      type: number
-      format: realenergy
-      multipleOf: 0.0001
-      minimum: -9999999.9999
-      maximum: 9999999.9999
-      example: 120001.1234
-    RealEnergyNullable:
-      description: Used to represent real energy values submitted to the market. Nullable added to allow for data driven delete behaviour.
-      type:
-      - number
-      - 'null'
-      format: realenergy
-      multipleOf: 0.1
-      minimum: -9.99999999E7
-      maximum: 9.99999999E7
-      example: 1200.7
-    MarketOperatingDay:
-      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
-      type: string
-      format: date
-      example: '2019-03-14'
     MarketWideDemandCurveType:
       description: Type of market wide demand curve.
       type: string
@@ -400,95 +450,14 @@ components:
       - RampCapability-Down
       - ShortTermReserve
       example: Operating
-    MarketWideDemandCurves:
-      description: Market Wide Demand Curves.
-      type: object
-      properties:
-        day:
-          $ref: '#/components/schemas/MarketOperatingDay'
-        marketDemandCurves:
-          type: array
-          items:
-            type: object
-            additionalProperties: false
-            properties:
-              demandCurveType:
-                $ref: '#/components/schemas/MarketWideDemandCurveType'
-              demandCurveSegments:
-                $ref: '#/components/schemas/DemandCurveSegments'
-            required:
-            - demandCurveType
-            - demandCurveSegments
-      required:
-      - day
-      - marketDemandCurves
-    ZonalDemandReqsResults:
-      description: Zonal Regulation and Contingency Reserve Requirements.
-      type: object
-      properties:
-        day:
-          $ref: '#/components/schemas/MarketOperatingDay'
-        zonalDemandRequirements:
-          type: array
-          items:
-            type: object
-            properties:
-              zone:
-                $ref: '#/components/schemas/ReserveZone'
-              zonalDemandRequirementsHourly:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    hour:
-                      $ref: '#/components/schemas/HourLabel'
-                    regReserveRequirement:
-                      $ref: '#/components/schemas/RealEnergyResults'
-                    spinReserveRequirement:
-                      $ref: '#/components/schemas/RealEnergyResults'
-                    suppReserveRequirement:
-                      $ref: '#/components/schemas/RealEnergyResults'
-      required:
-      - day
-      - zonalDemandRequirements
-    MarketPrice:
-      description: General type for all market prices.
-      format: money
+    RealEnergyResults:
+      description: Used to represent real energy values in market outcomes. Historically simliar to 'MWType'.
       type: number
-      multipleOf: 0.01
-      minimum: -9999.99
-      maximum: 9999.99
-      example: 34.91
-    MarketWideDemandReqsResults:
-      description: market wide demand requirements results.
-      type: object
-      properties:
-        day:
-          $ref: '#/components/schemas/MarketOperatingDay'
-        demandRequirementsHourly:
-          type: array
-          items:
-            type: object
-            properties:
-              hour:
-                $ref: '#/components/schemas/HourLabel'
-              regReserveRequirement:
-                $ref: '#/components/schemas/RealEnergyResults'
-              spinReserveRequirement:
-                $ref: '#/components/schemas/RealEnergyResults'
-              suppReserveRequirement:
-                $ref: '#/components/schemas/RealEnergyResults'
-              shortTermReserveRequirement:
-                $ref: '#/components/schemas/RealEnergyResults'
-      required:
-      - day
-      - demandRequirementsHourly
-    HourLabel:
-      description: Hour ending label. Represents an hour segment of time.
-      type: integer
-      minimum: 1
-      maximum: 24
-      example: 1
+      format: realenergy
+      multipleOf: 0.1
+      minimum: -9.99999999E7
+      maximum: 9.99999999E7
+      example: 120001.7
     APIResponse:
       description: General container for API response.
       type: object
@@ -549,53 +518,98 @@ components:
           description: The time at which the transaction was received by the system.
           type: string
           format: date-time
-    MarketIntervalLabel:
-      description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data.
-      type: string
-      format: date-time
-      example: '2019-03-14T14:50:00-05:00'
-    DemandCurveSegments:
-      description: Demand curve segments.
-      type: array
-      items:
-        type: object
-        properties:
-          mw:
-            $ref: '#/components/schemas/RealEnergyDemandCurve'
-          price:
-            $ref: '#/components/schemas/MarketPrice'
-        required:
-        - mw
-        - price
-    RampCapabilityRequirementsInterval5s:
-      description: Ramp Capability Requirements for 5 minute intervals.
-      type: object
-      properties:
-        day:
-          $ref: '#/components/schemas/MarketOperatingDay'
-        rampCapabilityRequirementsInterval5s:
-          type: array
-          items:
-            type: object
-            properties:
-              interval5:
-                $ref: '#/components/schemas/MarketIntervalLabel'
-              rampCapabilityUpRequirement:
-                $ref: '#/components/schemas/RealEnergyNullable'
-              rampCapabilityDownRequirement:
-                $ref: '#/components/schemas/RealEnergyNullable'
-      required:
-      - day
-      - rampCapabilityRequirementsInterval5s
-    RealEnergyResults:
-      description: Used to represent real energy values in market outcomes. Historically simliar to 'MWType'.
-      type: number
-      format: realenergy
-      multipleOf: 0.1
-      minimum: -9.99999999E7
-      maximum: 9.99999999E7
-      example: 120001.7
+  headers:
+    http-x-request-id:
+      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
+      schema:
+        type: string
+        format: guid
+      example: 34571c664e48ca0b1e30d7ffb9b3b287
+  responses:
+    NotFoundApiResponse:
+      description: Resource not found. The path provided does not point to an entity in the system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Not found message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    InternalErrorApiResponse:
+      description: Internal error occurred, details in server-side logs.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Internal error message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    BadRequestApiResponse:
+      description: User error. Request was invalid for some reason. See response for details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Bad request message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    UnauthorizedApiResponse:
+      description: Rejected due to insufficient permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Unauthorized message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
   parameters:
+    x-acting-participant:
+      in: header
+      name: x-acting-participant
+      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
+      schema:
+        type: string
+      example: MP
     Hour:
       in: query
       name: hour
@@ -610,17 +624,3 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/MarketOperatingDay'
-    x-acting-participant:
-      in: header
-      name: x-acting-participant
-      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
-      schema:
-        type: string
-      example: MP
-  headers:
-    http-x-request-id:
-      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
-      schema:
-        type: string
-        format: guid
-      example: 34571c664e48ca0b1e30d7ffb9b3b287

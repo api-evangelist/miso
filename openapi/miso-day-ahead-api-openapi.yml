@@ -886,16 +886,15 @@ paths:
     - url: https://apim.misoenergy.org/pricing
 components:
   schemas:
-    ClearedGeneration:
+    DayAheadNetScheduledInterchange:
       type: object
       properties:
         timeInterval:
           $ref: '#/components/schemas/TimeInterval'
         region:
           $ref: '#/components/schemas/Region'
-        supply:
+        nsi:
           type: number
-          description: Total supply cleared (in megawatts) based on physical or virtual offers.
     Region:
       enum:
       - NORTH
@@ -904,6 +903,26 @@ components:
       - MISO
       - NO_REGION
       type: string
+    200-OK-Day-Ahead-Net-Scheduled-InterchangeResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DayAheadNetScheduledInterchange'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-Generation-Fuel-TypeResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerationFuelType'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
     PageInfo:
       type: object
       properties:
@@ -921,6 +940,26 @@ components:
           format: int64
         lastPage:
           type: boolean
+    200-OK-Cleared-GenerationResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClearedGeneration'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-DayAhead-DemandResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DayAheadDemand'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
     GenerationFuelType:
       type: object
       properties:
@@ -934,16 +973,51 @@ components:
           type: number
         interval:
           type: string
-    200-OK-Generation-Fuel-TypeResponse-json:
+    FuelType:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/GenerationFuelType'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
+        coal:
+          type: number
+        gas:
+          type: number
+        nuclear:
+          type: number
+        water:
+          type: number
+        wind:
+          type: number
+        solar:
+          type: number
+        other:
+          type: number
+        storage:
+          type: number
+    OfferedGeneration:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          $ref: '#/components/schemas/Region'
+        mustRun:
+          type: number
+          description: The economic minimum/maximum (in megawatts) offered by generators with the must run commit status in the day-ahead market.
+        economic:
+          type: number
+          description: The economic minimum/maximum (in megawatts) offered by generators as economic in the day-ahead market.
+        emergency:
+          type: number
+          description: The economic minimum/maximum (in megawatts) offered by generators as emergency in the day-ahead market.
+    ClearedGeneration:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          $ref: '#/components/schemas/Region'
+        supply:
+          type: number
+          description: Total supply cleared (in megawatts) based on physical or virtual offers.
     TimeInterval:
       type: object
       properties:
@@ -968,90 +1042,6 @@ components:
           type: string
           description: 'Short hand value for time interval. Can be timestamp for 5min resolution (ex: 2023-06-28 00:00:00.000), hour ending value for hourly resolution, 1-24 (ex: 21), or date string for daily (ex: 2023-06-28). In Eastern Standard Time (UTC−05:00).'
           example: '2023-06-29'
-    OfferedGeneration:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        region:
-          $ref: '#/components/schemas/Region'
-        mustRun:
-          type: number
-          description: The economic minimum/maximum (in megawatts) offered by generators with the must run commit status in the day-ahead market.
-        economic:
-          type: number
-          description: The economic minimum/maximum (in megawatts) offered by generators as economic in the day-ahead market.
-        emergency:
-          type: number
-          description: The economic minimum/maximum (in megawatts) offered by generators as emergency in the day-ahead market.
-    FuelType:
-      type: object
-      properties:
-        coal:
-          type: number
-        gas:
-          type: number
-        nuclear:
-          type: number
-        water:
-          type: number
-        wind:
-          type: number
-        solar:
-          type: number
-        other:
-          type: number
-        storage:
-          type: number
-    DayAheadNetScheduledInterchange:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        region:
-          $ref: '#/components/schemas/Region'
-        nsi:
-          type: number
-    200-OK-Day-Ahead-Net-Scheduled-InterchangeResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DayAheadNetScheduledInterchange'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    200-OK-Offered-GenerationResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/OfferedGeneration'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    200-OK-Cleared-GenerationResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClearedGeneration'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    200-OK-DayAhead-DemandResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DayAheadDemand'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
     DayAheadDemand:
       type: object
       properties:
@@ -1068,13 +1058,13 @@ components:
         virtual:
           type: number
           description: Total demand cleared (in megawatts) based on virtual bids.
-    200-OK-LMPResponse-json:
+    200-OK-Offered-GenerationResponse-json:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/LocationalMarginalPrice'
+            $ref: '#/components/schemas/OfferedGeneration'
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true
@@ -1104,6 +1094,16 @@ components:
           type: number
           description: Market Clearing Price
           example: 6.48
+    200-OK-MCPResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/MarketClearingPrice'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
     LocationalMarginalPrice:
       type: object
       properties:
@@ -1132,13 +1132,13 @@ components:
           type: number
           description: Marginal Losses Component
           example: 0.64
-    200-OK-MCPResponse-json:
+    200-OK-LMPResponse-json:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/MarketClearingPrice'
+            $ref: '#/components/schemas/LocationalMarginalPrice'
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true

@@ -259,120 +259,29 @@ paths:
       summary: Post bilateral contracts schedules approval
       x-summary-source: derived
 components:
-  headers:
-    http-x-request-id:
-      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
-      schema:
-        type: string
-        format: guid
-      example: 34571c664e48ca0b1e30d7ffb9b3b287
-  parameters:
-    Participant:
-      in: path
-      name: participantName
-      description: The NERC ID of asset owner specified in the path for a collection resource.
-      required: true
-      schema:
-        $ref: '#/components/schemas/ParticipantName'
-    x-acting-participant:
-      in: header
-      name: x-acting-participant
-      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
-      schema:
-        type: string
-      example: MP
-  responses:
-    UnauthorizedApiResponse:
-      description: Rejected due to insufficient permissions.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Unauthorized message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    OkApiResponse:
-      description: Successful operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses: []
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    NotFoundApiResponse:
-      description: Resource not found. The path provided does not point to an entity in the system.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Not found message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    InternalErrorApiResponse:
-      description: Internal error occurred, details in server-side logs.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Internal error message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    BadRequestApiResponse:
-      description: User error. Request was invalid for some reason. See response for details.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Bad request message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
   schemas:
+    MarketIntervalLabelNullable:
+      description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data with null indicating unset.
+      type:
+      - string
+      - 'null'
+      format: date-time
+      example: '2019-03-14T14:50:00-05:00'
+    ParticipantName:
+      description: Market participant name.
+      type: string
+      minLength: 1
+      maxLength: 40
+      example: MP
+    CongestionLossesType:
+      description: The type of loss for the contract.
+      type:
+      - string
+      - 'null'
+      enum:
+      - SellerPays
+      - BuyerPays
+      - null
     Contracts:
       description: An object containing multiple contracts.
       type: object
@@ -436,191 +345,12 @@ components:
             - settlementMarket
       required:
       - contracts
-    ContractType:
-      description: The type of contract established between two participants.
-      type: string
-      enum:
-      - PureFinancial
-      - GrandFathered
-      - PseudoTie
     SettlementMarketType:
       description: The type of settlement the market will use to handle the contract.
       type: string
       enum:
       - day-ahead
       - real-time
-    CongestionLossesType:
-      description: The type of loss for the contract.
-      type:
-      - string
-      - 'null'
-      enum:
-      - SellerPays
-      - BuyerPays
-      - null
-    ContractName:
-      description: Bilateral contract name.
-      type: string
-      minLength: 1
-      maxLength: 50
-      example: Test Contract
-    ParticipantName:
-      description: Market participant name.
-      type: string
-      minLength: 1
-      maxLength: 40
-      example: MP
-    MarketOperatingDay:
-      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
-      type: string
-      format: date
-      example: '2019-03-14'
-    MarketIntervalLabelNullable:
-      description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data with null indicating unset.
-      type:
-      - string
-      - 'null'
-      format: date-time
-      example: '2019-03-14T14:50:00-05:00'
-    ScheduleApprovalType:
-      description: The type of approval required for the contract.
-      type: string
-      enum:
-      - SellerAutoApproval
-      - BuyerAutoApproval
-      - CounterpartyApproval
-    ContractSchedules:
-      description: A filtered collection of individual schedules for a specific contract or participant.
-      type: object
-      properties:
-        schedules:
-          description: Individual schedule for a specific contract or participant.
-          type: array
-          minItems: 0
-          items:
-            type: object
-            properties:
-              contractName:
-                $ref: '#/components/schemas/ContractName'
-              contractType:
-                $ref: '#/components/schemas/ContractType'
-              buyerName:
-                $ref: '#/components/schemas/ParticipantName'
-              sellerName:
-                $ref: '#/components/schemas/ParticipantName'
-              scheduleDay:
-                $ref: '#/components/schemas/MarketOperatingDay'
-              scheduleApproval:
-                $ref: '#/components/schemas/MarketIntervalLabelNullable'
-              scheduleState:
-                type: string
-                enum:
-                - Approved
-                - Pending
-              hours:
-                description: Collection of schedule on an hourly basis.
-                type: array
-                minItems: 24
-                maxItems: 24
-                items:
-                  type: object
-                  properties:
-                    hour:
-                      $ref: '#/components/schemas/HourLabel'
-                    mw:
-                      $ref: '#/components/schemas/RealEnergyResults'
-                  required:
-                  - hour
-                  - mw
-            required:
-            - contractName
-            - contractType
-            - buyerName
-            - sellerName
-            - scheduleDay
-            - hours
-      required:
-      - schedules
-    HourLabel:
-      description: Hour ending label. Represents an hour segment of time.
-      type: integer
-      minimum: 1
-      maximum: 24
-      example: 1
-    APIResponse:
-      description: General container for API response.
-      type: object
-      properties:
-        action:
-          description: A general action code summary of the result. HTTP status codes will be applied that match. These indicate the type of operation that was done (or not). Note, some APIs use REST verbiage like created/updated/deleted while others use submit/query.
-          enum:
-          - CREATED
-          - UPDATED
-          - DELETED
-          - CREATE_FAILED
-          - UPDATE_FAILED
-          - DELETE_FAILED
-          - GET_FAILED
-          - SUBMITTED
-          - SUBMIT_FAILED
-          - QUERY
-          - QUERY_FAILED
-        responses:
-          description: List of responses in case multiple resources are modified, or general errors that are not resource specific.
-          type: array
-          minItems: 0
-          items:
-            description: A single response which may contain multiple messages, both error and warning, per response.
-            type: object
-            properties:
-              messages:
-                description: List of warnings and errors resulting from the command.
-                type: array
-                minItems: 0
-                items:
-                  description: An individual warning or error message.  Designed to be either localized or categorized as an event.
-                  type: object
-                  properties:
-                    level:
-                      description: An indication of severity of the message.
-                      type: string
-                      enum:
-                      - ERROR
-                      - WARNING
-                      - INFO
-                    msgId:
-                      description: A categorized ID for this message, identifying it as a particular type of event. Useful for checking for specific errors, or localization.
-                      type: string
-                    params:
-                      description: Ordered list of parameter values for the message.
-                      type: array
-                      items:
-                        type: string
-                    userMsg:
-                      description: The message, fully rendered in the default locale on the service side.
-                      type: string
-        transactionId:
-          description: Unique identifier for the transaction which can be queried at a later date. Identifier is a GUID represented without hyphens. Only returned for submissions and errors though all calls generate a transaction ID that is returned in the http-x-request-id response header.
-          type: string
-          format: guid
-        transactionTime:
-          description: The time at which the transaction was received by the system.
-          type: string
-          format: date-time
-    PNodeName:
-      description: Commercial Pricing Node (PNode) name.
-      type: string
-      minLength: 1
-      maxLength: 30
-      example: PNODE1
-    RealEnergyResults:
-      description: Used to represent real energy values in market outcomes. Historically simliar to 'MWType'.
-      type: number
-      format: realenergy
-      multipleOf: 0.1
-      minimum: -9.99999999E7
-      maximum: 9.99999999E7
-      example: 120001.7
     BilateralConfirmation:
       description: An object for describing payloads that contain more than one schedule confirmations and/or contract confirmations.
       type: object
@@ -681,3 +411,273 @@ components:
                 enum:
                 - Confirm
       additionalProperties: false
+    ContractName:
+      description: Bilateral contract name.
+      type: string
+      minLength: 1
+      maxLength: 50
+      example: Test Contract
+    MarketOperatingDay:
+      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
+      type: string
+      format: date
+      example: '2019-03-14'
+    ContractSchedules:
+      description: A filtered collection of individual schedules for a specific contract or participant.
+      type: object
+      properties:
+        schedules:
+          description: Individual schedule for a specific contract or participant.
+          type: array
+          minItems: 0
+          items:
+            type: object
+            properties:
+              contractName:
+                $ref: '#/components/schemas/ContractName'
+              contractType:
+                $ref: '#/components/schemas/ContractType'
+              buyerName:
+                $ref: '#/components/schemas/ParticipantName'
+              sellerName:
+                $ref: '#/components/schemas/ParticipantName'
+              scheduleDay:
+                $ref: '#/components/schemas/MarketOperatingDay'
+              scheduleApproval:
+                $ref: '#/components/schemas/MarketIntervalLabelNullable'
+              scheduleState:
+                type: string
+                enum:
+                - Approved
+                - Pending
+              hours:
+                description: Collection of schedule on an hourly basis.
+                type: array
+                minItems: 24
+                maxItems: 24
+                items:
+                  type: object
+                  properties:
+                    hour:
+                      $ref: '#/components/schemas/HourLabel'
+                    mw:
+                      $ref: '#/components/schemas/RealEnergyResults'
+                  required:
+                  - hour
+                  - mw
+            required:
+            - contractName
+            - contractType
+            - buyerName
+            - sellerName
+            - scheduleDay
+            - hours
+      required:
+      - schedules
+    ContractType:
+      description: The type of contract established between two participants.
+      type: string
+      enum:
+      - PureFinancial
+      - GrandFathered
+      - PseudoTie
+    HourLabel:
+      description: Hour ending label. Represents an hour segment of time.
+      type: integer
+      minimum: 1
+      maximum: 24
+      example: 1
+    ScheduleApprovalType:
+      description: The type of approval required for the contract.
+      type: string
+      enum:
+      - SellerAutoApproval
+      - BuyerAutoApproval
+      - CounterpartyApproval
+    RealEnergyResults:
+      description: Used to represent real energy values in market outcomes. Historically simliar to 'MWType'.
+      type: number
+      format: realenergy
+      multipleOf: 0.1
+      minimum: -9.99999999E7
+      maximum: 9.99999999E7
+      example: 120001.7
+    PNodeName:
+      description: Commercial Pricing Node (PNode) name.
+      type: string
+      minLength: 1
+      maxLength: 30
+      example: PNODE1
+    APIResponse:
+      description: General container for API response.
+      type: object
+      properties:
+        action:
+          description: A general action code summary of the result. HTTP status codes will be applied that match. These indicate the type of operation that was done (or not). Note, some APIs use REST verbiage like created/updated/deleted while others use submit/query.
+          enum:
+          - CREATED
+          - UPDATED
+          - DELETED
+          - CREATE_FAILED
+          - UPDATE_FAILED
+          - DELETE_FAILED
+          - GET_FAILED
+          - SUBMITTED
+          - SUBMIT_FAILED
+          - QUERY
+          - QUERY_FAILED
+        responses:
+          description: List of responses in case multiple resources are modified, or general errors that are not resource specific.
+          type: array
+          minItems: 0
+          items:
+            description: A single response which may contain multiple messages, both error and warning, per response.
+            type: object
+            properties:
+              messages:
+                description: List of warnings and errors resulting from the command.
+                type: array
+                minItems: 0
+                items:
+                  description: An individual warning or error message.  Designed to be either localized or categorized as an event.
+                  type: object
+                  properties:
+                    level:
+                      description: An indication of severity of the message.
+                      type: string
+                      enum:
+                      - ERROR
+                      - WARNING
+                      - INFO
+                    msgId:
+                      description: A categorized ID for this message, identifying it as a particular type of event. Useful for checking for specific errors, or localization.
+                      type: string
+                    params:
+                      description: Ordered list of parameter values for the message.
+                      type: array
+                      items:
+                        type: string
+                    userMsg:
+                      description: The message, fully rendered in the default locale on the service side.
+                      type: string
+        transactionId:
+          description: Unique identifier for the transaction which can be queried at a later date. Identifier is a GUID represented without hyphens. Only returned for submissions and errors though all calls generate a transaction ID that is returned in the http-x-request-id response header.
+          type: string
+          format: guid
+        transactionTime:
+          description: The time at which the transaction was received by the system.
+          type: string
+          format: date-time
+  headers:
+    http-x-request-id:
+      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
+      schema:
+        type: string
+        format: guid
+      example: 34571c664e48ca0b1e30d7ffb9b3b287
+  responses:
+    NotFoundApiResponse:
+      description: Resource not found. The path provided does not point to an entity in the system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Not found message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    InternalErrorApiResponse:
+      description: Internal error occurred, details in server-side logs.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Internal error message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    OkApiResponse:
+      description: Successful operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses: []
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    BadRequestApiResponse:
+      description: User error. Request was invalid for some reason. See response for details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Bad request message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    UnauthorizedApiResponse:
+      description: Rejected due to insufficient permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Unauthorized message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+  parameters:
+    x-acting-participant:
+      in: header
+      name: x-acting-participant
+      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
+      schema:
+        type: string
+      example: MP
+    Participant:
+      in: path
+      name: participantName
+      description: The NERC ID of asset owner specified in the path for a collection resource.
+      required: true
+      schema:
+        $ref: '#/components/schemas/ParticipantName'
