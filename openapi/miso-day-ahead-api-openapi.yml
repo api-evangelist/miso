@@ -886,80 +886,6 @@ paths:
     - url: https://apim.misoenergy.org/pricing
 components:
   schemas:
-    DayAheadNetScheduledInterchange:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        region:
-          $ref: '#/components/schemas/Region'
-        nsi:
-          type: number
-    Region:
-      enum:
-      - NORTH
-      - CENTRAL
-      - SOUTH
-      - MISO
-      - NO_REGION
-      type: string
-    200-OK-Day-Ahead-Net-Scheduled-InterchangeResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DayAheadNetScheduledInterchange'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    200-OK-Generation-Fuel-TypeResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/GenerationFuelType'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    PageInfo:
-      type: object
-      properties:
-        pageNumber:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int64
-        lastPage:
-          type: boolean
-    200-OK-Cleared-GenerationResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ClearedGeneration'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
-    200-OK-DayAhead-DemandResponse-json:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DayAheadDemand'
-        page:
-          $ref: '#/components/schemas/PageInfo'
-      x-apim-inline: true
     GenerationFuelType:
       type: object
       properties:
@@ -1008,6 +934,61 @@ components:
         emergency:
           type: number
           description: The economic minimum/maximum (in megawatts) offered by generators as emergency in the day-ahead market.
+    DayAheadNetScheduledInterchange:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          $ref: '#/components/schemas/Region'
+        nsi:
+          type: number
+    200-OK-Generation-Fuel-TypeResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenerationFuelType'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-Offered-GenerationResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferedGeneration'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    200-OK-Day-Ahead-Net-Scheduled-InterchangeResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DayAheadNetScheduledInterchange'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    DayAheadDemand:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          $ref: '#/components/schemas/Region'
+        fixed:
+          type: number
+          description: Total demand cleared (in megawatts) based on physical fixed bids.
+        priceSens:
+          type: number
+          description: Total demand cleared (in megawatts) based on physical price sensitive bids.
+        virtual:
+          type: number
+          description: Total demand cleared (in megawatts) based on virtual bids.
     ClearedGeneration:
       type: object
       properties:
@@ -1018,6 +999,23 @@ components:
         supply:
           type: number
           description: Total supply cleared (in megawatts) based on physical or virtual offers.
+    PageInfo:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+        lastPage:
+          type: boolean
     TimeInterval:
       type: object
       properties:
@@ -1042,68 +1040,34 @@ components:
           type: string
           description: 'Short hand value for time interval. Can be timestamp for 5min resolution (ex: 2023-06-28 00:00:00.000), hour ending value for hourly resolution, 1-24 (ex: 21), or date string for daily (ex: 2023-06-28). In Eastern Standard Time (UTC−05:00).'
           example: '2023-06-29'
-    DayAheadDemand:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        region:
-          $ref: '#/components/schemas/Region'
-        fixed:
-          type: number
-          description: Total demand cleared (in megawatts) based on physical fixed bids.
-        priceSens:
-          type: number
-          description: Total demand cleared (in megawatts) based on physical price sensitive bids.
-        virtual:
-          type: number
-          description: Total demand cleared (in megawatts) based on virtual bids.
-    200-OK-Offered-GenerationResponse-json:
+    200-OK-DayAhead-DemandResponse-json:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/OfferedGeneration'
+            $ref: '#/components/schemas/DayAheadDemand'
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true
-    MarketClearingPrice:
-      type: object
-      properties:
-        interval:
-          type: string
-          example: '1'
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        product:
-          enum:
-          - Regulation
-          - Spin
-          - Supplemental
-          - STR
-          - Ramp-up
-          - Ramp-down
-          type: string
-          description: Ancillary Market product
-        zone:
-          type: string
-          description: Ancillary Services Reserve Zone
-          example: Zone 1
-        mcp:
-          type: number
-          description: Market Clearing Price
-          example: 6.48
-    200-OK-MCPResponse-json:
+    200-OK-Cleared-GenerationResponse-json:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/MarketClearingPrice'
+            $ref: '#/components/schemas/ClearedGeneration'
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true
+    Region:
+      enum:
+      - NORTH
+      - CENTRAL
+      - SOUTH
+      - MISO
+      - NO_REGION
+      type: string
     LocationalMarginalPrice:
       type: object
       properties:
@@ -1142,6 +1106,42 @@ components:
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true
+    200-OK-MCPResponse-json:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/MarketClearingPrice'
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      x-apim-inline: true
+    MarketClearingPrice:
+      type: object
+      properties:
+        interval:
+          type: string
+          example: '1'
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        product:
+          enum:
+          - Regulation
+          - Spin
+          - Supplemental
+          - STR
+          - Ramp-up
+          - Ramp-down
+          type: string
+          description: Ancillary Market product
+        zone:
+          type: string
+          description: Ancillary Services Reserve Zone
+          example: Zone 1
+        mcp:
+          type: number
+          description: Market Clearing Price
+          example: 6.48
   securitySchemes:
     apiKeyHeader:
       type: apiKey

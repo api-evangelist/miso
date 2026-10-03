@@ -260,28 +260,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MarketIntervalLabelNullable:
-      description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data with null indicating unset.
-      type:
-      - string
-      - 'null'
-      format: date-time
-      example: '2019-03-14T14:50:00-05:00'
-    ParticipantName:
-      description: Market participant name.
-      type: string
-      minLength: 1
-      maxLength: 40
-      example: MP
-    CongestionLossesType:
-      description: The type of loss for the contract.
-      type:
-      - string
-      - 'null'
-      enum:
-      - SellerPays
-      - BuyerPays
-      - null
     Contracts:
       description: An object containing multiple contracts.
       type: object
@@ -345,12 +323,34 @@ components:
             - settlementMarket
       required:
       - contracts
+    PNodeName:
+      description: Commercial Pricing Node (PNode) name.
+      type: string
+      minLength: 1
+      maxLength: 30
+      example: PNODE1
+    CongestionLossesType:
+      description: The type of loss for the contract.
+      type:
+      - string
+      - 'null'
+      enum:
+      - SellerPays
+      - BuyerPays
+      - null
     SettlementMarketType:
       description: The type of settlement the market will use to handle the contract.
       type: string
       enum:
       - day-ahead
       - real-time
+    MarketIntervalLabelNullable:
+      description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data with null indicating unset.
+      type:
+      - string
+      - 'null'
+      format: date-time
+      example: '2019-03-14T14:50:00-05:00'
     BilateralConfirmation:
       description: An object for describing payloads that contain more than one schedule confirmations and/or contract confirmations.
       type: object
@@ -411,17 +411,6 @@ components:
                 enum:
                 - Confirm
       additionalProperties: false
-    ContractName:
-      description: Bilateral contract name.
-      type: string
-      minLength: 1
-      maxLength: 50
-      example: Test Contract
-    MarketOperatingDay:
-      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
-      type: string
-      format: date
-      example: '2019-03-14'
     ContractSchedules:
       description: A filtered collection of individual schedules for a specific contract or participant.
       type: object
@@ -474,19 +463,11 @@ components:
             - hours
       required:
       - schedules
-    ContractType:
-      description: The type of contract established between two participants.
+    MarketOperatingDay:
+      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
       type: string
-      enum:
-      - PureFinancial
-      - GrandFathered
-      - PseudoTie
-    HourLabel:
-      description: Hour ending label. Represents an hour segment of time.
-      type: integer
-      minimum: 1
-      maximum: 24
-      example: 1
+      format: date
+      example: '2019-03-14'
     ScheduleApprovalType:
       description: The type of approval required for the contract.
       type: string
@@ -494,20 +475,12 @@ components:
       - SellerAutoApproval
       - BuyerAutoApproval
       - CounterpartyApproval
-    RealEnergyResults:
-      description: Used to represent real energy values in market outcomes. Historically simliar to 'MWType'.
-      type: number
-      format: realenergy
-      multipleOf: 0.1
-      minimum: -9.99999999E7
-      maximum: 9.99999999E7
-      example: 120001.7
-    PNodeName:
-      description: Commercial Pricing Node (PNode) name.
-      type: string
-      minLength: 1
-      maxLength: 30
-      example: PNODE1
+    HourLabel:
+      description: Hour ending label. Represents an hour segment of time.
+      type: integer
+      minimum: 1
+      maximum: 24
+      example: 1
     APIResponse:
       description: General container for API response.
       type: object
@@ -568,14 +541,86 @@ components:
           description: The time at which the transaction was received by the system.
           type: string
           format: date-time
-  headers:
-    http-x-request-id:
-      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
-      schema:
-        type: string
-        format: guid
-      example: 34571c664e48ca0b1e30d7ffb9b3b287
+    ParticipantName:
+      description: Market participant name.
+      type: string
+      minLength: 1
+      maxLength: 40
+      example: MP
+    ContractType:
+      description: The type of contract established between two participants.
+      type: string
+      enum:
+      - PureFinancial
+      - GrandFathered
+      - PseudoTie
+    ContractName:
+      description: Bilateral contract name.
+      type: string
+      minLength: 1
+      maxLength: 50
+      example: Test Contract
+    RealEnergyResults:
+      description: Used to represent real energy values in market outcomes. Historically simliar to 'MWType'.
+      type: number
+      format: realenergy
+      multipleOf: 0.1
+      minimum: -9.99999999E7
+      maximum: 9.99999999E7
+      example: 120001.7
   responses:
+    BadRequestApiResponse:
+      description: User error. Request was invalid for some reason. See response for details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Bad request message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    OkApiResponse:
+      description: Successful operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses: []
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    UnauthorizedApiResponse:
+      description: Rejected due to insufficient permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Unauthorized message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
     NotFoundApiResponse:
       description: Resource not found. The path provided does not point to an entity in the system.
       content:
@@ -614,66 +659,14 @@ components:
       headers:
         http-x-request-id:
           $ref: '#/components/headers/http-x-request-id'
-    OkApiResponse:
-      description: Successful operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses: []
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    BadRequestApiResponse:
-      description: User error. Request was invalid for some reason. See response for details.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Bad request message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    UnauthorizedApiResponse:
-      description: Rejected due to insufficient permissions.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Unauthorized message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-  parameters:
-    x-acting-participant:
-      in: header
-      name: x-acting-participant
-      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
+  headers:
+    http-x-request-id:
+      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
       schema:
         type: string
-      example: MP
+        format: guid
+      example: 34571c664e48ca0b1e30d7ffb9b3b287
+  parameters:
     Participant:
       in: path
       name: participantName
@@ -681,3 +674,10 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/ParticipantName'
+    x-acting-participant:
+      in: header
+      name: x-acting-participant
+      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
+      schema:
+        type: string
+      example: MP

@@ -287,38 +287,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MarketType:
-      description: Energy Market types.
-      type: string
-      enum:
-      - day-ahead
-      - real-time
-    Portfolio:
-      description: A single submitted portfolio. Each portfolio is a named association of resource pricing node (pnode) locations. A portfolio can contain resource pnode locations for generator units, demand response resources, and other pnodes.
-      type: object
-      properties:
-        name:
-          $ref: '#/components/schemas/PortfolioName'
-        portfolioLocations:
-          description: A list of pnodes identified by name.
-          type:
-          - array
-          - 'null'
-          items:
-            type: object
-            additionalProperties: false
-            properties:
-              name:
-                $ref: '#/components/schemas/PNodeName'
-      required:
-      - name
-      - portfolioLocations
-    ParticipantName:
-      description: Market participant name.
+    PNodeName:
+      description: Commercial Pricing Node (PNode) name.
       type: string
       minLength: 1
-      maxLength: 40
-      example: MP
+      maxLength: 30
+      example: PNODE1
     MuiMetadata:
       description: General MUI Meta Data, that is not participant specific.
       type: object
@@ -416,71 +390,67 @@ components:
                 $ref: '#/components/schemas/MarketType'
       required:
       - day
-    PortfolioName:
-      description: Portfolio name which is unique to a participant company and may be shared among users registered with the same company.
+    ReserveZone:
+      description: Used to represent a reserve zone.
+      type: number
+      minimum: 1
+      maximum: 999
+      example: 1
+    ContextFilter:
+      description: Context filter for the report.
       type: string
-      minLength: 1
-      maxLength: 40
-      example: Sample Portfolio
+      enum:
+      - System
+      - Portfolio
+      - FinSched
+      - Supply
+      - DemandBid
+      - VirtualBid
+      - VirtualOffer
+      - Lmp
+      example: System
     MarketOperatingDay:
       description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
       type: string
       format: date
       example: '2019-03-14'
-    RetrievedPortfolios:
-      description: A list of portfolios.
-      type: array
-      items:
-        description: A single retrieved portfolio. Each portfolio is a named association of resource pricing node (pnode) locations. A portfolio can contain resource pnode locations for generator units, demand response resources, and other pnodes. Can include additional metadata about the pnode depending on query parameters provided.
-        type: object
-        properties:
-          name:
-            $ref: '#/components/schemas/PortfolioName'
-          portfolioLocations:
-            description: Participant pnodes.
-            type: array
-            items:
-              type: object
-              additionalProperties: false
-              properties:
-                name:
-                  $ref: '#/components/schemas/PNodeName'
-                pnodeType:
-                  type: string
-                  enum:
-                  - Aggregate
-                  - Bus
-                  - Hub
-                  - Interface
-                  - Zone
-                  - 500 KV
-                virtualIncBidsAllowed:
-                  type: boolean
-                  example: true
-                virtualDecBidsAllowed:
-                  type: boolean
-                  example: true
-                unitOfferType:
-                  type: string
-                  enum:
-                  - GEN
-                  - DIR
-                  - DRR1
-                  - DRR2
-                  - EAR
-                  - ESR
-                  - SER
-                  - NA
-                intermittentStatus:
-                  type: string
-                  enum:
-                  - Dispatchable
-                  - Intermittent
-                  - Non-Intermittent
-                  - NA
-        required:
-        - name
-        - portfolioLocations
+    Portfolio:
+      description: A single submitted portfolio. Each portfolio is a named association of resource pricing node (pnode) locations. A portfolio can contain resource pnode locations for generator units, demand response resources, and other pnodes.
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/PortfolioName'
+        portfolioLocations:
+          description: A list of pnodes identified by name.
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              name:
+                $ref: '#/components/schemas/PNodeName'
+      required:
+      - name
+      - portfolioLocations
+    MarketType:
+      description: Energy Market types.
+      type: string
+      enum:
+      - day-ahead
+      - real-time
+    MetadatGroups:
+      description: Mui Meta-data groups.
+      type: string
+      enum:
+      - ReserveZones
+      - Participants
+      - CommitStatus
+      - DispatchStatus
+      - RealTimeOfferOverrideReasons
+      - MarketOptions
+      - CostScheduleTypes
     ParticipantMetadata:
       description: MUI and participant metadata.
       type: object
@@ -502,42 +472,6 @@ components:
       required:
       - day
       - participantControlAreas
-    ReserveZone:
-      description: Used to represent a reserve zone.
-      type: number
-      minimum: 1
-      maximum: 999
-      example: 1
-    MetadatGroups:
-      description: Mui Meta-data groups.
-      type: string
-      enum:
-      - ReserveZones
-      - Participants
-      - CommitStatus
-      - DispatchStatus
-      - RealTimeOfferOverrideReasons
-      - MarketOptions
-      - CostScheduleTypes
-    ContextFilter:
-      description: Context filter for the report.
-      type: string
-      enum:
-      - System
-      - Portfolio
-      - FinSched
-      - Supply
-      - DemandBid
-      - VirtualBid
-      - VirtualOffer
-      - Lmp
-      example: System
-    PNodeName:
-      description: Commercial Pricing Node (PNode) name.
-      type: string
-      minLength: 1
-      maxLength: 30
-      example: PNODE1
     APIResponse:
       description: General container for API response.
       type: object
@@ -598,14 +532,125 @@ components:
           description: The time at which the transaction was received by the system.
           type: string
           format: date-time
-  headers:
-    http-x-request-id:
-      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
-      schema:
-        type: string
-        format: guid
-      example: 34571c664e48ca0b1e30d7ffb9b3b287
+    ParticipantName:
+      description: Market participant name.
+      type: string
+      minLength: 1
+      maxLength: 40
+      example: MP
+    RetrievedPortfolios:
+      description: A list of portfolios.
+      type: array
+      items:
+        description: A single retrieved portfolio. Each portfolio is a named association of resource pricing node (pnode) locations. A portfolio can contain resource pnode locations for generator units, demand response resources, and other pnodes. Can include additional metadata about the pnode depending on query parameters provided.
+        type: object
+        properties:
+          name:
+            $ref: '#/components/schemas/PortfolioName'
+          portfolioLocations:
+            description: Participant pnodes.
+            type: array
+            items:
+              type: object
+              additionalProperties: false
+              properties:
+                name:
+                  $ref: '#/components/schemas/PNodeName'
+                pnodeType:
+                  type: string
+                  enum:
+                  - Aggregate
+                  - Bus
+                  - Hub
+                  - Interface
+                  - Zone
+                  - 500 KV
+                virtualIncBidsAllowed:
+                  type: boolean
+                  example: true
+                virtualDecBidsAllowed:
+                  type: boolean
+                  example: true
+                unitOfferType:
+                  type: string
+                  enum:
+                  - GEN
+                  - DIR
+                  - DRR1
+                  - DRR2
+                  - EAR
+                  - ESR
+                  - SER
+                  - NA
+                intermittentStatus:
+                  type: string
+                  enum:
+                  - Dispatchable
+                  - Intermittent
+                  - Non-Intermittent
+                  - NA
+        required:
+        - name
+        - portfolioLocations
+    PortfolioName:
+      description: Portfolio name which is unique to a participant company and may be shared among users registered with the same company.
+      type: string
+      minLength: 1
+      maxLength: 40
+      example: Sample Portfolio
   responses:
+    BadRequestApiResponse:
+      description: User error. Request was invalid for some reason. See response for details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Bad request message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    OkApiResponse:
+      description: Successful operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses: []
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    UnauthorizedApiResponse:
+      description: Rejected due to insufficient permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Unauthorized message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
     NotFoundApiResponse:
       description: Resource not found. The path provided does not point to an entity in the system.
       content:
@@ -644,66 +689,7 @@ components:
       headers:
         http-x-request-id:
           $ref: '#/components/headers/http-x-request-id'
-    OkApiResponse:
-      description: Successful operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses: []
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    BadRequestApiResponse:
-      description: User error. Request was invalid for some reason. See response for details.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Bad request message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
-    UnauthorizedApiResponse:
-      description: Rejected due to insufficient permissions.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Unauthorized message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
   parameters:
-    x-acting-participant:
-      in: header
-      name: x-acting-participant
-      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
-      schema:
-        type: string
-      example: MP
     MarketOperatingDay:
       in: path
       name: day
@@ -718,3 +704,17 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/ParticipantName'
+    x-acting-participant:
+      in: header
+      name: x-acting-participant
+      description: Header to override default acting participant of NERC ID. Will be validated against participant collection resource when specified in path.
+      schema:
+        type: string
+      example: MP
+  headers:
+    http-x-request-id:
+      description: Response header contains a unique transaction identifier assigned by MUI. Identifier is a GUID represented without hyphens.
+      schema:
+        type: string
+        format: guid
+      example: 34571c664e48ca0b1e30d7ffb9b3b287
