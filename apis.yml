@@ -1298,6 +1298,8 @@ apis:
   humanURL: https://www.misoenergy.org/markets-and-operations/real-time--market-data/market-reports/
   baseURL: https://docs.misoenergy.org/marketreports
   tags:
+  - Real-Time
+  tags_raw:
   - Realtime
   properties:
   - type: OpenAPI
