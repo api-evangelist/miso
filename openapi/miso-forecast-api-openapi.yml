@@ -438,6 +438,17 @@ paths:
     - url: https://markets.midwestiso.org/dart2/
 components:
   schemas:
+    OutageForecast:
+      type: object
+      properties:
+        timeInterval:
+          $ref: '#/components/schemas/TimeInterval'
+        region:
+          $ref: '#/components/schemas/Region'
+        onOutage:
+          type: number
+        interval:
+          type: string
     LocalDate:
       type: string
       format: date
@@ -451,34 +462,27 @@ components:
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true
-    PageInfo:
-      type: object
-      properties:
-        pageNumber:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        totalPages:
-          type: integer
-          format: int64
-        lastPage:
-          type: boolean
-    OutageForecast:
+    LoadForecast:
       type: object
       properties:
         timeInterval:
           $ref: '#/components/schemas/TimeInterval'
         region:
-          $ref: '#/components/schemas/Region'
-        onOutage:
-          type: number
-        interval:
           type: string
+          allOf:
+          - $ref: '#/components/schemas/Region'
+          example: NORTH
+        localResourceZone:
+          type: string
+          example: Z1
+        loadForecast:
+          type: number
+          example: 1349
+        init:
+          type: string
+          allOf:
+          - $ref: '#/components/schemas/LocalDate'
+          example: '2026-02-02'
     TimeInterval:
       type: object
       properties:
@@ -503,27 +507,14 @@ components:
           type: string
           description: 'Short hand value for time interval. Can be timestamp for 5min resolution (ex: 2023-06-28 00:00:00.000), hour ending value for hourly resolution, 1-24 (ex: 21), or date string for daily (ex: 2023-06-28). In Eastern Standard Time (UTC−05:00).'
           example: '2023-06-29'
-    LoadForecast:
-      type: object
-      properties:
-        timeInterval:
-          $ref: '#/components/schemas/TimeInterval'
-        region:
-          type: string
-          allOf:
-          - $ref: '#/components/schemas/Region'
-          example: NORTH
-        localResourceZone:
-          type: string
-          example: Z1
-        loadForecast:
-          type: number
-          example: 1349
-        init:
-          type: string
-          allOf:
-          - $ref: '#/components/schemas/LocalDate'
-          example: '2026-02-02'
+    Region:
+      enum:
+      - NORTH
+      - CENTRAL
+      - SOUTH
+      - MISO
+      - NO_REGION
+      type: string
     200-OK-Forecast-LoadResponse-json:
       type: object
       properties:
@@ -534,76 +525,23 @@ components:
         page:
           $ref: '#/components/schemas/PageInfo'
       x-apim-inline: true
-    Region:
-      enum:
-      - NORTH
-      - CENTRAL
-      - SOUTH
-      - MISO
-      - NO_REGION
-      type: string
-    PNodeName:
-      description: Commercial Pricing Node (PNode) name.
-      type: string
-      minLength: 1
-      maxLength: 30
-      example: PNODE1
-    DIRForecast:
-      description: 5-min DIR Forecast.
+    PageInfo:
       type: object
       properties:
-        day:
-          $ref: '#/components/schemas/MarketOperatingDay'
-        resources:
-          type: array
-          minItems: 0
-          items:
-            type: object
-            additionalProperties: false
-            properties:
-              pnodeName:
-                $ref: '#/components/schemas/PNodeName'
-              dirForecast:
-                $ref: '#/components/schemas/Interval5Forecast'
-            required:
-            - pnodeName
-            - dirForecast
-      required:
-      - day
-      - resources
-    MarketIntervalLabel:
-      description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data.
-      type: string
-      format: date-time
-      example: '2019-03-14T14:50:00-05:00'
-    RealEnergyNullable:
-      description: Used to represent real energy values submitted to the market. Nullable added to allow for data driven delete behaviour.
-      type:
-      - number
-      - 'null'
-      format: realenergy
-      multipleOf: 0.1
-      minimum: -9.99999999E7
-      maximum: 9.99999999E7
-      example: 1200.7
-    MarketOperatingDay:
-      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
-      type: string
-      format: date
-      example: '2019-03-14'
-    Interval5Forecast:
-      type: array
-      minItems: 1
-      maxItems: 12
-      items:
-        type: object
-        properties:
-          interval5:
-            $ref: '#/components/schemas/MarketIntervalLabel'
-          mw:
-            $ref: '#/components/schemas/RealEnergyResults'
-        required:
-        - mw
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int64
+        lastPage:
+          type: boolean
     DemandForecast:
       description: Hourly Demand Forecast.
       type: object
@@ -638,12 +576,95 @@ components:
       required:
       - day
       - resources
+    MarketIntervalLabel:
+      description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data.
+      type: string
+      format: date-time
+      example: '2019-03-14T14:50:00-05:00'
+    DRRLoadForecast:
+      description: 5-min DRR Deployment Forecast.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        resources:
+          type: array
+          minItems: 0
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
+              drrLoadForecast:
+                type: array
+                minItems: 1
+                maxItems: 288
+                items:
+                  type: object
+                  properties:
+                    interval5:
+                      $ref: '#/components/schemas/MarketIntervalLabel'
+                    mw:
+                      $ref: '#/components/schemas/RealEnergyResults'
+                  required:
+                  - interval5
+                  - mw
+            required:
+            - pnodeName
+            - drrLoadForecast
+      required:
+      - day
+      - resources
+    MarketOperatingDay:
+      description: Effective Market operating day of data. RFC 3339. 'YYYY-MM-DD'.
+      type: string
+      format: date
+      example: '2019-03-14'
+    RenewablesForecast:
+      description: 5-min MISO Renewables Forecast.
+      type: object
+      properties:
+        day:
+          $ref: '#/components/schemas/MarketOperatingDay'
+        resources:
+          type: array
+          items:
+            type: object
+            properties:
+              pnodeName:
+                $ref: '#/components/schemas/PNodeName'
+              interval5Forecast:
+                $ref: '#/components/schemas/Interval5Forecast'
+      required:
+      - day
+      - resources
+    PortfolioName:
+      description: Portfolio name which is unique to a participant company and may be shared among users registered with the same company.
+      type: string
+      minLength: 1
+      maxLength: 40
+      example: Sample Portfolio
+    RealEnergyResults:
+      description: Used to represent real energy values in market outcomes. Historically simliar to 'MWType'.
+      type: number
+      format: realenergy
+      multipleOf: 0.1
+      minimum: -9.99999999E7
+      maximum: 9.99999999E7
+      example: 120001.7
     HourLabel:
       description: Hour ending label. Represents an hour segment of time.
       type: integer
       minimum: 1
       maximum: 24
       example: 1
+    PNodeName:
+      description: Commercial Pricing Node (PNode) name.
+      type: string
+      minLength: 1
+      maxLength: 30
+      example: PNODE1
     APIResponse:
       description: General container for API response.
       type: object
@@ -704,20 +725,27 @@ components:
           description: The time at which the transaction was received by the system.
           type: string
           format: date-time
+    Interval5Forecast:
+      type: array
+      minItems: 1
+      maxItems: 12
+      items:
+        type: object
+        properties:
+          interval5:
+            $ref: '#/components/schemas/MarketIntervalLabel'
+          mw:
+            $ref: '#/components/schemas/RealEnergyResults'
+        required:
+        - mw
     ParticipantName:
       description: Market participant name.
       type: string
       minLength: 1
       maxLength: 40
       example: MP
-    PortfolioName:
-      description: Portfolio name which is unique to a participant company and may be shared among users registered with the same company.
-      type: string
-      minLength: 1
-      maxLength: 40
-      example: Sample Portfolio
-    DRRLoadForecast:
-      description: 5-min DRR Deployment Forecast.
+    DIRForecast:
+      description: 5-min DIR Forecast.
       type: object
       properties:
         day:
@@ -731,74 +759,25 @@ components:
             properties:
               pnodeName:
                 $ref: '#/components/schemas/PNodeName'
-              drrLoadForecast:
-                type: array
-                minItems: 1
-                maxItems: 288
-                items:
-                  type: object
-                  properties:
-                    interval5:
-                      $ref: '#/components/schemas/MarketIntervalLabel'
-                    mw:
-                      $ref: '#/components/schemas/RealEnergyResults'
-                  required:
-                  - interval5
-                  - mw
+              dirForecast:
+                $ref: '#/components/schemas/Interval5Forecast'
             required:
             - pnodeName
-            - drrLoadForecast
+            - dirForecast
       required:
       - day
       - resources
-    RealEnergyResults:
-      description: Used to represent real energy values in market outcomes. Historically simliar to 'MWType'.
-      type: number
+    RealEnergyNullable:
+      description: Used to represent real energy values submitted to the market. Nullable added to allow for data driven delete behaviour.
+      type:
+      - number
+      - 'null'
       format: realenergy
       multipleOf: 0.1
       minimum: -9.99999999E7
       maximum: 9.99999999E7
-      example: 120001.7
-    RenewablesForecast:
-      description: 5-min MISO Renewables Forecast.
-      type: object
-      properties:
-        day:
-          $ref: '#/components/schemas/MarketOperatingDay'
-        resources:
-          type: array
-          items:
-            type: object
-            properties:
-              pnodeName:
-                $ref: '#/components/schemas/PNodeName'
-              interval5Forecast:
-                $ref: '#/components/schemas/Interval5Forecast'
-      required:
-      - day
-      - resources
+      example: 1200.7
   parameters:
-    MarketOperatingDay:
-      in: path
-      name: day
-      description: The operating day of the data.
-      required: true
-      schema:
-        $ref: '#/components/schemas/MarketOperatingDay'
-    Portfolio:
-      in: query
-      name: portfolio
-      description: Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned.
-      required: false
-      schema:
-        $ref: '#/components/schemas/PortfolioName'
-    Pnode:
-      in: query
-      name: pnode
-      description: Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned.
-      required: false
-      schema:
-        $ref: '#/components/schemas/PNodeName'
     Participant:
       in: path
       name: participantName
@@ -813,26 +792,28 @@ components:
       schema:
         type: string
       example: MP
+    MarketOperatingDay:
+      in: path
+      name: day
+      description: The operating day of the data.
+      required: true
+      schema:
+        $ref: '#/components/schemas/MarketOperatingDay'
+    Pnode:
+      in: query
+      name: pnode
+      description: Optional parameter to specify the name of a pricing node for the requested data. If neither pnode or portfolio is provided then all applicable data is returned.
+      required: false
+      schema:
+        $ref: '#/components/schemas/PNodeName'
+    Portfolio:
+      in: query
+      name: portfolio
+      description: Optional parameter to specify the name of the Portfolio of pricing nodes for the requested data.  If neither pnode or portfolio is provided then all applicable data is returned.
+      required: false
+      schema:
+        $ref: '#/components/schemas/PortfolioName'
   responses:
-    BadRequestApiResponse:
-      description: User error. Request was invalid for some reason. See response for details.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Bad request message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
     OkApiResponse:
       description: Successful operation.
       content:
@@ -847,8 +828,8 @@ components:
       headers:
         http-x-request-id:
           $ref: '#/components/headers/http-x-request-id'
-    UnauthorizedApiResponse:
-      description: Rejected due to insufficient permissions.
+    InternalErrorApiResponse:
+      description: Internal error occurred, details in server-side logs.
       content:
         application/json:
           schema:
@@ -860,7 +841,26 @@ components:
               - level: ERROR
                 msgId: MESSAGE_ID
                 params: []
-                userMsg: Unauthorized message for MESSAGE_ID.
+                userMsg: Internal error message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    BadRequestApiResponse:
+      description: User error. Request was invalid for some reason. See response for details.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Bad request message for MESSAGE_ID.
             transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
             transactionTime: '2020-07-02T17:45:00-05:00'
       headers:
@@ -885,8 +885,8 @@ components:
       headers:
         http-x-request-id:
           $ref: '#/components/headers/http-x-request-id'
-    InternalErrorApiResponse:
-      description: Internal error occurred, details in server-side logs.
+    UnauthorizedApiResponse:
+      description: Rejected due to insufficient permissions.
       content:
         application/json:
           schema:
@@ -898,7 +898,7 @@ components:
               - level: ERROR
                 msgId: MESSAGE_ID
                 params: []
-                userMsg: Internal error message for MESSAGE_ID.
+                userMsg: Unauthorized message for MESSAGE_ID.
             transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
             transactionTime: '2020-07-02T17:45:00-05:00'
       headers:

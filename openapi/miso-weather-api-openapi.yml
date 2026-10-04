@@ -8776,6 +8776,56 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ApiError:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+          description: Message indicating reason for the error
+          example: Informative error message
+      additionalProperties: false
+      description: Metadata for error response
+    WeatherHourData:
+      type: object
+      properties:
+        number:
+          type: integer
+          description: Sequence number of the hour in the forecast collection
+          format: int32
+          example: 1
+        startTime:
+          type:
+          - string
+          - 'null'
+          description: Hour of the forecast
+          example: '2024-06-05T22:00:00Z'
+        isObserved:
+          type: integer
+          description: Indicates if the data is observed or predicted. A value of 1 indicates observed data, 0 indicates predicted data.
+          format: int32
+          example: 1
+        temperature:
+          $ref: '#/components/schemas/ReadingData'
+        sunrise:
+          $ref: '#/components/schemas/ReadingData'
+        sunset:
+          $ref: '#/components/schemas/ReadingData'
+      additionalProperties: false
+      description: Weather metrics for an individual hour
+    WeatherProperty:
+      type: object
+      properties:
+        periods:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WeatherHourData'
+          description: Collection of hourly metrics for the station
+      additionalProperties: false
+      description: Collection of station properties
     ReadingData:
       type: object
       properties:
@@ -8815,18 +8865,28 @@ components:
           $ref: '#/components/schemas/WeatherProperty'
       additionalProperties: false
       description: Collection of station properties
-    WeatherProperty:
+    GeometryConstraint:
       type: object
       properties:
-        periods:
+        type:
+          type:
+          - string
+          - 'null'
+          description: Geometry type of station reference
+          example: Point
+        coordinates:
           type:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/WeatherHourData'
-          description: Collection of hourly metrics for the station
+            type: number
+            format: float
+          description: Longitude and Latitude of station
+          example:
+          - -122.5
+          - 37.7
       additionalProperties: false
-      description: Collection of station properties
+      description: Geometry location of station
     ApiWeatherResponse:
       type: object
       properties:
@@ -8857,63 +8917,3 @@ components:
           description: Collection of stations and their weather data
       additionalProperties: false
       description: Response object for GET /weather endpoint
-    GeometryConstraint:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-          description: Geometry type of station reference
-          example: Point
-        coordinates:
-          type:
-          - array
-          - 'null'
-          items:
-            type: number
-            format: float
-          description: Longitude and Latitude of station
-          example:
-          - -122.5
-          - 37.7
-      additionalProperties: false
-      description: Geometry location of station
-    WeatherHourData:
-      type: object
-      properties:
-        number:
-          type: integer
-          description: Sequence number of the hour in the forecast collection
-          format: int32
-          example: 1
-        startTime:
-          type:
-          - string
-          - 'null'
-          description: Hour of the forecast
-          example: '2024-06-05T22:00:00Z'
-        isObserved:
-          type: integer
-          description: Indicates if the data is observed or predicted. A value of 1 indicates observed data, 0 indicates predicted data.
-          format: int32
-          example: 1
-        temperature:
-          $ref: '#/components/schemas/ReadingData'
-        sunrise:
-          $ref: '#/components/schemas/ReadingData'
-        sunset:
-          $ref: '#/components/schemas/ReadingData'
-      additionalProperties: false
-      description: Weather metrics for an individual hour
-    ApiError:
-      type: object
-      properties:
-        message:
-          type:
-          - string
-          - 'null'
-          description: Message indicating reason for the error
-          example: Informative error message
-      additionalProperties: false
-      description: Metadata for error response

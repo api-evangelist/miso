@@ -305,29 +305,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TransactionEvents:
-      description: Collection of transaction events.
-      type: array
-      items:
-        $ref: '#/components/schemas/TransactionEvent'
-    MarketIntervalLabel:
-      description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data.
-      type: string
-      format: date-time
-      example: '2019-03-14T14:50:00-05:00'
-    TransactionEventPayload:
-      description: Transaction event payload.
-      type: object
-      properties:
-        mrid:
-          type: string
-          format: uuid
-        payloadType:
-          $ref: '#/components/schemas/PayloadDocumentType'
-        payloadDocument:
-          type: string
-        transactionEvent:
-          $ref: '#/components/schemas/TransactionEvent'
     APIResponse:
       description: General container for API response.
       type: object
@@ -388,28 +365,6 @@ components:
           description: The time at which the transaction was received by the system.
           type: string
           format: date-time
-    ServiceName:
-      description: Enumeration defining the set of valid service names.
-      type: string
-      enum:
-      - portal-governor
-      - mgms
-      - notification
-      - mps
-    OperationType:
-      description: Enumeration defining the set of valid operation service types corresponding to HTTP operations.
-      type: string
-      enum:
-      - GET
-      - POST
-      - PUT
-      - DELETE
-    PayloadDocumentType:
-      description: Enumeration defining the valid payload document types
-      enum:
-      - INCOMING
-      - OUTGOING
-      type: string
     TransactionEvent:
       description: Transaction event.
       type: object
@@ -448,6 +403,48 @@ components:
               format: uuid
             name:
               type: string
+    TransactionEventPayload:
+      description: Transaction event payload.
+      type: object
+      properties:
+        mrid:
+          type: string
+          format: uuid
+        payloadType:
+          $ref: '#/components/schemas/PayloadDocumentType'
+        payloadDocument:
+          type: string
+        transactionEvent:
+          $ref: '#/components/schemas/TransactionEvent'
+    TransactionEventPayloads:
+      description: Collection of transaction event payloads.
+      type: array
+      items:
+        $ref: '#/components/schemas/TransactionEventPayload'
+    TransactionEvents:
+      description: Collection of transaction events.
+      type: array
+      items:
+        $ref: '#/components/schemas/TransactionEvent'
+    PayloadDocumentType:
+      description: Enumeration defining the valid payload document types
+      enum:
+      - INCOMING
+      - OUTGOING
+      type: string
+    MarketIntervalLabel:
+      description: Date-time as defined in RFC 3339. 'YYYY-MM-DDTHH:MM:SS-05:00'. Effective Market interval of data.
+      type: string
+      format: date-time
+      example: '2019-03-14T14:50:00-05:00'
+    ServiceName:
+      description: Enumeration defining the set of valid service names.
+      type: string
+      enum:
+      - portal-governor
+      - mgms
+      - notification
+      - mps
     TransactionStateType:
       description: Enumeration defining the set of valid Transaction Event States.
       type: string
@@ -455,31 +452,15 @@ components:
       - FAILED
       - PENDING
       - SUCCESS
-    TransactionEventPayloads:
-      description: Collection of transaction event payloads.
-      type: array
-      items:
-        $ref: '#/components/schemas/TransactionEventPayload'
+    OperationType:
+      description: Enumeration defining the set of valid operation service types corresponding to HTTP operations.
+      type: string
+      enum:
+      - GET
+      - POST
+      - PUT
+      - DELETE
   responses:
-    NotFoundApiResponse:
-      description: Resource not found. The path provided does not point to an entity in the system.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/APIResponse'
-          example:
-            action: <action enum>
-            responses:
-            - messages:
-              - level: ERROR
-                msgId: MESSAGE_ID
-                params: []
-                userMsg: Not found message for MESSAGE_ID.
-            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
-            transactionTime: '2020-07-02T17:45:00-05:00'
-      headers:
-        http-x-request-id:
-          $ref: '#/components/headers/http-x-request-id'
     UnauthorizedApiResponse:
       description: Rejected due to insufficient permissions.
       content:
@@ -494,6 +475,25 @@ components:
                 msgId: MESSAGE_ID
                 params: []
                 userMsg: Unauthorized message for MESSAGE_ID.
+            transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
+            transactionTime: '2020-07-02T17:45:00-05:00'
+      headers:
+        http-x-request-id:
+          $ref: '#/components/headers/http-x-request-id'
+    NotFoundApiResponse:
+      description: Resource not found. The path provided does not point to an entity in the system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIResponse'
+          example:
+            action: <action enum>
+            responses:
+            - messages:
+              - level: ERROR
+                msgId: MESSAGE_ID
+                params: []
+                userMsg: Not found message for MESSAGE_ID.
             transactionId: 34571c664e48ca0b1e30d7ffb9b3b287
             transactionTime: '2020-07-02T17:45:00-05:00'
       headers:
