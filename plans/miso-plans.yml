@@ -106,3 +106,40 @@ onboarding:
   terms: >-
     Each Data Exchange product carries MISO's AS IS / AS AVAILABLE warranty disclaimer as
     its product terms; accepted at subscription time.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  units: []
+  plans:
+  - name: Public API
+    access: free
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Market Reports archive
+    access: free
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Pricing API
+    access: free
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Load, Generation, and Interchange API
+    access: free
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: MUI 2.0 (market participants)
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
