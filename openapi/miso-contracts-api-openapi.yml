@@ -681,3 +681,9 @@ components:
         type: string
         format: guid
       example: 34571c664e48ca0b1e30d7ffb9b3b287
+x-provenance:
+  method: harvested
+  publisher: MISO
+  source: https://cdn.misoenergy.org/MUI%202.0%20Specification%203.3.0623177.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
