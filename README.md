@@ -1,4 +1,4 @@
-# MISO (miso)
+# MISO
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,189 +66,225 @@
 
 MISO — the Midcontinent Independent System Operator — is the not-for-profit Regional Transmission Organization that operates the electric grid and the wholesale electricity markets across fifteen US states and the Canadian province of Manitoba, serving a footprint of roughly forty-five million people from headquarters in Carmel, Indiana. Formed in 1998 and operating the region since December 2001, it is regulated by the Federal Energy Regulatory Commission, dispatches generation in real time, clears day-ahead and real-time energy and ancillary services markets, runs the ARR/FTR market and the generator interconnection queue, and plans the transmission system. It sits squarely in the middle of the value chain: it owns no generation, no wires and no retail customers, but it holds the market-wide operational data that every generator, transmission owner, load-serving entity and trader in the Midwest and the South depends on. Its API posture is the classic system operator split, and it is an unusually clean example of it. On the market side MISO is genuinely open — thirty-seven JSON endpoints at public-api.misoenergy.org return real-time fuel mix, load, prices, binding constraints and interchange to an anonymous GET with no key, no account and no click-through, and the full market report archive at docs.misoenergy.org downloads anonymously as CSV and XLSX. On the consumer side there is nothing to open: MISO is not a retail utility, holds no customer usage or billing data, and no energy-data mandate of any kind applies to it. Green Button is voluntary in the United States and is a distribution-utility standard; MISO publishes no Green Button, ESPI, or consumer data-sharing surface, and makes no claim to. Its newer MISO Data Exchange developer portal adds a keyed but self-serve tier over historical market report data, and its MUI 2.0 market interface is a genuinely closed, client-certificate-gated API for registered market participants only.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/miso/refs/heads/main/apis.yml)
+**Areas:** Energy · United States · Electricity · Energy Markets · Grid · System Operator · Market Operator · Wholesale Power · Open Energy Data · Renewables · Solar · Demand Response
 
-## Tags
+## MISO on APIs.io
 
-- Energy
-- United States
-- Electricity
-- Energy Markets
-- Grid
-- System Operator
-- Market Operator
-- Wholesale Power
-- Open Energy Data
-- Renewables
-- Solar
-- Demand Response
-- Utilities
+Everything profiled for MISO is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/miso/](https://apis.io/providers/miso/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (38)
 
-- **Created:** 2026-07-27
-- **Modified:** 2026-07-27
+- [MISO Market Reports](https://apis.io/apis/miso/miso-market-reports/) — MISO's long-running bulk market report surface — the second fully anonymous layer of its open market data, and the archive the Data Exchange APIs sit on top…
+- [MISO File Download API](https://apis.io/apis/miso/miso-file-download-api/) — The bulk file-retrieval counterpart to MUI 2.0, on the same two client-certificate-gated hosts and documented only in a PDF. MISO's File Download…
+- [MISO FTR MPMA Market User API](https://apis.io/apis/miso/miso-ftr-mpma-market-user-api/) — The Financial Transmission Rights / Multi-Period Multi-Auction market user API — four SOAP services covering the FTR market itself, auctions, bulk download…
+- [MISO EDR Service (Electronic Data Reporting)](https://apis.io/apis/miso/miso-edr-service/) — A SOAP service for uploading meter data and offer data to MISO, with a published WSDL and six XSD schemas (MdUploadPayload, MdUploadResponse, MeterData,…
+- [MISO CROW API (Outage Scheduling)](https://apis.io/apis/miso/miso-crow-api/) — The outage-scheduling interface, built on the CROW product, documented in a PDF reference plus a MISO-specific addendum and shipped with worked XML request…
+- [MISO Fuel and Consumables Data Request API](https://apis.io/apis/miso/miso-fuel-and-consumables-api/) — Data request API for fuel and consumables information, documented in a 171KB PDF API guide on MISO's CDN and nowhere else.
+- [MISO Market Portal Meter Data and Settlement Statements API](https://apis.io/apis/miso/miso-meter-data-and-settlement-statements-api/) — Market Portal API for retrieving meter data and settlement statements, documented in a 1MB PDF on MISO's CDN. Sits alongside the File Download API in the…
+- [MISO Ace API](https://apis.io/apis/miso/miso-ace-api/) — The Ace API from MISO — 1 operation(s) for ace.
+- [MISO Admin API](https://apis.io/apis/miso/miso-admin-api/) — The Admin API from MISO — 6 operation(s) for admin.
+- [MISO Aggregated Pnode API](https://apis.io/apis/miso/miso-aggregated-pnode-api/) — The Aggregated Pnode API from MISO — 1 operation(s) for aggregated pnode.
+- [MISO Bidding API](https://apis.io/apis/miso/miso-bidding-api/) — The Bidding API from MISO — 2 operation(s) for bidding.
+- [MISO Binding Constraints API](https://apis.io/apis/miso/miso-bindingconstraints-api/) — The BindingConstraints API from MISO — 3 operation(s) for bindingconstraints.
+- [MISO Contracts API](https://apis.io/apis/miso/miso-contracts-api/) — The Contracts API from MISO — 4 operation(s) for contracts.
+- [MISO Coordinated Transaction Scheduling API](https://apis.io/apis/miso/miso-coordinatedtransactionscheduling-api/) — The CoordinatedTransactionScheduling API from MISO — 1 operation(s) for coordinatedtransactionscheduling.
+- [MISO Csat Next Day Short Term Reserve Requirement API](https://apis.io/apis/miso/miso-csatnextdayshorttermreserverequirement-api/) — The CsatNextDayShortTermReserveRequirement API from MISO — 1 operation(s) for csatnextdayshorttermreserverequirement.
+- [MISO Csat Supply Demand API](https://apis.io/apis/miso/miso-csatsupplydemand-api/) — The CsatSupplyDemand API from MISO — 1 operation(s) for csatsupplydemand.
+- [MISO Day Ahead API](https://apis.io/apis/miso/miso-day-ahead-api/) — The Day Ahead API from MISO — 11 operation(s) for day ahead.
+- [MISO Forecast API](https://apis.io/apis/miso/miso-forecast-api/) — The Forecast API from MISO — 6 operation(s) for forecast.
+- [MISO Fuel Mix API](https://apis.io/apis/miso/miso-fuelmix-api/) — The FuelMix API from MISO — 3 operation(s) for fuelmix.
+- [MISO Generation Outages API](https://apis.io/apis/miso/miso-generationoutages-api/) — The GenerationOutages API from MISO — 1 operation(s) for generationoutages.
+- [MISO Historical API](https://apis.io/apis/miso/miso-historical-api/) — The Historical API from MISO — 1 operation(s) for historical.
+- [MISO IMM API](https://apis.io/apis/miso/miso-imm-api/) — The IMM API from MISO — 1 operation(s) for imm.
+- [MISO Interchange API](https://apis.io/apis/miso/miso-interchange-api/) — The Interchange API from MISO — 9 operation(s) for interchange.
+- [MISO Market Pricing API](https://apis.io/apis/miso/miso-marketpricing-api/) — The MarketPricing API from MISO — 6 operation(s) for marketpricing.
+- [MISO Model API](https://apis.io/apis/miso/miso-model-api/) — The Model API from MISO — 1 operation(s) for model.
+- [MISO Notifications API](https://apis.io/apis/miso/miso-notifications-api/) — The Notifications API from MISO — 6 operation(s) for notifications.
+- [MISO Notifications Format API](https://apis.io/apis/miso/miso-notifications-format-api/) — The Notifications Format API from MISO — 7 operation(s) for notifications format.
+- [MISO Offer API](https://apis.io/apis/miso/miso-offer-api/) — The Offer API from MISO — 7 operation(s) for offer.
+- [MISO Real Time RSG Commitments API](https://apis.io/apis/miso/miso-realtimersgcommitments-api/) — The RealTimeRSGCommitments API from MISO — 1 operation(s) for realtimersgcommitments.
+- [MISO Real Time Total Load API](https://apis.io/apis/miso/miso-realtimetotalload-api/) — The RealTimeTotalLoad API from MISO — 1 operation(s) for realtimetotalload.
+- [MISO Regional Directional Transfer API](https://apis.io/apis/miso/miso-regionaldirectionaltransfer-api/) — The RegionalDirectionalTransfer API from MISO — 1 operation(s) for regionaldirectionaltransfer.
+- [MISO Reports API](https://apis.io/apis/miso/miso-reports-api/) — The Reports API from MISO — 14 operation(s) for reports.
+- [MISO Reserves API](https://apis.io/apis/miso/miso-reserves-api/) — The Reserves API from MISO — 6 operation(s) for reserves.
+- [MISO Snapshot API](https://apis.io/apis/miso/miso-snapshot-api/) — The Snapshot API from MISO — 1 operation(s) for snapshot.
+- [MISO Transactions API](https://apis.io/apis/miso/miso-transactions-api/) — The Transactions API from MISO — 5 operation(s) for transactions.
+- [MISO Weather API](https://apis.io/apis/miso/miso-weather-api/) — The Weather API from MISO — 1 operation(s) for weather.
+- [MISO Wind Solar API](https://apis.io/apis/miso/miso-windsolar-api/) — The WindSolar API from MISO — 7 operation(s) for windsolar.
+- [MISO Realtime API](https://apis.io/apis/miso/miso-realtime-api/) — The Realtime API from MISO — 17 operation(s) for realtime.
 
-## APIs
+### Published properties
 
-### MISO Public API - Operations Displays
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-The anonymous half of MISO's data posture and the reason market_data_open is true. Twenty-six JSON endpoints publishing the source data behind MISO's public Operations Displays: area control error at thirty-second resolution, CSAT supply and demand, CSAT next-day short-term reserve requirement, the real-time fuel mix (current interval plus full today and yesterday series), real-time total load, the system snapshot, wind and solar actuals and forecasts, net actual and net scheduled interchange at one-minute and five-minute resolution both system-wide and per neighbouring balancing authority, regional directional transfer, and generation outages plus or minus five days. Verified anonymous on 2026-07-27 — every one of the twenty-six paths returned HTTP 200 with content-type application/json to a plain GET carrying no key, no cookie and no account. The current-interval fuel mix returned a real 96,122 MW total broken out by coal, natural gas, nuclear, wind, solar, battery storage and other. MISO restructured this surface on 2025-12-12, moving it to public-api.misoenergy.org and dropping CSV and XML in favour of JSON only; the older MISORTWDDataBroker endpoints on api.misoenergy.org are marked deprecated or retired and now return {"error": "no data"}. MISO publishes no OpenAPI here, so the specification in openapi/ was assembled from MISO's own published endpoint table plus the live payloads it served — see its x-provenance block.
+#### MCP servers (1)
 
-- **Human URL:** [https://www.misoenergy.org/markets-and-operations/RTDataAPIs/](https://www.misoenergy.org/markets-and-operations/RTDataAPIs/)
-- **Base URL:** `https://public-api.misoenergy.org`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [miso](https://apis.io/servers/miso/miso/)
 
-- Open Data
-- Grid
-- Fuel Mix
-- Load
-- Interchange
-- Wind
-- Solar
-- Outages
-- Anonymous Access
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [OpenAPI](openapi/miso-public-api-operations-displays-openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Documentation](https://www.misoenergy.org/markets-and-operations/RTDataAPIs/)
-- [API Reference](https://public-api.misoenergy.org/)
-- [Website](https://www.misoenergy.org/markets-and-operations/real-time--market-data/operations-displays/)
+- [Miso Agentic Access](https://apis.io/agentic-access/miso/miso-agentic-access/)
 
-### MISO Public API - Markets Displays
+#### Examples (63)
 
-Eleven JSON endpoints publishing the source data behind MISO's public Markets Displays: ancillary services market clearing prices for all eight reserve zones across regulation, spin, supplemental, short-term reserve and ramp; ex-ante locational marginal prices for the nine MISO hubs with loss and congestion components; the LMP consolidated table; real-time five-minute ex-post intervals for the current interval, the rolling current day and the previous day; real-time transmission, sub-regional power balance and reserve product binding constraints; coordinated transaction scheduling; and real-time RSG commitments. Verified anonymous on 2026-07-27 — all eleven paths returned HTTP 200 application/json with no key and no account, and the ex-ante LMP endpoint returned live prices for ARKANSAS.HUB, ILLINOIS.HUB, INDIANA.HUB, LOUISIANA.HUB, MICHIGAN.HUB, MINN.HUB, MS.HUB, SWPP and TEXAS.HUB. The previous-day and rolling ex-post interval feeds are large — 47 MB and 16 MB respectively — and are served without any pagination or authentication. MISO publishes no OpenAPI here; the specification in openapi/ was assembled from MISO's own published endpoint table plus the live payloads it served, with provenance recorded in the document.
+Example requests and responses.
 
-- **Human URL:** [https://www.misoenergy.org/markets-and-operations/RTDataAPIs/](https://www.misoenergy.org/markets-and-operations/RTDataAPIs/)
-- **Base URL:** `https://public-api.misoenergy.org`
+- [Miso Data Exchange Lgi Get_V1_Day_Ahead_Date_Demand](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_day_ahead_date_demand/)
+- [Miso Data Exchange Lgi Get_V1_Day_Ahead_Date_Generation_Cleared_Physical](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_day_ahead_date_generation_cleared_physical/)
+- [Miso Data Exchange Lgi Get_V1_Day_Ahead_Date_Generation_Cleared_Virtual](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_day_ahead_date_generation_cleared_virtual/)
+- [Miso Data Exchange Lgi Get_V1_Day_Ahead_Date_Generation_Fuel_Type](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_day_ahead_date_generation_fuel_type/)
+- [Miso Data Exchange Lgi Get_V1_Day_Ahead_Date_Generation_Offered_Ecomax](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_day_ahead_date_generation_offered_ecomax/)
+- [Miso Data Exchange Lgi Get_V1_Day_Ahead_Date_Generation_Offered_Ecomin](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_day_ahead_date_generation_offered_ecomin/)
+- [Miso Data Exchange Lgi Get_V1_Day_Ahead_Date_Interchange_Net_Scheduled](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_day_ahead_date_interchange_net_scheduled/)
+- [Miso Data Exchange Lgi Get_V1_Forecast_Date_Load](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_forecast_date_load/)
+- [Miso Data Exchange Lgi Get_V1_Forecast_Date_Outage](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_forecast_date_outage/)
+- [Miso Data Exchange Lgi Get_V1_Historical_Date_Interchange_Net_Scheduled](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_historical_date_interchange_net_scheduled/)
+- [Miso Data Exchange Lgi Get_V1_Real_Time_Date_Binding_Constraint](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_real_time_date_binding_constraint/)
+- [Miso Data Exchange Lgi Get_V1_Real_Time_Date_Demand_Forecast](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_real_time_date_demand_forecast/)
+- [Miso Data Exchange Lgi Get_V1_Real_Time_Date_Demand_Load_State_Estimator](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_real_time_date_demand_load_state_estimator/)
+- [Miso Data Exchange Lgi Get_V1_Real_Time_Date_Generation_Cleared_Supply](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_real_time_date_generation_cleared_supply/)
+- [Miso Data Exchange Lgi Get_V1_Real_Time_Date_Generation_Committed_Ecomax](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_real_time_date_generation_committed_ecomax/)
+- [Miso Data Exchange Lgi Get_V1_Real_Time_Date_Generation_Fuel_On_The_Margin](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_real_time_date_generation_fuel_on_the_margin/)
+- [Miso Data Exchange Lgi Get_V1_Real_Time_Date_Generation_Fuel_Type](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_real_time_date_generation_fuel_type/)
+- [Miso Data Exchange Lgi Get_V1_Real_Time_Date_Generation_Offered_Ecomax](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_real_time_date_generation_offered_ecomax/)
+- [Miso Data Exchange Lgi Get_V1_Real_Time_Date_Interchange_Net_Actual](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_real_time_date_interchange_net_actual/)
+- [Miso Data Exchange Lgi Get_V1_Real_Time_Date_Interchange_Net_Scheduled](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_real_time_date_interchange_net_scheduled/)
+- [Miso Data Exchange Lgi Get_V1_Real_Time_Date_Outage](https://apis.io/examples/miso/miso-data-exchange-lgi-get_v1_real_time_date_outage/)
+- [Miso Data Exchange Pricing Get_V1_Aggregated_Pnode](https://apis.io/examples/miso/miso-data-exchange-pricing-get_v1_aggregated_pnode/)
+- [Miso Data Exchange Pricing Get_V1_Day_Ahead_Date_Asm_Exante](https://apis.io/examples/miso/miso-data-exchange-pricing-get_v1_day_ahead_date_asm_exante/)
+- [Miso Data Exchange Pricing Get_V1_Day_Ahead_Date_Asm_Expost](https://apis.io/examples/miso/miso-data-exchange-pricing-get_v1_day_ahead_date_asm_expost/)
+- [Miso Data Exchange Pricing Get_V1_Day_Ahead_Date_Lmp_Exante](https://apis.io/examples/miso/miso-data-exchange-pricing-get_v1_day_ahead_date_lmp_exante/)
+- …and 38 more published on APIs.io
 
-#### Tags
+#### Collections (32)
 
-- Open Data
-- Energy Markets
-- LMP
-- Prices
-- Ancillary Services
-- Binding Constraints
-- Anonymous Access
+Postman and Open Collection request collections.
 
-#### Properties
+- [MISO Public Ace API](https://apis.io/collections/miso/open-miso-ace-api/)
+- [MUI - Public Specification Admin API](https://apis.io/collections/miso/open-miso-admin-api/)
+- [Pricing Aggregated Pnode API](https://apis.io/collections/miso/open-miso-aggregated-pnode-api/)
+- [MUI - Public Specification Bidding API](https://apis.io/collections/miso/open-miso-bidding-api/)
+- [MISO Public Binding Constraints API](https://apis.io/collections/miso/open-miso-bindingconstraints-api/)
+- [MUI - Public Specification Contracts API](https://apis.io/collections/miso/open-miso-contracts-api/)
+- [MISO Public Coordinated Transaction Scheduling API](https://apis.io/collections/miso/open-miso-coordinatedtransactionscheduling-api/)
+- [MISO Public Csat Next Day Short Term Reserve Requirement API](https://apis.io/collections/miso/open-miso-csatnextdayshorttermreserverequirement-api/)
+- [MISO Public Csat Supply Demand API](https://apis.io/collections/miso/open-miso-csatsupplydemand-api/)
+- [Miso Day Ahead API](https://apis.io/collections/miso/open-miso-day-ahead-api/)
+- [Miso Forecast API](https://apis.io/collections/miso/open-miso-forecast-api/)
+- [MISO Public Fuel Mix API](https://apis.io/collections/miso/open-miso-fuelmix-api/)
+- [MISO Public Generation Outages API](https://apis.io/collections/miso/open-miso-generationoutages-api/)
+- [Load, Generation, and Interchange Historical API](https://apis.io/collections/miso/open-miso-historical-api/)
+- [MUI - Public Specification IMM API](https://apis.io/collections/miso/open-miso-imm-api/)
+- [MISO Public Interchange API](https://apis.io/collections/miso/open-miso-interchange-api/)
+- [MISO Public Market Pricing API](https://apis.io/collections/miso/open-miso-marketpricing-api/)
+- [MUI - Public Specification Model API](https://apis.io/collections/miso/open-miso-model-api/)
+- [API Collection](https://apis.io/collections/miso/open-miso-mui-provenance/)
+- [MUI - Public Specification Notifications API](https://apis.io/collections/miso/open-miso-notifications-api/)
+- [MUI - Public Specification Notifications Format API](https://apis.io/collections/miso/open-miso-notifications-format-api/)
+- [MUI - Public Specification Offer API](https://apis.io/collections/miso/open-miso-offer-api/)
+- [Miso Real Time API](https://apis.io/collections/miso/open-miso-real-time-api/)
+- [MISO Public Real Time RSG Commitments API](https://apis.io/collections/miso/open-miso-realtimersgcommitments-api/)
+- [MISO Public Real Time Total Load API](https://apis.io/collections/miso/open-miso-realtimetotalload-api/)
+- …and 7 more published on APIs.io
 
-- [OpenAPI](openapi/miso-public-api-markets-displays-openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Documentation](https://www.misoenergy.org/markets-and-operations/RTDataAPIs/)
-- [API Reference](https://public-api.misoenergy.org/)
-- [Website](https://www.misoenergy.org/markets-and-operations/real-time--market-data/markets-displays/)
+#### Overlays (4)
 
-### MISO Data Exchange Pricing API
+OpenAPI overlays, including conversational phrasing for each operation.
 
-The pricing half of MISO Data Exchange, MISO's Azure API Management developer programme over Market Report data. Ten documented GET operations covering day-ahead and real-time ex-ante and ex-post locational marginal prices by commercial pricing node, day-ahead and real-time ex-ante and ex-post ancillary services market clearing prices by reserve zone, a real-time MCP summary, and an aggregated pricing node reference list. Responses are paged and carry the four LMP components — lmp, mcc (marginal congestion), mec (marginal energy) and mlc (marginal losses). A subscription key is required: an anonymous GET to https://apim.misoenergy.org/pricing/v1/day-ahead/2026-07-26/lmp-expost returned HTTP 401 "Access denied due to missing subscription key" on 2026-07-27, while a fabricated path on the same gateway returned HTTP 404 "Resource not found" — which is what makes the 401 meaningful. The key is self-serve: MISO's own portal product metadata returns approvalRequired false. The full API reference, every operation definition and the component schemas were all readable anonymously from the portal's data API, and the OpenAPI in openapi/ was assembled verbatim from them.
+- [Miso Data Exchange Lgi Overlay](https://apis.io/overlays/miso/miso-data-exchange-lgi-overlay/)
+- [Miso Data Exchange Pricing Overlay](https://apis.io/overlays/miso/miso-data-exchange-pricing-overlay/)
+- [Miso Public Api Markets Displays Overlay](https://apis.io/overlays/miso/miso-public-api-markets-displays-overlay/)
+- [Miso Public Api Operations Displays Overlay](https://apis.io/overlays/miso/miso-public-api-operations-displays-overlay/)
 
-- **Human URL:** [https://data-exchange.misoenergy.org/api-details#api=pricing-api](https://data-exchange.misoenergy.org/api-details#api=pricing-api)
-- **Base URL:** `https://apim.misoenergy.org/pricing`
+#### Security (2)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Energy Markets
-- LMP
-- Prices
-- Ancillary Services
-- Day-Ahead
-- Real-Time
+- [Miso Authentication](https://apis.io/security/miso/miso-authentication/)
+- [Miso Domain Security](https://apis.io/security/miso/miso-domain-security/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [OpenAPI](openapi/miso-data-exchange-pricing-api-openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Developer Portal](https://data-exchange.misoenergy.org/)
-- [API Reference](https://data-exchange.misoenergy.org/apis)
-- [Documentation](https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us)
-- [Plans](https://data-exchange.misoenergy.org/products)
+Published plans, tiers and prices.
 
-### MISO Data Exchange Load, Generation, and Interchange API
+- [Miso Plans](https://apis.io/plans/miso/miso-plans/)
 
-The system-data half of MISO Data Exchange. Twenty-two documented GET operations spanning actual load, day-ahead and real-time cleared demand, day-ahead cleared generation both physical and virtual, day-ahead and real-time generation by fuel type, offered and committed generation at ECOMAX and ECOMIN, fuel-on-the-margin, day-ahead, real-time and historical net scheduled interchange, real-time net actual interchange, real-time binding constraints, real-time and forecast outages, the medium-term load forecast, and state estimator load. MISO's own operation metadata carries the warning that interchange data is subject to change up to one hundred and five days after the market day due to reconciliation. Every operation is date-pathed (/v1/{market}/{yyyy-mm-dd}/...) with optional interval, region and paging filters. A subscription key is required — an anonymous GET to https://apim.misoenergy.org/lgi/v1/real-time/2026-07-26/demand/actual returned HTTP 401 "Access denied due to missing subscription key" on 2026-07-27 — and that key is self-serve with no approval step. The OpenAPI in openapi/ was assembled verbatim from MISO's anonymously served portal metadata.
+#### Rate limits (1)
 
-- **Human URL:** [https://data-exchange.misoenergy.org/api-details#api=load-generation-and-interchange-api](https://data-exchange.misoenergy.org/api-details#api=load-generation-and-interchange-api)
-- **Base URL:** `https://apim.misoenergy.org/lgi`
+Published request limits.
 
-#### Tags
+- [Miso Rate Limits](https://apis.io/rate-limits/miso/miso-rate-limits/)
 
-- Load
-- Generation
-- Interchange
-- Demand Forecast
-- Outages
-- Fuel Mix
-- Energy Markets
+## Where to find this API
 
-#### Properties
-
-- [OpenAPI](openapi/miso-data-exchange-load-generation-interchange-api-openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Developer Portal](https://data-exchange.misoenergy.org/)
-- [API Reference](https://data-exchange.misoenergy.org/apis)
-- [Documentation](https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us)
-- [Plans](https://data-exchange.misoenergy.org/products)
-
-### MISO Market Reports
-
-MISO's long-running bulk market report surface — the second fully anonymous layer of its open market data, and the archive the Data Exchange APIs sit on top of. Every published report is a plain HTTP GET against docs.misoenergy.org/marketreports/ with no key, no account, no login and no licence click-through, returning real CSV, XLSX, XML, ZIP and PDF files named by market date. Confirmed anonymous on 2026-07-27: 20260726_da_expost_lmp.csv returned HTTP 200 with 1,165,710 bytes of day-ahead ex-post LMP, 20260726_sr_gfm.xlsx returned HTTP 200 with 21,922 bytes, and Dead_Node_Reports_Readers_Guide.pdf returned HTTP 200. The report catalogue is browsed from the Market Reports page, which drives an internal Episerver Find search service — there is no documented query API, no directory listing (docs.misoenergy.org/marketreports/ itself returns HTTP 404) and no specification, so this is recorded as a verified public data surface rather than a specified API.
-
-- **Human URL:** [https://www.misoenergy.org/markets-and-operations/real-time--market-data/market-reports/](https://www.misoenergy.org/markets-and-operations/real-time--market-data/market-reports/)
-- **Base URL:** `https://docs.misoenergy.org/marketreports`
-
-#### Tags
-
-- Open Data
-- CSV
-- Market Reports
-- Settlements
-- Energy Markets
-- Anonymous Access
-
-#### Properties
-
-- [Documentation](https://www.misoenergy.org/markets-and-operations/real-time--market-data/market-reports/)
-- [Website](https://www.misoenergy.org/markets-and-operations/real-time--market-data/market-report-archives/)
-
-### MISO Market User Interface (MUI) 2.0 API
-
-The closed counterpart to everything else in this profile — MISO's programmatic JSON web API for registered market participants to submit energy supply offers and demand bids, query submissions, and query day-ahead and real-time market results as they clear. MISO documents it publicly in the MUI 2.0 API User Guide, which states verbatim that "All market participants using the JSON programmatic interface must be registered with MISO" and gives the base URL as https://markets.midwestiso.org/dart2 for production and https://cce.midwestiso.org/dart2 for the customer-facing test environment. Access is gated by a client digital certificate issued through the MISO Market Portal: an anonymous TLS connection to markets.midwestiso.org on 2026-07-27 failed at the handshake with an SSL alert rather than returning any HTTP status, which is direct evidence of mutual-TLS client-certificate enforcement. No OpenAPI is published and none could be harvested; the guide PDF is the only contract.
-
-- **Human URL:** [https://cdn.misoenergy.org/MUI%202.0%20API%20User%20Guide629008.pdf](https://cdn.misoenergy.org/MUI%202.0%20API%20User%20Guide629008.pdf)
-- **Base URL:** `https://markets.midwestiso.org/dart2`
-
-#### Tags
-
-- Energy Markets
-- Market Participants
-- Bids and Offers
-- Day-Ahead
-- Real-Time
-- Client Certificate
-
-#### Properties
-
-- [Documentation](https://cdn.misoenergy.org/MUI%202.0%20API%20User%20Guide629008.pdf)
-- [Onboarding](https://www.misoenergy.org/markets-and-operations/mp-registration/market-participation/)
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.misoenergy.org/)
-- [Developer Portal](https://data-exchange.misoenergy.org/)
 - [Documentation](https://www.misoenergy.org/markets-and-operations/RTDataAPIs/)
-- [API Reference](https://public-api.misoenergy.org/)
-- [Onboarding](https://help.misoenergy.org/knowledgebase/article/KA-01489/en-us)
-- [Sign Up](https://www.misoenergy.org/account/create-profile/)
-- [Sign In](https://data-exchange.misoenergy.org/signin)
-- [Plans](https://data-exchange.misoenergy.org/products)
-- [Terms of Service](https://www.misoenergy.org/meet-miso/legal-and-privacy/)
+- [Getting started](https://cdn.misoenergy.org/MISO%20Data%20Exchange%20User%20Guide674561.pdf)
+- [API reference](https://public-api.misoenergy.org/)
+- [Sign up](https://www.misoenergy.org/account/create-profile/)
 - [Support](https://help.misoenergy.org/)
 - [Blog](https://www.misoenergy.org/meet-miso/media-center/miso-matters/)
-- [LinkedIn](https://www.linkedin.com/company/midcontinent-iso/)
-- [YouTube](https://www.youtube.com/user/MISOenergy)
+- [Terms of service](https://www.misoenergy.org/meet-miso/legal-and-privacy/)
+- [Privacy policy](https://www.misoenergy.org/meet-miso/legal-and-privacy/)
+- [Status](https://www.misoenergy.org/markets-and-operations/notifications/it-and-system-notifications/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 49.3** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 69.6 |
+| Contract quality | 28.8 |
+| Contract governance | 4.5 |
+| Operational transparency | 52.6 |
+| Developer ergonomics | 66.1 |
+| Access clarity | 65.8 |
+
+**Agent readiness 33.5** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 27.0** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/miso/](https://apis.io/providers/miso/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for MISO: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/miso/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
